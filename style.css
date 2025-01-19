@@ -36,7 +36,6 @@ header .blog-name {
     margin: 0;
 }
 
-/* Header */
 header .blog-name a {
     color: inherit; /* Inherits the text color of the header */
     text-decoration: none; /* Removes underline */
@@ -71,10 +70,10 @@ nav ul li a:hover {
 
 /* Main Content */
 #mainCol {
-    width: 600px;
+    max-width: 600px; /* Make content responsive by capping its width */
     margin: 20px auto;
+    padding: 0 20px; /* Add padding for better spacing on smaller screens */
     line-height: 1.8;
-    margin-top: 0; /* Remove extra space above the main content */
 }
 
 #mainCol h2 {
@@ -84,7 +83,6 @@ nav ul li a:hover {
     margin-bottom: 10px;
 }
 
-/* Main Content */
 #mainCol p {
     margin-top: 10px;
     margin-bottom: 5px; /* Decrease spacing below the paragraph */
@@ -123,7 +121,6 @@ nav ul li a:hover {
     text-decoration: underline; /* Underline on hover for interactivity */
 }
 
-
 /* Footer */
 footer {
     font-size: 0.9em;
@@ -135,13 +132,51 @@ footer {
 }
 
 /* Responsive Design */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
     header {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center; /* Center-align for better presentation */
+        margin: 20px auto;
     }
+
+    header .blog-name {
+        font-size: 20px; /* Slightly smaller font for smaller devices */
+    }
+
     nav ul {
+        flex-direction: column; /* Stack navigation links vertically */
         gap: 10px;
+    }
+
+    #mainCol {
+        max-width: 90%; /* Expand content to fit more of the screen */
+        padding: 0 15px;
     }
 }
 
+@media (max-width: 480px) {
+    body {
+        font-size: 14px; /* Adjust font size for smaller devices */
+    }
+
+    header {
+        margin: 10px auto;
+        padding: 0 10px;
+    }
+
+    header .blog-name {
+        font-size: 18px; /* Further reduce blog name size on small screens */
+    }
+
+    nav ul {
+        gap: 8px; /* Reduce space between links */
+    }
+
+    #mainCol {
+        padding: 0 10px; /* Less padding on very small screens */
+    }
+
+    footer {
+        font-size: 0.8em; /* Smaller footer text */
+    }
+}
