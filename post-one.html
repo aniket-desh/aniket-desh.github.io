@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Aniket Deshpande - Post One">
+    <title>Aniket Deshpande - Post One</title>
+    <script type="text/javascript" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <style>
+        /* General styling for theorem and definition environments */
+        .theorem, .definition {
+            margin: 20px 0;
+            padding: 10px 15px;
+            border-left: 2px solid black; /* Vertical bar on the left */
+            background-color: white;
+            font-family: 'Georgia', serif;
+        }
+    
+        /* Styling for the proof environment (no vertical bar) */
+        .proof {
+            margin: 20px 0;
+            padding: 10px 15px;
+            background-color: white;
+            font-family: 'Georgia', serif;
+        }
+    
+        /* Title styling */
+        .theorem .title, .proof .title, .definition .title {
+            font-weight: bold;
+            margin-bottom: 3px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+    
+        /* Arrow styling */
+        .proof .title::after {
+            content: " ▼";
+            font-size: 0.8em;
+            margin-left: auto;
+            transition: transform 0.2s;
+        }
+    
+        /* Rotated arrow for collapsed state */
+        .proof.collapsed .title::after {
+            transform: rotate(90deg);
+        }
+    
+        /* Collapsible proof content */
+        .proof .content {
+            display: block;
+            margin-top: 10px;
+        }
+    
+        .proof.collapsed .content {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="blog-name"><a href="blog.html">\( entries \in \mathcal{H} \) </a></div>
+        <nav>
+            <ul>
+                <li><a href="blog.html">\( \mathbf{\looparrowleft} \)</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id="mainCol">
+        <h2>An Analytic Side Tangent</h2> 
+        <p>
+            <span style="color:darkgray">01.12.2025.</span> As an enthusiastic first-year at Illinois, I tried my hand at working through Walter Rudin's<i> Principles of Mathematical Analysis</i>, colloquially known as <i> Baby Rudin</i>. At this point in my mathematical maturity, I was still grappling with pure mathematics and proof techniques. The proof that will be outlined in this post is among some of the first that I was able to complete myself. While the reasoning might be slightly convoluted and not the most elegant, I did my best to include my entire thought process.
+        </p>
+        <p>
+            We begin with a statement of the theorem.
+        </p>
+        <!-- Theorem environment -->
+        <div class="theorem">
+            <div class="title">Theorem.</div>
+            <div class="content">Let \( x \in \mathbb{R} \) be positive, then the sequence \(  \{ \left( 1 + \frac{x}{n} \right)^n \}_{n=1}^{\infty}  \) is <i>strictly increasing.</i></div>
+        </div>
+        <p>
+        <!-- Proof environment -->
+        <div class="proof" id="proof1">
+            <div class="title" onclick="toggleProof('proof1')">Proof.</div>
+            <div class="content">
+                We begin with a reminder of the <i> Binomial Theorem</i>, which we will use shortly.
+                <div>
+                    \[
+                    (a + b)^n = \sum_{k=0}^{n} \binom{n}{k} a^{n-k} b^k
+                    \]
+                </div>
+                <p>We then consider <i>n</i>th term of the sequence, with \( n \in \mathbb{Z}^+ \), and then apply the Binomial Theorem.</p>
+                <div>
+                    \[
+                    \left( 1 + \frac{x}{n}   \right)^n = \sum_{k=0}^{n} \binom{n}{k} \left( 1 \right)^{n-k} \left( \frac{x}{n} \right)^k = \sum_{k=0}^{n} \binom{n}{k} \frac{x^k}{n^k} = 1 + \sum_{k=1}^{n} \frac{n!}{k!(n-k)!} \frac{x^k}{n^k}
+                    \]
+                </div>
+                <p>
+                    Note that we bring the \( 0 \)th term out of the sum (this step will make subsequent steps much simpler). We now express \(n! \) and \( n^k \) as \( n! = \left( \prod_{i=0}^{k-1}\text{ }{n-i}\right)(n-k)! \) and \( n^k = \prod_{i=0}^{k-1}\text{ }n \). Our relation then becomes:
+                </p>
+                <div>
+                    \[
+                    \left( 1 + \frac{x}{n}   \right)^n = 1 + \sum_{k=1}^{n} \frac{\left( \prod_{i=0}^{k-1}\text{ }{n-i}\right)(n-k)!}{\prod_{i=0}^{k-1}\text{ }n} \frac{x^k}{k!} = 1 + \sum_{k=1}^{n} \left( \prod_{i=0}^{k-1} \text{ } 1 - \frac{i}{n}  \right) \frac{x^k}{k!}
+                    \]
+                </div>
+                The next step in the proof is to show that every \( n+1 \)th term is greater than every \( n\)th term. We express the \( n+1\)th term as:
+                <div>
+                    \[
+                    \begin{aligned}
+                    \left( 1 + \frac{x}{n+1}   \right)^{n+1} &= 1 + \sum_{k=1}^{n+1} \left( \prod_{i=0}^{k-1} \text{ } 1 - \frac{i}{n+1}  \right) \frac{x^k}{k!} \\
+                    &= 1 + \sum_{k=1}^{n} \left( \prod_{i=0}^{k-1} \text{ } 1 - \frac{i}{n+1}  \right) \frac{x^k}{k!} + \prod_{i=0}^{n} \text{ } \left( 1 - \frac{i}{n+1} \right) \frac{x^{n+1}}{(n+1)!} \\
+                    \end{aligned}
+                    \]
+                </div>
+                We now we have to do some index gymnastics to show that the \( n+1\)th term is greater than the \( n\)th term. Let \( 1 \leq k \leq n \) and \( 0 \leq i \leq k-1 \). We then have
+                <div>
+                    \[
+                    n < n+1 \to \frac{1}{n} > \frac{1}{n+1} \to 1 - \frac{i}{n} < 1 - \frac{i}{n+1} \to 1 - \frac{i}{n} < 1 - \frac{i}{n+1}
+                    \]
+                </div>
+                Furthermore, we have \( 0 \leq i \leq k-1 \leq k \leq n \), which implies that \( 0 \leq i \leq n \). We then have
+                <div>
+                    \[
+                    0 \leq 0 \leq n \to 0 \leq \frac{i}{n} \leq 1 \to 1 - \frac{i}{n} > 0
+                    \]
+                </div>
+                We have shown that \( 1- \frac{i}{n} \leq 1 - \frac{i}{n+1} \leq 1 \). We then write the inequality between the \( n+1\)th and \( n\)th terms as
+                <div>
+                    \[
+                    \prod_{i=0}^{k-1} 1 - \frac{i}{n} < \prod_{i=0}^{k-1} 1 - \frac{i}{n+1} \to \prod_{i=0}^{k-1} \left( 1- \frac{i}{n} \right) \frac{x^k}{k!} < \prod_{i=0}^{k-1} \left( 1- \frac{i}{n+1} \right) \frac{x^k}{k!}
+                    \]
+                </div>
+                The penultimate step is to show that \( \prod_{i=0}^{n} \left( 1 - \frac{i}{n+1} \right) \frac{x^{n+1}}{(n+1)!} \) is positive to prove that the \( n+1 \)th term is strictly greater than the \( n\)th term. Since \(1 \leq k \leq n \) is arbitrary, we have
+                <div>
+                    \[
+                    \sum_{k=1}^{n} \left( \prod_{i=0}^{k-1} \left( 1 - \frac{i}{n+1} \right) \right) \frac{x^k}{k!} \geq \sum_{k=1}^{n} \left( \prod_{i=0}^{k-1} \left( 1 - \frac{i}{n} \right) \right) \frac{x^k}{k!}
+                    \]
+                </div>
+                Since \( x > 0 \), \( \frac{x^n}{(n+1)!} > 0\). Let \( 0 \leq i \leq n \). Then
+                <div>
+                    \[
+                    0 \leq i \leq n+1 \to 0 \leq \frac{i}{n+1} \leq 1 \to 0 \geq \frac{-i}{n+1} \geq -1 \to 1 \geq 1 - \frac{i}{n+1} \geq 0
+                    \]
+                </div>
+                <p style="text-align: justify;">
+                    Therefore, every term of the product is greater than \( 0 \). Therefore, we have shown that the \( n+1 \)th term is strictly greater than the \( n \)th term. This completes the proof.
+                    <span style="float: right;">\( \square \)</span>
+                </p>
+            </div>
+        </div>
+        There is another proof of this theorem that makes use of the natural logarithm of the <i>n</i>th term of the sequence and the <i>Mean Value Theorem</i>. Some key advantages of this approach are simpler algebra (evidently) and a broader insight into the behavior of the sequence, the limit of which is \( e^x \).
+    </main>
+
+    <script>
+        // Function to toggle the proof visibility
+        function toggleProof(proofId) {
+            const proof = document.getElementById(proofId);
+            proof.classList.toggle('collapsed');
+        }
+    </script>
+</body>
+</html>

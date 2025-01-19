@@ -1,0 +1,147 @@
+@charset "utf-8";
+
+/* Variables */
+:root {
+    --text-color: hsl(0, 0%, 20%);
+    --small: 15px;
+}
+
+/* Global Styles */
+body {
+    font-family: Palatino, serif;
+    font-size: var(--small);
+    color: var(--text-color);
+    background: white;
+    margin: 0;
+    padding: 0;
+    text-align: justify;
+    line-height: 1.6;
+    word-spacing: -0.01em; /* Adjust spacing between words */
+}
+
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 50px auto;
+    width: 600px;
+    padding: 10px 0;
+    margin-bottom: 5px;
+}
+
+header .blog-name {
+    font-size: 24px;
+    font-weight: normal;
+    margin: 0;
+}
+
+/* Header */
+header .blog-name a {
+    color: inherit; /* Inherits the text color of the header */
+    text-decoration: none; /* Removes underline */
+    font-weight: normal;
+}
+
+header .blog-name a:hover {
+    text-decoration: none; /* No underline on hover for the header link */
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    margin: 0;
+}
+
+nav ul li a {
+    color: var(--text-color); /* Same color as text */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline; /* Add underline on hover */
+}
+
+/* Main Content */
+#mainCol {
+    width: 600px;
+    margin: 20px auto;
+    line-height: 1.8;
+    margin-top: 0; /* Remove extra space above the main content */
+}
+
+#mainCol h2 {
+    font-family: Palatino, serif;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* Main Content */
+#mainCol p {
+    margin-top: 10px;
+    margin-bottom: 5px; /* Decrease spacing below the paragraph */
+}
+
+#mainCol ul {
+    margin-top: 5px; /* Reduce spacing above the list */
+    margin-bottom: 20px; /* Adjust spacing below the list if needed */
+    padding-left: 20px; /* Ensure consistent indentation */
+}
+
+#mainCol a {
+    color: var(--text-color); /* Same color as text */
+    text-decoration: none; /* Remove underline */
+}
+
+/* Link to UIUC */
+#mainCol a.uiuc-link {
+    color: darkred; /* Change to red */
+    text-decoration: none; /* Remove underline */
+}
+
+#mainCol a.uiuc-link:hover {
+    color: darkred; /* Keep red on hover */
+    text-decoration: underline; /* Optionally, add underline on hover for interactivity */
+}
+
+/* Custom Link Styling */
+#mainCol a.custom-link {
+    color: darkred;
+    text-decoration: none;
+}
+
+#mainCol a.custom-link:hover {
+    color: darkred;
+    text-decoration: underline; /* Underline on hover for interactivity */
+}
+
+
+/* Footer */
+footer {
+    font-size: 0.9em;
+    font-family: Palatino, serif;
+    color: #a6a2a0;
+    text-align: center;
+    margin: 50px auto 20px;
+    padding-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    nav ul {
+        gap: 10px;
+    }
+}
+
