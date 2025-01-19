@@ -14,7 +14,7 @@ body {
     background: white;
     margin: 0;
     padding: 0;
-    text-align: justify;
+    text-align: center;
     line-height: 1.6;
     word-spacing: -0.01em; /* Adjust spacing between words */
 }
@@ -22,8 +22,9 @@ body {
 /* Header */
 header {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     margin: 50px auto;
     width: 600px;
     padding: 10px 0;
@@ -74,6 +75,7 @@ nav ul li a:hover {
     margin: 20px auto;
     padding: 0 20px; /* Add padding for better spacing on smaller screens */
     line-height: 1.8;
+    text-align: center;
 }
 
 #mainCol h2 {
@@ -134,49 +136,40 @@ footer {
 /* Responsive Design */
 @media (max-width: 768px) {
     header {
-        flex-direction: column;
-        align-items: center; /* Center-align for better presentation */
-        margin: 20px auto;
-    }
-
-    header .blog-name {
-        font-size: 20px; /* Slightly smaller font for smaller devices */
+        margin: 20px auto 10px;
     }
 
     nav ul {
-        flex-direction: column; /* Stack navigation links vertically */
-        gap: 10px;
+        flex-direction: row; /* Keep nav items in a single row */
+        gap: 15px; /* Adjust spacing between nav items */
     }
 
     #mainCol {
-        max-width: 90%; /* Expand content to fit more of the screen */
+        max-width: 90%; /* Expand content width on smaller devices */
         padding: 0 15px;
     }
 }
 
 @media (max-width: 480px) {
-    body {
-        font-size: 14px; /* Adjust font size for smaller devices */
-    }
-
     header {
         margin: 10px auto;
         padding: 0 10px;
     }
 
     header .blog-name {
-        font-size: 18px; /* Further reduce blog name size on small screens */
+        font-size: 20px; /* Adjust font size for smaller screens */
     }
 
     nav ul {
-        gap: 8px; /* Reduce space between links */
+        gap: 10px; /* Reduce space between nav items */
     }
 
     #mainCol {
-        padding: 0 10px; /* Less padding on very small screens */
+        max-width: 95%; /* Ensure content fits smaller devices */
+        padding: 0 10px;
     }
 
     footer {
-        font-size: 0.8em; /* Smaller footer text */
+        font-size: 0.8em; /* Smaller font for footer on small screens */
     }
 }
