@@ -14,7 +14,7 @@ body {
     background: white;
     margin: 0;
     padding: 0;
-    text-align: center;
+    text-align: justify;
     line-height: 1.6;
     word-spacing: -0.01em; /* Adjust spacing between words */
 }
@@ -22,9 +22,8 @@ body {
 /* Header */
 header {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     margin: 50px auto;
     width: 600px;
     padding: 10px 0;
@@ -37,6 +36,7 @@ header .blog-name {
     margin: 0;
 }
 
+/* Header */
 header .blog-name a {
     color: inherit; /* Inherits the text color of the header */
     text-decoration: none; /* Removes underline */
@@ -71,11 +71,10 @@ nav ul li a:hover {
 
 /* Main Content */
 #mainCol {
-    max-width: 600px; /* Make content responsive by capping its width */
+    width: 600px;
     margin: 20px auto;
-    padding: 0 20px; /* Add padding for better spacing on smaller screens */
     line-height: 1.8;
-    text-align: center;
+    margin-top: 0; /* Remove extra space above the main content */
 }
 
 #mainCol h2 {
@@ -85,6 +84,7 @@ nav ul li a:hover {
     margin-bottom: 10px;
 }
 
+/* Main Content */
 #mainCol p {
     margin-top: 10px;
     margin-bottom: 5px; /* Decrease spacing below the paragraph */
@@ -123,6 +123,7 @@ nav ul li a:hover {
     text-decoration: underline; /* Underline on hover for interactivity */
 }
 
+
 /* Footer */
 footer {
     font-size: 0.9em;
@@ -134,42 +135,13 @@ footer {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
-    header {
-        margin: 20px auto 10px;
-    }
-
-    nav ul {
-        flex-direction: row; /* Keep nav items in a single row */
-        gap: 15px; /* Adjust spacing between nav items */
-    }
-
-    #mainCol {
-        max-width: 90%; /* Expand content width on smaller devices */
-        padding: 0 15px;
-    }
-}
-
 @media (max-width: 480px) {
     header {
-        margin: 10px auto;
-        padding: 0 10px;
+        flex-direction: column;
+        align-items: flex-start;
     }
-
-    header .blog-name {
-        font-size: 20px; /* Adjust font size for smaller screens */
-    }
-
     nav ul {
-        gap: 10px; /* Reduce space between nav items */
-    }
-
-    #mainCol {
-        max-width: 95%; /* Ensure content fits smaller devices */
-        padding: 0 10px;
-    }
-
-    footer {
-        font-size: 0.8em; /* Smaller font for footer on small screens */
+        gap: 10px;
     }
 }
+
