@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="mathcala.png" type="image/x-icon">
+    <meta name="description" content="Aniket Deshpande - Post One">
+    <title>Aniket Deshpande - Post One</title>
+    <script type="text/javascript" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <style>
+        /* General styling for theorem and definition environments */
+        .theorem, .definition {
+            margin: 20px 0;
+            padding: 10px 15px;
+            border-left: 2px solid black; /* Vertical bar on the left */
+            background-color: white;
+            font-family: 'Georgia', serif;
+        }
+    
+        /* Styling for the proof environment (no vertical bar) */
+        .proof {
+            margin: 20px 0;
+            padding: 10px 15px;
+            background-color: white;
+            font-family: 'Georgia', serif;
+        }
+    
+        /* Title styling */
+        .theorem .title, .proof .title, .definition .title {
+            font-weight: bold;
+            margin-bottom: 3px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+    
+        /* Arrow styling */
+        .proof .title::after {
+            content: " ▼";
+            font-size: 0.8em;
+            margin-left: auto;
+            transition: transform 0.2s;
+        }
+    
+        /* Rotated arrow for collapsed state */
+        .proof.collapsed .title::after {
+            transform: rotate(90deg);
+        }
+    
+        /* Collapsible proof content */
+        .proof .content {
+            display: block;
+            margin-top: 10px;
+        }
+    
+        .proof.collapsed .content {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="blog-name"><a href="blog.html">\( entries \in \mathcal{H} \) </a></div>
+        <nav>
+            <ul>
+                <li><a href="blog.html">\( \mathbf{\looparrowleft} \)</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id="mainCol">
+        <h2>An Exploration of PINNs</h2> 
+        <p>
+            <span style="color:darkgray">03.03.2025.</span> As I continue my physics undergraduate curriculum at Illinois, I have found an interest in the intersection of theoretical physics and statistical methods, specifically machine learning. On a high level, physical systems are governed by partial differential equations (PDEs), which are notoriously difficult to solve analytically. Machine learning, on the other hand, is a powerful tool for approximating functions and making predictions based on data.
+        </p>
+        <p>
+            A famous example of one of these systems is the Navier-Stokes equations, a set of coupled, nonlinear PDEs that govern the motion of viscous fluids. In many situations, no closed-form analytic solution exists, and standard numerical methods become computationally expensive. This is where physics-informed neural networks (PINNs) come in.
+        </p>
+        <!-- Theorem environment -->
+        <div class="theorem">
+            <!-- <div class="title">Navier-Stokes Equations.</div> -->
+            <div style="text-align: center;">
+                \( \nabla \cdot \mathbf{u} = 0 \qquad \frac{\partial \mathbf{u}}{\partial  t} + (\mathbf{u}\cdot\nabla)\mathbf{u} = -\frac{1}{\rho}\nabla p + \nu \nabla^2\mathbf{u} + \mathbf{f} \).
+            </div>
+        </div>
+        <p>
+            In turbulent flow, the velocity field \( \mathbf{u} \) exhibits chaotic behavior. PINNs are particularly useful in this context, as they allow us to solve these complex problems while directly incorporating physical laws into the model.
+        </p>
+        <p>
+            But what <i> is </i> a PINN? First, let us define a standard neural network. In practice, neural networks are flexible functions of input data \( \mathbf{x}\) that aim to predict an output \( \mathbf{y} \).
+        </p>
+        <div>
+            <div style="text-align: center;">
+            \( NN(\mathbf{x}, \mathbf{\theta}) \approx \mathbf{y}(\mathbf{x})\)
+            </div>
+        </div>
+        Given training data, we fine-tune the parameters \( \mathbf{\theta}\) so that the network approximates the true function. This is done by minimizing a loss function, \( \mathcal{L}(\mathbf{\theta}) \), which quantifies the difference between the predicted and true outputs.
+        <div style="text-align: center;">
+            \( \mathcal{L}(\mathbf{\theta}) = \frac{1}{N}\sum_{i}^N \left( NN(\mathbf{x}_i, \mathbf{\theta}) - \mathbf{y}_i \right)^2 \).
+        </div>
+        In reality, neural networks are a vast topic and I am omitting many details (for brevity). However, the key idea is that neural networks are universal function approximators, meaning they can approximate any function to arbitrary precision. We will continue with a simple differential equation from undergraduate mechanics (even with the utility of PINNs, the Navier-Stokes equations are a very complex system).
+        <p>
+            Consider a damped harmonic oscillator with mass \( m \), spring constant \( k \), and damping coefficient \( \mu \).
+            <div style="text-align: center;">
+                \( m\ddot{u} + \mu\dot{u} + ku = 0 \).
+            </div>
+            Assume the system has the initial conditions \( u(t=0) = 1 \) and \( \dot{u}(t=0) = 0 \). We can solve this equation analytically, but for the sake of this post, we will use a PINN to approximate the solution, \( NN(t, \mathbf{\theta}) \approx u(t) \).
+        </p> 
+        The key idea here is to use a loss function with <i> two components</i>, a boundary loss \( \mathcal{L}_b \) and a physics loss \( \mathcal{L}_p \) (also known as a residual loss). The boundary loss ensures that the network satisfies the initial conditions, while the physics loss enforces the differential equation.
+        <div style="text-align: center;">
+            \( \mathcal{L}_b = \lambda_1 (NN(t=0, \mathbf{\theta}) - 1)^2 + \lambda_2 (\dot{NN}(t=0, \mathbf{\theta}) - 0)^2 \),
+        </div>
+        <div style="text-align: center;">
+            \( \mathcal{L}_p = \frac{1}{N}\sum_{i}^N \left( \left[ m\frac{d^2}{dt^2} + \mu\frac{d}{dt} + k \right] NN(t_i, \mathbf{\theta}) \right)^2 \).
+        </div>
+        To make the programming easier, we will rearrange the differential equation into one with only two parameters \( \zeta \), the damping ratio, and \( \omega \), the natural frequency.
+        <div style="text-align: center;">
+            \( \ddot{u} + 2\zeta\omega\dot{u} + \omega^2u = 0 \).
+        </div>
+        Here, \( \zeta = \frac{\mu}{2\sqrt{mk}} \) and \( \omega = \sqrt{\frac{k}{m}} \). The PINN will output \( \hat{u}(t) \), which we will compare to the true solution \( u(t) \).
+        The code for this post is available on my <a href="https://github.com/aniket-desh/oscillator-pinn?tab=readme-ov-file" target="_blank" class="custom-link">GitHub.</a>
+    </main>
+
+    <script>
+        // Function to toggle the proof visibility
+        function toggleProof(proofId) {
+            const proof = document.getElementById(proofId);
+            proof.classList.toggle('collapsed');
+        }
+    </script>
+</body>
+</html>
