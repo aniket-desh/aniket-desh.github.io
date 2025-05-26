@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;600&display=swap" rel="stylesheet">
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <title>research</title>
+</head>
+
+<body>
+  <div id="contentContainer">
+
+    <div class="top-link">
+        <a href="about.html">&larr; back</a>
+    </div>
+
+    <h1>research</h1>
+    <hr>
+
+    <div class="profile-section">
+      <!-- <img src="assets/ad.png" alt="Profile Photo" class="profile-photo"> -->
+
+      <div class="bio-text">
+        <p> <b>lab for parallel numerical algorithms</b> <br>
+            currently, i am studying probabilistic methods for estimating the contraction of closed tensor networks. we are developing a markov chain monte carlo algorithm, borrowing methods from statistical physics, to estimate contractions such as the trace of matrix products.
+        </p>
+        <p>
+            for example, consider the following tensor network
+            \[
+                \text{Tr}(ABCD) = \sum_{ijkl} A_{ij}B_{jk}C_{kl}D_{li}
+            \]
+            this is a closed ring network (all indices are contracted). the direct computation requires multiple matrix multiplications, an \(\mathcal{O}(n^3)\) operation. however, we can use a markov chain to sample the indices \(i,j,k,l\) and estimate the trace. to improve mixing, we borrow some clever sampling techniques from statistical physics.
+        </p>
+      </div>
+    </div>
+
+
+    <!-- <h2>Other</h2>
+
+    <p>
+        Materials from past applications and proposals can be found <a href="#">here</a>.
+    </p> -->
+
+    <div class="menu">
+      <p>
+        <a href="index.html">home</a> /
+        <a href="notes.html">notes</a> /
+        <a href="blog.html">blog</a> /
+        <a href="../cv/cv.pdf">vitae</a>
+      </p>
+    </div>
+
+  </div>
+</body>
+
+</html>

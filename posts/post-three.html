@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/ad.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../src/style.css">
+    <title>walking the quantum line — aniket deshpande</title>
+    <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+<div id="contentContainer">
+
+    <div class="top-link">
+        <a href="../src/blog.html">&larr; blog</a>
+    </div>
+
+    <h1>walking the quantum line</h1>
+
+    <p><span class="gray-date">01.12.2025</span>  
+        this post outlines an intellectual curiosity of mine that arose while working on a project involving quantum channels and birth-death processes. although the project's main focus was the simulation complexity of quantum channels, i stayed thoroughly interested in the underlying symmetries of the quantum walk formalism. <br><br>
+        consider a finite, undirected graph \(G = (V, E) \), where \(V\), \(|V| = n\), is the set of vertices and \(E\) is the set of edges. let us first consider the classical case. in probability theory, a random walk \( (X_t)_{t \geq 0} \) on a graph is a Markov (meaning memoryless) process where, at each time step, a walker moves from its current vertex to one of its neighbors with <i>uniform</i> probability. <br><br>
+        we use a matrix \(P\) to represent the transition probabilities (hence this is the transition matrix) between vertices. the transition matrix is defined as follows.
+        \[ P_{ij} = \begin{cases}
+            \frac{1}{d_i} & \text{if } (i, j) \in E \\
+            0 & \text{otherwise}
+            \end{cases}
+        \]
+        where \(d_i\) is the degree of the \(i\)th vertex. the transition matrix is symmetric, meaning that \(P_{ij} = P_{ji}\). this symmetry arises from the fact that the graph is undirected. <br><br> consider the probability distribution \(\mu_t \): a vector of probabilities over the vertices at time \(t\), where the \(i\)th component is the probability of being at vertex \(i\) at time \(t\). 
+        \[
+        \mu_t = \mathbb{P}(X_t = i) \text{ for } i \in V
+        \]
+        we <i>evolve</i> the probability distribution over time using the transition matrix \(P\). the evolution of the probability distribution is given by the equation
+        \[ 
+        \mu_{t+1} = P \mu_t
+        \]
+        note that the transition matrix is simply the adjacency matrix of the graph, normalized by the degree of each vertex, \( P = D^{-1} A \), where \(D = \text{diag}(d_1, d_2, \ldots, d_n) \). <br><br> let's use this to derive the continuous-time limit of the random walk, using the definition of the derivative.
+        \[
+        \frac{\mu_{t + \Delta t} - \mu_t}{\Delta t} = \frac{P \mu_t - \mu_t}{\Delta t} = \frac{1}{\Delta t} (P - I) \mu_t
+        \]
+        we take the limit as \(\Delta t \to 0\) to obtain the following equation.
+        \[
+        \frac{d\mu_t}{dt} = (P - I) \mu_t = -L \mu_t
+        \]
+        here, we have defined \( L := I - P \) as the <i>graph Laplacian</i>. the negative sign arises from the fact that this models the decay towards equilibrium. this is a <i>diffusion model</i>, more specifically, this is the heat equation for a graph. <br><br>
+        now, let us consider the schrödinger equation, describing the time evolution of a quantum state \(\psi(t)\) in a Hilbert space.
+        \[
+        i\hbar \frac{d\psi}{dt} = H \psi \to \frac{d\psi}{dt} = -\frac{i}{\hbar} H \psi
+        \]
+        immediately, we see the similarities between the two processes. if we choose to define our graph Laplacian as the Hamiltonian, \(H = L\), we can see that the two processes are related. in fact, the graph Laplacian is a self-adjoint operator, meaning that it is equal to its own adjoint. this means that the eigenvalues of the graph Laplacian are real and non-negative, which is a requirement for a Hamiltonian. <br><br>
+        we now have a quantum random walk on a graph, where the evolution of the quantum state is given by the equation
+        \[
+        \psi(t) = e^{-iLt/\hbar} \psi(0)
+        \]
+
+    <div class="menu">
+        <p>
+            <a href="../src/index.html">home</a> / 
+            <a href="../src/about.html">research</a> / 
+            <a href="../src/notes.html">notes</a> /
+            <a href="../src/blog.html">blog</a>
+        </p>
+    </div>
+
+</div>
+
+<script>
+    function toggleProof(proofId) {
+        const proof = document.getElementById(proofId);
+        proof.classList.toggle('collapsed');
+    }
+</script>
+
+</body>
+</html>
