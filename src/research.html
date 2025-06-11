@@ -36,6 +36,27 @@
         </p>
         more updates soon!
       </div>
+      
+
+      <div class="bio-text">
+        <p><b>computation & neurodynamics lab</b> <br>
+          i am currently studying the dynamics of stochastic neuronal populations using moment closure methods. starting from a nonlinear stochastic differential equation (SDE) that governs individual neuron behavior, we analytically derive a reduced system of ordinary differential equations (ODEs) that describe the evolution of the population mean and covariance over time. this involves evaluating jacobians, noise terms, and closure assumptions that approximate the effect of higher-order cumulants.
+        </p>
+        <p>
+          the system under consideration takes the form
+          \[
+            \frac{dx}{dt} = f(x, \lambda) + \sigma \xi(t)
+          \]
+          where \(x(t)\) is the neuronal state vector (e.g., membrane voltage and recovery variable), \(\lambda\) is a parameter representing static input heterogeneity across the population, and \(\xi(t)\) is vector-valued white noise. nonlinearities in \(f\) (e.g., from cubic terms or feedback loops) make exact inference intractable, but we leverage a moment-based expansion to evolve just the first two moments, which are often sufficient for capturing macro-scale system behavior.
+        </p>
+        <p>
+          the symbolic derivation of the moment ODEs is done using <code>sympy</code>, and validated against Monte Carlo simulations of thousands of stochastic neurons. our next step is to build surrogate models—such as neural networks or gaussian processes—that can learn the mapping from inputs \((\lambda, t)\) to outputs \((\mu(t), \Sigma(t))\). these models enable fast approximations of neural behavior and could be used in optimal control, parameter inference, and theoretical neuroscience pipelines.
+        </p>
+        <p>
+          current experiments include benchmarking surrogate architectures (e.g., feedforward nets vs. GPR), integrating PCA-based dimensionality reduction, and extending the framework to richer models such as FitzHugh–Nagumo. the full analysis and implementation is available on <a href="https://github.com/aniket-desh/fitzhugh-nagumo" target="_blank">my github!</a>.
+        </p>
+        more updates soon!
+      </div>
     </div>
 
 
