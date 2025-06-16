@@ -6,61 +6,82 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <title>aniket deshpande</title>
+  <style>
+    .katex-header {
+      font-family: 'KaTeX_SansSerif', 'KaTeX_Main', Arial, sans-serif;
+      font-weight: bold;
+      font-size: 32px;
+      margin-bottom: 0.2em;
+      letter-spacing: 0.01em;
+    }
+    .katex-title {
+      font-family: 'KaTeX_SansSerif', 'KaTeX_Main', Arial, sans-serif;
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 1.2em;
+      margin-top: 0.2em;
+    }
+    .vollkorn {
+      font-family: 'Vollkorn', serif;
+      font-size: 1.08rem;
+    }
+    .about-contact {
+      margin: 1.5em 0 2em 0;
+      font-size: 1rem;
+    }
+    .about-section {
+      margin-bottom: 1.2em;
+    }
+    #profile {
+      float: left;
+      width: 162px;
+      height: 176px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin: 12px 16px 8px 0;
+    }
+  </style>
 </head>
 
 <body>
   <div id="contentContainer">
 
-    <h1>aniket deshpande</h1>
-    <hr>
+    <h1 class="katex-header">Aniket Deshpande</h1>
+    <h2 class="katex-title" style="font-weight:400;">Undergraduate, University of Illinois, Urbana-Champaign</h2>
 
-    <div class="profile-section">
-      <!-- <img src="assets/ad.png" alt="Profile Photo" class="profile-photo"> -->
-
-      <div class="bio-text">
+    <div class="about-main" style="display:flex; align-items:flex-start; gap:32px; margin-bottom:2.5em;">
+      <div class="vollkorn about-section">
+        <img id="profile" src="../assets/image.png" alt="Profile Photo">
         <p>
-          i am a third-year physics student at the
-          <a href="https://physics.illinois.edu" target="_blank">University of Illinois, Urbana-Champaign</a>, interested in physics and theoretical computer science.
-        </p>
-
-        <p>
-            my research interests lie at the intersection of theoretical physics and machine learning. more specifically, i am interested in studying quantum information and statistical learning through the lens of operator algebras, representation theory, and geometric algorithms.
+          I am a third-year physics student at the <a href="https://physics.illinois.edu" class="katex-title"  style="font-size:inherit; font-weight:500;" target="_blank">University of Illinois, Urbana-Champaign</a>, interested in physics and theoretical computer science.
         </p>
         <p>
-          i also have a fascination for the parallels between physics and probability-theoretic fields such as statistical learning, optimal transport, and financial markets.
+          My research interests lie at the intersection of theoretical physics and machine learning. More specifically, I am interested in studying quantum information and statistical learning through the lens of operator algebras, representation theory, and geometric algorithms. You can find a summary of my current <a href="research.html" class="katex-title" style="font-size:inherit; font-weight:500;">research</a> and a <a href="reading.html" class="katex-title" style="font-size:inherit; font-weight:500;">reading list</a> of books and papers I'm exploring. <br><br>This August, I will be attending the <a href="qsimconference.org" class="katex-title" style="font-size:inherit; font-weight:500;" target="_blank">QSim 2025</a> conference and summer school for quantum simulation at <i>IBM, New York City</i>. Feel free to reach out if you're also attending!
         </p>
-
+        <div class="clearfix"></div>
         <p>
-          outside of academics, i enjoy ultimate frisbee, jazz music, and curating my vinyl collection.
+          I also have a fascination for the parallels between physics and probability-theoretic fields such as statistical learning, optimal transport, and financial markets.
         </p>
-
         <p>
-          <b><a href="research.html">research</a> & <a href="reading.html">reading list</a></b>
+          Outside of academics, I enjoy ultimate frisbee, jazz music, and curating my vinyl collection.
         </p>
-
-        <p>
-          <b>news: </b> <br> ↦ in may 2025, i will be attending the IMSI workshop for uncertainty quantification & machine learning for physics at the <i>University of Chicago.</i><br>↦ in august 2025, i will be attending the QSim 2025 conference and summer school for quantum simulation at <i>IBM, New York City. feel free to reach out if you're also attending!</i>
-        </p>
-
+        <!-- <p style="margin-bottom: -3em;">
+          <b><span class="katex-title" style="font-size:inherit;"><b>News</b>:</span> </b> <br>
+          ↦ In May 2025, I will be attending the IMSI Workshop for Uncertainty Quantification & Machine Learning for Physics at the <i>University of Chicago</i>.<br>
+          ↦ In August 2025, I will be attending the QSim 2025 Conference and Summer School for Quantum Simulation at <i>IBM, New York City</i>. Feel free to reach out if you're also attending!
+        </p> -->
       </div>
     </div>
 
-    <h2>find me</h2>
-
-    <div id="infoContainer">
-      <p><a href="mailto:aniket4@illinois.edu">aniket4 at illinois dot edu</a></p>
-      <p>·</p>
-      <p><a href="https://www.linkedin.com/in/aniket-desh">linkedin</a></p>
-      <p>·</p>
-      <p><a href="https://github.com/aniket-desh">github</a></p>
+    <h2 class="katex-title" style="margin-top:-2em; margin-bottom:0.3em;">Find Me</h2>
+    <div class="vollkorn about-contact" style="font-size:1.05rem; font-weight:400; margin-bottom:2em; margin-top:0.1em;">
+      <span><b>aniket4 at illinois dot edu</b></span> &nbsp;·&nbsp;
+      <a class="katex-title" style="font-size:inherit; font-weight:500;" href="https://www.linkedin.com/in/aniket-desh">LinkedIn</a> &nbsp;·&nbsp;
+      <a class="katex-title" style="font-size:inherit; font-weight:500;" href="https://github.com/aniket-desh">GitHub</a>
     </div>
-
-    <!-- <h2>Other</h2>
-
-    <p>
-        Materials from past applications and proposals can be found <a href="#">here</a>.
-    </p> -->
 
     <div class="menu">
       <p>

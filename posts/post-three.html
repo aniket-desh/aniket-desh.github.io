@@ -17,66 +17,66 @@
         <a href="../src/blog.html">&larr; blog</a>
     </div>
 
-    <h1>walking the quantum line</h1>
+    <h1>Walking the Quantum Line</h1>
 
     <p><span class="gray-date">01.12.2025</span><br><br>
-        this post outlines some theoretical questions i explored while working on a project involving quantum walks, graph channels, and the complexity of simulating quantum processes. while the project was grounded in quantum information theory and open system dynamics, the deeper questions i found myself pursuing relate to the computational hardness of simulating quantum dynamics, and the structural symmetries inherent in such processes. <br><br>
+        This post outlines some theoretical questions I explored while working on a project involving quantum walks, graph channels, and the complexity of simulating quantum processes. While the project was grounded in quantum information theory and open system dynamics, the deeper questions I found myself pursuing relate to the computational hardness of simulating quantum dynamics, and the structural symmetries inherent in such processes. <br><br>
 
-        <b>discrete dynamics on graphs</b><br>
-        consider a finite, undirected graph \( G = (V, E) \) with \( |V| = n \). in the classical setting, a random walk \( (X_t)_{t \geq 0} \) on \( G \) is a markov chain where transitions are governed by the transition matrix \( P \), defined by:
+        <b>Discrete Dynamics on Graphs</b><br>
+        Consider a finite, undirected graph \( G = (V, E) \) with \( |V| = n \). In the classical setting, a random walk \( (X_t)_{t \geq 0} \) on \( G \) is a Markov chain where transitions are governed by the transition matrix \( P \), defined by:
         \[
         P_{ij} = \begin{cases}
         \frac{1}{d_i} & \text{if } (i, j) \in E \\
         0 & \text{otherwise}
         \end{cases}
         \]
-        the evolution of a probability vector \( \mu_t \in \mathbb{R}^n \) follows:
+        The evolution of a probability vector \( \mu_t \in \mathbb{R}^n \) follows:
         \[
         \mu_{t+1} = P \mu_t
         \]
-        taking a continuous-time limit, we obtain a graph diffusion equation:
+        Taking a continuous-time limit, we obtain a graph diffusion equation:
         \[
         \frac{d\mu_t}{dt} = -L \mu_t \quad \text{where } L = I - P
         \]
-        this gives us a classical diffusion process on a graph — governed by linear algebra, symmetry, and combinatorial structure. <br><br>
+        This gives us a classical diffusion process on a graph — governed by linear algebra, symmetry, and combinatorial structure. <br><br>
 
-        <b>quantum analogue: channels and walks</b><br>
+        <b>Quantum Analogue: Channels and Walks</b><br>
 
-        the quantum version of this process replaces probability distributions with density matrices, and transitions with completely positive trace-preserving (cptp) maps, also known as quantum channels. given a hilbert space \( \mathcal{H} \), a quantum channel \( \Phi: \mathcal{B}(\mathcal{H}) \to \mathcal{B}(\mathcal{H}) \) is typically represented in kraus form:
+        The quantum version of this process replaces probability distributions with density matrices, and transitions with completely positive trace-preserving (CPTP) maps, also known as quantum channels. Given a Hilbert space \( \mathcal{H} \), a quantum channel \( \Phi: \mathcal{B}(\mathcal{H}) \to \mathcal{B}(\mathcal{H}) \) is typically represented in Kraus form:
         \[
         \Phi(\rho) = \sum_j K_j \rho K_j^\dagger \quad \text{with } \sum_j K_j^\dagger K_j = I
         \]
-        our focus was on a special class of quantum channels induced by birth-death graphs, where each kraus operator encodes a weighted transition corresponding to an edge. these channels are non-unitary, capturing decoherence or environmental noise. <br><br>
+        Our focus was on a special class of quantum channels induced by birth-death graphs, where each Kraus operator encodes a weighted transition corresponding to an edge. These channels are non-unitary, capturing decoherence or environmental noise. <br><br>
 
-        <b>simulation complexity</b><br>
+        <b>Simulation Complexity</b><br>
 
-        the key question is: <i>how hard is it to simulate such a channel using quantum circuits of bounded size?</i><br>
+        The key question is: <i>How hard is it to simulate such a channel using quantum circuits of bounded size?</i><br>
 
-        we define the simulation length:
+        We define the simulation length:
         \[
         \ell^\epsilon_U(\Phi) = \min \left\{ M \,\middle|\, \left\| \Phi - \text{Ad}_{U_1 \cdots U_M} \right\|_\diamond < \epsilon \right\}
         \]
-        where the \( U_i \in \mathcal{U} \), a resource set of allowed unitaries, and \( \text{Ad}_U(\rho) = U \rho U^\dagger \). this quantity captures the computational resource cost (measured in gates or volume) of simulating the dynamics encoded by \( \Phi \). <br><br>
+        where the \( U_i \in \mathcal{U} \), a resource set of allowed unitaries, and \( \text{Ad}_U(\rho) = U \rho U^\dagger \). This quantity captures the computational resource cost (measured in gates or volume) of simulating the dynamics encoded by \( \Phi \). <br><br>
 
-        <b>bounds and lower bound techniques</b><br>
+        <b>Bounds and Lower Bound Techniques</b><br>
 
-to understand the resource complexity of simulating a quantum channel \( \Phi \), we studied the quantity \( \ell^\epsilon(\Phi) \), which denotes the minimum number of unitaries required to approximate \( \Phi \) within diamond norm \( \epsilon \). our goal was to establish lower bounds on this simulation length. the key technique uses a <i>lipschitz-type complexity measure</i>, denoted \( \text{CS}(\Phi) \), to bound how sensitively \( \Phi \) acts on input states. <br><br>
+To understand the resource complexity of simulating a quantum channel \( \Phi \), we studied the quantity \( \ell^\epsilon(\Phi) \), which denotes the minimum number of unitaries required to approximate \( \Phi \) within diamond norm \( \epsilon \). Our goal was to establish lower bounds on this simulation length. The key technique uses a <i>Lipschitz-type complexity measure</i>, denoted \( \text{CS}(\Phi) \), to bound how sensitively \( \Phi \) acts on input states. <br><br>
 
-formally, define:
+Formally, define:
 \[
 \text{CS}(\Phi) = \sup_{\rho \neq \sigma} \frac{ \| \Phi(\rho) - \Phi(\sigma) \|_1 }{ \| \rho - \sigma \|_1 }
 \]
-this is the operator lipschitz constant of \( \Phi \) with respect to the trace norm. it captures the worst-case amplification of distinguishability between states under the channel \( \Phi \). <br><br>
+This is the operator Lipschitz constant of \( \Phi \) with respect to the trace norm. It captures the worst-case amplification of distinguishability between states under the channel \( \Phi \). <br><br>
 
-now, let \( \Phi_C \) be a quantum channel approximated by a unitary circuit of length \( \ell \), composed of gates drawn from a universal set \( \mathcal{U} \). since each gate can only move probability mass locally (by a bounded trace distance), the total amplification that the circuit can induce is proportional to \( \ell \). <br><br>
+Now, let \( \Phi_C \) be a quantum channel approximated by a unitary circuit of length \( \ell \), composed of gates drawn from a universal set \( \mathcal{U} \). Since each gate can only move probability mass locally (by a bounded trace distance), the total amplification that the circuit can induce is proportional to \( \ell \). <br><br>
 
-this leads to the inequality:
+This leads to the inequality:
 \[
 \text{CS}(\Phi) \leq D \cdot \ell^\epsilon(\Phi) + \epsilon \sqrt{n}
 \]
 where \( D \) is a universal constant (arising from gate locality bounds), and the additive \( \epsilon \sqrt{n} \) term comes from the diamond norm approximation error combined with the fact that the state space is \( n \)-dimensional. <br><br>
 
-to complete the lower bound, we construct a test function \( f \in \mathcal{B}(\mathcal{H}) \), which acts as a "sensitivity witness" for \( \Phi \). for instance, for graph-induced channels, define:
+To complete the lower bound, we construct a test function \( f \in \mathcal{B}(\mathcal{H}) \), which acts as a "sensitivity witness" for \( \Phi \). For instance, for graph-induced channels, define:
 \[
 f = 
 \begin{pmatrix}
@@ -87,11 +87,11 @@ f =
 \end{pmatrix}
 \in \mathbb{C}^{n \times n}
 \]
-this matrix captures the global off-diagonal structure of the graph. we evaluate the channel’s nontrivial action on a centered state \( \rho \) via:
+This matrix captures the global off-diagonal structure of the graph. We evaluate the channel's nontrivial action on a centered state \( \rho \) via:
 \[
 \text{tr}\left(f (\Phi(\rho) - \rho)\right) \geq \sqrt{n}
 \]
-thus, \( \text{CS}(\Phi) \geq \sqrt{n} \). plugging this into the previous inequality yields:
+Thus, \( \text{CS}(\Phi) \geq \sqrt{n} \). Plugging this into the previous inequality yields:
 \[
 \sqrt{n} \leq D \cdot \ell^\epsilon(\Phi) + \epsilon \sqrt{n} \Rightarrow \ell^\epsilon(\Phi) \geq \frac{(1 - \epsilon) \sqrt{n}}{D}
 \]
@@ -99,26 +99,26 @@ which gives the desired lower bound:
 \[
 \ell^\epsilon(\Phi) \in \Omega(\sqrt{n})
 \]
-this argument abstracts a central intuition: if a quantum channel spreads state mass across a graph structure in a way that’s highly sensitive (in a lipschitz sense), then any circuit that simulates it must have sufficient length to propagate that information. in particular, <i>non-unitarity</i>, <i>trace decay</i>, and <i>graph connectivity</i> together drive this complexity.
+This argument abstracts a central intuition: if a quantum channel spreads state mass across a graph structure in a way that's highly sensitive (in a Lipschitz sense), then any circuit that simulates it must have sufficient length to propagate that information. In particular, <i>non-unitarity</i>, <i>trace decay</i>, and <i>graph connectivity</i> together drive this complexity.
 <br><br>
 
-        <b>structural symmetries and geometry</b><br>
+        <b>Structural Symmetries and Geometry</b><br>
 
-        what makes these channels theoretically rich is their connection to permutation symmetry, lie-theoretic structure, and geometric algorithms. the transition operators we used (eq\(_k\), p\(_k\), and ±1 gates) are inherently combinatorial, yet they act on exponentially large hilbert spaces. <br>
+        What makes these channels theoretically rich is their connection to permutation symmetry, Lie-theoretic structure, and geometric algorithms. The transition operators we used (eq\(_k\), p\(_k\), and ±1 gates) are inherently combinatorial, yet they act on exponentially large Hilbert spaces. <br>
 
-        this raises interesting representation-theoretic questions:
+        This raises interesting representation-theoretic questions:
         <ul>
-            <li>how do symmetries in the graph (automorphism group) reflect in the algebra of the channel?</li>
-            <li>what role do induced representations and young diagrams play in block-diagonalizing these dynamics?</li>
-            <li>can we find geometry-aware decompositions that improve circuit efficiency?</li>
+            <li>How do symmetries in the graph (automorphism group) reflect in the algebra of the channel?</li>
+            <li>What role do induced representations and Young diagrams play in block-diagonalizing these dynamics?</li>
+            <li>Can we find geometry-aware decompositions that improve circuit efficiency?</li>
         </ul>
-        these questions live at the intersection of algebraic complexity, operator algebras, and quantum control — and form the next step in my exploration. <br><br>
+        These questions live at the intersection of algebraic complexity, operator algebras, and quantum control — and form the next step in my exploration. <br><br>
 
-        <b>closing thoughts</b><br>
+        <b>Closing Thoughts</b><br>
 
-        this project started as an investigation into simulating noisy quantum walks, but led to broader complexity-theoretic questions: what are the minimal resources needed to implement non-unitary dynamics? how do structural symmetries reduce simulation overhead? can we classify simulation complexity of quantum channels up to geometric equivalence classes? <br><br>
+        This project started as an investigation into simulating noisy quantum walks, but led to broader complexity-theoretic questions: What are the minimal resources needed to implement non-unitary dynamics? How do structural symmetries reduce simulation overhead? Can we classify simulation complexity of quantum channels up to geometric equivalence classes? <br><br>
 
-        i plan to continue this line of work, especially exploring connections to quantum learning theory, algorithmic symmetry, and representation-theoretic circuit synthesis.
+        I plan to continue this line of work, especially exploring connections to quantum learning theory, algorithmic symmetry, and representation-theoretic circuit synthesis.
     </p>
 
     <div class="menu">

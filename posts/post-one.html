@@ -17,13 +17,25 @@
         <a href="../src/blog.html">&larr; blog</a>
     </div>
 
-    <h1>an analytic side tangent</h1>
+    <h1>An Analytic Side Tangent</h1>
 
-    <p><span class="gray-date">01.12.2025</span>  
-    as an enthusiastic first-year at illinois, i tried working through walter rudin’s <i>principles of mathematical analysis</i>, colloquially known as <i>baby rudin</i>.  
-    at this point in my mathematical maturity, i was still grappling with pure mathematics and proof techniques.  
-    the proof outlined below is among the first i was able to complete myself.  
-    while the reasoning may be slightly convoluted, it reflects my full early thought process.
+    <p><span class="gray-date">01.09.2024</span><br><br>
+        This post outlines a proof of monotonicity for a sequence that arises in real analysis. <br><br>
+
+        <b>The Sequence</b><br>
+        Consider the sequence \( a_n = \left(1 + \frac{1}{n}\right)^n \). This sequence is famous for converging to the number \( e \), but here we focus on its monotonicity. <br><br>
+
+        <b>Monotonicity Proof</b><br>
+        We want to show that \( a_n \) is strictly increasing. Consider the ratio:
+
+        If we can show this ratio is greater than 1 for all \( n \), then the sequence is strictly increasing. Let's compute:
+
+        so the ratio is:
+
+        since \( 1 + \frac{1}{n} > 1 \) for all \( n \), the ratio is always greater than 1. thus, \( a_n \) is strictly increasing. <br><br>
+
+        <b>Closing Thoughts</b><br>
+        This simple proof illustrates how elementary inequalities can reveal deep properties of sequences. Monotonicity is a key concept in analysis, and this example is a classic illustration.
     </p>
 
     <p>we begin with the statement of the theorem.</p>
@@ -114,7 +126,7 @@
     </div>
 
     <p>
-    an alternative proof uses the natural logarithm and the mean value theorem on the \(n\)th term, leading to simpler algebra and insight into the sequence’s convergence toward \( e^x \).
+    an alternative proof uses the natural logarithm and the mean value theorem on the \(n\)th term, leading to simpler algebra and insight into the sequence's convergence toward \( e^x \).
     </p>
 
     <div class="menu">

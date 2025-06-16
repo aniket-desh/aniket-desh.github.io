@@ -17,45 +17,45 @@
         <a href="about.html">&larr; back</a>
     </div>
 
-    <h1>research</h1>
+    <h2 class="katex-title">Research</h2>
     <hr>
 
     <div class="profile-section">
       <!-- <img src="assets/ad.png" alt="Profile Photo" class="profile-photo"> -->
 
       <div class="bio-text">
-        <p> <b>lab for parallel numerical algorithms</b> <br>
-            currently, i am studying probabilistic methods for estimating the contraction of closed tensor networks. we are developing a markov chain monte carlo algorithm, borrowing methods from statistical physics, to estimate contractions such as the trace of matrix products.
+        <p> <b><a href="https://lpna.cs.illinois.edu/" class="katex-title" style="font-size:inherit; font-weight:500;" target="_blank">Lab for Parallel Numerical Algorithms</a></b> <br>
+            Currently, I am studying probabilistic methods for estimating the contraction of closed tensor networks. We are developing a markov chain monte carlo algorithm, borrowing methods from statistical physics, to estimate contractions such as the trace of matrix products.
         </p>
         <p>
-            for example, consider the following tensor network
+            For example, consider the following tensor network
             \[
                 \text{Tr}(ABCD) = \sum_{ijkl} A_{ij}B_{jk}C_{kl}D_{li}
             \]
-            this is a closed ring network (all indices are contracted). the direct computation requires multiple matrix multiplications, an \(\mathcal{O}(n^3)\) operation. however, we can use a markov chain to sample the indices \(i,j,k,l\) and estimate the trace. to improve mixing, we borrow some clever sampling techniques from statistical physics.
+            This is a closed ring network (all indices are contracted). The direct computation requires multiple matrix multiplications, an \(\mathcal{O}(n^3)\) operation. However, we can use a markov chain to sample the indices \(i,j,k,l\) and estimate the trace. To improve mixing, we borrow some clever sampling techniques from statistical physics.
         </p>
-        more updates soon!
+        More updates soon!
       </div>
       
 
       <div class="bio-text">
-        <p><b>computation & neurodynamics lab</b> <br>
-          i am currently studying the dynamics of stochastic neuronal populations using moment closure methods. starting from a nonlinear stochastic differential equation (SDE) that governs individual neuron behavior, we analytically derive a reduced system of ordinary differential equations (ODEs) that describe the evolution of the population mean and covariance over time. this involves evaluating jacobians, noise terms, and closure assumptions that approximate the effect of higher-order cumulants.
+        <p> <b><a href="https://conelab.beckman.illinois.edu/" class="katex-title" style="font-size:inherit; font-weight:500;" target="_blank">Computation & Neurodynamics Lab</a></b> <br>
+           I am currently studying the dynamics of stochastic neuronal populations using moment closure methods. Starting from a nonlinear stochastic differential equation (SDE) that governs individual neuron behavior, we analytically derive a reduced system of ordinary differential equations (ODEs) that describe the evolution of the population mean and covariance over time. This involves evaluating Jacobians, noise terms, and closure assumptions that approximate the effect of higher-order cumulants.
         </p>
         <p>
-          the system under consideration takes the form
-          \[
-            \frac{dx}{dt} = f(x, \lambda) + \sigma \xi(t)
-          \]
-          where \(x(t)\) is the neuronal state vector (e.g., membrane voltage and recovery variable), \(\lambda\) is a parameter representing static input heterogeneity across the population, and \(\xi(t)\) is vector-valued white noise. nonlinearities in \(f\) (e.g., from cubic terms or feedback loops) make exact inference intractable, but we leverage a moment-based expansion to evolve just the first two moments, which are often sufficient for capturing macro-scale system behavior.
+           The system under consideration takes the form
+           \[
+             \frac{dx}{dt} = f(x, \lambda) + \sigma \xi(t)
+           \]
+           where \(x(t)\) is the neuronal state vector (e.g., membrane voltage and recovery variable), \(\lambda\) is a parameter representing static input heterogeneity across the population, and \(\xi(t)\) is vector-valued white noise. Nonlinearities in \(f\) (e.g., from cubic terms or feedback loops) make exact inference intractable, but we leverage a moment-based expansion to evolve just the first two moments, which are often sufficient for capturing macro-scale system behavior.
         </p>
         <p>
-          the symbolic derivation of the moment ODEs is done using <code>sympy</code>, and validated against Monte Carlo simulations of thousands of stochastic neurons. our next step is to build surrogate models—such as neural networks or gaussian processes—that can learn the mapping from inputs \((\lambda, t)\) to outputs \((\mu(t), \Sigma(t))\). these models enable fast approximations of neural behavior and could be used in optimal control, parameter inference, and theoretical neuroscience pipelines.
+           The symbolic derivation of the moment ODEs is done using <code style="font-size:0.92em;">sympy</code>, and validated against Monte Carlo simulations of thousands of stochastic neurons. Our next step is to build surrogate models—such as neural networks or Gaussian processes—that can learn the mapping from inputs \((\lambda, t)\) to outputs \((\mu(t), \Sigma(t))\). These models enable fast approximations of neural behavior and could be used in optimal control, parameter inference, and theoretical neuroscience pipelines.
         </p>
         <p>
-          current experiments include benchmarking surrogate architectures (e.g., feedforward nets vs. GPR), integrating PCA-based dimensionality reduction, and extending the framework to richer models such as FitzHugh–Nagumo. the full analysis and implementation is available on <a href="https://github.com/aniket-desh/fitzhugh-nagumo" target="_blank">my github!</a>.
+           Current experiments include benchmarking surrogate architectures (e.g., feedforward nets vs. GPR), integrating PCA-based dimensionality reduction, and extending the framework to richer models such as FitzHugh–Nagumo. The full analysis and implementation is available on my <a href="https://github.com/aniket-desh/fitzhugh-nagumo" class="katex-title" style="font-size:inherit; font-weight:500;" target="_blank"> GitHub</a>.
         </p>
-        more updates soon!
+        More updates soon!
       </div>
     </div>
 

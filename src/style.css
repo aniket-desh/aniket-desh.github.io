@@ -199,7 +199,7 @@ hr {
     border: none;
     height: 1px;
     background: black;
-    margin: 20px 0 40px 0;
+    margin: .1px 0 32px 0;
     margin-bottom: -5px;
 }
 
@@ -335,5 +335,28 @@ section p a {
 .gray-date {
     color: darkgray;
     font-size: 0.9rem;
+}
+
+.katex-title {
+  font-family: 'KaTeX_SansSerif', 'KaTeX_Main', Arial, sans-serif !important;
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 0.5em;
+  margin-top: 0.2em;
+}
+
+h2.katex-title {
+  font-size: 24px;
+  font-family: 'KaTeX_SansSerif', 'KaTeX_Main', Arial, sans-serif !important;
+  font-weight: 700;
+  margin-bottom: 0.2em;
+}
+
+h3.katex-title {
+  font-size: 20px;
+  font-family: 'KaTeX_SansSerif', 'KaTeX_Main', Arial, sans-serif !important;
+  font-weight: 600;
+  margin-top: 2em;
+  margin-bottom: 0.3em;
 }
 
