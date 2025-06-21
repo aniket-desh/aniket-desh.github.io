@@ -25,14 +25,17 @@
 
       <div class="bio-text">
         <p> <b><a href="https://lpna.cs.illinois.edu/" class="katex-title" style="font-size:inherit; font-weight:500;" target="_blank">Lab for Parallel Numerical Algorithms</a></b> <br>
-            Currently, I am studying probabilistic methods for estimating the contraction of closed tensor networks. We are developing a markov chain monte carlo algorithm, borrowing methods from statistical physics, to estimate contractions such as the trace of matrix products.
+            Currently, I am studying probabilistic methods for estimating the contraction of closed tensor networks. We are developing a Markov chain Monte Carlo algorithm, borrowing methods from statistical physics, to estimate contractions such as the trace of matrix products.
         </p>
         <p>
-            For example, consider the following tensor network
+            For example, consider the following tensor contraction
             \[
                 \text{Tr}(ABCD) = \sum_{ijkl} A_{ij}B_{jk}C_{kl}D_{li}
             \]
-            This is a closed ring network (all indices are contracted). The direct computation requires multiple matrix multiplications, an \(\mathcal{O}(n^3)\) operation. However, we can use a markov chain to sample the indices \(i,j,k,l\) and estimate the trace. To improve mixing, we borrow some clever sampling techniques from statistical physics.
+            This is a closed ring network (all indices are contracted). The direct computation requires multiple matrix multiplications, an \(\mathcal{O}(n^3)\) operation. However, we can use a Markov chain to sample the indices \(i,j,k,l\) and estimate the trace. To improve mixing, we borrow some clever sampling techniques from statistical physics.
+        </p>
+        <p>
+          While this is a somewhat trivial (direct multiplication is often faster in this case), finding an optimal contraction order for larger networks is NP-hard. High state-space systems, such as those arising in quantum chemistry and quantum circuits, would benefit greatly from effective contraction approximation algorithms.
         </p>
         More updates soon!
       </div>
@@ -45,9 +48,9 @@
         <p>
            The system under consideration takes the form
            \[
-             \frac{dx}{dt} = f(x, \lambda) + \sigma \xi(t)
+             dx = f(x, \lambda) dt + G(x, \lambda) dW_t
            \]
-           where \(x(t)\) is the neuronal state vector (e.g., membrane voltage and recovery variable), \(\lambda\) is a parameter representing static input heterogeneity across the population, and \(\xi(t)\) is vector-valued white noise. Nonlinearities in \(f\) (e.g., from cubic terms or feedback loops) make exact inference intractable, but we leverage a moment-based expansion to evolve just the first two moments, which are often sufficient for capturing macro-scale system behavior.
+           where \(x(t)\) is the neuronal state vector (e.g., membrane voltage and recovery variable), \(\lambda\) is a parameter representing static input heterogeneity across the population, and \(W_t\) is vector-valued white noise. Nonlinearities in \(f\) (e.g., from cubic terms or feedback loops) make exact inference intractable, but we leverage a moment-based expansion to evolve just the first two moments, which are often sufficient for capturing macro-scale system behavior.
         </p>
         <p>
            The symbolic derivation of the moment ODEs is done using <code style="font-size:0.92em;">sympy</code>, and validated against Monte Carlo simulations of thousands of stochastic neurons. Our next step is to build surrogate models—such as neural networks or Gaussian processes—that can learn the mapping from inputs \((\lambda, t)\) to outputs \((\mu(t), \Sigma(t))\). These models enable fast approximations of neural behavior and could be used in optimal control, parameter inference, and theoretical neuroscience pipelines.
