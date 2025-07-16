@@ -43,24 +43,21 @@
 
       <div class="bio-text">
         <p> 
-            <b><a href="https://conelab.beckman.illinois.edu/" class="katex-title" style="font-size:inherit; font-weight:500;" target="_blank">Computation & Neurodynamics Lab</a></b> <br>
-            I am currently studying the dynamics of stochastic neuronal populations using moment closure methods. Starting from a nonlinear stochastic differential equation (SDE) that governs individual neuron behavior, we analytically derive a reduced system of ordinary differential equations (ODEs) that describe the evolution of the population mean and covariance over time. This involves evaluating Jacobians, noise terms, and closure assumptions that approximate the effect of higher-order cumulants.
+          <b><a href="https://conelab.beckman.illinois.edu/" class="katex-title" style="font-size:inherit; font-weight:500;" target="_blank">Computation & Neurodynamics Lab</a></b> <br>
+          I study the dynamics of stochastic neuronal populations using moment closure methods. Starting from nonlinear SDEs that describe individual neuron behavior, we analytically derive reduced ODEs governing the evolution of the population mean and covariance. This requires evaluating Jacobians, stochastic forcing terms, and closure approximations to capture the effect of higher-order moments.
         </p>
         <p>
-            The system under consideration takes the form
-            \[
-                dx = f(x, \lambda) dt + G(x, \lambda) dW_t
-            \]
-            where \(x(t)\) is the neuronal state vector (e.g., membrane voltage and recovery variable), \(\lambda\) represents static input heterogeneity across the population, and \(W_t\) is vector-valued white noise. Nonlinearities in \(f\) (e.g., from cubic terms or feedback loops) make exact inference intractable, but we leverage a moment-based expansion to evolve just the first two moments, which are often sufficient for capturing macro-scale system behavior.
+          The system under consideration takes the form
+          \[
+            dx = f(x, \lambda) \, dt + G(x, \lambda) \, dW_t
+          \]
+          where \(x(t)\) is the neuronal state (e.g., membrane voltage and recovery variable), \(\lambda\) encodes input heterogeneity across the population, and \(W_t\) is vector-valued white noise. Nonlinearities in \(f\) (e.g., cubic terms or feedback) make exact inference intractable, so we evolve only the first two moments, which often suffice to capture collective dynamics.
         </p>
         <p>
-            The symbolic derivation of the moment ODEs is done using <code style="font-size:0.92em;">sympy</code>, and validated against Monte Carlo simulations of thousands of stochastic neurons. Our next step is to build surrogate models—such as neural networks or Gaussian processes—that can learn the mapping from inputs \((\lambda, t)\) to outputs \((\mu(t), \Sigma(t))\). These models enable fast approximations of neural behavior and could be used in optimal control, parameter inference, and theoretical neuroscience pipelines.
+          The closure equations are symbolically derived using <code style="font-size:0.92em;">sympy</code> and validated against Monte Carlo simulations. We’re now analyzing these ODEs through the lens of symmetry and geometric structure: computing Lie brackets between the dynamics and candidate vector fields to uncover invariants, symmetry-preserving perturbations, and coordinate-free signatures of neural computation.
         </p>
         <p>
-            Recently, I’ve been exploring extensions of this framework toward geometric and manifold-based learning, particularly for systems with nonlinear latent structure. Parallel to this, I’m beginning to investigate how similar stochastic and reduced-order techniques can be applied in quantum systems, including quantum channels and open quantum dynamics.
-        </p>
-        <p>
-            Current experiments include benchmarking surrogate architectures (e.g., feedforward nets vs. GPR), integrating PCA-based dimensionality reduction, and extending the framework to richer models such as FitzHugh–Nagumo. The full analysis and implementation is available on my <a href="https://github.com/aniket-desh/fitzhugh-nagumo" class="katex-title" style="font-size:inherit; font-weight:500;" target="_blank">GitHub</a>.
+          Current experiments include building surrogate models that learn the map \((\lambda, t) \mapsto (\mu(t), \Sigma(t))\), benchmarking architectures (e.g., neural nets vs. GPR), and extending the framework to rich biophysical models such as FitzHugh–Nagumo. Full implementation is on <a href="https://github.com/aniket-desh/fitzhugh-nagumo" class="katex-title" style="font-size:inherit; font-weight:500;" target="_blank">GitHub</a>.
         </p>
         More updates soon!
       </div>
