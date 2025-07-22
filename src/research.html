@@ -32,10 +32,10 @@
             \[
                 \text{Tr}(ABCD) = \sum_{ijkl} A_{ij}B_{jk}C_{kl}D_{li}
             \]
-            This is a closed ring network (all indices are contracted). The direct computation requires multiple matrix multiplications, an \(\mathcal{O}(n^3)\) operation. However, we can use a Markov chain to sample the indices \(i,j,k,l\) and estimate the trace. To improve mixing, we borrow some clever sampling techniques from statistical physics.
+            This is a closed ring network (all indices are contracted). The direct computation requires multiple matrix multiplications, an \(\mathcal{O}(n^3)\) operation. However, we can use MCMC methods to estimate contractions. To improve mixing, we borrow some clever sampling techniques from statistical physics.
         </p>
         <p>
-          While this is a somewhat trivial (direct multiplication is often faster in this case), finding an optimal contraction order for larger networks is NP-hard. High state-space systems, such as those arising in quantum chemistry and quantum circuits, would benefit greatly from effective contraction approximation algorithms.
+          While this is a somewhat trivial contraction (direct multiplication is often faster in this case), finding an optimal contraction order for larger networks is NP-hard. High state-space systems, such as those arising in quantum chemistry and quantum circuits, would benefit greatly from effective contraction approximation algorithms.
         </p>
         More updates soon!
       </div>
