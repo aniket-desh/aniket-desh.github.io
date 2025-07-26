@@ -20,50 +20,49 @@
     <h1>An Exploration of PINNs</h1>
 
     <p><span class="gray-date">11.10.2024</span><br><br>
-        This post outlines my self-study of physics-informed neural networks (PINNs), a method at the intersection of physics and machine learning for analyzing partial differential equations. <br><br>
+        This post summarizes my self-study of physics-informed neural networks (PINNs), a method that elegantly blends differential equations with deep learning. PINNs offer a mesh-free alternative to classical solvers for PDEs, encoding physical laws directly into a neural network's training objective.
+    </p>
 
-        In classical numerical analysis, partial differential equations (PDEs) are solved using discretization methods such as finite differences, finite elements, or spectral methods. These approaches approximate the solution on a grid or basis, trading off accuracy and computational cost. <br><br>
+    <p>
+        Traditional methods for solving PDEs: finite difference, finite element, or spectral methods—require discretizing the domain. These techniques trade off accuracy, complexity, and resolution. In contrast, PINNs aim to model the solution function itself using a continuous, differentiable neural network.
+    </p>
 
-        The key idea behind PINNs is to represent the solution to a PDE as a neural network, trained to satisfy the equation and boundary conditions. Given a PDE of the form:
+    <p>
+        Consider, for example, the Navier–Stokes equations in incompressible fluid dynamics:
     </p>
 
     <div class="theorem">
         <div class="content" style="text-align: center;">
-            \( \nabla \cdot \mathbf{u} = 0 \quad \text{and} \quad \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u}\cdot\nabla)\mathbf{u} = -\frac{1}{\rho}\nabla p + \nu \nabla^2\mathbf{u} + \mathbf{f} \)
+            \( \nabla \cdot \mathbf{u} = 0 \quad \text{and} \quad \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u} \cdot \nabla)\mathbf{u} = -\frac{1}{\rho}\nabla p + \nu \nabla^2\mathbf{u} + \mathbf{f} \)
         </div>
     </div>
 
     <p>
-    in turbulent flow, the velocity field \( \mathbf{u} \) exhibits chaotic behavior.  
-    PINNs are particularly useful in this context, allowing us to solve these complex problems while directly incorporating physical laws into the model.
+        When the velocity field \( \mathbf{u} \) is turbulent, its behavior is chaotic, multi-scale, and notoriously hard to resolve. PINNs shine in such scenarios by using neural networks to approximate the field while incorporating the PDE directly into the loss function.
     </p>
 
     <p>
-    but what <i>is</i> a PINN? first, let's define a standard neural network.  
-    in practice, neural networks are flexible functions of input data \( \mathbf{x} \) that aim to predict an output \( \mathbf{y} \).
-    </p>
-
-    <div style="text-align: center;">
-        \( NN(\mathbf{x}, \mathbf{\theta}) \approx \mathbf{y}(\mathbf{x}) \)
-    </div>
-
-    <p>
-    given training data, we fine-tune the parameters \( \mathbf{\theta} \) so that the network approximates the true function.  
-    this is done by minimizing a loss function, \( \mathcal{L}(\mathbf{\theta}) \), which quantifies the difference between predicted and true outputs.
+        But what exactly <i>is</i> a physics-informed neural network? Let's build from first principles. A neural network is a parameterized function mapping inputs \( \mathbf{x} \) to outputs \( \mathbf{y} \), denoted:
     </p>
 
     <div style="text-align: center;">
-        \( \mathcal{L}(\mathbf{\theta}) = \frac{1}{N} \sum_{i=1}^N \left( NN(\mathbf{x}_i, \mathbf{\theta}) - \mathbf{y}_i \right)^2 \)
+        \( NN(\mathbf{x}, \boldsymbol{\theta}) \approx \mathbf{y}(\mathbf{x}) \)
     </div>
 
     <p>
-    neural networks are a vast topic, and many important details are omitted here.  
-    however, the key idea is that neural networks are universal function approximators, capable of approximating any continuous function to arbitrary precision.
+        During training, we tune parameters \( \boldsymbol{\theta} \) by minimizing a loss function, which measures the difference between predicted and ground-truth outputs:
+    </p>
+
+    <div style="text-align: center;">
+        \( \mathcal{L}(\boldsymbol{\theta}) = \frac{1}{N} \sum_{i=1}^N \left( NN(\mathbf{x}_i, \boldsymbol{\theta}) - \mathbf{y}_i \right)^2 \)
+    </div>
+
+    <p>
+        Neural networks are known as universal function approximators: they can represent any smooth function to arbitrary precision given enough capacity. In PINNs, we leverage this expressiveness not just to fit data, but to solve differential equations.
     </p>
 
     <p>
-    to illustrate how PINNs are used, let's consider a simpler system from undergraduate mechanics:  
-    a damped harmonic oscillator with mass \( m \), spring constant \( k \), and damping coefficient \( \mu \).
+        To illustrate how PINNs work, consider a simpler problem from undergraduate physics: the damped harmonic oscillator with mass \( m \), spring constant \( k \), and damping coefficient \( \mu \). Its governing ODE is:
     </p>
 
     <div style="text-align: center;">
@@ -71,40 +70,40 @@
     </div>
 
     <p>
-    assume initial conditions \( u(0) = 1 \) and \( \dot{u}(0) = 0 \).  
-    although the system has an analytic solution, we will use a PINN to approximate it, modeling \( u(t) \) as \( NN(t, \mathbf{\theta}) \).
-    </p>
-
-    <p>
-    the key idea is to define a loss function with two components:  
-    a boundary loss \( \mathcal{L}_b \) to enforce initial conditions,  
-    and a physics loss \( \mathcal{L}_p \) to enforce the differential equation itself.
+        Suppose we’re given initial conditions \( u(0) = 1 \) and \( \dot{u}(0) = 0 \). While the solution is analytic, we treat this as a test case for applying a PINN. We model the solution \( u(t) \) with a neural network:
     </p>
 
     <div style="text-align: center;">
-        \( \mathcal{L}_b = \lambda_1 (NN(0, \mathbf{\theta}) - 1)^2 + \lambda_2 (\dot{NN}(0, \mathbf{\theta}) - 0)^2 \)
-    </div>
-
-    <div style="text-align: center;">
-        \( \mathcal{L}_p = \frac{1}{N} \sum_{i=1}^N \left( m\frac{d^2}{dt^2} NN(t_i, \mathbf{\theta}) + \mu\frac{d}{dt} NN(t_i, \mathbf{\theta}) + k NN(t_i, \mathbf{\theta}) \right)^2 \)
+        \( \hat{u}(t) = NN(t, \boldsymbol{\theta}) \)
     </div>
 
     <p>
-    to simplify, we can rearrange into parameters \( \zeta \) (damping ratio) and \( \omega \) (natural frequency):
+        The total loss combines two components: one to enforce initial conditions and another to enforce the ODE. Specifically, we define:
     </p>
 
     <div style="text-align: center;">
-        \( \ddot{u} + 2\zeta\omega\dot{u} + \omega^2 u = 0 \)
+        \( \mathcal{L}_b = \lambda_1 \left( NN(0, \boldsymbol{\theta}) - 1 \right)^2 + \lambda_2 \left( \dot{NN}(0, \boldsymbol{\theta}) - 0 \right)^2 \)
+    </div>
+
+    <div style="text-align: center;">
+        \( \mathcal{L}_p = \frac{1}{N} \sum_{i=1}^N \left( m\frac{d^2}{dt^2} NN(t_i, \boldsymbol{\theta}) + \mu \frac{d}{dt} NN(t_i, \boldsymbol{\theta}) + k NN(t_i, \boldsymbol{\theta}) \right)^2 \)
     </div>
 
     <p>
-    where \( \zeta = \frac{\mu}{2\sqrt{mk}} \) and \( \omega = \sqrt{\frac{k}{m}} \).
-    the PINN outputs \( \hat{u}(t) \), which can then be compared to the true \( u(t) \).
+        We minimize the total loss \( \mathcal{L} = \mathcal{L}_b + \mathcal{L}_p \), ensuring the neural network satisfies both the physical dynamics and initial conditions. For interpretability, we can also write the equation in terms of damping ratio \( \zeta \) and natural frequency \( \omega \):
+    </p>
+
+    <div style="text-align: center;">
+        \( \ddot{u} + 2\zeta\omega \dot{u} + \omega^2 u = 0 \)
+    </div>
+
+    <p>
+        where \( \zeta = \frac{\mu}{2\sqrt{mk}} \) and \( \omega = \sqrt{\frac{k}{m}} \). The trained network \( \hat{u}(t) \) can then be compared to the closed-form solution \( u(t) \), validating the effectiveness of the PINN framework.
     </p>
 
     <p>
-    code for the implementation in this post is available on my 
-    <a href="https://github.com/aniket-desh/oscillator-pinn?tab=readme-ov-file" target="_blank">github</a>.
+        The full implementation of this example is available on my 
+        <a href="https://github.com/aniket-desh/oscillator-pinn?tab=readme-ov-file" target="_blank">GitHub repository</a>.
     </p>
 
     <div class="menu">
