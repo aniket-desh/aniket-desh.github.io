@@ -360,3 +360,39 @@ h3.katex-title {
   margin-bottom: 0.2em;
 }
 
+.research-entry {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin: .5rem 0;
+  /* border-top: 1px solid #ddd; */
+  padding-top: 2rem;
+}
+
+.research-img {
+  flex: 0 0 160px;
+  margin-top: 0.25rem;
+}
+
+.research-img img {
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.research-text {
+  flex: 1;
+}
+
+.research-text h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.research-text p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}

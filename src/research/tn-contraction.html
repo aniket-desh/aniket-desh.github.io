@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/ad.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../style.css">
+    <title>tensor contractions</title>
+    <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+<div id="contentContainer">
+
+    <!-- <div class="top-link">
+        <a href="index.html">&larr; home</a>
+    </div> -->
+
+    <h3 class="katex-title">Approximating Tensor Contractions with Annealed Importance Sampling</h3>
+
+    <p>
+        Tensors are ubiquitous in modern information processing. In classical information, tensors represent high-dimensional data structures like images, videos, and text. In quantum computing, tensors encode quantum states and operations, enabling efficient simulation of quantum circuits. <br><br>For example, a quantum circuit, represented by a set of unitaries \( \text{ }\mathcal{U} = \{U_1, U_2, \ldots, U_m\} \), has the probability of measuring a particular bitstring \( x = (x_1, x_2, \ldots, x_n) \) given by the contraction
+    \[
+        \mathrm{Pr}(x) = \left| \langle x | U_m \cdots U_2 U_1 | 0^{\otimes n} \rangle \right|^2
+    \]
+    where \( |0^{\otimes n} \rangle \) is the initial state of the circuit. This amplitude corresponds to a tensor network contraction, where each gate \( U_i \in \mathcal{U}\) is represented as a low-rank tensor, with the circuit structure defining the connectivity. The contraction  sums over all intermediate qubit states at each layer
+    \[
+        \langle x | U_m \cdots U_2 U_1 | 0^{\otimes n} \rangle = \sum_{\text{internal indices}}\prod_{v \in \mathcal{V}} T_v[\text{indices}]
+    \]
+    Evaluating this quantity is \(\mathsf{\#P}\)-hard in general, as it requires summing over an exponential number of intermediate states. However, many practical applications only require approximate estimates of these contractions, which can be achieved using Monte Carlo methods. 
+    </p>
+    
+    <div class="menu">
+        <p>
+            <a href="../../index.html">home</a> / 
+            <a href="../research.html">research</a> /
+            <a href="../blog.html">blog</a> /
+            <a href="../../cv/cv.pdf">vitae</a>
+        </p>
+    </div>
+
+</div>
+</body>
+</html>

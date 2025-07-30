@@ -21,26 +21,27 @@
     <hr>
 
     <div class="profile-section">
-      <!-- <img src="assets/ad.png" alt="Profile Photo" class="profile-photo"> -->
 
-      <div class="bio-text">
-        <p> <b><a href="https://lpna.cs.illinois.edu/" class="katex-title" style="font-size:inherit; font-weight:500;" target="_blank">Lab for Parallel Numerical Algorithms</a></b> <br>
-            Currently, I am studying probabilistic methods for estimating the contraction of closed tensor networks. We are developing a Markov chain Monte Carlo algorithm, borrowing methods from statistical physics, to estimate contractions such as the trace of matrix products.
-        </p>
-        <p>
-            For example, consider the following tensor contraction
-            \[
-                \text{Tr}(ABCD) = \sum_{ijkl} A_{ij}B_{jk}C_{kl}D_{li}
-            \]
-            This is a closed ring network (all indices are contracted). The direct computation requires multiple matrix multiplications, an \(\mathcal{O}(n^3)\) operation. However, we can use MCMC methods to estimate contractions. To improve mixing, we borrow some clever sampling techniques from statistical physics.
-        </p>
-        <p>
-          While this is a somewhat trivial contraction (direct multiplication is often faster in this case), finding an optimal contraction order for larger networks is \( \mathsf{\#P} \)-hard. High state-space systems, such as those arising in quantum chemistry and quantum circuits, would benefit greatly from effective contraction approximation algorithms.<br><br>We'll be presenting this work at the <a
-            href="https://qsimconference.org/" class="katex-title" style="font-size:inherit; font-weight:500;"
-            target="_blank">QSim 2025</a> poster session!
-        </p>
-        
-      </div>
+  <div class="research-text">
+    <p>
+      <b><a href="https://lpna.cs.illinois.edu/" class="katex-title" style="font-size:inherit; font-weight:500;" target="_blank">Lab for Parallel Numerical Algorithms</a></b> <br>
+      We are developing a Markov chain Monte Carlo algorithm to estimate contractions of closed tensor networks. This allows efficient approximation of quantities like
+      \[
+        \text{Tr}(ABCD) = \sum_{ijkl} A_{ij}B_{jk}C_{kl}D_{li}
+      \]
+      using methods from statistical physics to improve mixing.
+    </p>
+    <p>
+      Such contractions are trivial in small cases but become \(\#\textsf{P}\)-hard for large networks. Our approach targets use cases in quantum circuits and chemistry, where exact contraction is intractable.
+    </p>
+    <p>
+      We'll present this work at <a href="https://qsimconference.org/" target="_blank">QSim 2025</a>.  
+      <a href="research/tn-contraction.html" class="katex-title"
+            style="font-size:15px; font-weight:500; text-decoration:underline; color:black; transition:color 0.3s;"
+            onmouseover="this.style.color='darkred';" onmouseout="this.style.color='black';"> Read more here!</a>
+    </p>
+  </div>
+</div>
       
 
       <div class="bio-text">
