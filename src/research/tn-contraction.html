@@ -7,10 +7,29 @@
     <link rel="icon" href="assets/ad.png" type="image/x-icon" />
     <link rel="stylesheet" href="../style.css">
     <title>tensor contractions</title>
-    <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- MathJax 3 config must come BEFORE the loader -->
+    <script>
+    MathJax = {
+        tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true,
+        processEnvironments: true
+        }
+    };
+    </script>
+    <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"
+            integrity="sha256-Cm3tWrvOEzMWWN0jnzQ4Kr0GSSx0txth6MqoES7FX6U=" crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+    <!-- pseudocode.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.js"></script>
 </head>
 
 <body>
+
+    
+    
 <div id="contentContainer">
 
     <!-- <div class="top-link">
@@ -24,12 +43,63 @@
     \[
         \mathrm{Pr}(x) = \left| \langle x | U_m \cdots U_2 U_1 | 0^{\otimes n} \rangle \right|^2
     \]
-    where \( |0^{\otimes n} \rangle \) is the initial state of the circuit. This amplitude corresponds to a tensor network contraction, where each gate \( U_i \in \mathcal{U}\) is represented as a low-rank tensor, with the circuit structure defining the connectivity. The contraction  sums over all intermediate qubit states at each layer
-    \[
-        \langle x | U_m \cdots U_2 U_1 | 0^{\otimes n} \rangle = \sum_{\text{internal indices}}\prod_{v \in \mathcal{V}} T_v[\text{indices}]
-    \]
-    Evaluating this quantity is \(\mathsf{\#P}\)-hard in general, as it requires summing over an exponential number of intermediate states. However, many practical applications only require approximate estimates of these contractions, which can be achieved using Monte Carlo methods. 
+        where \( |0^{\otimes n} \rangle \) is the initial state of the circuit. This amplitude corresponds to a tensor network contraction, where each gate \( U_i \in \mathcal{U}\) is represented as a low-rank tensor, with the circuit structure defining the connectivity. The contraction  sums over all intermediate qubit states at each layer
+        \[
+            \langle x | U_m \cdots U_2 U_1 | 0^{\otimes n} \rangle = \sum_{\text{internal indices}}\prod_{v \in \mathcal{V}} T_v[\text{indices}]
+        \]
+        Evaluating this quantity is \(\mathsf{\#P}\)-hard in general, as it requires summing over an exponential number of intermediate states. However, many practical applications only require approximate estimates of these contractions, which can be achieved using Monte Carlo methods. <br><br>
+        Annealed importance sampling (AIS), introduced by Radford Neal in 2001, is a powerful altered Markov Chain Monte Carlo method for estimating partition functions or marginal likelihoods of high-dimensional, multimodal distributions. Suppose we want to estimate the normalization constant \(Z\) of a target distribution
+        \[
+            \pi_K (x) = \frac{\psi(x)^1}{Z}
+        \]
+        which is intractable. AIS interpolates between a simple proposal distribution \(\pi_0(x)\) and the target distribution \(\pi_K(x)\) by introducing a sequence of intermediate distributions
+        \[
+            \pi_k(x) \propto \psi(x)^{\beta_k},\quad \beta_0 = 0 < \beta_1 < \cdots < \beta_K = 1
+        \]
+        By gradually "annealing" through these distributions using MCMC moves that leave \(\pi_k \) invariant, AIS constructs a sequence of states \(\mathbf{x}^{(0)}, \mathbf{x}^{(1)}, \ldots, \mathbf{x}^{(K)}\) and corresponding weights. The overall AIS estimator is, in fact, unbiased even for a finite number of steps. At every step \(k\), we sample \(N\) independent chains, each initialized from \(\pi_0\). After \(K\) steps, we average the product of weights across all chains to obtain an estimate of the normalization constant:
+        \[
+            \hat Z = Z_0 \cdot \frac{1}{N} \sum_{i=1}^N \prod_{k=1}^K \psi\left(\mathbf{x}_i^{(k-1)}\right)^{\beta_k - \beta_{k-1}}
+        \]
+        where each ratio is computed as the expectation under the intermediate distribution \(\pi_{\beta_{k-1}} \).
+        \[
+            \frac{Z_{\beta_k}}{Z_{\beta_{k-1}}} = \mathbb{E}_{\mathbf{x} \sim \pi_{\beta_{k-1}}} \left[ \psi \left(\mathbf{x}\right)^{\beta_k - \beta_{k-1}}\right]
+        \]
+        
+        <a style="color:darkred"> In Progress. </a>  
+        
     </p>
+
+    <pre id="ais-alg">
+        \begin{algorithm}
+        \caption{Annealed Importance Sampling}
+        \Require N chains, ladder (\beta_k)
+        \State Sample \(x^{(0,i)}\sim \pi_0\) for \(i=1,\dots,N\)
+        \For{\(k=1\) to \(K\)}
+        \For{\(i=1\) to \(N\)}
+            \State Mix chain \(i\) under \(\pi_{\beta_k}\) via MCMC
+            \State \(w_k^{(i)} \gets \psi(x^{(k-1,i)})^{\beta_k-\beta_{k-1}}\)
+        \EndFor
+        \EndFor
+        \State \(\hat Z \gets Z_0 \cdot \frac{1}{N} \sum_{i=1}^N \prod_{k=1}^K w_k^{(i)}\)
+        \end{algorithm}
+    </pre>
+
+    <script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const el = document.getElementById('ais-alg');
+        const tryRender = () => {
+        if (window.pseudocode && el) {
+            pseudocode.renderElement(el);
+            if (window.MathJax) {
+            MathJax.typesetPromise([el]);
+            }
+        } else {
+            setTimeout(tryRender, 50);
+        }
+        };
+        tryRender();
+    });
+    </script>
     
     <div class="menu">
         <p>
