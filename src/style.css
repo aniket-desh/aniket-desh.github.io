@@ -125,6 +125,7 @@ h2 {
     font-weight: 600;
     margin-top: -20px;
     margin-bottom: -15px;
+    font-family: Georgia, 'Bitstream Vera Serif', serif;
 }
 
 .menu {
@@ -146,6 +147,7 @@ h2 {
 h3 {
     margin-top: 10px;
     margin-bottom: 5px;
+    font-family: Georgia, 'Bitstream Vera Serif', serif;
 }
 
 p, ul {
@@ -193,6 +195,7 @@ h1 {
     font-weight: 400;
     text-align: left;
     margin-bottom: -20px;
+    font-family: Georgia, 'Bitstream Vera Serif', serif;
 }
 
 hr {
@@ -281,6 +284,7 @@ section h2 {
     font-weight: 600;
     margin-top: 40px;
     margin-bottom: 10px;
+    font-family: Georgia, 'Bitstream Vera Serif', serif;
 }
 
 section p {
@@ -338,7 +342,7 @@ section p a {
 }
 
 .katex-title {
-  font-family: 'KaTeX_SansSerif', 'KaTeX_Main', Arial, sans-serif !important;
+  font-family: Georgia, 'Bitstream Vera Serif', serif;
   font-size: 24px;
   font-weight: 500;
   margin-bottom: 0.5em;
@@ -347,14 +351,14 @@ section p a {
 
 h2.katex-title {
   font-size: 24px;
-  font-family: 'KaTeX_SansSerif', 'KaTeX_Main', Arial, sans-serif !important;
+  font-family: Georgia, 'Bitstream Vera Serif', serif;
   font-weight: 700;
   margin-bottom: 0.2em;
 }
 
 h3.katex-title {
   font-size: 16px;  /* or 17px if 16 feels too small */
-  font-family: 'KaTeX_SansSerif', 'KaTeX_Main', Arial, sans-serif !important;
+  font-family: Georgia, 'Bitstream Vera Serif', serif;
   font-weight: 600;
   margin-top: 1em;
   margin-bottom: 0.2em;
@@ -389,6 +393,7 @@ h3.katex-title {
   font-weight: 600;
   margin-top: 0;
   margin-bottom: 0.5rem;
+  font-family: Georgia, 'Bitstream Vera Serif', serif;
 }
 
 .research-text p {
