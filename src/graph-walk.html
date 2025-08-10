@@ -129,11 +129,27 @@
         body.dark-mode .bar-chart {
             border-color: #6b7280;
         }
+
+    /* theme-aware tick color */
+    body.light-mode .bar::after { background-color: #6b7280; }
+    body.dark-mode .bar::after { background-color: #6b7280; }
         
         .bar {
             background-color: #6b7280;
             transition: height 0.3s ease-in-out;
             position: relative;
+        }
+        /* ticks under each bar */
+        .bar::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -6px; /* sits between axis and labels */
+            width: 1px;
+            height: 6px;
+            background-color: #6b7280; /* same as axis color */
+            opacity: 0.9;
         }
         .bar-label {
             position: absolute;
@@ -464,6 +480,8 @@
                 <polygon points="5,3 19,12 5,21"/>
             </symbol>
 
+            
+
             <!-- reset/new graph icons removed -->
         </defs>
     </svg>
@@ -496,6 +514,7 @@
                 <button id="theme-toggle" class="btn-small btn-secondary icon-button" title="Dark Mode">
                     <svg class="icon-small"><use href="#moon-icon"></use></svg>
                 </button>
+                
             </div>
         </div>
         
@@ -550,7 +569,7 @@
     <script>
         // --- basic setup ---
         let scene, camera, renderer, controls;
-        let graphGroup; // To hold all parts of the graph
+    let graphGroup; // To hold all parts of the graph
         const vertices = []; // To store sphere objects
         const edges = []; // To store edge objects
         
@@ -560,7 +579,7 @@
         // --- simulation state ---
         let isPlaying = true;
         let simulationInterval;
-        let stepSpeed = 150; // milliseconds
+    let stepSpeed = 150; // milliseconds
         
         // --- markov chain state ---
         let numVertices = 20; // Default number of vertices
@@ -584,7 +603,7 @@
         const barChartEl = document.getElementById('bar-chart');
         const resetButton = document.getElementById('reset-button');
         const regenerateButton = document.getElementById('regenerate-button');
-        const themeToggle = document.getElementById('theme-toggle');
+    const themeToggle = document.getElementById('theme-toggle');
         const playPauseButton = document.getElementById('play-pause-button');
         const speedSlider = document.getElementById('speed-slider');
         const speedValue = document.getElementById('speed-value');
@@ -754,7 +773,7 @@
             return isDarkMode ? 0xffffff : 0x000000; // white in dark mode, black in light mode
         }
 
-        function updateVertexColors() {
+    function updateVertexColors() {
             if (vertices.length === 0) return;
 
             const defaultColor = getDefaultNodeColor();
@@ -1015,6 +1034,8 @@
         function createHistogram() {
             // Clear existing bars
             barChartEl.innerHTML = '';
+
+            const sparseLabels = numVertices > 20;
             
             for (let i = 0; i < numVertices; i++) {
                 const bar = document.createElement('div');
@@ -1024,8 +1045,12 @@
                 
                 const label = document.createElement('div');
                 label.className = 'bar-label';
-                // Display bins starting from 1 instead of 0
-                label.innerText = (i + 1).toString();
+                // 1-based labels; if crowded (>20), only show every 5th
+                if (sparseLabels) {
+                    label.innerText = ((i + 1) % 5 === 0) ? (i + 1).toString() : '';
+                } else {
+                    label.innerText = (i + 1).toString();
+                }
                 bar.appendChild(label);
                 
                 barChartEl.appendChild(bar);
