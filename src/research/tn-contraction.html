@@ -65,7 +65,49 @@
             \frac{Z_{\beta_k}}{Z_{\beta_{k-1}}} = \mathbb{E}_{\mathbf{x} \sim \pi_{\beta_{k-1}}} \left[ \psi \left(\mathbf{x}\right)^{\beta_k - \beta_{k-1}}\right]
         \]
         
-        <a style="color:darkred"> In Progress. </a>  
+                In our implementation, the Markov chain at each annealing step is evolved using 
+        <em>Glauber dynamics</em>, which performs single-site updates conditioned on the 
+        rest of the configuration. For a randomly chosen edge index \( e \) in the tensor 
+        network graph, we resample its value from the conditional distribution
+        \[
+            x_e \sim \pi_{\beta_k}(x_e \mid x_{\setminus e}) \;\propto\;
+            \prod_{\substack{v \in \mathcal{V} \\ e \text{ incident to } v}}
+                T_v[\ldots, x_e, \ldots]^{\beta_k}.
+        \]
+        This local update rule preserves \(\pi_{\beta_k}\) as the stationary distribution, 
+        enabling the Markov chain to gradually adapt to sharper distributions as 
+        \(\beta_k \to 1\).
+
+        <br><br>
+        Our test networks include \( 2 \times 2 \) and \( 3 \times 3 \) lattice networks. Each rank-\(n\), \(n\)-dimensional tensor is defined as <i>diagonally-dominant</i>.
+        \[
+            T_v = \left(1 - \epsilon \right)D + \left( \frac{\epsilon}{d^n} \right)N
+        \]
+        where
+        \[
+            D(i_1 i_2 \ldots i_n) = \begin{cases}
+                1 & \text{if } i_1 = i_2 = \cdots = i_n, \\
+                0 & \text{otherwise}
+            \end{cases}
+            \quad\text{and}\quad N(i_1 i_2 \ldots i_n) = 1
+        \]
+        and \( \epsilon \in [0, 1]\) is a noise parameter. This structure closely mimic components of quantum circuits (e.g., \(T\), CZ, 
+        and phase gates) and create a challenging, high-concentration probability 
+        landscape for MCMC.
+
+        <br><br>
+        We benchmark AIS against naive uniform sampling by tracking the geometric 
+        mean relative error (GMRE) of each ratio estimate \(Z_{\beta_k} / Z_{\beta_{k-1}}\) 
+        across annealing steps and trials. Results show that while both methods perform 
+        comparably when \(\beta_k \approx 0\) (nearly uniform distribution), AIS 
+        significantly outperforms uniform sampling as the target distribution sharpens. 
+        This improvement arises from AIS's ability to locally mix towards the 
+        high-probability configurations, maintaining accuracy even in concentrated regimes.
+
+        <br><br>
+        Overall, this project demonstrates that AIS with Glauber dynamics provides a 
+        scalable and accurate tool for approximating tensor network contractions in 
+        structured, high-dimensional settings relevant to quantum simulation.
         
     </p>
 

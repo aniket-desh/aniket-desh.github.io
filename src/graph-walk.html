@@ -188,6 +188,7 @@
             width: 100%;
         }
         
+        
         .btn-small {
             font-family: 'Vollkorn', serif;
             font-weight: 600;
@@ -556,6 +557,8 @@
             <button id="reset-button" class="btn btn-primary">Reset</button>
             <button id="regenerate-button" class="btn btn-secondary">New Graph</button>
         </div>
+
+        
     </div>
 
     <div id="histogram-container">
@@ -609,8 +612,8 @@
         const speedValue = document.getElementById('speed-value');
         const nodesSlider = document.getElementById('nodes-slider');
         const nodesValue = document.getElementById('nodes-value');
-        const connectednessSlider = document.getElementById('connectedness-slider');
-        const connectednessValue = document.getElementById('connectedness-value');
+    const connectednessSlider = document.getElementById('connectedness-slider');
+    const connectednessValue = document.getElementById('connectedness-value');
 
         // --- initialization ---
         function init() {
@@ -789,7 +792,7 @@
             });
         }
 
-        // --- generate random graph ---
+    // --- generate random graph ---
         function generateRandomGraph() {
             // clear existing graph
             if (graphGroup) {
@@ -828,7 +831,7 @@
             
             // create adjacency list based on distance and ensure connectivity
             adjacency = Array.from({ length: numVertices }, () => []);
-            
+
             // connect nodes within connection radius with probability
             for (let i = 0; i < numVertices; i++) {
                 for (let j = i + 1; j < numVertices; j++) {
@@ -843,7 +846,7 @@
                     }
                 }
             }
-            
+
             // ensure minimum connectivity (but allow some isolated clusters initially)
             for (let i = 0; i < numVertices; i++) {
                 if (adjacency[i].length < minDegree) {
@@ -865,28 +868,6 @@
                         adjacency[i].push(closestNode);
                         adjacency[closestNode].push(i);
                     }
-                }
-            }
-            
-            // add a few strategic long-range connections to create bottlenecks
-            // these act as bridges between clusters
-            const numBridges = Math.floor(numVertices / 8); // fewer bridges for more bottlenecks
-            for (let b = 0; b < numBridges; b++) {
-                const node1 = Math.floor(Math.random() * numVertices);
-                let node2 = Math.floor(Math.random() * numVertices);
-                
-                // ensure we're connecting different clusters (nodes far apart)
-                let attempts = 0;
-                while ((node1 === node2 || adjacency[node1].includes(node2) || 
-                       distance(positions[node1], positions[node2]) < connectionRadius * 1.5) && 
-                       attempts < 20) {
-                    node2 = Math.floor(Math.random() * numVertices);
-                    attempts++;
-                }
-                
-                if (node1 !== node2 && !adjacency[node1].includes(node2)) {
-                    adjacency[node1].push(node2);
-                    adjacency[node2].push(node1);
                 }
             }
 

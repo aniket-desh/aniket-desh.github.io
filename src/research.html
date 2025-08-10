@@ -45,25 +45,30 @@
       
 
       <div class="bio-text">
-        <p> 
-          <b><a href="https://conelab.beckman.illinois.edu/" class="katex-title" style="font-size:inherit; font-weight:500;" target="_blank">Computation & Neurodynamics Lab</a></b> <br>
-          I study the dynamics of stochastic neuronal populations using moment closure methods. Starting from nonlinear SDEs that describe individual neuron behavior, we analytically derive reduced ODEs governing the evolution of the population mean and covariance. This requires evaluating Jacobians, stochastic forcing terms, and closure approximations to capture the effect of higher-order moments.
-        </p>
-        <p>
-          The system under consideration takes the form
-          \[
-            dx = f(x, \lambda) \, dt + G(x, \lambda) \, dW_t
-          \]
-          where \(x(t)\) is the neuronal state (e.g., membrane voltage and recovery variable), \(\lambda\) encodes input heterogeneity across the population, and \(W_t\) is vector-valued white noise. Nonlinearities in \(f\) (e.g., cubic terms or feedback) make exact inference intractable, so we evolve only the first two moments, which often suffice to capture collective dynamics.
-        </p>
-        <p>
-          The closure equations are symbolically derived using <code style="font-size:0.92em;">sympy</code> and validated against Monte Carlo simulations. We’re now analyzing these ODEs through the lens of symmetry and geometric structure: computing Lie brackets between the dynamics and candidate vector fields to uncover invariants, symmetry-preserving perturbations, and coordinate-free signatures of neural computation.
-        </p>
-        <p>
-          Current experiments include building surrogate models that learn the map \((\lambda, t) \mapsto (\mu(t), \Sigma(t))\), benchmarking architectures (e.g., neural nets vs. GPR), and extending the framework to rich biophysical models such as FitzHugh–Nagumo. Full implementation is on <a href="https://github.com/aniket-desh/fitzhugh-nagumo" class="katex-title" style="font-size:inherit; font-weight:500;" target="_blank">GitHub</a>.
-        </p>
-        More updates soon!
-      </div>
+      <p> 
+        <b><a href="https://conelab.beckman.illinois.edu/" class="katex-title" style="font-size:inherit; font-weight:500;" target="_blank">Computation & Neurodynamics Lab</a></b> <br>
+        I work on extracting analytic Floquet decompositions of periodic dynamical systems using symbolic AI. Given a linear time-periodic system, we seek closed-form expressions for its monodromy matrix and periodic transformation \(P(t)\) so that the dynamics can be represented in a time-invariant form. This enables exact optimal control design in transformed coordinates without relying on purely numerical Floquet computations.
+      </p>
+      <p>
+        The systems of interest take the form
+        \[
+          \dot{x}(t) = A(t) x(t), \quad A(t+T) = A(t)
+        \]
+        where \(T\) is the fundamental period. Floquet theory guarantees a decomposition
+        \[
+          \Phi(t) = P(t) e^{R t}
+        \]
+        of the fundamental solution \(\Phi(t)\) into a \(T\)-periodic matrix \(P(t)\) and a constant matrix \(R\) containing the Floquet exponents. The monodromy matrix \(M = \Phi(T)\) satisfies \(M = P(0) e^{R T}\), linking periodic dynamics to their time-invariant equivalent.
+      </p>
+      <p>
+        We compute numerical decompositions for benchmark systems, then fit symbolic models for \(P(t)\) and \(R\) using sparse regression and periodicity constraints. The learned analytic forms are validated by reconstructing \(\Phi(t)\) and comparing to direct numerical integration. Once obtained, these symbolic decompositions allow the design of optimal controllers via periodic Riccati equations, yielding closed-form feedback laws in the transformed coordinates.
+      </p>
+      <p>
+        Current work focuses on defining appropriate function bases for symbolic fitting, ensuring periodicity during model discovery, and testing the framework on canonical periodic systems such as the Mathieu equation and parametrically forced oscillators.
+      </p>
+      More updates soon!
+    </div>
+
     </div>
 
 
