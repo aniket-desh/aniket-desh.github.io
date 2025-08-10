@@ -357,11 +357,70 @@
             fill: #ffffff;
             stroke: #ffffff;
         }
+        
+        /* Mobile responsive styles */
+        @media screen and (max-width: 768px) {
+            #info-panel {
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                max-width: none;
+                width: calc(100% - 20px);
+                font-size: 14px;
+                position: relative;
+            }
+            
+            #controls-panel {
+                top: 180px;
+                left: 10px;
+                right: 10px;
+                max-width: none;
+                width: calc(100% - 20px);
+            }
+            
+            #histogram-container {
+                bottom: 10px;
+                left: 10px;
+                right: 10px;
+                width: calc(100% - 20px);
+                max-width: none;
+                transform: none;
+            }
+            
+            /* Move back button to top right of info panel for mobile */
+            .back-button-mobile {
+                position: absolute !important;
+                top: 10px !important;
+                right: 10px !important;
+                left: auto !important;
+                z-index: 1001 !important;
+            }
+            
+            .back-button-mobile a {
+                font-size: 14px !important;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            #info-panel {
+                padding: 0.4rem;
+            }
+            
+            #controls-panel {
+                top: 200px;
+                padding: 0.4rem;
+            }
+            
+            .back-button-mobile {
+                top: 10px !important;
+                right: 10px !important;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Back button -->
-    <div style="position: absolute; top: 200px; left: 20px; z-index: 1000;">
+    <div class="back-button-mobile" style="position: absolute; top: 200px; left: 20px; z-index: 1000;">
         <a href="about.html" style="
             color: inherit; 
             text-decoration: none; 
