@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markov Chain on a 3D Random Graph</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Vollkorn', serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow: hidden;
+        }
+        
+        /* light mode (default) */
+        body.light-mode {
+            background-color: #ffffff;
+            color: #000000;
+        }
+        
+        /* dark mode */
+        body.dark-mode {
+            background-color: #000000;
+            color: #f3f4f6;
+        }
+        
+        #container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        canvas {
+            display: block;
+        }
+        #info-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 0.6rem;
+            border-radius: 0.5rem;
+            border: 1px solid;
+            max-width: 220px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        #controls-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid;
+            max-width: 210px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        /* light mode panel */
+        body.light-mode #info-panel,
+        body.light-mode #controls-panel {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-color: #e5e7eb;
+            color: #000000;
+        }
+        
+        /* dark mode panel */
+        body.dark-mode #info-panel,
+        body.dark-mode #controls-panel {
+            background-color: rgba(31, 41, 55, 0.8);
+            border-color: #374151;
+            color: #f3f4f6;
+        }
+        
+        #histogram-container {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            max-width: 400px;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        /* light mode histogram */
+        body.light-mode #histogram-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-color: #e5e7eb;
+            color: #000000;
+        }
+        
+        /* dark mode histogram */
+        body.dark-mode #histogram-container {
+            background-color: rgba(31, 41, 55, 0.8);
+            border-color: #374151;
+            color: #f3f4f6;
+        }
+        
+        .bar-chart {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            width: 100%;
+            height: 80px;
+            border-left: 2px solid;
+            border-bottom: 2px solid;
+            padding-top: 8px;
+            transition: border-color 0.3s ease;
+        }
+        
+        body.light-mode .bar-chart {
+            border-color: #6b7280;
+        }
+        
+        body.dark-mode .bar-chart {
+            border-color: #6b7280;
+        }
+        
+        .bar {
+            background-color: #6b7280;
+            transition: height 0.3s ease-in-out;
+            position: relative;
+        }
+        .bar-label {
+            position: absolute;
+            bottom: -25px;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            transition: color 0.3s ease;
+        }
+        
+        body.light-mode .bar-label {
+            color: #4b5563;
+        }
+        
+        body.dark-mode .bar-label {
+            color: #d1d5db;
+        }
+
+        .histogram-caption {
+            margin-top: 4px;
+            font-size: 11px;
+            color: inherit;
+            opacity: 0.8;
+        }
+        
+        /* button styles */
+        .btn {
+            font-family: 'Vollkorn', serif;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 0.3rem;
+            width: 100%;
+        }
+        
+        .btn-small {
+            font-family: 'Vollkorn', serif;
+            font-weight: 600;
+            padding: 0.3rem 0.5rem;
+            border-radius: 0.4rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.2rem;
+            width: auto;
+            min-width: 36px;
+        }
+        
+        .control-group {
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.3rem;
+            border-bottom: 1px solid;
+            transition: border-color 0.3s ease;
+        }
+        
+        body.light-mode .control-group {
+            border-color: #e5e7eb;
+        }
+        
+        body.dark-mode .control-group {
+            border-color: #374151;
+        }
+        
+        .control-group:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .slider-container {
+            margin: 0.2rem 0;
+        }
+        
+        .slider {
+            width: 100%;
+            margin: 0.25rem 0;
+            appearance: none;
+            height: 4px;
+            border-radius: 3px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        body.light-mode .slider {
+            background: #e5e7eb;
+        }
+        
+        body.dark-mode .slider {
+            background: #374151;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #6b7280;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .slider::-webkit-slider-thumb:hover {
+            background: #4b5563;
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #6b7280;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .control-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0.15rem 0;
+        }
+        
+        .play-pause-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            margin: 0.25rem 0;
+        }
+
+        /* Tighten title spacing in controls */
+        #controls-panel h2 {
+            margin-bottom: 0.25rem !important;
+        }
+
+        .icon-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 36px;
+            min-height: 32px;
+        }
+        
+        .btn-primary {
+            background-color: #6b7280;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #4b5563;
+        }
+        
+        .btn-secondary {
+            background-color: #6b7280;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #4b5563;
+        }
+        
+        .btn-toggle {
+            background-color: #6b7280;
+            color: white;
+            margin-top: 1rem;
+        }
+        
+        .btn-toggle:hover {
+            background-color: #4b5563;
+        }
+        
+        /* typography */
+        h1, h2 {
+            font-family: 'Vollkorn', serif;
+            font-weight: 700;
+        }
+        
+        p, span {
+            font-family: 'Vollkorn', serif;
+            font-weight: 400;
+        }
+        
+        /* icon styles */
+        .icon {
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 6px;
+            transition: fill 0.3s ease, stroke 0.3s ease;
+        }
+        
+        .icon-small {
+            width: 14px;
+            height: 14px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 4px;
+            transition: fill 0.3s ease, stroke 0.3s ease;
+        }
+
+        /* remove right margin when icon is alone in an icon button */
+        .icon-button .icon-small,
+        .icon-button .icon {
+            margin-right: 0;
+        }
+
+        /* icons default to stroke-based styling so outlines are crisp */
+        .icon use, .icon-small use, .icon *, .icon-small * {
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }        body.light-mode .icon,
+        body.light-mode .icon-small {
+            fill: #000000;
+            stroke: #000000;
+        }
+        
+        body.dark-mode .icon,
+        body.dark-mode .icon-small {
+            fill: #ffffff;
+            stroke: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button -->
+    <div style="position: absolute; top: 200px; left: 20px; z-index: 1000;">
+        <a href="about.html" style="
+            color: inherit; 
+            text-decoration: none; 
+            font-family: 'Vollkorn', serif; 
+            font-size: 16px; 
+            font-weight: 400;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        " onmouseover="this.style.opacity='1';" onmouseout="this.style.opacity='0.7';">
+            ← back
+        </a>
+    </div>
+    
+    <!-- svg icons -->
+    <svg style="display: none;">
+        <defs>
+            <!-- moon -->
+            <symbol id="moon-icon" viewBox="0 0 24 24">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="none"/>
+            </symbol>
+
+            <!-- sun -->
+            <symbol id="sun-icon" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="4" fill="none"/>
+                <line x1="12" y1="2" x2="12" y2="5"/>
+                <line x1="12" y1="19" x2="12" y2="22"/>
+                <line x1="2" y1="12" x2="5" y2="12"/>
+                <line x1="19" y1="12" x2="22" y2="12"/>
+                <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/>
+                <line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/>
+                <line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/>
+                <line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/>
+            </symbol>
+
+            <symbol id="pause-icon" viewBox="0 0 24 24">
+                <rect x="6" y="4" width="4" height="16"/>
+                <rect x="14" y="4" width="4" height="16"/>
+            </symbol>
+            <symbol id="play-icon" viewBox="0 0 24 24">
+                <polygon points="5,3 19,12 5,21"/>
+            </symbol>
+
+            <!-- reset/new graph icons removed -->
+        </defs>
+    </svg>
+
+    <div id="container">
+        <!-- the 3d canvas will be inserted here by three.js -->
+    </div>
+
+    <div id="info-panel">
+        <h1 class="text-base font-bold mb-2">Graph Random Walks</h1>
+        <p class="text-xs mb-2">The red sphere shows the walker's current state. Amber edges are bottleneck bridges between clusters.</p>
+        <div class="text-xs">
+            <p><strong>Steps Taken:</strong> <span id="steps">0</span></p>
+            <p><strong>Current State:</strong> <span id="state">0</span></p>
+            <p><strong>Graph Nodes:</strong> <span id="node-count">20</span></p>
+            <p><strong>Avg Degree:</strong> <span id="avg-degree">~5.2</span></p>
+        </div>
+        
+    </div>
+
+    <div id="controls-panel">
+        <h2 class="text-sm font-semibold mb-2">Controls</h2>
+        
+        <!-- Play/Pause Controls -->
+        <div class="control-group">
+            <div class="play-pause-container">
+                <button id="play-pause-button" class="btn-small btn-primary icon-button" title="Pause">
+                    <svg class="icon-small"><use href="#pause-icon"></use></svg>
+                </button>
+                <button id="theme-toggle" class="btn-small btn-secondary icon-button" title="Dark Mode">
+                    <svg class="icon-small"><use href="#moon-icon"></use></svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Speed Control -->
+        <div class="control-group">
+            <div class="control-row">
+                <label class="text-xs font-medium">Speed:</label>
+                <span id="speed-value" class="text-xs">Normal</span>
+            </div>
+            <div class="slider-container">
+                <input type="range" id="speed-slider" class="slider" min="1" max="10" value="5">
+            </div>
+        </div>
+        
+        <!-- Node Count Control -->
+        <div class="control-group">
+            <div class="control-row">
+                <label class="text-xs font-medium">Nodes:</label>
+                <span id="nodes-value" class="text-xs">20</span>
+            </div>
+            <div class="slider-container">
+                <input type="range" id="nodes-slider" class="slider" min="10" max="50" value="20" step="5">
+            </div>
+        </div>
+        
+        <!-- Connectedness Control -->
+        <div class="control-group">
+            <div class="control-row">
+                <label class="text-xs font-medium">Connectedness:</label>
+                <span id="connectedness-value" class="text-xs">Sparse</span>
+            </div>
+            <div class="slider-container">
+                <input type="range" id="connectedness-slider" class="slider" min="1" max="5" value="2">
+            </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="control-group">
+            <button id="reset-button" class="btn btn-primary">Reset</button>
+            <button id="regenerate-button" class="btn btn-secondary">New Graph</button>
+        </div>
+    </div>
+
+    <div id="histogram-container">
+        <h2 class="text-sm font-semibold mb-2">State Visitation Frequency</h2>
+        <div class="bar-chart" id="bar-chart">
+            <!-- bars will be generated by javascript -->
+        </div>
+    <!-- <div class="histogram-caption">x: state, y: visits</div> -->
+    </div>
+
+    <script>
+        // --- basic setup ---
+        let scene, camera, renderer, controls;
+        let graphGroup; // To hold all parts of the graph
+        const vertices = []; // To store sphere objects
+        const edges = []; // To store edge objects
+        
+        // --- theme state ---
+        let isDarkMode = false; // Start in light mode
+        
+        // --- simulation state ---
+        let isPlaying = true;
+        let simulationInterval;
+        let stepSpeed = 150; // milliseconds
+        
+        // --- markov chain state ---
+        let numVertices = 20; // Default number of vertices
+        let currentState = 0;
+        let steps = 0;
+        let visitCounts = [];
+        let adjacency = []; // Adjacency list for the random graph
+        let positions = []; // 3D positions of vertices
+        
+        // --- random graph parameters ---
+        let connectionRadius = 1.8; // Nodes within this distance are connected (adjustable)
+        let minDegree = 1; // Minimum degree for each node
+        let graphRadius = 4; // Radius of the sphere where nodes are placed
+        let connectedness = 2; // 1=very sparse, 5=very connected
+
+        // --- dom elements ---
+        const stepsEl = document.getElementById('steps');
+        const stateEl = document.getElementById('state');
+        const nodeCountEl = document.getElementById('node-count');
+        const avgDegreeEl = document.getElementById('avg-degree');
+        const barChartEl = document.getElementById('bar-chart');
+        const resetButton = document.getElementById('reset-button');
+        const regenerateButton = document.getElementById('regenerate-button');
+        const themeToggle = document.getElementById('theme-toggle');
+        const playPauseButton = document.getElementById('play-pause-button');
+        const speedSlider = document.getElementById('speed-slider');
+        const speedValue = document.getElementById('speed-value');
+        const nodesSlider = document.getElementById('nodes-slider');
+        const nodesValue = document.getElementById('nodes-value');
+        const connectednessSlider = document.getElementById('connectedness-slider');
+        const connectednessValue = document.getElementById('connectedness-value');
+
+        // --- initialization ---
+        function init() {
+            // Set initial theme
+            document.body.className = 'light-mode';
+            
+            // Scene
+            scene = new THREE.Scene();
+            updateSceneBackground();
+
+            // Camera
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 4;
+
+            // Renderer
+            const container = document.getElementById('container');
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+
+            // Controls
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+
+            // Lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(5, 10, 7.5);
+            scene.add(directionalLight);
+
+            // Create Visuals
+            generateRandomGraph();
+            createHistogram();
+            
+            // Start simulation
+            resetSimulation();
+            animate();
+            
+            // Start the simulation interval
+            startSimulation();
+
+            // apply theme-based colors on first load
+            updateSceneBackground();
+            updateVertexColors();
+
+            // Event Listeners
+            window.addEventListener('resize', onWindowResize, false);
+            resetButton.addEventListener('click', resetSimulation);
+            regenerateButton.addEventListener('click', () => {
+                generateRandomGraph();
+                resetSimulation();
+            });
+            themeToggle.addEventListener('click', toggleTheme);
+            playPauseButton.addEventListener('click', togglePlayPause);
+            speedSlider.addEventListener('input', updateSpeed);
+            nodesSlider.addEventListener('input', updateNodeCount);
+            connectednessSlider.addEventListener('input', updateConnectedness);
+        }
+        
+        // --- simulation control functions ---
+        function startSimulation() {
+            if (simulationInterval) clearInterval(simulationInterval);
+            simulationInterval = setInterval(step, stepSpeed);
+            isPlaying = true;
+            const playIcon = playPauseButton.querySelector('svg use');
+            playIcon.setAttribute('href', '#pause-icon');
+            playPauseButton.title = 'Pause';
+        }
+        
+        function stopSimulation() {
+            if (simulationInterval) clearInterval(simulationInterval);
+            isPlaying = false;
+            const playIcon = playPauseButton.querySelector('svg use');
+            playIcon.setAttribute('href', '#play-icon');
+            playPauseButton.title = 'Play';
+        }
+        
+        function togglePlayPause() {
+            if (isPlaying) {
+                stopSimulation();
+            } else {
+                startSimulation();
+            }
+        }
+        
+        function updateSpeed() {
+            const speedLevel = parseInt(speedSlider.value);
+            const speeds = [1000, 500, 300, 200, 150, 100, 75, 50, 30, 20]; // milliseconds
+            const labels = ['Very Slow', 'Slow', 'Slower', 'Slow-Normal', 'Normal', 'Fast-Normal', 'Faster', 'Fast', 'Very Fast', 'Ultra Fast'];
+            
+            stepSpeed = speeds[speedLevel - 1];
+            speedValue.textContent = labels[speedLevel - 1];
+            
+            if (isPlaying) {
+                startSimulation(); // Restart with new speed
+            }
+        }
+        
+        function updateNodeCount() {
+            const newNodeCount = parseInt(nodesSlider.value);
+            nodesValue.textContent = newNodeCount;
+            numVertices = newNodeCount;
+            
+            // Regenerate graph with new node count
+            generateRandomGraph();
+            resetSimulation();
+        }
+        
+        function updateConnectedness() {
+            const level = parseInt(connectednessSlider.value);
+            const labels = ['Very Sparse', 'Sparse', 'Medium', 'Dense', 'Very Dense'];
+            const radii = [1.4, 1.8, 2.3, 2.8, 3.5];
+            const probabilities = [0.5, 0.7, 0.85, 0.95, 1.0];
+            
+            connectedness = level;
+            connectionRadius = radii[level - 1];
+            connectednessValue.textContent = labels[level - 1];
+            
+            // Store the probability for use in graph generation
+            window.connectionProbability = probabilities[level - 1];
+            
+            // Regenerate graph with new connectedness
+            generateRandomGraph();
+            resetSimulation();
+        }
+
+        // --- theme functions ---
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.className = isDarkMode ? 'dark-mode' : 'light-mode';
+            
+            // update theme toggle button
+            const themeIcon = themeToggle.querySelector('svg use');
+            if (isDarkMode) {
+                themeIcon.setAttribute('href', '#sun-icon');
+                themeToggle.title = 'Light Mode';
+            } else {
+                themeIcon.setAttribute('href', '#moon-icon');
+                themeToggle.title = 'Dark Mode';
+            }
+            
+            updateSceneBackground();
+            updateVertexColors();
+        }
+        
+        function updateSceneBackground() {
+            // ensure both scene and renderer clear color are set for consistent background updates
+            const bgColor = new THREE.Color(isDarkMode ? 0x000000 : 0xffffff);
+            if (scene) scene.background = bgColor;
+            if (renderer) renderer.setClearColor(bgColor, 1);
+        }
+        
+        // helper to determine default node color based on theme
+        function getDefaultNodeColor() {
+            return isDarkMode ? 0xffffff : 0x000000; // white in dark mode, black in light mode
+        }
+
+        function updateVertexColors() {
+            if (vertices.length === 0) return;
+
+            const defaultColor = getDefaultNodeColor();
+            const currentColor = 0x991b1b; // darker red for current state
+
+            vertices.forEach((vertex, index) => {
+                if (index === currentState) {
+                    vertex.material.color.set(currentColor);
+                } else {
+                    vertex.material.color.set(defaultColor);
+                }
+                vertex.material.needsUpdate = true;
+            });
+        }
+
+        // --- generate random graph ---
+        function generateRandomGraph() {
+            // clear existing graph
+            if (graphGroup) {
+                scene.remove(graphGroup);
+            }
+            vertices.length = 0;
+            edges.length = 0;
+            
+            graphGroup = new THREE.Group();
+            
+            // generate random positions on a sphere
+            positions = [];
+            for (let i = 0; i < numVertices; i++) {
+                // create clusters to encourage bottlenecks
+                const clusterCenter = Math.floor(i / 5); // group nodes into clusters of ~5
+                const numClusters = Math.ceil(numVertices / 5);
+                
+                // base cluster position
+                const clusterPhi = (clusterCenter / numClusters) * Math.PI;
+                const clusterTheta = (clusterCenter * 2.618) * 2 * Math.PI; // golden ratio for distribution
+                
+                // add random offset within cluster
+                const offsetPhi = (Math.random() - 0.5) * 0.8;
+                const offsetTheta = (Math.random() - 0.5) * 0.8;
+                
+                const phi = clusterPhi + offsetPhi;
+                const theta = clusterTheta + offsetTheta;
+                const r = graphRadius * (0.8 + 0.4 * Math.random()); // more radius variation
+                
+                const x = r * Math.sin(phi) * Math.cos(theta);
+                const y = r * Math.sin(phi) * Math.sin(theta);
+                const z = r * Math.cos(phi);
+                
+                positions.push([x, y, z]);
+            }
+            
+            // create adjacency list based on distance and ensure connectivity
+            adjacency = Array.from({ length: numVertices }, () => []);
+            
+            // connect nodes within connection radius with probability
+            for (let i = 0; i < numVertices; i++) {
+                for (let j = i + 1; j < numVertices; j++) {
+                    const dist = distance(positions[i], positions[j]);
+                    if (dist < connectionRadius) {
+                        // use dynamic connection probability based on connectedness setting
+                        const connectionProb = window.connectionProbability || 0.7;
+                        if (Math.random() < connectionProb) {
+                            adjacency[i].push(j);
+                            adjacency[j].push(i);
+                        }
+                    }
+                }
+            }
+            
+            // ensure minimum connectivity (but allow some isolated clusters initially)
+            for (let i = 0; i < numVertices; i++) {
+                if (adjacency[i].length < minDegree) {
+                    // find closest unconnected node
+                    let closestNode = -1;
+                    let closestDist = Infinity;
+                    
+                    for (let j = 0; j < numVertices; j++) {
+                        if (i !== j && !adjacency[i].includes(j)) {
+                            const dist = distance(positions[i], positions[j]);
+                            if (dist < closestDist) {
+                                closestDist = dist;
+                                closestNode = j;
+                            }
+                        }
+                    }
+                    
+                    if (closestNode !== -1) {
+                        adjacency[i].push(closestNode);
+                        adjacency[closestNode].push(i);
+                    }
+                }
+            }
+            
+            // add a few strategic long-range connections to create bottlenecks
+            // these act as bridges between clusters
+            const numBridges = Math.floor(numVertices / 8); // fewer bridges for more bottlenecks
+            for (let b = 0; b < numBridges; b++) {
+                const node1 = Math.floor(Math.random() * numVertices);
+                let node2 = Math.floor(Math.random() * numVertices);
+                
+                // ensure we're connecting different clusters (nodes far apart)
+                let attempts = 0;
+                while ((node1 === node2 || adjacency[node1].includes(node2) || 
+                       distance(positions[node1], positions[node2]) < connectionRadius * 1.5) && 
+                       attempts < 20) {
+                    node2 = Math.floor(Math.random() * numVertices);
+                    attempts++;
+                }
+                
+                if (node1 !== node2 && !adjacency[node1].includes(node2)) {
+                    adjacency[node1].push(node2);
+                    adjacency[node2].push(node1);
+                }
+            }
+
+            // ensure the graph is fully connected by linking disconnected components
+            ensureConnectivity();
+            
+            // create vertices (spheres)
+            const vertexGeo = new THREE.SphereGeometry(0.12, 16, 16);
+            const defaultColor = getDefaultNodeColor(); // theme-aware default
+            const vertexMat = new THREE.MeshBasicMaterial({ color: defaultColor });
+            positions.forEach((pos, index) => {
+                const vertex = new THREE.Mesh(vertexGeo, vertexMat.clone());
+                vertex.position.set(pos[0], pos[1], pos[2]);
+                vertex.userData = { index: index };
+                vertices.push(vertex);
+                graphGroup.add(vertex);
+            });
+            
+            // create edges (lines)
+            const edgePoints = [];
+            const edgeColors = [];
+            for (let i = 0; i < numVertices; i++) {
+                for (const neighbor of adjacency[i]) {
+                    if (i < neighbor) { // avoid duplicate edges
+                        edgePoints.push(new THREE.Vector3(...positions[i]));
+                        edgePoints.push(new THREE.Vector3(...positions[neighbor]));
+                        
+                        // color-code edges: long-range bridges vs local connections
+                        const dist = distance(positions[i], positions[neighbor]);
+                        let color;
+                        if (dist > connectionRadius * 1.2) {
+                            // bridge connection - make it more visible
+                            color = new THREE.Color(0xf59e0b); // amber for bridges
+                        } else {
+                            // local connection
+                            color = new THREE.Color(0x6b7280); // gray for local
+                        }
+                        edgeColors.push(color.r, color.g, color.b);
+                        edgeColors.push(color.r, color.g, color.b);
+                    }
+                }
+            }
+            
+            const edgeGeo = new THREE.BufferGeometry().setFromPoints(edgePoints);
+            edgeGeo.setAttribute('color', new THREE.Float32BufferAttribute(edgeColors, 3));
+            const edgeMat = new THREE.LineBasicMaterial({ 
+                vertexColors: true, 
+                linewidth: 2,
+                opacity: 0.8,
+                transparent: true
+            });
+            const lineSegments = new THREE.LineSegments(edgeGeo, edgeMat);
+            graphGroup.add(lineSegments);
+            
+            scene.add(graphGroup);
+            
+            // update visit counts array
+            visitCounts = new Array(numVertices).fill(0);
+            
+            // update ui
+            updateGraphInfo();
+            // ensure vertex colors match current theme immediately
+            updateVertexColors();
+        }
+        
+        function distance(pos1, pos2) {
+            const dx = pos1[0] - pos2[0];
+            const dy = pos1[1] - pos2[1];
+            const dz = pos1[2] - pos2[2];
+            return Math.sqrt(dx * dx + dy * dy + dz * dz);
+        }
+
+        
+        // find connected components via dfs
+        function getConnectedComponents() {
+            const visited = new Array(numVertices).fill(false);
+            const components = [];
+
+            function dfs(start, comp) {
+                const stack = [start];
+                visited[start] = true;
+                while (stack.length) {
+                    const v = stack.pop();
+                    comp.push(v);
+                    for (const nb of adjacency[v]) {
+                        if (!visited[nb]) {
+                            visited[nb] = true;
+                            stack.push(nb);
+                        }
+                    }
+                }
+            }
+
+            for (let i = 0; i < numVertices; i++) {
+                if (!visited[i]) {
+                    const comp = [];
+                    dfs(i, comp);
+                    components.push(comp);
+                }
+            }
+
+            return components;
+        }
+
+        // connect disconnected components with minimal edges (nearest pair between components)
+        function ensureConnectivity() {
+            const components = getConnectedComponents();
+            if (components.length <= 1) return;
+
+            // start with the first component as the main set
+            let main = components[0].slice();
+
+            for (let c = 1; c < components.length; c++) {
+                const comp = components[c];
+                let bestA = -1, bestB = -1;
+                let bestDist = Infinity;
+
+                // find nearest pair between 'main' and current component
+                for (const a of main) {
+                    for (const b of comp) {
+                        const d = distance(positions[a], positions[b]);
+                        if (d < bestDist) {
+                            bestDist = d;
+                            bestA = a;
+                            bestB = b;
+                        }
+                    }
+                }
+
+                if (bestA !== -1 && bestB !== -1 && !adjacency[bestA].includes(bestB)) {
+                    adjacency[bestA].push(bestB);
+                    adjacency[bestB].push(bestA);
+                }
+
+                // merge this component into main
+                main = main.concat(comp);
+            }
+        }        function updateGraphInfo() {
+            nodeCountEl.innerText = numVertices;
+            const totalDegree = adjacency.reduce((sum, neighbors) => sum + neighbors.length, 0);
+            const avgDegree = (totalDegree / numVertices).toFixed(1);
+            avgDegreeEl.innerText = `~${avgDegree}`;
+        }
+
+        function createHistogram() {
+            // Clear existing bars
+            barChartEl.innerHTML = '';
+            
+            for (let i = 0; i < numVertices; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'bar';
+                bar.id = `bar-${i}`;
+                bar.style.width = `${Math.max(2, 90 / numVertices)}%`;
+                
+                const label = document.createElement('div');
+                label.className = 'bar-label';
+                label.innerText = i.toString();
+                bar.appendChild(label);
+                
+                barChartEl.appendChild(bar);
+            }
+        }
+
+        // --- simulation logic ---
+        function step() {
+            if (!isPlaying) return; // don't step if paused
+            
+            // get neighbors of the current state
+            const neighbors = adjacency[currentState];
+            if (neighbors.length === 0) return; // skip if no neighbors
+            
+            // choose the next state uniformly at random
+            const nextState = neighbors[Math.floor(Math.random() * neighbors.length)];
+            
+            updateWalker(nextState);
+            steps++;
+            visitCounts[currentState]++;
+            
+            updateUI();
+        }
+        
+        function updateWalker(nextState) {
+            // reset old vertex color and scale
+            const defaultColor = getDefaultNodeColor(); // theme-aware default
+            vertices[currentState].material.color.set(defaultColor);
+            vertices[currentState].material.needsUpdate = true;
+            vertices[currentState].scale.set(1, 1, 1);
+
+            // set new vertex color and scale
+            currentState = nextState;
+            vertices[currentState].material.color.set(0x991b1b); // darker red
+            vertices[currentState].material.needsUpdate = true;
+            vertices[currentState].scale.set(1.8, 1.8, 1.8);
+            
+            // add a pulsing effect
+            vertices[currentState].userData.pulsePhase = 0;
+        }
+        
+        function resetSimulation() {
+            steps = 0;
+            visitCounts.fill(0);
+            updateWalker(0); // start at vertex 0
+            updateUI();
+        }
+
+        // --- ui updates ---
+        function updateUI() {
+            stepsEl.innerText = steps;
+            stateEl.innerText = currentState;
+            updateHistogram();
+        }
+
+        function updateHistogram() {
+            if (steps === 0) {
+                 for (let i = 0; i < numVertices; i++) {
+                    const bar = document.getElementById(`bar-${i}`);
+                    bar.style.height = `0%`;
+                }
+                return;
+            }
+
+            const maxCount = Math.max(...visitCounts);
+            // the stationary distribution is uniform, so we expect counts to be around steps/numVertices
+            const expectedMax = Math.max(maxCount, steps / numVertices * 1.5);
+
+            for (let i = 0; i < numVertices; i++) {
+                const bar = document.getElementById(`bar-${i}`);
+                const percentage = (visitCounts[i] / expectedMax) * 100;
+                bar.style.height = `${Math.min(100, percentage)}%`;
+            }
+        }
+
+        // --- animation loop & event handlers ---
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            
+            // rotate the graph slowly
+            graphGroup.rotation.y += 0.002;
+            graphGroup.rotation.x += 0.001;
+            
+            // add pulsing effect to current node
+            if (vertices[currentState] && vertices[currentState].userData.pulsePhase !== undefined) {
+                vertices[currentState].userData.pulsePhase += 0.1;
+                const pulse = 1.8 + 0.3 * Math.sin(vertices[currentState].userData.pulsePhase);
+                vertices[currentState].scale.set(pulse, pulse, pulse);
+            }
+            
+            renderer.render(scene, camera);
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        // --- start everything ---
+        init();
+    </script>
+</body>
+</html>
