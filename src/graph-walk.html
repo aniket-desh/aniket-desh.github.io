@@ -49,7 +49,7 @@
             border-radius: 0.5rem;
             border: 1px solid;
             max-width: 220px;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
         }
         
         #controls-panel {
@@ -60,7 +60,7 @@
             border-radius: 0.5rem;
             border: 1px solid;
             max-width: 210px;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.35s ease, opacity 0.3s ease;
         }
         
         /* light mode panel */
@@ -93,7 +93,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.35s ease, opacity 0.3s ease;
         }
         
         /* light mode histogram */
@@ -187,7 +187,6 @@
             margin-top: 0.3rem;
             width: 100%;
         }
-        
         
         .btn-small {
             font-family: 'Vollkorn', serif;
@@ -321,6 +320,29 @@
         
         .btn-toggle:hover {
             background-color: #4b5563;
+        }
+
+        /* presentation mode animations */
+        body.ui-hidden #info-panel {
+            transform: translateX(-140%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        body.ui-hidden #controls-panel {
+            transform: translateX(140%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        body.ui-hidden #histogram-container {
+            transform: translate(-50%, 140%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .back-button-mobile { transition: transform 0.35s ease, opacity 0.3s ease; }
+        body.ui-hidden .back-button-mobile {
+            opacity: 0;
+            transform: translateY(-10px);
+            pointer-events: none;
         }
         
         /* typography */
@@ -481,6 +503,11 @@
                 <polygon points="5,3 19,12 5,21"/>
             </symbol>
 
+            <!-- eye -->
+            <symbol id="eye-icon" viewBox="0 0 24 24">
+                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" fill="none"/>
+                <circle cx="12" cy="12" r="3" fill="none"/>
+            </symbol>
             
 
             <!-- reset/new graph icons removed -->
@@ -514,6 +541,9 @@
                 </button>
                 <button id="theme-toggle" class="btn-small btn-secondary icon-button" title="Dark Mode">
                     <svg class="icon-small"><use href="#moon-icon"></use></svg>
+                </button>
+                <button id="ui-toggle" class="btn-small btn-secondary icon-button" title="Hide UI">
+                    <svg class="icon-small"><use href="#eye-icon"></use></svg>
                 </button>
                 
             </div>
@@ -557,8 +587,6 @@
             <button id="reset-button" class="btn btn-primary">Reset</button>
             <button id="regenerate-button" class="btn btn-secondary">New Graph</button>
         </div>
-
-        
     </div>
 
     <div id="histogram-container">
@@ -576,13 +604,16 @@
         const vertices = []; // To store sphere objects
         const edges = []; // To store edge objects
         
-        // --- theme state ---
+    // --- theme state ---
         let isDarkMode = false; // Start in light mode
         
         // --- simulation state ---
         let isPlaying = true;
         let simulationInterval;
     let stepSpeed = 150; // milliseconds
+        // --- presentation mode (UI hidden aesthetic view) ---
+        let wasPlayingBeforeHide = false;
+        let lineSegments; // reference to edges line segments for recoloring
         
         // --- markov chain state ---
         let numVertices = 20; // Default number of vertices
@@ -607,13 +638,14 @@
         const resetButton = document.getElementById('reset-button');
         const regenerateButton = document.getElementById('regenerate-button');
     const themeToggle = document.getElementById('theme-toggle');
+    const uiToggle = document.getElementById('ui-toggle');
         const playPauseButton = document.getElementById('play-pause-button');
         const speedSlider = document.getElementById('speed-slider');
         const speedValue = document.getElementById('speed-value');
         const nodesSlider = document.getElementById('nodes-slider');
         const nodesValue = document.getElementById('nodes-value');
-    const connectednessSlider = document.getElementById('connectedness-slider');
-    const connectednessValue = document.getElementById('connectedness-value');
+        const connectednessSlider = document.getElementById('connectedness-slider');
+        const connectednessValue = document.getElementById('connectedness-value');
 
         // --- initialization ---
         function init() {
@@ -669,6 +701,9 @@
                 resetSimulation();
             });
             themeToggle.addEventListener('click', toggleTheme);
+            uiToggle.addEventListener('click', () => {
+                hideUI();
+            });
             playPauseButton.addEventListener('click', togglePlayPause);
             speedSlider.addEventListener('input', updateSpeed);
             nodesSlider.addEventListener('input', updateNodeCount);
@@ -792,7 +827,7 @@
             });
         }
 
-    // --- generate random graph ---
+        // --- generate random graph ---
         function generateRandomGraph() {
             // clear existing graph
             if (graphGroup) {
@@ -831,7 +866,7 @@
             
             // create adjacency list based on distance and ensure connectivity
             adjacency = Array.from({ length: numVertices }, () => []);
-
+            
             // connect nodes within connection radius with probability
             for (let i = 0; i < numVertices; i++) {
                 for (let j = i + 1; j < numVertices; j++) {
@@ -846,7 +881,7 @@
                     }
                 }
             }
-
+            
             // ensure minimum connectivity (but allow some isolated clusters initially)
             for (let i = 0; i < numVertices; i++) {
                 if (adjacency[i].length < minDegree) {
@@ -868,6 +903,28 @@
                         adjacency[i].push(closestNode);
                         adjacency[closestNode].push(i);
                     }
+                }
+            }
+            
+            // add a few strategic long-range connections to create bottlenecks
+            // these act as bridges between clusters
+            const numBridges = Math.floor(numVertices / 8); // fewer bridges for more bottlenecks
+            for (let b = 0; b < numBridges; b++) {
+                const node1 = Math.floor(Math.random() * numVertices);
+                let node2 = Math.floor(Math.random() * numVertices);
+                
+                // ensure we're connecting different clusters (nodes far apart)
+                let attempts = 0;
+                while ((node1 === node2 || adjacency[node1].includes(node2) || 
+                       distance(positions[node1], positions[node2]) < connectionRadius * 1.5) && 
+                       attempts < 20) {
+                    node2 = Math.floor(Math.random() * numVertices);
+                    attempts++;
+                }
+                
+                if (node1 !== node2 && !adjacency[node1].includes(node2)) {
+                    adjacency[node1].push(node2);
+                    adjacency[node2].push(node1);
                 }
             }
 
@@ -919,7 +976,7 @@
                 opacity: 0.8,
                 transparent: true
             });
-            const lineSegments = new THREE.LineSegments(edgeGeo, edgeMat);
+            lineSegments = new THREE.LineSegments(edgeGeo, edgeMat);
             graphGroup.add(lineSegments);
             
             scene.add(graphGroup);
@@ -1130,6 +1187,68 @@
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        // --- UI hide/show ---
+        let uiHidden = false;
+        function setEdgesGray(allGray) {
+            if (!lineSegments) return;
+            const colors = lineSegments.geometry.getAttribute('color');
+            const n = colors.count; // number of vertices in the line segments
+            const gray = new THREE.Color(0x6b7280);
+            const amber = new THREE.Color(0xf59e0b);
+            for (let i = 0; i < n; i++) {
+                const r = colors.getX(i), g = colors.getY(i), b = colors.getZ(i);
+                if (allGray) {
+                    colors.setX(i, gray.r); colors.setY(i, gray.g); colors.setZ(i, gray.b);
+                } else {
+                    colors.setX(i, gray.r); colors.setY(i, gray.g); colors.setZ(i, gray.b);
+                }
+            }
+            colors.needsUpdate = true;
+        }
+
+        function restoreEdgeColors() {
+            if (!lineSegments) return;
+            const colors = lineSegments.geometry.getAttribute('color');
+            let idx = 0; // vertex index in color attribute
+            for (let i = 0; i < numVertices; i++) {
+                for (const neighbor of adjacency[i]) {
+                    if (i < neighbor) {
+                        const dist = distance(positions[i], positions[neighbor]);
+                        const isBridge = dist > connectionRadius * 1.2;
+                        const c = new THREE.Color(isBridge ? 0xf59e0b : 0x6b7280);
+                        // two vertices per segment
+                        colors.setX(idx, c.r); colors.setY(idx, c.g); colors.setZ(idx, c.b); idx++;
+                        colors.setX(idx, c.r); colors.setY(idx, c.g); colors.setZ(idx, c.b); idx++;
+                    }
+                }
+            }
+            colors.needsUpdate = true;
+        }
+
+        function hideUI() {
+            if (uiHidden) return;
+            uiHidden = true;
+            document.body.classList.add('ui-hidden');
+            // recolor edges to gray
+            setEdgesGray(true);
+            // Set up one-time listener to restore on next click anywhere
+            setTimeout(() => {
+                const restore = () => {
+                    showUI();
+                    document.removeEventListener('pointerdown', restore, true);
+                };
+                document.addEventListener('pointerdown', restore, true);
+            }, 0);
+        }
+
+        function showUI() {
+            if (!uiHidden) return;
+            uiHidden = false;
+            document.body.classList.remove('ui-hidden');
+            // restore edge colors (amber bridges and gray locals)
+            restoreEdgeColors();
         }
 
         // --- start everything ---
