@@ -652,52 +652,45 @@
             // Set initial theme
             document.body.className = 'light-mode';
             
-            // Scene
             scene = new THREE.Scene();
             updateSceneBackground();
 
-            // Camera
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             camera.position.z = 4;
 
-            // Renderer
             const container = document.getElementById('container');
             renderer = new THREE.WebGLRenderer({ antialias: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
             container.appendChild(renderer.domElement);
 
-            // Controls
             controls = new THREE.OrbitControls(camera, renderer.domElement);
             controls.enableDamping = true;
             controls.dampingFactor = 0.05;
 
-            // Lights
             const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
             scene.add(ambientLight);
             const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
             directionalLight.position.set(5, 10, 7.5);
             scene.add(directionalLight);
 
-            // Create Visuals
             generateRandomGraph();
             createHistogram();
+            fitCameraToGraph();
             
-            // Start simulation
             resetSimulation();
             animate();
             
-            // Start the simulation interval
             startSimulation();
 
             // apply theme-based colors on first load
             updateSceneBackground();
             updateVertexColors();
 
-            // Event Listeners
             window.addEventListener('resize', onWindowResize, false);
             resetButton.addEventListener('click', resetSimulation);
             regenerateButton.addEventListener('click', () => {
                 generateRandomGraph();
+                fitCameraToGraph();
                 resetSimulation();
             });
             themeToggle.addEventListener('click', toggleTheme);
@@ -710,7 +703,6 @@
             connectednessSlider.addEventListener('input', updateConnectedness);
         }
         
-        // --- simulation control functions ---
         function startSimulation() {
             if (simulationInterval) clearInterval(simulationInterval);
             simulationInterval = setInterval(step, stepSpeed);
@@ -745,7 +737,7 @@
             speedValue.textContent = labels[speedLevel - 1];
             
             if (isPlaying) {
-                startSimulation(); // Restart with new speed
+                startSimulation(); 
             }
         }
         
@@ -754,11 +746,9 @@
             nodesValue.textContent = newNodeCount;
             numVertices = newNodeCount;
             
-            // Regenerate graph with new node count
             generateRandomGraph();
-            // Rebuild histogram bars to match new node count
+            fitCameraToGraph();
             createHistogram();
-            // Reset simulation to start with fresh counts and UI
             resetSimulation();
         }
         
@@ -772,15 +762,13 @@
             connectionRadius = radii[level - 1];
             connectednessValue.textContent = labels[level - 1];
             
-            // Store the probability for use in graph generation
             window.connectionProbability = probabilities[level - 1];
             
-            // Regenerate graph with new connectedness
             generateRandomGraph();
+            fitCameraToGraph();
             resetSimulation();
         }
 
-        // --- theme functions ---
         function toggleTheme() {
             isDarkMode = !isDarkMode;
             document.body.className = isDarkMode ? 'dark-mode' : 'light-mode';
@@ -827,7 +815,6 @@
             });
         }
 
-        // --- generate random graph ---
         function generateRandomGraph() {
             // clear existing graph
             if (graphGroup) {
@@ -995,6 +982,28 @@
             const dy = pos1[1] - pos2[1];
             const dz = pos1[2] - pos2[2];
             return Math.sqrt(dx * dx + dy * dy + dz * dz);
+        }
+
+        // Adjust camera distance to fit the current graph comfortably
+        function fitCameraToGraph() {
+            if (!camera || positions.length === 0) return;
+            // get max radius from origin
+            let maxR = 0;
+            for (let i = 0; i < positions.length; i++) {
+                const p = positions[i];
+                const r = Math.sqrt(p[0]*p[0] + p[1]*p[1] + p[2]*p[2]);
+                if (r > maxR) maxR = r;
+            }
+            // margin so edges/nodes have breathing room
+            const margin = 1.25;
+            const targetRadius = Math.max(1, maxR) * margin;
+            const halfFov = THREE.MathUtils.degToRad(camera.fov * 0.5);
+            const distance = targetRadius / Math.tan(halfFov);
+            camera.position.set(0, 0, distance);
+            if (controls) {
+                controls.target.set(0,0,0);
+                controls.update();
+            }
         }
 
         
