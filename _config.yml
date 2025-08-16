@@ -1,0 +1,11 @@
+# Jekyll configuration for GitHub Pages
+plugins:
+  - jekyll-redirect-from
+
+# Remove .html extensions
+permalink: pretty
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - CNAME
