@@ -359,7 +359,7 @@ h2.katex-title {
 h3.katex-title {
   font-size: 16px;  /* or 17px if 16 feels too small */
   font-family: Georgia, 'Bitstream Vera Serif', serif;
-  font-weight: 600;
+  font-weight: 500;
   margin-top: 1em;
   margin-bottom: 0.2em;
 }
