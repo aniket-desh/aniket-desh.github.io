@@ -6,115 +6,82 @@
     <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;600&display=swap" rel="stylesheet">
     <link rel="icon" href="../assets/ad.png" type="image/x-icon" />
     <link rel="stylesheet" href="../src/style.css">
-    <title>an exploration of PINNs — aniket deshpande</title>
+    <title>the slow art of fast mixing — aniket deshpande</title>
     <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        h1 {
+            font-family: "adobe-caslon-pro", "Adobe Caslon Pro", "AdobeCaslonPro-Regular", "Big Caslon", "Adobe Caslon", "Caslon", "Libre Caslon Text", Georgia, "Times New Roman", serif;
+        }
+        h3 {
+            font-family: "adobe-caslon-pro", "Adobe Caslon Pro", "AdobeCaslonPro-Regular", "Big Caslon", "Adobe Caslon", "Caslon", "Libre Caslon Text", Georgia, "Times New Roman", serif;
+        }
+    </style>
 </head>
 
 <body>
 <div id="contentContainer">
 
-    <div class="top-link">
+        <div class="flex flex-col mt-8 text-sm">
         <a href="../src/blog.html">&larr; blog</a>
     </div>
 
-    <h1>An Exploration of PINNs</h1>
+    <h1>the slow art of fast mixing</h1>
 
-    <p><span class="gray-date">11.10.2024</span><br><br>
-        This post summarizes my self-study of physics-informed neural networks (PINNs), a method that elegantly blends differential equations with deep learning. PINNs offer a mesh-free alternative to classical solvers for PDEs, encoding physical laws directly into a neural network's training objective.
+    <p><span class="gray-date">07.25.2025</span><br><br>
+        In my studies of quantum information and learning theory, I find that a particular computational tool has become the center of rigorous mathematical research: sampling. This post walks through the rich theory of MCMC sampling and the results that allow Monte Carlo simulations to be numerical necessities in many fields.<br><br> In quantum information, Path-Integral Monte Carlo (PIMC) is a primary method for simulating thermal states of stoquastic quantum systems. PIMC transforms a quantum partition function into a classical Gibbs distribution by introducing an “imaginary-time” dimension, then applies Markov Chain Monte Carlo to sample from that distribution. Recently, these Markov chains were proven to mix <i> rapidly</i>, using the canonical path method. This rigorously justifies the use of PIMC in partition function estimation. <br><br> 
+        Suppose we hope to estimate the partition function of a \(1\)D stoquastic Hamiltonian
+        \[
+        H = \sum_{i=1}^{n-1}Z_{i}Z_{i+1} + \sum_{i=1}^{n}h_iX_i
+        \]
+        With a Suzuki-Trotter decomposition, this quantum system becomes a classical one in \(n \times \beta\) space-time, with a Gibbs distribution over paths \(  x \in \{0, 1 \}^{n\beta}\). Sampling from this distribution using MCMC requires Glauber dynamics. However, our estimates can be wildly inaccurate unless we prove mixing time to be <i> small</i>. 
+        <br><br>In learning theory, specifically in probabilistic inference on graphical models, sampling-based algorithms (e.g. Gibbs sampling, importance sampling) are essential to approximating joint distributions when exact inference is intractable. Consider a Markov random field over binary variables \(X_1, \ldots, X_n\) with pairwise interactions:
+        \[
+            P(x) \propto \exp \left( \sum_{(i, j) \in E} \theta_{ij} x_i x_j + \sum_{i}\theta_i x_i \right)
+        \]
+        and we want to compute marginal probabilities \(P(X_i = 1)\). Exact inference is \(\mathsf{\# P} \)-hard, so we use Gibbs sampling. But how long does this take to converge to the true distribution? Once again, this depends on how fast the Markov chain mixes. Both of these examples illustrate that sampling is not just a numerical tool, but a computational lifeline in dire need of some theoretical justifications: <i> do these chains converge fast enough for meaningful inference?</i> <br><br> Canonical paths are a powerful combinatorial framework for proving rapid mixing in high-dimensional Markov chains. Let us define a set of paths \( \Gamma = \{ \gamma_{x, y} \}_{x, y \in \Omega} \) for each pair of distinct states in the state space \( \Omega \). The <i> edge congestion</i> is defined as
+        \[
+         \rho = \max_{e \in E} \frac{1}{Q(e)} \sum_{(x, y) : e \in \gamma_{x, y}} \pi(x)\pi(y)
+        \]
+        where \( Q(e) = \pi(u) P(u, v)\) is the ergodic flow through edge \(e_{u \to v}\). In 1989, Jerrum and Sinclair showed that one can lower-bound the <i> conductance</i> \(\Phi\) and <i>spectral gap</i> \(\lambda_1\) with
+        \[
+        \Phi \geq \frac{1}{2\rho},\quad \lambda_1 \geq \frac{1}{2\rho^2}
+        \]
+        yielding a mixing-time bound (in total variation) of 
+        \[
+        \tau(\epsilon) \leq \frac{2}{\Phi^2} \left(\ln \frac{1}{\pi_{min}} + \ln \frac{1}{\epsilon} \right).
+        \]
+        This foundational result was the justification for their FPRAS algorithm for approximating the permanent of a matrix, and has since been generalized. However, canonical paths designate a single path to each pair of states potentially causing large congestion. So, we introduce <i> fractional flows</i>, a probability distribution over paths for each pair. Let \( f_{x, y}(\gamma)\) be the amount of flow along path \(\gamma\) from \(x\) to \(y\), subject to the constraint:
+        \[
+        \sum_{\gamma \in \Gamma} f_{x, y}(\gamma) = \pi(x) \pi(y).
+        \]
+        The total load on an edge \(e\) and fractional congestion are defined as
+        \[
+        F(e) = \sum_{x, y}\sum_{\gamma \ni e} f_{x, y}(\gamma),\quad \rho_f = \max_{e \in E} \frac{F(e)}{Q(e)}.
+        \]
+        A vital insight in modern canonical path theory is that rapid mixing is still ensured when \(\rho_f\) is small. Fractional flows even often yield <i> smaller</i> congestion bounds than deterministic path assignments. Note that <i> path length matters.</i> Diaconis and Stroock showed that with a maximum path length \(l_{max} = \max_{x, y} \left| \gamma_{x, y} \right|\), the spectral gap satisfies the bound
+        \[
+        \lambda_1 \geq \frac{1}{\rho_f l_{max}}
+        \]
+        This bound tightens mixing time estimates by involving both congestion and how long it takes information to propogate through the graph structure. With long but sparse paths, it can be much stronger than the \(\rho^2\) bound. <br><br> In 2025, Chen et al. heavily improved on the Jerrum-Sinclair result by redefining the analysis for the perfect matching chain. For a graph with \(n\) vertices, \(m\) edges, and maximum degree \(\Delta\), they showed that the mixing time satisfies
+        \[
+        \tau(\epsilon) = \widetilde{\mathcal{O}} \left(\Delta^2 m + \Delta^2 \log\left(1/\epsilon\right) \right).
+        \]
+        In summary, the journey from Jerrum & Sinclair's classical framework to the modern refinement by Chen et al. illustrates the mathematical richness of sampling theory. For problems in quantum simulation and learning algorithms, where sampling is vital, this theory is mathematical assurance that Monte Carlo isn't just plausible, it's provably fast.
+
+        <h3>references</h3>
+<ul>
+  <li><strong>Chen et al. (2025)</strong> – <em>Faster Mixing of the Jerrum–Sinclair Chain</em>. <br>Shows the mixing time is \(\widetilde O(\Delta^2 m)\) for the perfect-matching chain. <a href="https://arxiv.org/abs/2504.02740" target="_blank">arxiv.org</a></li>
+
+  <li><strong>Guruswami (2016)</strong> – <em>Rapidly Mixing Markov Chains: A Comparison of Techniques</em>. <br>A helpful overview of canonical paths vs. fractional flows. <a href="https://arxiv.org/abs/1603.01512" target="_blank">arxiv.org</a></li>
+
+  <!-- <li><strong>Sinclair et al. (1992)</strong> – <em>Improved bounds for mixing rates of Markov chains and multicommodity flow</em><br>Introduced multicommodity flow for bounding mixing times via congestion. <a href="https://www.cs.mcgill.ca/~jking/papers/conductance.pdf" target="_blank">link</a></li> -->
+
+  <li><strong>Diaconis & Stroock (1991)</strong> – <em>Geometric Bounds for Eigenvalues of Markov Chains. </em>Proved that spectral gap is bounded by \(1 / (\rho_f \cdot l_{max})\), tying congestion to path length. <a href="https://proceedings.neurips.cc/paper_files/paper/2022/file/a600cdf3a53f93bcb85cb37343a8d831-Paper-Conference.pdf" target="_blank">link</a></li>
+
+  <li><strong>Jerrum & Sinclair (1989)</strong> - <em>Approximating the Permanent</em> <br>Introduced the use of Markov chains for approximating the permanent of a matrix. <a href="https://dl.acm.org/doi/10.1145/74334.74335" target="_blank">link</a></li>
+</ul>
+
     </p>
-
-    <p>
-        Traditional methods for solving PDEs: finite difference, finite element, or spectral methods—require discretizing the domain. These techniques trade off accuracy, complexity, and resolution. In contrast, PINNs aim to model the solution function itself using a continuous, differentiable neural network.
-    </p>
-
-    <p>
-        Consider, for example, the Navier–Stokes equations in incompressible fluid dynamics:
-    </p>
-
-    <div class="theorem">
-        <div class="content" style="text-align: center;">
-            \( \nabla \cdot \mathbf{u} = 0 \quad \text{and} \quad \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u} \cdot \nabla)\mathbf{u} = -\frac{1}{\rho}\nabla p + \nu \nabla^2\mathbf{u} + \mathbf{f} \)
-        </div>
-    </div>
-
-    <p>
-        When the velocity field \( \mathbf{u} \) is turbulent, its behavior is chaotic, multi-scale, and notoriously hard to resolve. PINNs shine in such scenarios by using neural networks to approximate the field while incorporating the PDE directly into the loss function.
-    </p>
-
-    <p>
-        But what exactly <i>is</i> a physics-informed neural network? Let's build from first principles. A neural network is a parameterized function mapping inputs \( \mathbf{x} \) to outputs \( \mathbf{y} \), denoted:
-    </p>
-
-    <div style="text-align: center;">
-        \( NN(\mathbf{x}, \boldsymbol{\theta}) \approx \mathbf{y}(\mathbf{x}) \)
-    </div>
-
-    <p>
-        During training, we tune parameters \( \boldsymbol{\theta} \) by minimizing a loss function, which measures the difference between predicted and ground-truth outputs:
-    </p>
-
-    <div style="text-align: center;">
-        \( \mathcal{L}(\boldsymbol{\theta}) = \frac{1}{N} \sum_{i=1}^N \left( NN(\mathbf{x}_i, \boldsymbol{\theta}) - \mathbf{y}_i \right)^2 \)
-    </div>
-
-    <p>
-        Neural networks are known as universal function approximators: they can represent any smooth function to arbitrary precision given enough capacity. In PINNs, we leverage this expressiveness not just to fit data, but to solve differential equations.
-    </p>
-
-    <p>
-        To illustrate how PINNs work, consider a simpler problem from undergraduate physics: the damped harmonic oscillator with mass \( m \), spring constant \( k \), and damping coefficient \( \mu \). Its governing ODE is:
-    </p>
-
-    <div style="text-align: center;">
-        \( m \ddot{u} + \mu \dot{u} + ku = 0 \)
-    </div>
-
-    <p>
-        Suppose we’re given initial conditions \( u(0) = 1 \) and \( \dot{u}(0) = 0 \). While the solution is analytic, we treat this as a test case for applying a PINN. We model the solution \( u(t) \) with a neural network:
-    </p>
-
-    <div style="text-align: center;">
-        \( \hat{u}(t) = NN(t, \boldsymbol{\theta}) \)
-    </div>
-
-    <p>
-        The total loss combines two components: one to enforce initial conditions and another to enforce the ODE. Specifically, we define:
-    </p>
-
-    <div style="text-align: center;">
-        \( \mathcal{L}_b = \lambda_1 \left( NN(0, \boldsymbol{\theta}) - 1 \right)^2 + \lambda_2 \left( \dot{NN}(0, \boldsymbol{\theta}) - 0 \right)^2 \)
-    </div>
-
-    <div style="text-align: center;">
-        \( \mathcal{L}_p = \frac{1}{N} \sum_{i=1}^N \left( m\frac{d^2}{dt^2} NN(t_i, \boldsymbol{\theta}) + \mu \frac{d}{dt} NN(t_i, \boldsymbol{\theta}) + k NN(t_i, \boldsymbol{\theta}) \right)^2 \)
-    </div>
-
-    <p>
-        We minimize the total loss \( \mathcal{L} = \mathcal{L}_b + \mathcal{L}_p \), ensuring the neural network satisfies both the physical dynamics and initial conditions. For interpretability, we can also write the equation in terms of damping ratio \( \zeta \) and natural frequency \( \omega \):
-    </p>
-
-    <div style="text-align: center;">
-        \( \ddot{u} + 2\zeta\omega \dot{u} + \omega^2 u = 0 \)
-    </div>
-
-    <p>
-        where \( \zeta = \frac{\mu}{2\sqrt{mk}} \) and \( \omega = \sqrt{\frac{k}{m}} \). The trained network \( \hat{u}(t) \) can then be compared to the closed-form solution \( u(t) \), validating the effectiveness of the PINN framework.
-    </p>
-
-    <p>
-        The full implementation of this example is available on my 
-        <a href="https://github.com/aniket-desh/oscillator-pinn?tab=readme-ov-file" target="_blank">GitHub repository</a>.
-    </p>
-
-    <div class="menu">
-        <p>
-            <a href="index.html">home</a> / 
-            <a href="../src/about.html">research</a> / 
-            <a href="../src/notes.html">notes</a> /
-            <a href="../src/blog.html">blog</a>
-        </p>
-    </div>
-
 </div>
 
 <script>

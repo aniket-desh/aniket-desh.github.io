@@ -6,8 +6,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;600&display=swap" rel="stylesheet">
     <link rel="icon" href="../assets/ad.png" type="image/x-icon" />
     <link rel="stylesheet" href="../src/style.css">
-    <title>an analytic side tangent — aniket deshpande</title>
+    <title>walking the quantum line — aniket deshpande</title>
     <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        h1 {
+            font-family: "adobe-caslon-pro", "Adobe Caslon Pro", "AdobeCaslonPro-Regular", "Big Caslon", "Adobe Caslon", "Caslon", "Libre Caslon Text", Georgia, "Times New Roman", serif;
+        }
+    </style>
 </head>
 
 <body>
@@ -17,110 +22,94 @@
         <a href="../src/blog.html">&larr; blog</a>
     </div>
 
-    <h1>An Analytic Side Tangent</h1>
+    <h1>walking the quantum line</h1>
 
-    <p><span class="gray-date">01.09.2024</span><br><br>
-        This short post presents a classical result in real analysis: one that I encountered early on in Rudin’s <i>Principles of Mathematical Analysis</i> and managed to prove independently. The statement concerns the monotonicity of a sequence that converges to the exponential function. While the proof technique here is elementary and admittedly a bit roundabout, it demonstrates how combinatorics and inequalities interact to reveal deep properties of limits and convergence.
+    <p><span class="gray-date">05.20.2025</span><br><br>
+        This post traces some of the theoretical questions that emerged during a project on quantum walks, graph-induced channels, and the resource complexity of simulating quantum processes. While the original motivation came from quantum information theory and open-system dynamics, the ideas quickly pulled me into deeper territory: questions about how structure and symmetry shape the hardness of simulation, and what it means to “propagate” quantum information over a discrete geometry.
     </p>
 
     <p>
-        Consider the sequence \( a_n = \left(1 + \frac{x}{n}\right)^n \), where \( x > 0 \). This expression famously converges to \( e^x \), but our focus here is on showing that the sequence is strictly increasing. This is a foundational property in analysis and a compelling showcase of how structure emerges from repeated products.
+        To build intuition, begin with the classical case: a random walk on a finite undirected graph \( G = (V, E) \), with \( |V| = n \). The walk is governed by a transition matrix \( P \) defined via local averaging:
+        \[
+        P_{ij} = \begin{cases}
+        \frac{1}{d_i} & \text{if } (i, j) \in E \\
+        0 & \text{otherwise}
+        \end{cases}
+        \]
+        Starting from a probability vector \( \mu_t \), the discrete dynamics evolve via \( \mu_{t+1} = P \mu_t \). In continuous time, this yields a diffusion equation,
+        \[
+        \frac{d\mu_t}{dt} = -L \mu_t, \quad \text{where } L = I - P
+        \]
+        which spreads probability mass over the graph according to its connectivity.
     </p>
 
-    <p>Let’s begin with the precise statement.</p>
-
-    <div class="theorem">
-        <div class="title">theorem.</div>
-        <div class="content">
-            Let \( x \in \mathbb{R} \) be positive. Then the sequence \( \left\{ \left(1 + \frac{x}{n} \right)^n \right\}_{n=1}^{\infty} \) is <i>strictly increasing</i>.
-        </div>
-    </div>
-
-    <p>We now present the proof.</p>
-
-    <div class="proof" id="proof1">
-        <div class="title" onclick="toggleProof('proof1')">proof.</div>
-        <div class="content">
-
-            We begin by recalling the binomial theorem:
-
-            \[
-            (a + b)^n = \sum_{k=0}^{n} \binom{n}{k} a^{n-k} b^k
-            \]
-
-            Applying this to our sequence, we expand the \(n\)th term:
-
-            \[
-            \left(1 + \frac{x}{n}\right)^n = \sum_{k=0}^{n} \binom{n}{k} \left(1\right)^{n-k} \left(\frac{x}{n}\right)^k = \sum_{k=0}^{n} \binom{n}{k} \frac{x^k}{n^k}
-            \]
-
-            Extracting the \(k = 0\) term gives:
-
-            \[
-            \left(1 + \frac{x}{n}\right)^n = 1 + \sum_{k=1}^{n} \frac{n!}{k!(n-k)!} \cdot \frac{x^k}{n^k}
-            \]
-
-            We now express the factorial and power terms in product form:
-
-            \[
-            n! = \left( \prod_{i=0}^{k-1} (n - i) \right)(n - k)! \quad \text{and} \quad n^k = \prod_{i=0}^{k-1} n
-            \]
-
-            Substituting, the binomial coefficient simplifies to:
-
-            \[
-            \binom{n}{k} \cdot \frac{1}{n^k} = \left( \prod_{i=0}^{k-1} \left(1 - \frac{i}{n}\right) \right) \cdot \frac{1}{k!}
-            \]
-
-            Thus,
-
-            \[
-            \left(1 + \frac{x}{n}\right)^n = 1 + \sum_{k=1}^{n} \left( \prod_{i=0}^{k-1} \left(1 - \frac{i}{n}\right) \right) \cdot \frac{x^k}{k!}
-            \]
-
-            Now consider the \((n+1)\)st term:
-
-            \[
-            \left(1 + \frac{x}{n+1}\right)^{n+1} = 1 + \sum_{k=1}^{n+1} \left( \prod_{i=0}^{k-1} \left(1 - \frac{i}{n+1}\right) \right) \cdot \frac{x^k}{k!}
-            \]
-
-            We separate the last term for clarity:
-
-            \[
-            = 1 + \sum_{k=1}^{n} \left( \prod_{i=0}^{k-1} \left(1 - \frac{i}{n+1}\right) \right) \cdot \frac{x^k}{k!} + \left( \prod_{i=0}^{n} \left(1 - \frac{i}{n+1} \right) \right) \cdot \frac{x^{n+1}}{(n+1)!}
-            \]
-
-            To show that the sequence is strictly increasing, we compare the coefficients term-by-term:
-
-            Since \( n < n+1 \), we have:
-
-            \[
-            \frac{1}{n} > \frac{1}{n+1} \quad \Rightarrow \quad 1 - \frac{i}{n} < 1 - \frac{i}{n+1}
-            \]
-
-            Therefore, for each \(k \leq n\),
-
-            \[
-            \prod_{i=0}^{k-1} \left(1 - \frac{i}{n} \right) < \prod_{i=0}^{k-1} \left(1 - \frac{i}{n+1} \right)
-            \]
-
-            Additionally, the extra term
-
-            \[
-            \left( \prod_{i=0}^{n} \left(1 - \frac{i}{n+1} \right) \right) \cdot \frac{x^{n+1}}{(n+1)!}
-            \]
-
-            is strictly positive because each factor \( 1 - \frac{i}{n+1} > 0 \) for \( 0 \leq i \leq n \).
-
-            Hence, every term in the summation at step \(n+1\) is greater than its counterpart at step \(n\), and a new positive term is added. This proves the sequence is strictly increasing.
-
-            <span style="float: right;">\( \square \)</span>
-
-        </div>
-    </div>
+    <p>
+        The quantum version generalizes this setup by replacing probability vectors with density matrices, and transition matrices with completely positive trace-preserving maps (CPTP maps), or quantum channels. A channel \( \Phi \) acts on density operators via Kraus decomposition:
+        \[
+        \Phi(\rho) = \sum_j K_j \rho K_j^\dagger, \quad \text{with } \sum_j K_j^\dagger K_j = I
+        \]
+        The specific channels I studied were induced by birth-death graphs, where each Kraus operator encodes a weighted transition along an edge. These channels are non-unitary and model both propagation and decoherence, making them ideal for capturing open-system behavior.
+    </p>
 
     <p>
-        An alternative and more elegant proof involves taking logarithms and applying the mean value theorem. This approach yields more insight into the convergence of the sequence to \(e^x\) and avoids the combinatorial machinery. Nonetheless, the above proof serves as a nice exercise in inequalities and binomial expansions.
+        The central question that emerged was: how expensive is it to simulate such a channel using quantum circuits of bounded depth? Formally, we define the simulation length \( \ell^\epsilon_U(\Phi) \) as the minimum number of unitaries \( U_1, \ldots, U_M \in \mathcal{U} \) such that the composed unitary channel approximates \( \Phi \) within diamond norm \( \epsilon \):
+        \[
+        \ell^\epsilon_U(\Phi) = \min \left\{ M \,\middle|\, \left\| \Phi - \text{Ad}_{U_1 \cdots U_M} \right\|_\diamond < \epsilon \right\}
+        \]
+        where \( \text{Ad}_U(\rho) = U \rho U^\dagger \) and \( \mathcal{U} \) is a resource gate set. This quantity captures a notion of quantum circuit "length", a proxy for the physical resources required to realize non-unitary evolution through coherent gates.
+    </p>
+
+    <p>
+        To bound this from below, I turned to a Lipschitz-style complexity measure:
+        \[
+        \text{CS}(\Phi) = \sup_{\rho \neq \sigma} \frac{ \| \Phi(\rho) - \Phi(\sigma) \|_1 }{ \| \rho - \sigma \|_1 }
+        \]
+        This is the operator Lipschitz constant of \( \Phi \), measuring how much the channel amplifies state distinguishability in the trace norm. Intuitively, if a channel can significantly stretch the distance between nearby quantum states, then any unitary simulation must have enough “resolution” to capture that distortion.
+    </p>
+
+    <p>
+        Now, consider a circuit that simulates \( \Phi \) with length \( \ell \), composed of local unitaries. Each gate has bounded influence, so the total distinguishability growth it can induce is linear in \( \ell \). This gives the inequality:
+        \[
+        \text{CS}(\Phi) \leq D \cdot \ell^\epsilon(\Phi) + \epsilon \sqrt{n}
+        \]
+        for some universal constant \( D \), with the \( \epsilon \sqrt{n} \) term arising from the diamond norm relaxation over an \( n \)-dimensional Hilbert space.
+    </p>
+
+    <p>
+        To lower-bound \( \ell^\epsilon(\Phi) \), we construct a witness observable \( f \in \mathcal{B}(\mathcal{H}) \) that detects the channel's global mixing behavior. For graph-induced channels, a natural choice is:
+        \[
+        f =
+        \begin{pmatrix}
+        0 & 1 & \cdots & 1 \\
+        1 & 0 & \cdots & 1 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        1 & 1 & \cdots & 0 \\
+        \end{pmatrix}
+        \in \mathbb{C}^{n \times n}
+        \]
+        which encodes uniform off-diagonal structure. Evaluating the change in \( f \) under the channel yields:
+        \[
+        \text{tr}\left(f (\Phi(\rho) - \rho)\right) \geq \sqrt{n}
+        \quad \Rightarrow \quad \text{CS}(\Phi) \geq \sqrt{n}
+        \]
+        Plugging this into the earlier bound gives:
+        \[
+        \sqrt{n} \leq D \cdot \ell^\epsilon(\Phi) + \epsilon \sqrt{n}
+        \quad \Rightarrow \quad \ell^\epsilon(\Phi) \geq \frac{(1 - \epsilon) \sqrt{n}}{D}
+        \]
+        which shows that the simulation length scales at least as \( \Omega(\sqrt{n}) \). This offers a geometric constraint: if a channel spreads mass across a graph in a highly sensitive way, then any quantum circuit that mimics this process must be long enough to physically traverse that structure.
+    </p>
+
+    <p>
+        But the story doesn’t end with bounds. These channels exhibit deep structural symmetries. The operators I worked with, edge shifts, projections, and sign-flips, are combinatorial, yet act on exponentially large state spaces. Their algebra is shaped by permutation symmetries of the underlying graph. As I dug deeper, I found myself asking: <i>How do graph automorphisms appear in the operator structure of the channel? Can we block-diagonalize the channel via induced representations? Are there symmetry-aware decompositions that lower circuit depth? </i>
+    </p>
+
+    <p>
+        These questions blend representation theory, operator algebras, and quantum control. They hint at a general principle: the simulation complexity of a quantum process may be controlled not only by dynamics and noise, but by the symmetries of the space it inhabits. The group actions hidden in a process might be our most powerful tools for compressing it.
+    </p>
+
+    <p>
+        What began as a study of noisy quantum walks ended in a broader landscape: simulation theory, Lipschitz analysis, and circuit synthesis through geometric lenses. I’m continuing to explore these ideas, especially their connections to quantum learning theory and representation-theoretic models of computation.
     </p>
 
     <div class="menu">
