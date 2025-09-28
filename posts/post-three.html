@@ -97,7 +97,7 @@
             In the tight-balance limit \(b \to \infty\), \(\nu(t)\approx I(t)/J_0\) (linear tracking) and the mean mode acquires an effective timescale \(\tau_{\mathrm{eff}} = \tau/b\). This leads to the first core result.
             </p>
             
-            <div style="text-align: center; margin: 0.5em 0 2em 0;">
+            <div style="text-align: center; margin: 0.5em 0 2em 0; background-color: #f8f8f8; padding: 1em; border-radius: 8px;">
                 "Balance speeds up the population mean by a factor of \(b\)."
             </div>
             
@@ -122,26 +122,49 @@
             C_{I\nu}(f) = \frac{\left| S_{I\nu}(f)\right|^2}{S_{II}(f) S_{\nu\nu}(f)},
             \]
             Here, \(S_{I\nu}\) is the cross-spectrum of the input and output, and \(S_{II}\), \(S_{\nu\nu}\) are their respective autospectra. The result is that higher balance values keep cohere close to one across higher frequencies, reflecting faster tracking and higher effective bandwidth
-            \begin{align}
-            \text{[fig 2 here]}
-            \end{align}
-            Integrating this coherence function gives us a Gaussian-channel lower bound on the <i>mutual information</i> between the input and output signals.
-            \[
-            R_{\mathrm{lb}} = -\int\, df \log_2\left(1 - C_{I\nu}(f)\right).
-            \]
+
+            <div style="display: flex; align-items: flex-start; margin: 2em 0; gap: 2em;">
+                <img src="../assets/post3/fig2.png" alt="Input-output coherence as a function of frequency and balance" style="width: 45%; height: auto; border: 1px solid #ddd; flex-shrink: 0;">
+                <div style="flex: 1;">
+                    <p style="font-style: italic; color: #666; font-size: 0.9em; margin: 0 0 1em 0; line-height: 1.6;">
+                        <strong>Figure 2:</strong> Input-output coherence as a function of frequency and balance. Higher balance values maintain coherence close to one across higher frequencies, demonstrating improved signal tracking and increased effective bandwidth.
+                    </p>
+                    <p style="margin: 0; line-height: 1.6;">
+                        Integrating this coherence function gives us a Gaussian-channel lower bound on the <i>mutual information</i> between the input and output signals.
+                        \[
+                        R_{\mathrm{lb}} = -\int\, df \log_2\left(1 - C_{I\nu}(f)\right).
+                        \]
+                    </p>
+                </div>
+            </div>
+
             This is the one of the headline results of the paper, and our second core finding.
-            </p>
             
-            <div style="text-align: center; margin: 0.5em 0 2em 0;">
+            <div style="text-align: center; margin: 0.5em 0 2em 0; background-color: #f8f8f8; padding: 1em; border-radius: 8px;">
                 "The information rate grows nearly linearly with balance until it saturates at the bandwidth limit imposed by the input itself."
             </div>
-            \begin{align}
-            \text{[fig3 here]}
-            \end{align}
-            To complete our understanding of this paper, it's worth highlighting a key result from <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010590">a complementary paper</a> done by Engelken et al. This PLOS paper provides code that shows the same non-stationary DMFT framework was used the compute the largest Lyapunov exponent \(\lambda_1\). The surprising finding was that common input is poor at surpressing chaos. Because of balance, the common drive enters the mean equation and is canceled by recurrent inhibition. As a result, \(\lambda_1\) only turns negative at very large input amplitudes. Input independent, on the other hand, enters the fluctuation channel directly and is not canceled, so even small amplitudes can suppress chaos.
-            \begin{align}
-            \text{[fig 4 here]}
-            \end{align}
+
+            <div style="display: flex; align-items: flex-start; margin: 2em 0; gap: 2em;">
+                <div style="flex: 1;">
+                    <p style="font-style: italic; color: #666; font-size: 0.9em; margin: 0 0 1em 0; line-height: 1.6;">
+                        <strong>Figure 3:</strong> Information rate scaling with balance parameter. The mutual information between input and output grows nearly linearly with balance until saturating at the bandwidth limit of the input signal.
+                    </p>
+                    <p style="margin: 0; line-height: 1.6;">
+                        To complete our understanding of this paper, it's worth highlighting a key result from <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010590">a complementary paper</a> done by Engelken et al. This PLOS paper provides code that shows the same non-stationary DMFT framework was used to compute the largest Lyapunov exponent \(\lambda_1\).
+                    </p>
+                </div>
+                <img src="../assets/post3/fig3.png" alt="Information rate scaling with balance parameter" style="width: 45%; height: auto; border: 1px solid #ddd; flex-shrink: 0;">
+            </div>
+
+            The surprising finding was that common input is poor at surpressing chaos. Because of balance, the common drive enters the mean equation and is canceled by recurrent inhibition. As a result, \(\lambda_1\) only turns negative at very large input amplitudes. Input independent, on the other hand, enters the fluctuation channel directly and is not canceled, so even small amplitudes can suppress chaos.
+
+            <div style="text-align: center; margin: 2em 0;">
+                <img src="../assets/post3/fig4.png" alt="Lyapunov exponent suppression by common vs independent input" style="max-width: 50%; height: auto; border: 1px solid #ddd;">
+                <p style="font-style: italic; color: #666; font-size: 0.9em; margin-top: 0.5em; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    <strong>Figure 4:</strong> Chaos suppression by input type. Common input (top) requires large amplitudes to suppress chaos due to balance cancellation, while independent input (bottom) can suppress chaos even at small amplitudes by directly affecting fluctuation dynamics.
+                </p>
+            </div>
+            
             This closes the loop on what we know. Balance plants a real outlier eigenvalue at \(-b\), accelerates the mean mode, broadens encoding bandwidth, and shapes how chaos can be tamed. In the next post, I'll go beyond balance and introduce low-rank perturbations
             \[
             S = \sum_{k=1}^R m_k u_k v_k^T,
