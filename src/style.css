@@ -74,7 +74,7 @@ body.landing {
 }
 
 .top-left-nav ul li a:hover {
-    text-decoration: underline;
+    font-style: italic;
 }
 
 .bottom-nav ul {
@@ -99,7 +99,7 @@ body.landing {
 }
 
 .bottom-nav ul li a:hover {
-    text-decoration: underline;
+    font-style: italic;
 }
 
 .art-placeholder {
@@ -238,7 +238,7 @@ footer.bottom-nav a {
 }
 
 footer.bottom-nav a:hover {
-    text-decoration: underline;
+    font-style: italic;
 }
 
 #contentContainer {
