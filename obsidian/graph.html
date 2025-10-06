@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;500;600&display=swap" rel="stylesheet">
+  <title>knowledge graph</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body { 
+      margin: 0;
+      font-family: 'Vollkorn', serif;
+      background-color: #fff;
+    }
+    
+    #graph {
+      background-color: #fff;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      background: transparent;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-family: 'Vollkorn', serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #333;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: font-style 0.2s ease;
+    }
+
+    .back-button:hover {
+      font-style: italic;
+    }
+
+    .expand-button {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: transparent;
+      border: 1px solid #333;
+      padding: 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .expand-button:hover {
+      background: #f8f8f8;
+      border-color: #000;
+    }
+
+    .expand-button svg {
+      width: 18px;
+      height: 18px;
+      stroke: #333;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* Hide buttons when embedded in iframe */
+    body.embedded .back-button {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <a href="../index.html" class="back-button">
+    <span>←</span>
+    <span>home</span>
+  </a>
+
+  <button class="expand-button" onclick="expandGraph()" title="expand to fullscreen">
+    <svg viewBox="0 0 24 24">
+      <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+    </svg>
+  </button>
+
+  <div id="graph"></div>
+
+  <script src="//unpkg.com/force-graph"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <script>
+    // Check if we're in an iframe
+    if (window.self !== window.top) {
+      document.body.classList.add('embedded');
+    }
+
+    function expandGraph() {
+      window.open('graph.html', '_blank');
+    }
+
+    const graphElement = document.getElementById('graph');
+
+    let hoverNode = null;
+    let highlightLinks = new Set();
+
+    const DEFAULT_NODE_COLOR = '#666';
+    const HIGHLIGHT_NODE_COLOR = '#000';
+    const DEFAULT_LINK_COLOR = '#ccc';
+    const HIGHLIGHT_LINK_COLOR = '#333';
+    const TEXT_COLOR = '#333';
+
+    fetch('./graph-data.json')
+      .then(res => res.json())
+      .then(data => {
+        const Graph = ForceGraph()(graphElement)
+          .graphData(data)
+          .nodeId('id')
+          .nodeVal(node => (node === hoverNode ? 7 : 5))
+          .linkSource('source')
+          .linkTarget('target')
+          .backgroundColor('#ffffff')
+          .linkWidth(link => highlightLinks.has(link) ? 1.2 : 0.6)
+          .linkColor(link => highlightLinks.has(link) ? HIGHLIGHT_LINK_COLOR : DEFAULT_LINK_COLOR)
+          .linkDirectionalParticles(0)
+          .linkDirectionalArrowLength(0)
+          .d3Force('charge', d3.forceManyBody().strength(-50))
+          .d3Force('link', d3.forceLink().distance(60).strength(1))
+          .d3Force('collide', d3.forceCollide(10))
+          .d3Force('center', d3.forceCenter())
+
+          .nodeCanvasObject((node, ctx, globalScale) => {
+            const isHovered = (node === hoverNode);
+            ctx.fillStyle = isHovered ? HIGHLIGHT_NODE_COLOR : DEFAULT_NODE_COLOR;
+            ctx.beginPath();
+            const radius = (isHovered ? 7 : 5) / 2;
+            ctx.arc(node.x, node.y, radius, 0, 2 * Math.PI, false);
+            ctx.fill();
+
+            if (globalScale > 0.6) {
+              const label = node.id.split('/').pop().replace('.md', '');
+              const fontSize = 12 / globalScale;
+              ctx.font = `${fontSize}px 'Vollkorn', Georgia, serif`;
+              ctx.textAlign = 'left';
+              ctx.textBaseline = 'middle';
+              ctx.fillStyle = TEXT_COLOR;
+              
+              const labelX = node.x + radius + 8 / globalScale;
+              ctx.fillText(label, labelX, node.y);
+            }
+          })
+
+          .onNodeHover(node => {
+            hoverNode = node || null;
+            highlightLinks.clear();
+
+            if (node) {
+              data.links.forEach(link => {
+                if (link.source.id === node.id || link.target.id === node.id) {
+                  highlightLinks.add(link);
+                }
+              });
+            }
+
+            graphElement.style.cursor = node ? 'pointer' : 'grab';
+          });
+
+        Graph.onEngineStop(() => Graph.zoomToFit(400, 80));
+      });
+  </script>
+</body>
+</html>

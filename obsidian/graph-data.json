@@ -1,0 +1,810 @@
+{
+  "nodes": [
+    {
+      "id": "ReLU.md"
+    },
+    {
+      "id": "unitary operators.md"
+    },
+    {
+      "id": "Hilbert spaces.md"
+    },
+    {
+      "id": "universal approximation theorem.md"
+    },
+    {
+      "id": "composite systems.md"
+    },
+    {
+      "id": "combinatorial explosions.md"
+    },
+    {
+      "id": "Cauchy sequences.md"
+    },
+    {
+      "id": "exponential distributions.md"
+    },
+    {
+      "id": "singular value decomposition.md"
+    },
+    {
+      "id": "evidence lower bound.md"
+    },
+    {
+      "id": "normalizing flows.md"
+    },
+    {
+      "id": "topological space.md"
+    },
+    {
+      "id": "density operator.md"
+    },
+    {
+      "id": "perceptrons.md"
+    },
+    {
+      "id": "projective measurements.md"
+    },
+    {
+      "id": "curse of dimensionality.md"
+    },
+    {
+      "id": "pure states.md"
+    },
+    {
+      "id": "quantum states.md"
+    },
+    {
+      "id": "Markov chains.md"
+    },
+    {
+      "id": "manifolds.md"
+    },
+    {
+      "id": "general relativity.md"
+    },
+    {
+      "id": "Markov property.md"
+    },
+    {
+      "id": "dimensionality reduction.md"
+    },
+    {
+      "id": "quantum channel.md"
+    },
+    {
+      "id": "logistic regression.md"
+    },
+    {
+      "id": "coordinate chart.md"
+    },
+    {
+      "id": "observables.md"
+    },
+    {
+      "id": "positive operator-valued measures.md"
+    },
+    {
+      "id": "the manifold hypothesis.md"
+    },
+    {
+      "id": "inner product.md"
+    },
+    {
+      "id": "gaussian distributions.md"
+    },
+    {
+      "id": "quantum evolution.md"
+    },
+    {
+      "id": "poisson distributions.md"
+    },
+    {
+      "id": "perceptron convergence theorem.md"
+    },
+    {
+      "id": "atlas.md"
+    },
+    {
+      "id": "principal component analysis.md"
+    },
+    {
+      "id": "gamma distributions.md"
+    },
+    {
+      "id": "statistical manifolds.md"
+    },
+    {
+      "id": "naive bayes.md"
+    },
+    {
+      "id": "spectral theorem.md"
+    },
+    {
+      "id": "activation function.md"
+    },
+    {
+      "id": "latent space.md"
+    },
+    {
+      "id": "gradient descent.md"
+    },
+    {
+      "id": "generalized linear models.md"
+    },
+    {
+      "id": "mixed states.md"
+    },
+    {
+      "id": "Fisher information.md"
+    },
+    {
+      "id": "sigmoid function.md"
+    },
+    {
+      "id": "homeomorphism.md"
+    },
+    {
+      "id": "autoencoders.md"
+    },
+    {
+      "id": "Hermitian operators.md"
+    },
+    {
+      "id": "artificial neural networks.md"
+    },
+    {
+      "id": "vector spaces.md"
+    },
+    {
+      "id": "spectral decomposition.md"
+    },
+    {
+      "id": "variational autoencoders.md"
+    },
+    {
+      "id": "linear operators.md"
+    },
+    {
+      "id": "covariance.md"
+    },
+    {
+      "id": "generative adversarial networks.md"
+    },
+    {
+      "id": "ordinary linear regression.md"
+    },
+    {
+      "id": "differential geometry.md"
+    },
+    {
+      "id": "binomial distributions.md"
+    },
+    {
+      "id": "projectors.md"
+    },
+    {
+      "id": "partial trace.md"
+    },
+    {
+      "id": "Gaussian naive bayes.md"
+    },
+    {
+      "id": "metric space.md"
+    },
+    {
+      "id": "Kullback-Leibler divergence.md"
+    },
+    {
+      "id": "inner product spaces.md"
+    },
+    {
+      "id": "neural networks.md"
+    },
+    {
+      "id": "bipartite states.md"
+    },
+    {
+      "id": "manifold learning.md"
+    },
+    {
+      "id": "maximum likelihood estimation.md"
+    },
+    {
+      "id": "diffusion models.md"
+    },
+    {
+      "id": "illinois/generative models.md"
+    }
+  ],
+  "links": [
+    {
+      "source": "ReLU.md",
+      "target": "activation function.md"
+    },
+    {
+      "source": "unitary operators.md",
+      "target": "Hilbert spaces.md"
+    },
+    {
+      "source": "unitary operators.md",
+      "target": "inner product.md"
+    },
+    {
+      "source": "unitary operators.md",
+      "target": "linear operators.md"
+    },
+    {
+      "source": "unitary operators.md",
+      "target": "quantum states.md"
+    },
+    {
+      "source": "unitary operators.md",
+      "target": "quantum evolution.md"
+    },
+    {
+      "source": "Hilbert spaces.md",
+      "target": "inner product spaces.md"
+    },
+    {
+      "source": "Hilbert spaces.md",
+      "target": "Cauchy sequences.md"
+    },
+    {
+      "source": "Hilbert spaces.md",
+      "target": "quantum states.md"
+    },
+    {
+      "source": "composite systems.md",
+      "target": "Hilbert spaces.md"
+    },
+    {
+      "source": "composite systems.md",
+      "target": "density operator.md"
+    },
+    {
+      "source": "composite systems.md",
+      "target": "bipartite states.md"
+    },
+    {
+      "source": "combinatorial explosions.md",
+      "target": "curse of dimensionality.md"
+    },
+    {
+      "source": "Cauchy sequences.md",
+      "target": "metric space.md"
+    },
+    {
+      "source": "exponential distributions.md",
+      "target": "Markov chains.md"
+    },
+    {
+      "source": "exponential distributions.md",
+      "target": "gamma distributions.md"
+    },
+    {
+      "source": "singular value decomposition.md",
+      "target": "unitary operators.md"
+    },
+    {
+      "source": "density operator.md",
+      "target": "quantum states.md"
+    },
+    {
+      "source": "density operator.md",
+      "target": "Hilbert spaces.md"
+    },
+    {
+      "source": "density operator.md",
+      "target": "pure states.md"
+    },
+    {
+      "source": "density operator.md",
+      "target": "mixed states.md"
+    },
+    {
+      "source": "perceptrons.md",
+      "target": "gradient descent.md"
+    },
+    {
+      "source": "perceptrons.md",
+      "target": "perceptron convergence theorem.md"
+    },
+    {
+      "source": "perceptrons.md",
+      "target": "naive bayes.md"
+    },
+    {
+      "source": "perceptrons.md",
+      "target": "Gaussian naive bayes.md"
+    },
+    {
+      "source": "projective measurements.md",
+      "target": "observables.md"
+    },
+    {
+      "source": "projective measurements.md",
+      "target": "quantum states.md"
+    },
+    {
+      "source": "projective measurements.md",
+      "target": "spectral decomposition.md"
+    },
+    {
+      "source": "projective measurements.md",
+      "target": "projectors.md"
+    },
+    {
+      "source": "curse of dimensionality.md",
+      "target": "combinatorial explosions.md"
+    },
+    {
+      "source": "pure states.md",
+      "target": "density operator.md"
+    },
+    {
+      "source": "quantum states.md",
+      "target": "pure states.md"
+    },
+    {
+      "source": "quantum states.md",
+      "target": "Hilbert spaces.md"
+    },
+    {
+      "source": "quantum states.md",
+      "target": "quantum evolution.md"
+    },
+    {
+      "source": "quantum states.md",
+      "target": "unitary operators.md"
+    },
+    {
+      "source": "Markov chains.md",
+      "target": "Markov property.md"
+    },
+    {
+      "source": "manifolds.md",
+      "target": "differential geometry.md"
+    },
+    {
+      "source": "manifolds.md",
+      "target": "topological space.md"
+    },
+    {
+      "source": "manifolds.md",
+      "target": "homeomorphism.md"
+    },
+    {
+      "source": "manifolds.md",
+      "target": "coordinate chart.md"
+    },
+    {
+      "source": "manifolds.md",
+      "target": "atlas.md"
+    },
+    {
+      "source": "Markov property.md",
+      "target": "Markov chains.md"
+    },
+    {
+      "source": "dimensionality reduction.md",
+      "target": "curse of dimensionality.md"
+    },
+    {
+      "source": "dimensionality reduction.md",
+      "target": "principal component analysis.md"
+    },
+    {
+      "source": "dimensionality reduction.md",
+      "target": "manifold learning.md"
+    },
+    {
+      "source": "quantum channel.md",
+      "target": "quantum states.md"
+    },
+    {
+      "source": "quantum channel.md",
+      "target": "Hilbert spaces.md"
+    },
+    {
+      "source": "quantum channel.md",
+      "target": "linear operators.md"
+    },
+    {
+      "source": "quantum channel.md",
+      "target": "density operator.md"
+    },
+    {
+      "source": "coordinate chart.md",
+      "target": "differential geometry.md"
+    },
+    {
+      "source": "coordinate chart.md",
+      "target": "statistical manifolds.md"
+    },
+    {
+      "source": "coordinate chart.md",
+      "target": "homeomorphism.md"
+    },
+    {
+      "source": "observables.md",
+      "target": "Hermitian operators.md"
+    },
+    {
+      "source": "observables.md",
+      "target": "quantum states.md"
+    },
+    {
+      "source": "observables.md",
+      "target": "density operator.md"
+    },
+    {
+      "source": "positive operator-valued measures.md",
+      "target": "quantum states.md"
+    },
+    {
+      "source": "positive operator-valued measures.md",
+      "target": "projective measurements.md"
+    },
+    {
+      "source": "the manifold hypothesis.md",
+      "target": "dimensionality reduction.md"
+    },
+    {
+      "source": "the manifold hypothesis.md",
+      "target": "manifold learning.md"
+    },
+    {
+      "source": "the manifold hypothesis.md",
+      "target": "statistical manifolds.md"
+    },
+    {
+      "source": "inner product.md",
+      "target": "vector spaces.md"
+    },
+    {
+      "source": "perceptron convergence theorem.md",
+      "target": "perceptrons.md"
+    },
+    {
+      "source": "atlas.md",
+      "target": "differential geometry.md"
+    },
+    {
+      "source": "atlas.md",
+      "target": "coordinate chart.md"
+    },
+    {
+      "source": "atlas.md",
+      "target": "statistical manifolds.md"
+    },
+    {
+      "source": "principal component analysis.md",
+      "target": "dimensionality reduction.md"
+    },
+    {
+      "source": "principal component analysis.md",
+      "target": "covariance.md"
+    },
+    {
+      "source": "principal component analysis.md",
+      "target": "spectral theorem.md"
+    },
+    {
+      "source": "principal component analysis.md",
+      "target": "singular value decomposition.md"
+    },
+    {
+      "source": "principal component analysis.md",
+      "target": "manifold learning.md"
+    },
+    {
+      "source": "gamma distributions.md",
+      "target": "Markov chains.md"
+    },
+    {
+      "source": "gamma distributions.md",
+      "target": "exponential distributions.md"
+    },
+    {
+      "source": "naive bayes.md",
+      "target": "gaussian distributions.md"
+    },
+    {
+      "source": "naive bayes.md",
+      "target": "Gaussian naive bayes.md"
+    },
+    {
+      "source": "activation function.md",
+      "target": "artificial neural networks.md"
+    },
+    {
+      "source": "activation function.md",
+      "target": "neural networks.md"
+    },
+    {
+      "source": "activation function.md",
+      "target": "universal approximation theorem.md"
+    },
+    {
+      "source": "activation function.md",
+      "target": "sigmoid function.md"
+    },
+    {
+      "source": "activation function.md",
+      "target": "ReLU.md"
+    },
+    {
+      "source": "latent space.md",
+      "target": "statistical manifolds.md"
+    },
+    {
+      "source": "latent space.md",
+      "target": "neural networks.md"
+    },
+    {
+      "source": "latent space.md",
+      "target": "illinois/generative models.md"
+    },
+    {
+      "source": "latent space.md",
+      "target": "autoencoders.md"
+    },
+    {
+      "source": "latent space.md",
+      "target": "dimensionality reduction.md"
+    },
+    {
+      "source": "latent space.md",
+      "target": "principal component analysis.md"
+    },
+    {
+      "source": "generalized linear models.md",
+      "target": "ordinary linear regression.md"
+    },
+    {
+      "source": "generalized linear models.md",
+      "target": "gaussian distributions.md"
+    },
+    {
+      "source": "generalized linear models.md",
+      "target": "gaussian distributions.md"
+    },
+    {
+      "source": "generalized linear models.md",
+      "target": "binomial distributions.md"
+    },
+    {
+      "source": "generalized linear models.md",
+      "target": "poisson distributions.md"
+    },
+    {
+      "source": "generalized linear models.md",
+      "target": "gamma distributions.md"
+    },
+    {
+      "source": "generalized linear models.md",
+      "target": "maximum likelihood estimation.md"
+    },
+    {
+      "source": "mixed states.md",
+      "target": "density operator.md"
+    },
+    {
+      "source": "mixed states.md",
+      "target": "pure states.md"
+    },
+    {
+      "source": "mixed states.md",
+      "target": "quantum states.md"
+    },
+    {
+      "source": "mixed states.md",
+      "target": "spectral decomposition.md"
+    },
+    {
+      "source": "sigmoid function.md",
+      "target": "activation function.md"
+    },
+    {
+      "source": "sigmoid function.md",
+      "target": "artificial neural networks.md"
+    },
+    {
+      "source": "autoencoders.md",
+      "target": "neural networks.md"
+    },
+    {
+      "source": "autoencoders.md",
+      "target": "autoencoders.md"
+    },
+    {
+      "source": "autoencoders.md",
+      "target": "latent space.md"
+    },
+    {
+      "source": "autoencoders.md",
+      "target": "principal component analysis.md"
+    },
+    {
+      "source": "autoencoders.md",
+      "target": "ReLU.md"
+    },
+    {
+      "source": "autoencoders.md",
+      "target": "statistical manifolds.md"
+    },
+    {
+      "source": "autoencoders.md",
+      "target": "dimensionality reduction.md"
+    },
+    {
+      "source": "autoencoders.md",
+      "target": "variational autoencoders.md"
+    },
+    {
+      "source": "Hermitian operators.md",
+      "target": "linear operators.md"
+    },
+    {
+      "source": "Hermitian operators.md",
+      "target": "inner product spaces.md"
+    },
+    {
+      "source": "Hermitian operators.md",
+      "target": "Hilbert spaces.md"
+    },
+    {
+      "source": "Hermitian operators.md",
+      "target": "unitary operators.md"
+    },
+    {
+      "source": "Hermitian operators.md",
+      "target": "spectral theorem.md"
+    },
+    {
+      "source": "Hermitian operators.md",
+      "target": "spectral decomposition.md"
+    },
+    {
+      "source": "spectral decomposition.md",
+      "target": "unitary operators.md"
+    },
+    {
+      "source": "spectral decomposition.md",
+      "target": "quantum states.md"
+    },
+    {
+      "source": "spectral decomposition.md",
+      "target": "density operator.md"
+    },
+    {
+      "source": "variational autoencoders.md",
+      "target": "illinois/generative models.md"
+    },
+    {
+      "source": "variational autoencoders.md",
+      "target": "autoencoders.md"
+    },
+    {
+      "source": "variational autoencoders.md",
+      "target": "latent space.md"
+    },
+    {
+      "source": "variational autoencoders.md",
+      "target": "gaussian distributions.md"
+    },
+    {
+      "source": "variational autoencoders.md",
+      "target": "maximum likelihood estimation.md"
+    },
+    {
+      "source": "variational autoencoders.md",
+      "target": "autoencoders.md"
+    },
+    {
+      "source": "variational autoencoders.md",
+      "target": "evidence lower bound.md"
+    },
+    {
+      "source": "variational autoencoders.md",
+      "target": "Kullback-Leibler divergence.md"
+    },
+    {
+      "source": "differential geometry.md",
+      "target": "statistical manifolds.md"
+    },
+    {
+      "source": "differential geometry.md",
+      "target": "general relativity.md"
+    },
+    {
+      "source": "differential geometry.md",
+      "target": "statistical manifolds.md"
+    },
+    {
+      "source": "differential geometry.md",
+      "target": "manifold learning.md"
+    },
+    {
+      "source": "differential geometry.md",
+      "target": "the manifold hypothesis.md"
+    },
+    {
+      "source": "projectors.md",
+      "target": "Hilbert spaces.md"
+    },
+    {
+      "source": "projectors.md",
+      "target": "linear operators.md"
+    },
+    {
+      "source": "partial trace.md",
+      "target": "quantum channel.md"
+    },
+    {
+      "source": "Gaussian naive bayes.md",
+      "target": "naive bayes.md"
+    },
+    {
+      "source": "inner product spaces.md",
+      "target": "vector spaces.md"
+    },
+    {
+      "source": "inner product spaces.md",
+      "target": "inner product.md"
+    },
+    {
+      "source": "inner product spaces.md",
+      "target": "Hilbert spaces.md"
+    },
+    {
+      "source": "bipartite states.md",
+      "target": "composite systems.md"
+    },
+    {
+      "source": "bipartite states.md",
+      "target": "quantum states.md"
+    },
+    {
+      "source": "bipartite states.md",
+      "target": "density operator.md"
+    },
+    {
+      "source": "bipartite states.md",
+      "target": "partial trace.md"
+    },
+    {
+      "source": "maximum likelihood estimation.md",
+      "target": "Fisher information.md"
+    },
+    {
+      "source": "maximum likelihood estimation.md",
+      "target": "generalized linear models.md"
+    },
+    {
+      "source": "maximum likelihood estimation.md",
+      "target": "logistic regression.md"
+    },
+    {
+      "source": "maximum likelihood estimation.md",
+      "target": "neural networks.md"
+    },
+    {
+      "source": "illinois/generative models.md",
+      "target": "variational autoencoders.md"
+    },
+    {
+      "source": "illinois/generative models.md",
+      "target": "diffusion models.md"
+    },
+    {
+      "source": "illinois/generative models.md",
+      "target": "generative adversarial networks.md"
+    },
+    {
+      "source": "illinois/generative models.md",
+      "target": "normalizing flows.md"
+    }
+  ]
+}
