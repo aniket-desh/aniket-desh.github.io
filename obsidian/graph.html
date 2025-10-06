@@ -138,10 +138,12 @@
           .linkColor(link => highlightLinks.has(link) ? HIGHLIGHT_LINK_COLOR : DEFAULT_LINK_COLOR)
           .linkDirectionalParticles(0)
           .linkDirectionalArrowLength(0)
-          .d3Force('charge', d3.forceManyBody().strength(-50))
-          .d3Force('link', d3.forceLink().distance(60).strength(1))
-          .d3Force('collide', d3.forceCollide(10))
+          .d3Force('charge', d3.forceManyBody().strength(-150))
+          .d3Force('link', d3.forceLink().distance(120).strength(0.3))
+          .d3Force('collide', d3.forceCollide(25))
           .d3Force('center', d3.forceCenter())
+          .d3Force('x', d3.forceX().strength(0.05))
+          .d3Force('y', d3.forceY().strength(0.05))
 
           .nodeCanvasObject((node, ctx, globalScale) => {
             const isHovered = (node === hoverNode);
