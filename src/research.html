@@ -13,19 +13,21 @@
     h1 {
       font-family: "adobe-caslon-pro", "Adobe Caslon Pro", "AdobeCaslonPro-Regular", "Big Caslon", "Adobe Caslon", "Caslon", "Libre Caslon Text", Georgia, "Times New Roman", serif;
     }
+
     .research-text {
       margin-bottom: -2em;
     }
-    .research-text + .research-text {
+
+    .research-text+.research-text {
       margin-top: 0.5em;
     }
-    
+
     .project-section {
       margin-bottom: 2.5em;
       padding-bottom: 2em;
       border-bottom: 1px solid #e0e0e0;
     }
-    
+
     .project-section:last-of-type {
       border-bottom: none;
     }
@@ -36,7 +38,7 @@
   <div id="contentContainer">
 
     <div class="top-link">
-        <a href="about.html">&larr; back</a>
+      <a href="about.html">&larr; back</a>
     </div>
 
     <h1>research</h1>
@@ -46,48 +48,63 @@
 
       <div class="research-text">
         <p>
-          I currently work in numerical linear algebra, high-dimensional statistics, and quantum information. I hope to help develop mathematical foundations of quantum algorithms and contribute to the <a href="https://x.com/pfau/status/1974177288322494709" class="katex-title"
+          I currently work in numerical linear algebra, high-dimensional statistics, and quantum information. I hope to
+          help develop mathematical foundations of quantum algorithms and contribute to the <a
+            href="https://x.com/pfau/status/1974177288322494709" class="katex-title"
             style="font-size:15px; font-weight:500; text-decoration:underline; color:black; transition:color 0.3s;"
             onmouseover="this.style.color='darkred';" onmouseout="this.style.color='black';">physics of learning.</a>
-        </p
+        </p </div>
+
+        <div class="research-text">
+          <p>
+            <b><a href="https://lpna.cs.illinois.edu/" class="katex-title" style="font-size:inherit; font-weight:500;"
+                target="_blank">Lab for Parallel Numerical Algorithms</a></b>
+          </p>
+
+          <div class="project-section">
+            <div style="margin-top: 1em;">
+              <img src="../assets/relative-error-beta-sweep.png" alt="Relative error vs beta"
+                style="float: left; width: 200px; height: auto; border: 1px solid #ddd; margin-right: 2em; margin-bottom: 1em;">
+              <h3 style="margin-top: 0; font-size: 1.1em; font-weight: 400;">(i) mcmc for tensor network contractions
+              </h3>
+              <p style="margin-bottom: 0.8em;">
+                We are developing a Markov chain Monte Carlo algorithm to estimate contractions of closed tensor
+                networks. This allows efficient approximation of contraction quantities using methods from statistical
+                physics to improve mixing. Such contractions \[
+                \text{Tr}(ABCD) = \sum_{ijkl} A_{ij}B_{jk}C_{kl}D_{li}
+                \]are trivial in small cases but become \(\#\textsf{P}\)-hard for large networks. Our approach targets
+                use cases in quantum circuits and chemistry, where exact contraction is intractable.
+              </p>
+              <p style="margin-bottom: 0.5em;"><b>QSim '25</b> <a href="research/tn-contraction.html"
+                  class="katex-title"
+                  style="font-size:15px; font-weight:500; text-decoration:none; color:#000000; transition:color 0.3s;"
+                  onmouseover="this.style.color='darkred';" onmouseout="this.style.color='#000000';">, Read more
+                  here!</a>
+              </p>
+              <div style="clear: both;"></div>
+            </div>
+          </div>
+
+          <div class="project-section">
+            <div>
+              <img src="../assets/amdm_convergence_placeholder.png" alt="AMDM algorithm"
+                style="float: left; width: 200px; height: auto; border: 1px solid #ddd; margin-right: 2em; margin-bottom: 1em;">
+              <h3 style="margin-top: 0; font-size: 1.1em; font-weight: 400;">(ii) bayesian tensor decompositions</h3>
+              <p style="margin-bottom: 0.8em;">
+                We are developing Bayesian algorithms for tensor decomposition and probabilistic linear algebra.
+                Currently, we are building on Alternating Mahalanobis Distance Minimization (AMDM) to design a Bayesian
+                tensor decomposition method with mode-wise covariance modeling. By interpreting AMDM as maximum
+                likelihood estimation under a Kronecker-structured Gaussian prior, we aim to create new optimization
+                schemes that combine statistical inference with deterministic tensor solvers for improved conditioning
+                and uncertainty estimation.
+              </p>
+              <p style="margin-bottom: 0.5em;">More updates soon!</p>
+              <div style="clear: both;"></div>
+            </div>
+          </div>
+        </div>
       </div>
 
-  <div class="research-text">
-    <p>
-      <b><a href="https://lpna.cs.illinois.edu/" class="katex-title" style="font-size:inherit; font-weight:500;" target="_blank">Lab for Parallel Numerical Algorithms</a></b>
-    </p>
-    
-    <div class="project-section">
-      <div style="margin-top: 1em;">
-        <img src="../assets/relative-error-beta-sweep.png" alt="Relative error vs beta" style="float: left; width: 200px; height: auto; border: 1px solid #ddd; margin-right: 2em; margin-bottom: 1em;">
-        <h3 style="margin-top: 0; font-size: 1.1em; font-weight: 400;">(i) mcmc for tensor network contractions</h3>
-        <p style="margin-bottom: 0.8em;">
-          We are developing a Markov chain Monte Carlo algorithm to estimate contractions of closed tensor networks. This allows efficient approximation of contraction quantities using methods from statistical physics to improve mixing. Such contractions \[
-            \text{Tr}(ABCD) = \sum_{ijkl} A_{ij}B_{jk}C_{kl}D_{li}
-          \]are trivial in small cases but become \(\#\textsf{P}\)-hard for large networks. Our approach targets use cases in quantum circuits and chemistry, where exact contraction is intractable.
-        </p>
-        <p style="margin-bottom: 0.5em;"><b>QSim '25</b> <a href="research/tn-contraction.html" class="katex-title"
-              style="font-size:15px; font-weight:500; text-decoration:none; color:#000000; transition:color 0.3s;"
-              onmouseover="this.style.color='darkred';" onmouseout="this.style.color='#000000';">, Read more here!</a>
-        </p>
-        <div style="clear: both;"></div>
-      </div>
-    </div>
-    
-    <div class="project-section">
-      <div>
-        <img src="../assets/amdm_convergence_placeholder.png" alt="AMDM algorithm" style="float: left; width: 200px; height: auto; border: 1px solid #ddd; margin-right: 2em; margin-bottom: 1em;">
-        <h3 style="margin-top: 0; font-size: 1.1em; font-weight: 400;">(ii) bayesian tensor decompositions</h3>
-        <p style="margin-bottom: 0.8em;">
-          We are developing Bayesian algorithms for tensor decomposition and probabilistic linear algebra. Currently, we are building on Alternating Mahalanobis Distance Minimization (AMDM) to design a Bayesian tensor decomposition method with mode-wise covariance modeling. By interpreting AMDM as maximum likelihood estimation under a Kronecker-structured Gaussian prior, we aim to create new optimization schemes that combine statistical inference with deterministic tensor solvers for improved conditioning and uncertainty estimation.
-        </p>
-        <p style="margin-bottom: 0.5em;">More updates soon!</p>
-        <div style="clear: both;"></div>
-      </div>
-    </div>
-  </div>
-</div>
-      
 
       <!-- <div class="bio-text">
       <p> 

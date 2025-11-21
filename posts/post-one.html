@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,128 +17,166 @@
 </head>
 
 <body>
-<div id="contentContainer">
+    <div id="contentContainer">
 
-    <div class="top-link">
-        <a href="../src/blog.html">&larr; blog</a>
-    </div>
+        <div class="top-link">
+            <a href="../src/blog.html">&larr; blog</a>
+        </div>
 
-    <div style="position: relative; margin-bottom: 1em;">
-        <svg style="position: absolute; top: -10px; left: 284px; width: calc(100% - 284px); height: 60px; z-index: -1;" 
-             viewBox="0 0 600 60" preserveAspectRatio="none">
-            <path d="M 0 30 L 20 25 L 40 35 L 60 20 L 80 40 L 100 15 L 120 35 L 140 25 L 160 45 L 180 30 L 200 20 L 220 35 L 240 40 L 260 25 L 280 30 L 300 35 L 320 20 L 340 40 L 360 30 L 380 35 L 400 25 L 420 40 L 440 30 L 460 35 L 480 25 L 500 30 L 520 35 L 540 40 L 560 30 L 580 35 L 600 30"
-                  stroke="#888888" stroke-width="1.5" fill="none" opacity="0.6"/>
-        </svg>
-        <h1>walking the quantum line</h1>
-    </div>
+        <div style="position: relative; margin-bottom: 1em;">
+            <svg style="position: absolute; top: -10px; left: 284px; width: calc(100% - 284px); height: 60px; z-index: -1;"
+                viewBox="0 0 600 60" preserveAspectRatio="none">
+                <path
+                    d="M 0 30 L 20 25 L 40 35 L 60 20 L 80 40 L 100 15 L 120 35 L 140 25 L 160 45 L 180 30 L 200 20 L 220 35 L 240 40 L 260 25 L 280 30 L 300 35 L 320 20 L 340 40 L 360 30 L 380 35 L 400 25 L 420 40 L 440 30 L 460 35 L 480 25 L 500 30 L 520 35 L 540 40 L 560 30 L 580 35 L 600 30"
+                    stroke="#888888" stroke-width="1.5" fill="none" opacity="0.6" />
+            </svg>
+            <h1>walking the quantum line</h1>
+        </div>
 
-    <p><span class="gray-date">05.20.2025</span><br><br>
-        This post traces some of the theoretical questions that emerged during a project on quantum walks, graph-induced channels, and the resource complexity of simulating quantum processes. While the original motivation came from quantum information theory and open-system dynamics, the ideas quickly pulled me into deeper territory: questions about how structure and symmetry shape the hardness of simulation, and what it means to “propagate” quantum information over a discrete geometry.
-    </p>
-
-    <p>
-        To build intuition, begin with the classical case: a random walk on a finite undirected graph \( G = (V, E) \), with \( |V| = n \). The walk is governed by a transition matrix \( P \) defined via local averaging:
-        \[
-        P_{ij} = \begin{cases}
-        \frac{1}{d_i} & \text{if } (i, j) \in E \\
-        0 & \text{otherwise}
-        \end{cases}
-        \]
-        Starting from a probability vector \( \mu_t \), the discrete dynamics evolve via \( \mu_{t+1} = P \mu_t \). In continuous time, this yields a diffusion equation,
-        \[
-        \frac{d\mu_t}{dt} = -L \mu_t, \quad \text{where } L = I - P
-        \]
-        which spreads probability mass over the graph according to its connectivity.
-    </p>
-
-    <p>
-        The quantum version generalizes this setup by replacing probability vectors with density matrices, and transition matrices with completely positive trace-preserving maps (CPTP maps), or quantum channels. A channel \( \Phi \) acts on density operators via Kraus decomposition:
-        \[
-        \Phi(\rho) = \sum_j K_j \rho K_j^\dagger, \quad \text{with } \sum_j K_j^\dagger K_j = I
-        \]
-        The specific channels I studied were induced by birth-death graphs, where each Kraus operator encodes a weighted transition along an edge. These channels are non-unitary and model both propagation and decoherence, making them ideal for capturing open-system behavior.
-    </p>
-
-    <p>
-        The central question that emerged was: how expensive is it to simulate such a channel using quantum circuits of bounded depth? Formally, we define the simulation length \( \ell^\epsilon_U(\Phi) \) as the minimum number of unitaries \( U_1, \ldots, U_M \in \mathcal{U} \) such that the composed unitary channel approximates \( \Phi \) within diamond norm \( \epsilon \):
-        \[
-        \ell^\epsilon_U(\Phi) = \min \left\{ M \,\middle|\, \left\| \Phi - \text{Ad}_{U_1 \cdots U_M} \right\|_\diamond < \epsilon \right\}
-        \]
-        where \( \text{Ad}_U(\rho) = U \rho U^\dagger \) and \( \mathcal{U} \) is a resource gate set. This quantity captures a notion of quantum circuit "length", a proxy for the physical resources required to realize non-unitary evolution through coherent gates.
-    </p>
-
-    <p>
-        To bound this from below, I turned to a Lipschitz-style complexity measure:
-        \[
-        \text{CS}(\Phi) = \sup_{\rho \neq \sigma} \frac{ \| \Phi(\rho) - \Phi(\sigma) \|_1 }{ \| \rho - \sigma \|_1 }
-        \]
-        This is the operator Lipschitz constant of \( \Phi \), measuring how much the channel amplifies state distinguishability in the trace norm. Intuitively, if a channel can significantly stretch the distance between nearby quantum states, then any unitary simulation must have enough “resolution” to capture that distortion.
-    </p>
-
-    <p>
-        Now, consider a circuit that simulates \( \Phi \) with length \( \ell \), composed of local unitaries. Each gate has bounded influence, so the total distinguishability growth it can induce is linear in \( \ell \). This gives the inequality:
-        \[
-        \text{CS}(\Phi) \leq D \cdot \ell^\epsilon(\Phi) + \epsilon \sqrt{n}
-        \]
-        for some universal constant \( D \), with the \( \epsilon \sqrt{n} \) term arising from the diamond norm relaxation over an \( n \)-dimensional Hilbert space.
-    </p>
-
-    <p>
-        To lower-bound \( \ell^\epsilon(\Phi) \), we construct a witness observable \( f \in \mathcal{B}(\mathcal{H}) \) that detects the channel's global mixing behavior. For graph-induced channels, a natural choice is:
-        \[
-        f =
-        \begin{pmatrix}
-        0 & 1 & \cdots & 1 \\
-        1 & 0 & \cdots & 1 \\
-        \vdots & \vdots & \ddots & \vdots \\
-        1 & 1 & \cdots & 0 \\
-        \end{pmatrix}
-        \in \mathbb{C}^{n \times n}
-        \]
-        which encodes uniform off-diagonal structure. Evaluating the change in \( f \) under the channel yields:
-        \[
-        \text{tr}\left(f (\Phi(\rho) - \rho)\right) \geq \sqrt{n}
-        \quad \Rightarrow \quad \text{CS}(\Phi) \geq \sqrt{n}
-        \]
-        Plugging this into the earlier bound gives:
-        \[
-        \sqrt{n} \leq D \cdot \ell^\epsilon(\Phi) + \epsilon \sqrt{n}
-        \quad \Rightarrow \quad \ell^\epsilon(\Phi) \geq \frac{(1 - \epsilon) \sqrt{n}}{D}
-        \]
-        which shows that the simulation length scales at least as \( \Omega(\sqrt{n}) \). This offers a geometric constraint: if a channel spreads mass across a graph in a highly sensitive way, then any quantum circuit that mimics this process must be long enough to physically traverse that structure.
-    </p>
-
-    <p>
-        But the story doesn’t end with bounds. These channels exhibit deep structural symmetries. The operators I worked with, edge shifts, projections, and sign-flips, are combinatorial, yet act on exponentially large state spaces. Their algebra is shaped by permutation symmetries of the underlying graph. As I dug deeper, I found myself asking: <i>How do graph automorphisms appear in the operator structure of the channel? Can we block-diagonalize the channel via induced representations? Are there symmetry-aware decompositions that lower circuit depth? </i>
-    </p>
-
-    <p>
-        These questions blend representation theory, operator algebras, and quantum control. They hint at a general principle: the simulation complexity of a quantum process may be controlled not only by dynamics and noise, but by the symmetries of the space it inhabits. The group actions hidden in a process might be our most powerful tools for compressing it.
-    </p>
-
-    <p>
-        What began as a study of noisy quantum walks ended in a broader landscape: simulation theory, Lipschitz analysis, and circuit synthesis through geometric lenses. I’m continuing to explore these ideas, especially their connections to quantum learning theory and representation-theoretic models of computation.
-    </p>
-
-    <div class="menu">
-        <p>
-            <a href="index.html">home</a> / 
-            <a href="../src/about.html">research</a> / 
-            <a href="../src/teaching.html">teaching</a> /
-            <a href="../src/notes.html">notes</a> /
-            <a href="../src/blog.html">blog</a> /
-            <a href="../cv/cv.pdf">vitae</a>
+        <p><span class="gray-date">05.20.2025</span><br><br>
+            This post traces some of the theoretical questions that emerged during a project on quantum walks,
+            graph-induced channels, and the resource complexity of simulating quantum processes. While the original
+            motivation came from quantum information theory and open-system dynamics, the ideas quickly pulled me into
+            deeper territory: questions about how structure and symmetry shape the hardness of simulation, and what it
+            means to “propagate” quantum information over a discrete geometry.
         </p>
+
+        <p>
+            To build intuition, begin with the classical case: a random walk on a finite undirected graph \( G = (V, E)
+            \), with \( |V| = n \). The walk is governed by a transition matrix \( P \) defined via local averaging:
+            \[
+            P_{ij} = \begin{cases}
+            \frac{1}{d_i} & \text{if } (i, j) \in E \\
+            0 & \text{otherwise}
+            \end{cases}
+            \]
+            Starting from a probability vector \( \mu_t \), the discrete dynamics evolve via \( \mu_{t+1} = P \mu_t \).
+            In continuous time, this yields a diffusion equation,
+            \[
+            \frac{d\mu_t}{dt} = -L \mu_t, \quad \text{where } L = I - P
+            \]
+            which spreads probability mass over the graph according to its connectivity.
+        </p>
+
+        <p>
+            The quantum version generalizes this setup by replacing probability vectors with density matrices, and
+            transition matrices with completely positive trace-preserving maps (CPTP maps), or quantum channels. A
+            channel \( \Phi \) acts on density operators via Kraus decomposition:
+            \[
+            \Phi(\rho) = \sum_j K_j \rho K_j^\dagger, \quad \text{with } \sum_j K_j^\dagger K_j = I
+            \]
+            The specific channels I studied were induced by birth-death graphs, where each Kraus operator encodes a
+            weighted transition along an edge. These channels are non-unitary and model both propagation and
+            decoherence, making them ideal for capturing open-system behavior.
+        </p>
+
+        <p>
+            The central question that emerged was: how expensive is it to simulate such a channel using quantum circuits
+            of bounded depth? Formally, we define the simulation length \( \ell^\epsilon_U(\Phi) \) as the minimum
+            number of unitaries \( U_1, \ldots, U_M \in \mathcal{U} \) such that the composed unitary channel
+            approximates \( \Phi \) within diamond norm \( \epsilon \):
+            \[
+            \ell^\epsilon_U(\Phi) = \min \left\{ M \,\middle|\, \left\| \Phi - \text{Ad}_{U_1 \cdots U_M}
+            \right\|_\diamond < \epsilon \right\} \] where \( \text{Ad}_U(\rho)=U \rho U^\dagger \) and \( \mathcal{U}
+                \) is a resource gate set. This quantity captures a notion of quantum circuit "length" , a proxy for the
+                physical resources required to realize non-unitary evolution through coherent gates. </p>
+
+                <p>
+                    To bound this from below, I turned to a Lipschitz-style complexity measure:
+                    \[
+                    \text{CS}(\Phi) = \sup_{\rho \neq \sigma} \frac{ \| \Phi(\rho) - \Phi(\sigma) \|_1 }{ \| \rho -
+                    \sigma \|_1 }
+                    \]
+                    This is the operator Lipschitz constant of \( \Phi \), measuring how much the channel amplifies
+                    state distinguishability in the trace norm. Intuitively, if a channel can significantly stretch the
+                    distance between nearby quantum states, then any unitary simulation must have enough “resolution” to
+                    capture that distortion.
+                </p>
+
+                <p>
+                    Now, consider a circuit that simulates \( \Phi \) with length \( \ell \), composed of local
+                    unitaries. Each gate has bounded influence, so the total distinguishability growth it can induce is
+                    linear in \( \ell \). This gives the inequality:
+                    \[
+                    \text{CS}(\Phi) \leq D \cdot \ell^\epsilon(\Phi) + \epsilon \sqrt{n}
+                    \]
+                    for some universal constant \( D \), with the \( \epsilon \sqrt{n} \) term arising from the diamond
+                    norm relaxation over an \( n \)-dimensional Hilbert space.
+                </p>
+
+                <p>
+                    To lower-bound \( \ell^\epsilon(\Phi) \), we construct a witness observable \( f \in
+                    \mathcal{B}(\mathcal{H}) \) that detects the channel's global mixing behavior. For graph-induced
+                    channels, a natural choice is:
+                    \[
+                    f =
+                    \begin{pmatrix}
+                    0 & 1 & \cdots & 1 \\
+                    1 & 0 & \cdots & 1 \\
+                    \vdots & \vdots & \ddots & \vdots \\
+                    1 & 1 & \cdots & 0 \\
+                    \end{pmatrix}
+                    \in \mathbb{C}^{n \times n}
+                    \]
+                    which encodes uniform off-diagonal structure. Evaluating the change in \( f \) under the channel
+                    yields:
+                    \[
+                    \text{tr}\left(f (\Phi(\rho) - \rho)\right) \geq \sqrt{n}
+                    \quad \Rightarrow \quad \text{CS}(\Phi) \geq \sqrt{n}
+                    \]
+                    Plugging this into the earlier bound gives:
+                    \[
+                    \sqrt{n} \leq D \cdot \ell^\epsilon(\Phi) + \epsilon \sqrt{n}
+                    \quad \Rightarrow \quad \ell^\epsilon(\Phi) \geq \frac{(1 - \epsilon) \sqrt{n}}{D}
+                    \]
+                    which shows that the simulation length scales at least as \( \Omega(\sqrt{n}) \). This offers a
+                    geometric constraint: if a channel spreads mass across a graph in a highly sensitive way, then any
+                    quantum circuit that mimics this process must be long enough to physically traverse that structure.
+                </p>
+
+                <p>
+                    But the story doesn’t end with bounds. These channels exhibit deep structural symmetries. The
+                    operators I worked with, edge shifts, projections, and sign-flips, are combinatorial, yet act on
+                    exponentially large state spaces. Their algebra is shaped by permutation symmetries of the
+                    underlying graph. As I dug deeper, I found myself asking: <i>How do graph automorphisms appear in
+                        the operator structure of the channel? Can we block-diagonalize the channel via induced
+                        representations? Are there symmetry-aware decompositions that lower circuit depth? </i>
+                </p>
+
+                <p>
+                    These questions blend representation theory, operator algebras, and quantum control. They hint at a
+                    general principle: the simulation complexity of a quantum process may be controlled not only by
+                    dynamics and noise, but by the symmetries of the space it inhabits. The group actions hidden in a
+                    process might be our most powerful tools for compressing it.
+                </p>
+
+                <p>
+                    What began as a study of noisy quantum walks ended in a broader landscape: simulation theory,
+                    Lipschitz analysis, and circuit synthesis through geometric lenses. I’m continuing to explore these
+                    ideas, especially their connections to quantum learning theory and representation-theoretic models
+                    of computation.
+                </p>
+
+                <div class="menu">
+                    <p>
+                        <a href="index.html">home</a> /
+                        <a href="../src/about.html">research</a> /
+                        <a href="../src/teaching.html">teaching</a> /
+                        <a href="../src/notes.html">notes</a> /
+                        <a href="../src/blog.html">blog</a> /
+                        <a href="../cv/cv.pdf">vitae</a>
+                    </p>
+                </div>
+
     </div>
 
-</div>
-
-<script>
-    function toggleProof(proofId) {
-        const proof = document.getElementById(proofId);
-        proof.classList.toggle('collapsed');
-    }
-</script>
+    <script>
+        function toggleProof(proofId) {
+            const proof = document.getElementById(proofId);
+            proof.classList.toggle('collapsed');
+        }
+    </script>
 
 </body>
+
 </html>
