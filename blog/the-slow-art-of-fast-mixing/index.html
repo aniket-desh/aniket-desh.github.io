@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="icon" href="../assets/ad.png" type="image/x-icon" />
-    <link rel="stylesheet" href="../src/style.css">
+    <link rel="icon" href="/assets/ad.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/style.css">
     <title>the slow art of fast mixing — aniket deshpande</title>
     <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
@@ -46,7 +46,7 @@
 <div id="contentContainer">
 
         <div class="flex flex-col mt-8 text-sm">
-        <a href="../src/blog.html">&larr; blog</a>
+        <a href="/blog/">&larr; blog</a>
     </div>
 
     <div style="position: relative; margin-bottom: 1.5em;">
@@ -84,7 +84,7 @@
     </div>
 
     <p><span class="gray-date">07.25.2025</span><br><br>
-        In my studies of quantum information and learning theory, I find that a particular computational tool has become the center of rigorous mathematical research: sampling. This post walks through the rich theory of MCMC sampling and the results that allow Monte Carlo simulations to be numerical necessities in many fields.<br><br> In quantum information, Path-Integral Monte Carlo (PIMC) is a primary method for simulating thermal states of stoquastic quantum systems. PIMC transforms a quantum partition function into a classical Gibbs distribution by introducing an “imaginary-time” dimension, then applies Markov Chain Monte Carlo to sample from that distribution. Recently, these Markov chains were proven to mix <i> rapidly</i>, using the canonical path method. This rigorously justifies the use of PIMC in partition function estimation. <br><br> 
+        In my studies of quantum information and learning theory, I find that a particular computational tool has become the center of rigorous mathematical research: sampling. This post walks through the rich theory of MCMC sampling and the results that allow Monte Carlo simulations to be numerical necessities in many fields.<br><br> In quantum information, Path-Integral Monte Carlo (PIMC) is a primary method for simulating thermal states of stoquastic quantum systems. PIMC transforms a quantum partition function into a classical Gibbs distribution by introducing an "imaginary-time" dimension, then applies Markov Chain Monte Carlo to sample from that distribution. Recently, these Markov chains were proven to mix <i> rapidly</i>, using the canonical path method. This rigorously justifies the use of PIMC in partition function estimation. <br><br> 
         Suppose we hope to estimate the partition function of a \(1\)D stoquastic Hamiltonian
         \[
         H = \sum_{i=1}^{n-1}Z_{i}Z_{i+1} + \sum_{i=1}^{n}h_iX_i
@@ -149,3 +149,4 @@
 
 </body>
 </html>
+

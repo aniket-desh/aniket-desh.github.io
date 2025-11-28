@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="/assets/ad.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/style.css">
+    <title>fault lines in phase space — aniket deshpande</title>
+    <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        h1 {
+            font-family: "EB Garamond", "adobe-caslon-pro", "Adobe Caslon Pro", "AdobeCaslonPro-Regular", "Big Caslon", "Adobe Caslon", "Caslon", "Libre Caslon Text", Georgia, "Times New Roman", serif;
+            font-weight: bold;
+        }
+        h3 {
+            font-family: "EB Garamond", "adobe-caslon-pro", "Adobe Caslon Pro", "AdobeCaslonPro-Regular", "Big Caslon", "Adobe Caslon", "Caslon", "Libre Caslon Text", Georgia, "Times New Roman", serif;
+        }
+        
+        .menu {
+            margin-bottom: 1.5em;
+            margin-top: 0;
+            text-align: left;
+            font-size: 1rem;
+        }
+        
+        .menu p {
+            margin: 0;
+            text-align: left;
+        }
+        
+        .menu a {
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            margin-right: 1em;
+        }
+        
+        .menu a:last-child {
+            margin-right: 0;
+        }
+    </style>
+</head>
+
+<body>
+<div id="contentContainer">
+
+    <div class="top-link">
+        <a href="/blog/">&larr; blog</a>
+    </div>
+
+    <div style="position: relative; margin-bottom: 1em;">
+        <svg style="position: absolute; top: -15px; left: 0; width: 100%; height: 80px; z-index: -1;" 
+             viewBox="0 0 1000 80" preserveAspectRatio="none">
+            <!-- Minimalistic vector field: small arrows showing flow direction -->
+            
+            <!-- Arrow marker definition -->
+            <defs>
+                <marker id="arrow" markerWidth="4" markerHeight="4" refX="3" refY="2" orient="auto">
+                    <path d="M 0 0 L 4 2 L 0 4" fill="#888888" opacity="0.5"/>
+                </marker>
+            </defs>
+            
+            <!-- Vector field: grid of small arrows -->
+            <!-- Row 1 (top) -->
+            <line x1="100" y1="20" x2="120" y2="18" stroke="#888888" stroke-width="0.8" opacity="0.4" marker-end="url(#arrow)"/>
+            <line x1="250" y1="18" x2="270" y2="16" stroke="#888888" stroke-width="0.8" opacity="0.4" marker-end="url(#arrow)"/>
+            <line x1="400" y1="16" x2="420" y2="18" stroke="#888888" stroke-width="0.8" opacity="0.4" marker-end="url(#arrow)"/>
+            <line x1="550" y1="18" x2="570" y2="20" stroke="#888888" stroke-width="0.8" opacity="0.4" marker-end="url(#arrow)"/>
+            <line x1="700" y1="20" x2="720" y2="22" stroke="#888888" stroke-width="0.8" opacity="0.4" marker-end="url(#arrow)"/>
+            <line x1="850" y1="22" x2="870" y2="24" stroke="#888888" stroke-width="0.8" opacity="0.4" marker-end="url(#arrow)"/>
+            
+            <!-- Row 2 (middle-top) -->
+            <line x1="80" y1="35" x2="100" y2="33" stroke="#888888" stroke-width="0.8" opacity="0.5" marker-end="url(#arrow)"/>
+            <line x1="230" y1="33" x2="250" y2="32" stroke="#888888" stroke-width="0.8" opacity="0.5" marker-end="url(#arrow)"/>
+            <line x1="380" y1="32" x2="400" y2="33" stroke="#888888" stroke-width="0.8" opacity="0.5" marker-end="url(#arrow)"/>
+            <line x1="530" y1="33" x2="550" y2="35" stroke="#888888" stroke-width="0.8" opacity="0.5" marker-end="url(#arrow)"/>
+            <line x1="680" y1="35" x2="700" y2="37" stroke="#888888" stroke-width="0.8" opacity="0.5" marker-end="url(#arrow)"/>
+            <line x1="830" y1="37" x2="850" y2="39" stroke="#888888" stroke-width="0.8" opacity="0.5" marker-end="url(#arrow)"/>
+            
+            <!-- Row 3 (center) -->
+            <line x1="60" y1="50" x2="80" y2="48" stroke="#888888" stroke-width="0.9" opacity="0.6" marker-end="url(#arrow)"/>
+            <line x1="210" y1="48" x2="230" y2="47" stroke="#888888" stroke-width="0.9" opacity="0.6" marker-end="url(#arrow)"/>
+            <line x1="360" y1="47" x2="380" y2="48" stroke="#888888" stroke-width="0.9" opacity="0.6" marker-end="url(#arrow)"/>
+            <line x1="510" y1="48" x2="530" y2="50" stroke="#888888" stroke-width="0.9" opacity="0.6" marker-end="url(#arrow)"/>
+            <line x1="660" y1="50" x2="680" y2="52" stroke="#888888" stroke-width="0.9" opacity="0.6" marker-end="url(#arrow)"/>
+            <line x1="810" y1="52" x2="830" y2="54" stroke="#888888" stroke-width="0.9" opacity="0.6" marker-end="url(#arrow)"/>
+            
+            <!-- Row 4 (middle-bottom) -->
+            <line x1="80" y1="65" x2="100" y2="63" stroke="#888888" stroke-width="0.8" opacity="0.5" marker-end="url(#arrow)"/>
+            <line x1="230" y1="63" x2="250" y2="62" stroke="#888888" stroke-width="0.8" opacity="0.5" marker-end="url(#arrow)"/>
+            <line x1="380" y1="62" x2="400" y2="63" stroke="#888888" stroke-width="0.8" opacity="0.5" marker-end="url(#arrow)"/>
+            <line x1="530" y1="63" x2="550" y2="65" stroke="#888888" stroke-width="0.8" opacity="0.5" marker-end="url(#arrow)"/>
+            <line x1="680" y1="65" x2="700" y2="67" stroke="#888888" stroke-width="0.8" opacity="0.5" marker-end="url(#arrow)"/>
+            <line x1="830" y1="67" x2="850" y2="69" stroke="#888888" stroke-width="0.8" opacity="0.5" marker-end="url(#arrow)"/>
+            
+            <!-- Row 5 (bottom) -->
+            <line x1="100" y1="80" x2="120" y2="78" stroke="#888888" stroke-width="0.8" opacity="0.4" marker-end="url(#arrow)"/>
+            <line x1="250" y1="78" x2="270" y2="76" stroke="#888888" stroke-width="0.8" opacity="0.4" marker-end="url(#arrow)"/>
+            <line x1="400" y1="76" x2="420" y2="78" stroke="#888888" stroke-width="0.8" opacity="0.4" marker-end="url(#arrow)"/>
+            <line x1="550" y1="78" x2="570" y2="80" stroke="#888888" stroke-width="0.8" opacity="0.4" marker-end="url(#arrow)"/>
+            <line x1="700" y1="80" x2="720" y2="82" stroke="#888888" stroke-width="0.8" opacity="0.4" marker-end="url(#arrow)"/>
+            <line x1="850" y1="82" x2="870" y2="84" stroke="#888888" stroke-width="0.8" opacity="0.4" marker-end="url(#arrow)"/>
+        </svg>
+        <h1>fault lines in phase space</h1>
+    </div>
+
+    <p><span class="gray-date">11.28.2025</span><br><br>
+        In the <a href="/blog/a-ghost-in-the-machine/" class="katex-title"
+            style="font-size:inherit; font-weight:500; text-decoration:underline; color:black; transition:color 0.3s;"
+            onmouseover="this.style.color='darkred';" onmouseout="this.style.color='black';">previous post</a>, we saw how balance creates a single spectral outlier at \(-b\) that governs mean dynamics, accelerates the population mode, and broadens encoding bandwidth. But what if we go beyond a single rank-one term? What happens when we add structured, low-rank perturbations to the random bulk? <br><br>
+
+        This post develops a complete theoretical framework showing how low-rank structure creates spectral outliers that predict phase transitions. We'll build the theory step by step, then validate it with numerical results. The key insight: the real part of these outliers acts as a "fault line" in phase space, marking where the network transitions from fixed points to oscillations to chaos.
+    </p>
+
+    <h3>beyond balance: introducing low-rank perturbations</h3>
+
+    <p>
+        We extend our connectivity matrix to include structured, low-rank terms:
+        \[
+        J = gW - \frac{b}{N}J_0 \mathbf{1}\mathbf{1}^T + S
+        \]
+        where:
+    </p>
+    <ul>
+        <li>\(gW\): the random bulk, with \(W\) a real Ginibre matrix scaled by \(1/\sqrt{N}\), giving bulk radius \(g\)</li>
+        <li>\(-\frac{b}{N}J_0 \mathbf{1}\mathbf{1}^T\): the rank-one mean term (balance, from the previous post)</li>
+        <li>\(S = \sum_{k=1}^R m_k u_k v_k^T = UMV^T\): the <i>new low-rank perturbation</i></li>
+    </ul>
+
+    <p>
+        Each term \(m_k u_k v_k^T\) creates structure: a rank-one pattern in connectivity. The parameters are:
+    </p>
+    <ul>
+        <li>\(R\): the number of low-rank modes (the rank)</li>
+        <li>\(m_k\): the strength of the \(k\)-th mode</li>
+        <li>\(u_k, v_k \in \mathbb{R}^N\): deterministic unit vectors defining the structure</li>
+    </ul>
+
+    <p>
+        Why low-rank? Biologically, structured connectivity patterns appear in feature selectivity, task-specific circuits, and learned representations. Computationally, each rank-one term can encode a computational mode. Mathematically, finite-rank perturbations on random matrices create isolated outliers that we can track analytically.
+    </p>
+
+    <h3>spectral theory: finite-rank outliers on random matrices</h3>
+
+    <p>
+        The spectral picture now has three components:
+    </p>
+    <ul>
+        <li><b>Random bulk</b>: Circular law with radius \(g\) (from \(gW\)), eigenvalues uniformly distributed in a disk</li>
+        <li><b>Balance outlier</b>: Real eigenvalue at \(-b\) (from the rank-one mean term)</li>
+        <li><b>Low-rank outliers</b>: Each term \(m_k u_k v_k^T\) can create an outlier \(\lambda_{\mathrm{out}}^{(k)}\)</li>
+    </ul>
+
+    <p>
+        To find these outliers, we use a powerful tool: the matrix determinant lemma. For any invertible matrix \(A\) and rank-\(R\) perturbation \(UV^T\),
+        \[
+        \det(A + UV^T) = \det(A) \det(I + A^{-1}UV^T)
+        \]
+        This reduces an \(N \times N\) determinant to an \(R \times R\) determinant—a massive simplification.
+    </p>
+
+    <p>
+        Applying this to our connectivity, for \(J = gW + S\) where \(S = UMV^T\) with \(M = \mathrm{diag}(m_1, \ldots, m_R)\), we get:
+        \[
+        \det(zI - (gW + S)) = \det(zI - gW) \det(I_R - M\mathcal{R}_W(z))
+        \]
+        where \(\mathcal{R}_W(z) = V^T(zI - gW)^{-1}U\) is the resolvent projected onto the structured subspaces. Any eigenvalue \(z\) with \(\det(zI - gW) \neq 0\) must satisfy:
+        \[
+        \det(I_R - M\mathcal{R}_W(z)) = 0
+        \]
+    </p>
+
+    <p>
+        Now comes the key step: the <i>isotropic resolvent limit</i>. For \(|z| > g\) (outside the bulk), the circular law implies that for any fixed \(U, V\) with \(R = \mathcal{O}(1)\),
+        \[
+        \mathcal{R}_W(z) = V^T(zI - gW)^{-1}U \xrightarrow[N \to \infty]{\text{a.s.}} -z^{-1}V^TU
+        \]
+        Outside the bulk, the resolvent looks like \(-z^{-1}I\)—this is the isotropic limit.
+    </p>
+
+    <p>
+        Substituting this into our determinant condition gives:
+        \[
+        \det(I_R + \frac{M}{z}V^TU) = 0 \iff \det(zI_R + M V^TU) = 0
+        \]
+    </p>
+
+    <p>
+        <b>Theorem (Finite-Rank Outliers)</b>: Any limit point \(z\) of an eigenvalue of \(gW + S\) with \(|z| > g\) satisfies
+        \[
+        \det(zI_R + M V^TU) = 0
+        \]
+    </p>
+
+    <p>
+        In the special case where \(V^TU = \mathrm{diag}(\alpha_1, \ldots, \alpha_R)\) (diagonal overlaps), this simplifies dramatically:
+        \[
+        z_k = -m_k \alpha_k, \quad k = 1, \ldots, R
+        \]
+        Each \(z_k\) appears as an <i>isolated outlier</i> if \(|z_k| > g\); otherwise, it's absorbed by the Ginibre bulk.
+    </p>
+
+    <p>
+        For the full connectivity \(J = gW - \frac{b}{N}J_0 \mathbf{1}\mathbf{1}^T + S\), we stack the rank-one mean and rank-\(R\) spike together. When \(\mathbf{1}\) is orthogonal to \(\{U, V\}\) and \(V^TU\) is diagonal, the outliers decouple to the union of \(-b\) (from balance) and \(-m_k\alpha_k\) (from low-rank structure). This gives us a closed-form predictor for all isolated eigenvalues.
+    </p>
+
+    <h3>extending dmft: low-rank order parameters</h3>
+
+    <p>
+        The spectral theory tells us where outliers appear, but to understand dynamics, we need to extend the non-stationary DMFT framework. The challenge: how do we incorporate low-rank structure into the mean-field equations?
+    </p>
+
+    <p>
+        The answer lies in <i>low-rank overlaps</i>. For connectivity \(J = gW - \frac{b}{N} \mathbf{1}\mathbf{1}^T + S\) with \(S = \sum_{k=1}^R m_k u_k v_k^T\), the structured drive to neuron \(i\) is:
+        \[
+        \mu_i^{\mathrm{struct}}(t) = \sum_{k=1}^R m_k u_{k,i} \kappa_k(t)
+        \]
+        where the overlaps are:
+        \[
+        \kappa_k(t) = \frac{1}{\sqrt{N}} v_k^T \phi(h(t))
+        \]
+        These capture how much the network "projects" onto each structured mode.
+    </p>
+
+    <p>
+        Under exchangeability and the Gaussian reduction for fluctuations \(\tilde{h}(t)\), the \(R\) overlaps obey a self-consistency:
+        \[
+        \kappa(t) = C M \chi(t)
+        \]
+        where:
+    </p>
+    <ul>
+        <li>\(C = \frac{1}{N}V^TU \in \mathbb{R}^{R \times R}\) (overlap matrix between structure vectors)</li>
+        <li>\(M = \mathrm{diag}(m_1, \ldots, m_R)\)</li>
+        <li>\(\chi(t) = \mathbb{E}_{u,\tilde{h}}[u \phi(m(t) + u^T M \kappa(t) + \tilde{h}(t))]\)</li>
+        <li>\(\tilde{h}(t) \sim \mathcal{N}(0, c(t,t))\) (Gaussian fluctuations from random bulk)</li>
+    </ul>
+
+    <p>
+        The mean and covariance equations retain their baseline form but with a shifted mean:
+        \[
+        \tau \frac{dm}{dt} = -m(t) - bJ_0 \nu(t) + bI(t)
+        \]
+        where \(\nu(t) = \mathbb{E}[\phi(m(t) + u^T M \kappa(t) + \tilde{h}(t))]\), and the covariance equations are evaluated with the same shift inside the moment \(q(t,s)\).
+    </p>
+
+    <p>
+        To understand stability, we linearize the overlap map \(\kappa \mapsto C M \chi(\kappa)\) around the trajectory. This gives:
+        \[
+        \delta \kappa(t) = J_{\mathrm{red}}(t) \delta \kappa(t)
+        \]
+        where the <i>reduced Jacobian</i> is:
+        \[
+        J_{\mathrm{red}}(t) = C M A(t)
+        \]
+        with
+        \[
+        A_{ab}(t) = \mathbb{E}_{u,\tilde{h}}[u_a u_b \phi'(m(t) + u^T M \kappa(t) + \tilde{h}(t))]
+        \]
+    </p>
+
+    <p>
+        The \(R\) instantaneous "outliers" are the eigenvalues of \(J_{\mathrm{red}}(t)\). The network undergoes a macroscopic transition when:
+        \[
+        \max_k \mathrm{Re}(\lambda_k(J_{\mathrm{red}}(t))) = 0
+        \]
+        This is the <i>crossing criterion</i>—it marks the fault line where stability is lost.
+    </p>
+
+    <p>
+        When \(V^TU\) is diagonal and \(u, v\) are orthogonal to \(\mathbf{1}/\sqrt{N}\), then \(C = \mathrm{diag}(\alpha_1, \ldots, \alpha_R)\) and \(J_{\mathrm{red}}(t)\) is diagonal, yielding \(\lambda_k(t) = m_k \alpha_k A_{kk}(t)\). When \(A_{kk}(t) \approx 1\) (high-gain ReLU in the active regime), this recovers the static outlier locations \(z_k \approx -m_k\alpha_k\) from the spectral theory, providing a bridge between the spectral result and the time-resolved stability condition.
+    </p>
+
+    <h3>fast proxy: computing phase boundaries efficiently</h3>
+
+    <p>
+        Full DMFT requires solving self-consistent equations on a triangular time grid—expensive for phase diagrams where we need to scan many \((g, m)\) values. We need a fast way to estimate where outliers lie.
+    </p>
+
+    <p>
+        The key insight: the outlier position depends on the <i>trajectory-averaged gain</i> \(\bar{A}\). For \(J = gW - \frac{b}{N}\mathbf{1}\mathbf{1}^T + m u v^T\) with \(u = v \perp \mathbf{1}\), the rank-one outlier in the trajectory-averaged Jacobian \(\overline{-I + J D(t)}\) is well-approximated by:
+        \[
+        \mathrm{Re}\lambda_{\mathrm{out}} \approx m (v^T \bar{A} u) - 1
+        \]
+        where \(\bar{A} = \overline{\mathrm{diag}(D(t))}\) and \(D_{ii}(t) = \phi'(h_i(t))\) is the derivative mask.
+    </p>
+
+    <p>
+        We estimate \(\bar{A}(g, m)\) from short simulations (burn-in 60%, \(T=10\), \(\Delta t=5 \times 10^{-3}\)) and average over 5 seeds. The proxy is:
+        \[
+        \widehat{\mathrm{Re}\lambda_{\mathrm{out}}}(g, m) = m (v^T \bar{A}(g, m) u) - 1
+        \]
+        For \(u = v\) with \(\|u\| = 1\) and \(u \perp \mathbf{1}\), this simplifies to \(m \bar{A}(g, m) - 1\).
+    </p>
+
+    <p>
+        The zero contour of this proxy gives the phase boundary \(m^*(g)\)—the fault line where \(\mathrm{Re}(\lambda_{\mathrm{out}}) = 0\). This is orders of magnitude faster than full DMFT while capturing the essential physics.
+    </p>
+
+    <h3>the phase diagram: mapping the fault lines</h3>
+
+    <p>
+        We can now map out the phase space in \((g, m)\) coordinates, where \(g\) controls the random connectivity strength (bulk radius) and \(m\) controls the low-rank perturbation strength (outlier position).
+    </p>
+
+    <p>
+        The network exhibits three dynamical phases:
+    </p>
+    <ol>
+        <li><b>Fixed Point</b>: All \(\mathrm{Re}(\lambda_{\mathrm{out}}^{(k)}) < 0\). The network settles to equilibrium, all modes are stable.</li>
+        <li><b>Hopf Oscillations</b>: One pair of complex-conjugate outliers crosses into the right half-plane. The network exhibits limit cycle oscillations, rhythmic patterns emerge.</li>
+        <li><b>Chaos</b>: Multiple unstable modes, or the bulk itself becomes unstable. The network is chaotic, highly sensitive to initial conditions.</li>
+    </ol>
+
+    <p>
+        The phase boundaries are determined by the crossing criterion: when \(\max_k \mathrm{Re}(\lambda_k(J_{\mathrm{red}}(t))) = 0\), the network bifurcates. The fast proxy gives us an efficient way to compute these boundaries.
+    </p>
+
+    <div style="text-align: center; margin: 2em 0;">
+        <img src="/assets/post4/phase.png" alt="Phase diagram in (g, m) space" style="max-width: 80%; height: auto; border: 1px solid #ddd;">
+        <p style="font-style: italic; color: #666; font-size: 0.9em; margin-top: 0.5em; max-width: 700px; margin-left: auto; margin-right: auto;">
+            <strong>Figure 1:</strong> Phase diagram via low-rank outlier proxy. Filled contours show \(\widehat{\mathrm{Re}\lambda_{\mathrm{out}}}(g,m) = m(v^T \bar{A}(g,m)u)-1\) for \(N=1000\), \(b=10\). The black zero-level contour approximates the macroscopic stability boundary \(m^*(g)\). Brighter colors indicate larger (less stable) real parts of the predicted outlier. The map shows how increasing \(m\) eventually destabilizes the system, with sharper dependence near \(g \approx 2\).
+        </p>
+    </div>
+
+    <p>
+        Figure 1 shows the resulting phase map. The zero contour marks the transition: below it, the network is stable (fixed point); above it, stability is lost. The ridge around \(g \approx 2\) is a non-normal "most sensitive" region where small changes in \(m\) produce comparatively larger shifts in the outlier position.
+    </p>
+
+    <h3>validation: theory meets simulation</h3>
+
+    <p>
+        Does the theory actually work? Figure 2 tests the low-rank prediction at fixed \((g, b)\) by sweeping the rank-1 strength \(m\). For each \(m\), we:
+    </p>
+    <ol>
+        <li>Time-average the Jacobian to obtain \(A_{\mathrm{avg}}\) and extract the outlier with maximal real part</li>
+        <li>Record the largest Lyapunov exponent \(\lambda_1\) from the network dynamics</li>
+        <li>Evaluate the scalar proxy \(m(v^T \bar{D} u)-1\) from the same run</li>
+    </ol>
+
+    <div style="text-align: center; margin: 2em 0;">
+        <img src="/assets/post4/lowrankcore.png" alt="Low-rank emergence and predicted crossing" style="max-width: 90%; height: auto; border: 1px solid #ddd;">
+        <p style="font-style: italic; color: #666; font-size: 0.9em; margin-top: 0.5em; max-width: 700px; margin-left: auto; margin-right: auto;">
+            <strong>Figure 2:</strong> Low-rank emergence and predicted crossing (rank-1). We fix \((N, g, b, \tau, \tau_S) = (600, 2.0, 5.0, 1, 1)\) and sweep the low-rank strength \(m\) (5 seeds). <b>Left:</b> Trajectory-averaged Jacobian spectrum (cloud), with the tracked outlier marked (X). <b>Middle:</b> Empirical \(\mathrm{Re}\lambda_{\mathrm{out}}(m)\) (orange, mean±SEM) versus the DMFT-style proxy \(m(v^T \bar{D} u)-1\) (green). Both curves approach 0 at similar \(m\), indicating the same predicted crossing. <b>Right:</b> Largest Lyapunov exponent \(\lambda_1(m)\) (blue, mean±SEM); it trends toward 0 near the crossing, consistent with loss of stability.
+        </p>
+    </div>
+
+    <p>
+        The empirical \(\mathrm{Re}\lambda_{\mathrm{out}}(m)\) and the proxy cross zero at similar \(m\) within error bars, and \(\lambda_1(m)\) approaches zero at the same location. This alignment validates our low-rank DMFT: the outlier controls the macroscopic stability boundary.
+    </p>
+
+    <h3>ablations: what matters?</h3>
+
+    <p>
+        Does the phase boundary depend on the precise rank-1 orientation or the choice of activation function? Figure 3 shows that the sign change of \(\mathrm{Re}\lambda_{\mathrm{out}}(m)\) is preserved for both \(u=v=\mathbf{1}/\sqrt{N}\) (aligned with mean mode) and randomly oriented \(u, v \perp \mathbf{1}\), with only modest shifts in the threshold. Replacing ReLU by tanh slightly increases the effective gain (earlier crossing), consistent with the analytical dependence of the linearized gain \(\bar{D}\) on the nonlinearity.
+    </p>
+
+    <div style="text-align: center; margin: 2em 0;">
+        <img src="/assets/post4/ablationsre.png" alt="Ablations: orientation and nonlinearity" style="max-width: 90%; height: auto; border: 1px solid #ddd;">
+        <p style="font-style: italic; color: #666; font-size: 0.9em; margin-top: 0.5em; max-width: 700px; margin-left: auto; margin-right: auto;">
+            <strong>Figure 3:</strong> Ablations: orientation and nonlinearity. Mean ± SEM over 5 seeds. We compare the low-rank direction aligned with the mean mode (\(u=v=\mathbf{1}/\sqrt{N}\)) versus random unit vectors orthogonal to \(\mathbf{1}\), and ReLU vs tanh. The zero crossing of \(\mathrm{Re}\lambda_{\mathrm{out}}\) persists under both alignment choices, confirming that the instability is a robust rank-1 effect rather than a special orientation.
+        </p>
+    </div>
+
+    <p>
+        The imaginary part remains near zero across conditions, indicating the dominant transition is a real-axis instability that governs stability/chaos via the sign of \(\mathrm{Re}\lambda_{\mathrm{out}}\).
+    </p>
+
+    <h3>interpreting the phase map: computational implications</h3>
+
+    <p>
+        What does the \((g, m)\) phase diagram tell us? Reading the map:
+    </p>
+    <ul>
+        <li><b>Low \(g\), low \(m\)</b>: Stable fixed point. The network is quiescent, can store memories, but has no dynamics.</li>
+        <li><b>Increasing \(m\)</b>: Structured modes become active. Can drive oscillations, enable rhythmic patterns and temporal encoding.</li>
+        <li><b>High \(g\)</b>: Random bulk dominates. Chaos emerges, network is highly sensitive, good for exploration but hard to control.</li>
+        <li><b>The sweet spot</b>: Balance between structure and randomness. Enough structure for computation, not too much chaos.</li>
+    </ul>
+
+    <p>
+        Biologically, this suggests how networks might tune \((g, m)\) for different computational regimes. Task-specific networks might use higher \(m\) (more structure) for reliable, reproducible dynamics. Task-general networks might use higher \(g\) (more randomness) for flexibility and exploration.
+    </p>
+
+    <h3>closing: spectral blueprints for network design</h3>
+
+    <p>
+        We've developed a complete theoretical framework connecting low-rank structure to spectral outliers to phase transitions. The key results:
+    </p>
+    <ul>
+        <li><b>Spectral theory</b>: Finite-rank perturbations create isolated outliers via determinantal reduction and the isotropic resolvent limit</li>
+        <li><b>Extended DMFT</b>: Low-rank overlaps couple to mean-field equations, giving time-resolved stability analysis</li>
+        <li><b>Fast proxy</b>: Trajectory-averaged gain enables efficient phase diagram computation</li>
+        <li><b>Phase boundaries</b>: The real part of outliers marks fault lines where networks transition between dynamical regimes</li>
+    </ul>
+
+    <p>
+        Spectral outliers are the "blueprints" that control network behavior. Low-rank structure creates these blueprints in a controlled way. We can now <i>predict and design</i> network dynamics from connectivity structure. The theory provides a bridge between structure and function, showing how the spectral fingerprint of connectivity shapes the computational capabilities of neural networks.
+    </p>
+
+    <p>
+        Open questions remain: How do multiple low-rank terms interact nonlinearly? Can we design connectivity to achieve specific phase transitions? What about time-dependent low-rank structure (learning, plasticity)? These are directions for future exploration, but the foundation is now in place: we understand how structure creates spectral outliers, and how those outliers predict the fault lines in phase space.
+    </p>
+
+</div>
+
+<script>
+    function toggleProof(proofId) {
+        const proof = document.getElementById(proofId);
+        proof.classList.toggle('collapsed');
+    }
+</script>
+
+</body>
+</html>
+

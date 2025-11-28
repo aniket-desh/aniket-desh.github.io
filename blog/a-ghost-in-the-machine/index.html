@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="icon" href="../assets/ad.png" type="image/x-icon" />
-    <link rel="stylesheet" href="../src/style.css">
+    <link rel="icon" href="/assets/ad.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/style.css">
     <title>a ghost in the machine — aniket deshpande</title>
     <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
@@ -53,7 +53,7 @@
 <div id="contentContainer">
 
         <div class="flex flex-col mt-8 text-sm">
-        <a href="../src/blog.html">&larr; blog</a>
+        <a href="/blog/">&larr; blog</a>
     </div>
 
     <div style="position: relative; margin-bottom: 1.5em;">
@@ -135,7 +135,7 @@
             As \(b\) increases, the mean mode tracks input \(b\)-times faster. In simulations, fitting the exponential decay of \(m(t)\) confirms that the timescale drops as \(1/b\). 
 
             <div style="text-align: center; margin: 2em 0;">
-                <img src="../assets/post3/fig1.png" alt="Balance-induced speedup of population dynamics" style="max-width: 50%; height: auto; border: 1px solid #ddd;">
+                <img src="/assets/post3/fig1.png" alt="Balance-induced speedup of population dynamics" style="max-width: 50%; height: auto; border: 1px solid #ddd;">
                 <p style="font-style: italic; color: #666; font-size: 0.9em; margin-top: 0.5em; max-width: 600px; margin-left: auto; margin-right: auto;">
                     <strong>Figure 1:</strong> Balance-induced speedup of population dynamics. The effective timescale τ<sub>eff</sub> of the population mean decreases as 1/b, demonstrating how tighter balance leads to faster tracking of external inputs.
                 </p>
@@ -148,7 +148,7 @@
             Here, \(S_{I\nu}\) is the cross-spectrum of the input and output, and \(S_{II}\), \(S_{\nu\nu}\) are their respective autospectra. The result is that higher balance values keep cohere close to one across higher frequencies, reflecting faster tracking and higher effective bandwidth
 
             <div style="display: flex; align-items: flex-start; margin: 2em 0; gap: 2em;">
-                <img src="../assets/post3/fig2.png" alt="Input-output coherence as a function of frequency and balance" style="width: 45%; height: auto; border: 1px solid #ddd; flex-shrink: 0;">
+                <img src="/assets/post3/fig2.png" alt="Input-output coherence as a function of frequency and balance" style="width: 45%; height: auto; border: 1px solid #ddd; flex-shrink: 0;">
                 <div style="flex: 1;">
                     <p style="font-style: italic; color: #666; font-size: 0.9em; margin: 0 0 1em 0; line-height: 1.6;">
                         <strong>Figure 2:</strong> Input-output coherence as a function of frequency and balance. Higher balance values maintain coherence close to one across higher frequencies, demonstrating improved signal tracking and increased effective bandwidth.
@@ -177,13 +177,13 @@
                         To complete our understanding of this paper, it's worth highlighting a key result from <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010590">a complementary paper</a> done by Engelken et al. This PLOS paper provides code that shows the same non-stationary DMFT framework was used to compute the largest Lyapunov exponent \(\lambda_1\).
                     </p>
                 </div>
-                <img src="../assets/post3/fig3.png" alt="Information rate scaling with balance parameter" style="width: 45%; height: auto; border: 1px solid #ddd; flex-shrink: 0;">
+                <img src="/assets/post3/fig3.png" alt="Information rate scaling with balance parameter" style="width: 45%; height: auto; border: 1px solid #ddd; flex-shrink: 0;">
             </div>
 
             The surprising finding was that common input is poor at surpressing chaos. Because of balance, the common drive enters the mean equation and is canceled by recurrent inhibition. As a result, \(\lambda_1\) only turns negative at very large input amplitudes. Input independent, on the other hand, enters the fluctuation channel directly and is not canceled, so even small amplitudes can suppress chaos.
 
             <div style="text-align: center; margin: 2em 0;">
-                <img src="../assets/post3/fig4.png" alt="Lyapunov exponent suppression by common vs independent input" style="max-width: 50%; height: auto; border: 1px solid #ddd;">
+                <img src="/assets/post3/fig4.png" alt="Lyapunov exponent suppression by common vs independent input" style="max-width: 50%; height: auto; border: 1px solid #ddd;">
                 <p style="font-style: italic; color: #666; font-size: 0.9em; margin-top: 0.5em; max-width: 600px; margin-left: auto; margin-right: auto;">
                     <strong>Figure 4:</strong> Chaos suppression by input type. Common input (top) requires large amplitudes to suppress chaos due to balance cancellation, while independent input (bottom) can suppress chaos even at small amplitudes by directly affecting fluctuation dynamics.
                 </p>
@@ -208,3 +208,4 @@
 
 </body>
 </html>
+
