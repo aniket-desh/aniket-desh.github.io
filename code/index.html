@@ -28,9 +28,13 @@
         }
         
         .menu a {
-            text-decoration: underline;
-            text-decoration-style: dotted;
+            text-decoration: none;
             margin-right: 1em;
+            display: inline-block;
+            transition: transform 0.15s ease;
+        }
+        .menu a:hover {
+            transform: skewX(-8deg);
         }
         
         .menu a:last-child {
@@ -45,6 +49,15 @@
 
         .project-section:last-of-type {
             border-bottom: none;
+        }
+        
+        /* Prevent layout shift on hover by using transform instead of font-style */
+        a[style*="color:darkred"] {
+            display: inline-block;
+            transition: transform 0.15s ease;
+        }
+        a[style*="color:darkred"]:hover {
+            transform: skewX(-8deg);
         }
     </style>
 </head>
@@ -77,8 +90,7 @@
             <h3 style="margin-top: 0; font-size: 1.1em; font-weight: 400;">(ii) low-rank dynamic mean-field theory</h3>
             <p style="margin-bottom: 0.8em;">
                 experiments for a non-stationary dynamic mean-field theory for RNNs with low-rank structure. repository <a href="https://github.com/aniket-desh/low-rank-dynamic-mean-field-theory"
-                  style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:500; text-decoration:underline; text-decoration-style:dotted; color:black; transition:color 0.3s;"
-                  onmouseover="this.style.color='darkred';" onmouseout="this.style.color='black';"
+                  style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;"
                   target="_blank">here</a>.
             </p>
             <div style="clear: both;"></div>
@@ -92,8 +104,7 @@
             <h3 style="margin-top: 0; font-size: 1.1em; font-weight: 400;">(i) mcmc for tensor contractions</h3>
             <p style="margin-bottom: 0.8em;">
                 algorithms, experiments, and test structures for tensor contraction approximation software written by myself and the LPNA. repository <a href="https://github.com/aniket-desh/mcmc-tensor-network"
-                  style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:500; text-decoration:underline; text-decoration-style:dotted; color:black; transition:color 0.3s;"
-                  onmouseover="this.style.color='darkred';" onmouseout="this.style.color='black';"
+                  style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;"
                   target="_blank">here</a>.
             </p>
             <div style="clear: both;"></div>

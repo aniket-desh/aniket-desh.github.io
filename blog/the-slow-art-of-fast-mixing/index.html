@@ -31,9 +31,13 @@
         }
         
         .menu a {
-            text-decoration: underline;
-            text-decoration-style: dotted;
+            text-decoration: none;
             margin-right: 1em;
+            display: inline-block;
+            transition: transform 0.15s ease;
+        }
+        .menu a:hover {
+            transform: skewX(-8deg);
         }
         
         .menu a:last-child {
@@ -126,15 +130,15 @@
 
         <h3>references</h3>
 <ul>
-  <li><strong>Chen et al. (2025)</strong> – <em>Faster Mixing of the Jerrum–Sinclair Chain</em>. <br>Shows the mixing time is \(\widetilde O(\Delta^2 m)\) for the perfect-matching chain. <a href="https://arxiv.org/abs/2504.02740" target="_blank">arxiv.org</a></li>
+  <li><strong>Chen et al. (2025)</strong> – <em>Faster Mixing of the Jerrum–Sinclair Chain</em>. <br>Shows the mixing time is \(\widetilde O(\Delta^2 m)\) for the perfect-matching chain. <a href="https://arxiv.org/abs/2504.02740" target="_blank" style="text-decoration:none; color:darkred; font-weight:400;" onmouseover="this.style.fontStyle='italic';" onmouseout="this.style.fontStyle='normal';">arxiv.org</a></li>
 
-  <li><strong>Guruswami (2016)</strong> – <em>Rapidly Mixing Markov Chains: A Comparison of Techniques</em>. <br>A helpful overview of canonical paths vs. fractional flows. <a href="https://arxiv.org/abs/1603.01512" target="_blank">arxiv.org</a></li>
+  <li><strong>Guruswami (2016)</strong> – <em>Rapidly Mixing Markov Chains: A Comparison of Techniques</em>. <br>A helpful overview of canonical paths vs. fractional flows. <a href="https://arxiv.org/abs/1603.01512" target="_blank" style="text-decoration:none; color:darkred; font-weight:400;" onmouseover="this.style.fontStyle='italic';" onmouseout="this.style.fontStyle='normal';">arxiv.org</a></li>
 
   <!-- <li><strong>Sinclair et al. (1992)</strong> – <em>Improved bounds for mixing rates of Markov chains and multicommodity flow</em><br>Introduced multicommodity flow for bounding mixing times via congestion. <a href="https://www.cs.mcgill.ca/~jking/papers/conductance.pdf" target="_blank">link</a></li> -->
 
-  <li><strong>Diaconis & Stroock (1991)</strong> – <em>Geometric Bounds for Eigenvalues of Markov Chains. </em>Proved that spectral gap is bounded by \(1 / (\rho_f \cdot l_{max})\), tying congestion to path length. <a href="https://proceedings.neurips.cc/paper_files/paper/2022/file/a600cdf3a53f93bcb85cb37343a8d831-Paper-Conference.pdf" target="_blank">link</a></li>
+  <li><strong>Diaconis & Stroock (1991)</strong> – <em>Geometric Bounds for Eigenvalues of Markov Chains. </em>Proved that spectral gap is bounded by \(1 / (\rho_f \cdot l_{max})\), tying congestion to path length. <a href="https://proceedings.neurips.cc/paper_files/paper/2022/file/a600cdf3a53f93bcb85cb37343a8d831-Paper-Conference.pdf" target="_blank" style="text-decoration:none; color:darkred; font-weight:400;" onmouseover="this.style.fontStyle='italic';" onmouseout="this.style.fontStyle='normal';">link</a></li>
 
-  <li><strong>Jerrum & Sinclair (1989)</strong> - <em>Approximating the Permanent</em> <br>Introduced the use of Markov chains for approximating the permanent of a matrix. <a href="https://dl.acm.org/doi/10.1145/74334.74335" target="_blank">link</a></li>
+  <li><strong>Jerrum & Sinclair (1989)</strong> - <em>Approximating the Permanent</em> <br>Introduced the use of Markov chains for approximating the permanent of a matrix. <a href="https://dl.acm.org/doi/10.1145/74334.74335" target="_blank" style="text-decoration:none; color:darkred; font-weight:400;" onmouseover="this.style.fontStyle='italic';" onmouseout="this.style.fontStyle='normal';">link</a></li>
 </ul>
 
     </p>

@@ -31,9 +31,13 @@
         }
         
         .menu a {
-            text-decoration: underline;
-            text-decoration-style: dotted;
+            text-decoration: none;
             margin-right: 1em;
+            display: inline-block;
+            transition: transform 0.15s ease;
+        }
+        .menu a:hover {
+            transform: skewX(-8deg);
         }
         
         .menu a:last-child {
@@ -107,8 +111,8 @@
 
     <p><span class="gray-date">11.28.2025</span><br><br>
         In the <a href="/blog/a-ghost-in-the-machine/" class="katex-title"
-            style="font-size:inherit; font-weight:500; text-decoration:underline; color:black; transition:color 0.3s;"
-            onmouseover="this.style.color='darkred';" onmouseout="this.style.color='black';">previous post</a>, we saw how balance creates a single spectral outlier at \(-b\) that governs mean dynamics, accelerates the population mode, and broadens encoding bandwidth. But what if we go beyond a single rank-one term? What happens when we add structured, low-rank perturbations to the random bulk? <br><br>
+            style="font-size:inherit; font-weight:400; text-decoration:none; color:darkred;"
+            onmouseover="this.style.fontStyle='italic';" onmouseout="this.style.fontStyle='normal';">previous post</a>, we saw how balance creates a single spectral outlier at \(-b\) that governs mean dynamics, accelerates the population mode, and broadens encoding bandwidth. But what if we go beyond a single rank-one term? What happens when we add structured, low-rank perturbations to the random bulk? <br><br>
 
         This post develops a complete theoretical framework showing how low-rank structure creates spectral outliers that predict phase transitions. We'll build the theory step by step, then validate it with numerical results. The key insight: the real part of these outliers acts as a "fault line" in phase space, marking where the network transitions from fixed points to oscillations to chaos.
     </p>

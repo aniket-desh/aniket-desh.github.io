@@ -30,9 +30,13 @@
     }
     
     .menu a {
-      text-decoration: underline;
-      text-decoration-style: dotted;
+      text-decoration: none;
       margin-right: 1em;
+      display: inline-block;
+      transition: transform 0.15s ease;
+    }
+    .menu a:hover {
+      transform: skewX(-8deg);
     }
     
     .menu a:last-child {
@@ -55,6 +59,15 @@
 
     .project-section:last-of-type {
       border-bottom: none;
+    }
+    
+    /* Prevent layout shift on hover by using transform instead of font-style */
+    a[style*="color:darkred"] {
+      display: inline-block;
+      transition: transform 0.15s ease;
+    }
+    a[style*="color:darkred"]:hover {
+      transform: skewX(-8deg);
     }
   </style>
 </head>
@@ -84,13 +97,12 @@
           I currently work in efficient linear algebra and theoretical neuroscience. I hope to
           contribute to the <a
             href="https://x.com/pfau/status/1974177288322494709" class="katex-title"
-            style="font-size:15px; font-weight:500; text-decoration:underline; color:black; transition:color 0.3s;"
-            onmouseover="this.style.color='darkred';" onmouseout="this.style.color='black';">physics of learning</a>, a theory of natural and artificial intelligence.
+            style="font-size:15px; font-weight:400; text-decoration:none; color:darkred;">physics of learning</a>, a theory of natural and artificial intelligence.
         </p </div>
 
         <div class="research-text">
           <p>
-            <b><a href="https://lpna.cs.illinois.edu/" class="katex-title" style="font-size:inherit; font-weight:500;"
+            <b><a href="https://lpna.cs.illinois.edu/" class="katex-title" style="font-size:inherit; font-weight:400; text-decoration:none; color:black;"
                 target="_blank">Lab for Parallel Numerical Algorithms</a></b>
           </p>
 
@@ -110,8 +122,7 @@
               </p>
               <p style="margin-bottom: 0.5em;"><b>QSim '25</b> <a href="/research/tensor-contraction/"
                   class="katex-title"
-                  style="font-size:15px; font-weight:500; text-decoration:none; color:#000000; transition:color 0.3s;"
-                  onmouseover="this.style.color='darkred';" onmouseout="this.style.color='#000000';">, Read more
+                  style="font-size:15px; font-weight:400; text-decoration:none; color:darkred;">, Read more
                   here!</a>
               </p>
               <div style="clear: both;"></div>

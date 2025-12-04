@@ -28,13 +28,26 @@
         }
         
         .menu a {
-            text-decoration: underline;
-            text-decoration-style: dotted;
+            text-decoration: none;
             margin-right: 1em;
+            display: inline-block;
+            transition: transform 0.15s ease;
+        }
+        .menu a:hover {
+            transform: skewX(-8deg);
         }
         
         .menu a:last-child {
             margin-right: 0;
+        }
+        
+        /* Prevent layout shift on hover by using transform instead of font-style */
+        a[style*="color:darkred"] {
+            display: inline-block;
+            transition: transform 0.15s ease;
+        }
+        a[style*="color:darkred"]:hover {
+            transform: skewX(-8deg);
         }
     </style>
 </head>
@@ -73,7 +86,7 @@
             <h3 class="katex-title" style="margin-bottom:-1em;">IV / Fault Lines in Phase Space</h3>
             <p style="margin-bottom:0.3em;">
                <i>developing a complete theoretical framework showing how low-rank structure creates spectral outliers that predict phase transitions, from fixed points to oscillations to chaos.</i><br>
-                <a href="/blog/fault-lines-in-phase-space/">read more &rarr;</a>
+                <a href="/blog/fault-lines-in-phase-space/" style="text-decoration:none; color:darkred; font-weight:400;">read more &rarr;</a>
             </p>
         </section>
 
@@ -81,7 +94,7 @@
             <h3 class="katex-title" style="margin-bottom:-1em;">III/ A Ghost in the Machine</h3>
             <p style="margin-bottom:0.3em;">
                <i>uncovering how a single spectral outlier eigenvalue can rise above chaotic bulk dynamics in recurrent neural networks, creating a clean computational channel hidden inside disorder.</i><br>
-                <a href="/blog/a-ghost-in-the-machine/">read more &rarr;</a>
+                <a href="/blog/a-ghost-in-the-machine/" style="text-decoration:none; color:darkred; font-weight:400;">read more &rarr;</a>
             </p>
         </section>
 
@@ -89,7 +102,7 @@
             <h3 class="katex-title" style="margin-bottom:-1em;">II / The Slow Art of Fast Mixing</h3>
             <p style="margin-bottom:0.3em;">
                 <i>a closer look at canonical path theory, the justification for rapid mixing in high-dimensional Markov chains. </i><br>
-                <a href="/blog/the-slow-art-of-fast-mixing/">read more &rarr;</a>
+                <a href="/blog/the-slow-art-of-fast-mixing/" style="text-decoration:none; color:darkred; font-weight:400;">read more &rarr;</a>
             </p>
         </section>
 
@@ -97,7 +110,7 @@
             <h3 class="katex-title" style="margin-bottom:-1em;">I / Walking the Quantum Line</h3>
             <p style="margin-bottom:0.3em;">
                <i>tracing the shared formalism between classical random walks and quantum evolution on graphs, revealing how diffusion and interference arise from a common linear backbone.</i>
-                <a href="/blog/walking-the-quantum-line/">read more &rarr;</a>
+                <a href="/blog/walking-the-quantum-line/" style="text-decoration:none; color:darkred; font-weight:400;">read more &rarr;</a>
             </p>
         </section>
 

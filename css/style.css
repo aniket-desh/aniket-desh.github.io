@@ -99,7 +99,7 @@ body.landing {
 }
 
 .bottom-nav ul li a:hover {
-    font-style: italic;
+    /* Skew animation handled in page-specific styles */
 }
 
 .art-placeholder {
@@ -130,7 +130,7 @@ h2 {
 
 .menu {
     margin-top: 50px;
-    font-size: 0.85rem;
+    font-size: 1rem;
     text-align: center;
     font-family:'Vollkorn', serif;
 }
@@ -141,7 +141,7 @@ h2 {
 }
 
 .menu a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 h3 {
@@ -166,7 +166,7 @@ a {
 }
 
 a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 footer {
@@ -276,7 +276,7 @@ footer.bottom-nav a:hover {
 }
 
 .top-link a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 section h2 {

@@ -29,13 +29,26 @@
     }
     
     .menu a {
-      text-decoration: underline;
-      text-decoration-style: dotted;
+      text-decoration: none;
       margin-right: 1em;
+      display: inline-block;
+      transition: transform 0.15s ease;
+    }
+    .menu a:hover {
+      transform: skewX(-8deg);
     }
     
     .menu a:last-child {
       margin-right: 0;
+    }
+    
+    /* Prevent layout shift on hover by using transform instead of font-style */
+    a[style*="color:darkred"] {
+      display: inline-block;
+      transition: transform 0.15s ease;
+    }
+    a[style*="color:darkred"]:hover {
+      transform: skewX(-8deg);
     }
   </style>
 </head>
@@ -63,7 +76,7 @@
     </p>
 
     <h3 class="katex-title" style="margin-bottom:0.3em;">[11.2025] tensor computations in Julia, <i>SIAM @ UIUC</i></h3>
-        <i>a 90 minute workshop covering tensor contractions, matrix product states, and tensor network diagrams implemented in Julia. materials available on <a href="https://github.com/aniket-desh/tensors-uiuc-siam-worshop-2025">GitHub</a>.</i>
+        <i>a 90 minute workshop covering tensor contractions, matrix product states, and tensor network diagrams implemented in Julia. materials available on <a href="https://github.com/aniket-desh/tensors-uiuc-siam-worshop-2025" style="text-decoration:none; color:darkred; font-weight:400;">GitHub</a>.</i>
 
   </div>
 </body>

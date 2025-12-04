@@ -42,9 +42,13 @@
         }
         
         .menu a {
-            text-decoration: underline;
-            text-decoration-style: dotted;
+            text-decoration: none;
             margin-right: 1em;
+            display: inline-block;
+            transition: transform 0.15s ease;
+        }
+        .menu a:hover {
+            transform: skewX(-8deg);
         }
         
         .menu a:last-child {

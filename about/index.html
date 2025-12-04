@@ -68,9 +68,13 @@
     }
     
     .menu a {
-      text-decoration: underline;
-      text-decoration-style: dotted;
+      text-decoration: none;
       margin-right: 1em;
+      display: inline-block;
+      transition: transform 0.15s ease;
+    }
+    .menu a:hover {
+      transform: skewX(-8deg);
     }
     
     .menu a:last-child {
@@ -120,6 +124,20 @@
     h1 a {
       text-decoration: none;
       color: inherit;
+      display: inline-block;
+      transition: transform 0.15s ease;
+    }
+    h1 a:hover {
+      transform: skewX(-8deg);
+    }
+    
+    /* Prevent layout shift on hover by using transform instead of font-style */
+    a[style*="color:darkred"] {
+      display: inline-block;
+      transition: transform 0.15s ease;
+    }
+    a[style*="color:darkred"]:hover {
+      transform: skewX(-8deg);
     }
   </style>
 </head>
@@ -153,12 +171,12 @@
         <div class="contact-section">
           <p>
             <a href="https://github.com/aniket-desh" 
-              style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:400; text-decoration:underline; text-decoration-style:dotted; color:black;"
+              style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:400; text-decoration:underline; color:black;"
               target="_blank">github/aniket-desh</a>
           </p>
           <p>
             <a href="https://twitter.com/aniketdxsh" 
-              style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:400; text-decoration:underline; text-decoration-style:dotted; color:black;"
+              style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:400; text-decoration:none; color:black;"
               target="_blank">@aniketdxsh</a>
           </p>
           <p>aniket4 [at] illinois [dot] edu</p>
@@ -170,31 +188,27 @@
       <p>
         currently, I do research in numerical linear algebra and theoretical neuroscience. you can find a summary
         of my ongoing <a href="/research/"
-          style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:500; text-decoration:underline; text-decoration-style:dotted; color:black; transition:color 0.3s;"
-          onmouseover="this.style.color='darkred';" onmouseout="this.style.color='black';">research</a> and a <a
+          style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">research</a> and a <a
           href="/reading/"
-          style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:500; text-decoration:underline; text-decoration-style:dotted; color:black; transition:color 0.3s;"
-          onmouseover="this.style.color='darkred';" onmouseout="this.style.color='black';">reading list</a> of books
+          style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">reading list</a> of books
         and papers I'm exploring. beyond academics, I enjoy ultimate frisbee and expanding my record collection. I also write on <a href="https://reductionism.substack.com"
-          style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:500; text-decoration:underline; text-decoration-style:dotted; color:black; transition:color 0.3s;"
-          onmouseover="this.style.color='darkred';" onmouseout="this.style.color='black';"
+          style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;"
           target="_blank">Substack</a>!
         here is a <a href="/graph-walk/"
-          style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:500; text-decoration:underline; text-decoration-style:dotted; color:black; transition:color 0.3s;"
-          onmouseover="this.style.color='darkred';" onmouseout="this.style.color='black';">simulation</a> of graph
+          style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">simulation</a> of graph
         random walks!
       </p>
       <p style="margin-top: 0.5em;">
         <b style="font-family: 'EB Garamond', 'adobe-caslon-pro', 'Adobe Caslon Pro', 'AdobeCaslonPro-Regular', 'Big Caslon', 'Adobe Caslon', 'Caslon', 'Libre Caslon Text', Georgia, 'Times New Roman', serif; font-size: 1.1em;">news: </b><br>[02.2026] - I will be joining the <a href="https://vectorinstitute.ai/"
-          style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:500; text-decoration:underline; text-decoration-style:dotted;"
+          style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;"
           target="_blank">Vector Institute</a> as a visiting research intern! I will be hosted by <a
           href="https://www.matter.toronto.edu/basic-content-page/about-alan"
-          style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:500; text-decoration:underline; text-decoration-style:dotted;"
+          style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;"
           target="_blank">Alán
           Aspuru-Guzik</a> and the Matter Lab at the University of Toronto.<br>[08.2025] - "Approximating Tensor
         Contractions with Annealed Importance Sampling" will be at the poster session at <a
           href="https://qsimconference.org/"
-          style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:500; text-decoration:underline; text-decoration-style:dotted;"
+          style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;"
           target="_blank">QSim 2025</a> at IBM, New York
         City.
       </p>

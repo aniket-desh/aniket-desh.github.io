@@ -38,9 +38,13 @@
         }
         
         .menu a {
-            text-decoration: underline;
-            text-decoration-style: dotted;
+            text-decoration: none;
             margin-right: 1em;
+            display: inline-block;
+            transition: transform 0.15s ease;
+        }
+        .menu a:hover {
+            transform: skewX(-8deg);
         }
         
         .menu a:last-child {
@@ -89,12 +93,12 @@
 
     <p><span class="gray-date">09.28.2025</span><br><br>
         This post will be the first of \(N\) in a series outlining a project I am completing for a <a href="https://courses.grainger.illinois.edu/ECE598RE/fa2025/" class="katex-title"
-            style="font-size:inherit; font-weight:500; text-decoration:underline; color:black; transition:color 0.3s;"
-            onmouseover="this.style.color='darkred';" onmouseout="this.style.color='black';">graduate course</a>  on dynamical systems, neural networks, and theoretical neuroscience. Specifically, I will be exploring how low-rank structure hidden in high-dimensional random connectivity gives rise to <i>spectral outliers:</i> isolated eigenvalues that dominate the macroscopic behavior of otherwise chaotic networks. We will pull ideas from theories of random matrices, dynamical mean fields, and free probability to understand these phenomena. <br><br>
+            style="font-size:inherit; font-weight:400; text-decoration:none; color:darkred;"
+            onmouseover="this.style.fontStyle='italic';" onmouseout="this.style.fontStyle='normal';">graduate course</a>  on dynamical systems, neural networks, and theoretical neuroscience. Specifically, I will be exploring how low-rank structure hidden in high-dimensional random connectivity gives rise to <i>spectral outliers:</i> isolated eigenvalues that dominate the macroscopic behavior of otherwise chaotic networks. We will pull ideas from theories of random matrices, dynamical mean fields, and free probability to understand these phenomena. <br><br>
 
             It's natural to now step back and ask: <i>what do we already know about chaotic RNNs? How does structure change the story?</i> <br><br>
 
-            The most relevant recent work here is by Rainer Engelken and collaborators. Their <a href="https://proceedings.neurips.cc/paper_files/paper/2022/hash/e6f29fb27bb400f89f5584c175005679-Abstract-Conference.html">NeurIPS 2022</a> paper developed what they call a non-stationary dynamic mean-field theory (DMFT). Classical DMFT provides us with a way to describe the statistics of large random networks at stationary, but once the network is driven by time-varying inputs, the stationar assumption breaks. Engelken et al. derived a <i>time-resolved closure</i>: equations for the population mean activity, the two-time correlation function of fluctuations, and an auxiliary kernel that makes the system self-consistent. Practically, the framework gives us a tractable way to predict the network's response spectrum, its largest Lyapunov exponent, and even the information-theoretic capacity of the population to transmit signals. <br><br>
+            The most relevant recent work here is by Rainer Engelken and collaborators. Their <a href="https://proceedings.neurips.cc/paper_files/paper/2022/hash/e6f29fb27bb400f89f5584c175005679-Abstract-Conference.html" style="text-decoration:none; color:darkred; font-weight:400;" onmouseover="this.style.fontStyle='italic';" onmouseout="this.style.fontStyle='normal';">NeurIPS 2022</a> paper developed what they call a non-stationary dynamic mean-field theory (DMFT). Classical DMFT provides us with a way to describe the statistics of large random networks at stationary, but once the network is driven by time-varying inputs, the stationar assumption breaks. Engelken et al. derived a <i>time-resolved closure</i>: equations for the population mean activity, the two-time correlation function of fluctuations, and an auxiliary kernel that makes the system self-consistent. Practically, the framework gives us a tractable way to predict the network's response spectrum, its largest Lyapunov exponent, and even the information-theoretic capacity of the population to transmit signals. <br><br>
 
             We study a continuous-time rate network with \(N\) units. Each unit carries a synaptic current \(h_i(t)\) and fires at rate \(\phi(h_i)\), with \(\phi(x) = \max(0, x)\) (ReLU). The dynamics are given by the differential equation
             \[
@@ -174,7 +178,7 @@
                         <strong>Figure 3:</strong> Information rate scaling with balance parameter. The mutual information between input and output grows nearly linearly with balance until saturating at the bandwidth limit of the input signal.
                     </p>
                     <p style="margin: 0; line-height: 1.6;">
-                        To complete our understanding of this paper, it's worth highlighting a key result from <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010590">a complementary paper</a> done by Engelken et al. This PLOS paper provides code that shows the same non-stationary DMFT framework was used to compute the largest Lyapunov exponent \(\lambda_1\).
+                        To complete our understanding of this paper, it's worth highlighting a key result from <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010590" style="text-decoration:none; color:darkred; font-weight:400;" onmouseover="this.style.fontStyle='italic';" onmouseout="this.style.fontStyle='normal';">a complementary paper</a> done by Engelken et al. This PLOS paper provides code that shows the same non-stationary DMFT framework was used to compute the largest Lyapunov exponent \(\lambda_1\).
                     </p>
                 </div>
                 <img src="/assets/post3/fig3.png" alt="Information rate scaling with balance parameter" style="width: 45%; height: auto; border: 1px solid #ddd; flex-shrink: 0;">
