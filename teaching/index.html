@@ -5,20 +5,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="/assets/ad.png" type="image/x-icon" />
-  <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;600&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css"/>
   <title>teaching | aniket deshpande</title>
   <style>
+    html {
+      font-size: 15px;
+    }
+
+    body.tgt-layout {
+      font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+      background-color: #fff;
+      color: #111;
+    }
+
     h1 {
-      font-family: "EB Garamond", "adobe-caslon-pro", "Adobe Caslon Pro", "AdobeCaslonPro-Regular", "Big Caslon", "Adobe Caslon", "Caslon", "Libre Caslon Text", Georgia, "Times New Roman", serif;
-      font-weight: bold;
-      margin-bottom: 0.3em;
+      font-weight: 400;
+      margin-top: 10rem;
+      margin-bottom: 0.2rem;
+      font-size: 2rem;
+      line-height: 1;
     }
     
     .menu {
       margin-bottom: 1.5em;
-      margin-top: 0;
+      margin-top: 0.5em;
       text-align: left;
       font-size: 1rem;
     }
@@ -41,6 +51,23 @@
     .menu a:last-child {
       margin-right: 0;
     }
+
+    p {
+      margin-top: 1.4rem;
+      margin-bottom: 1.4rem;
+      padding-right: 0;
+      vertical-align: baseline;
+      font-size: 1rem;
+      line-height: 1.3rem;
+    }
+
+    h3 {
+      font-weight: 400;
+      font-size: 1.3rem;
+      margin-top: 2.1rem;
+      margin-bottom: 1.4rem;
+      line-height: 1;
+    }
     
     /* Prevent layout shift on hover by using transform instead of font-style */
     a[style*="color:darkred"] {
@@ -53,8 +80,9 @@
   </style>
 </head>
 
-<body>
-  <div id="contentContainer">
+<body class="tgt-layout">
+  <div class="container">
+    <div class="text">
 
     <h1>teaching</h1>
     <!-- <hr> -->
@@ -75,9 +103,9 @@
       a list of materials I'll gather as I teach more workshops, courses, and reading groups.
     </p>
 
-    <h3 class="katex-title" style="margin-bottom:0.3em;">[11.2025] tensor computations in Julia, <i>SIAM @ UIUC</i></h3>
-        <i>a 90 minute workshop covering tensor contractions, matrix product states, and tensor network diagrams implemented in Julia. materials available on <a href="https://github.com/aniket-desh/tensors-uiuc-siam-worshop-2025" style="text-decoration:none; color:darkred; font-weight:400;">GitHub</a>.</i>
-
+    <h3>[11.2025] tensor computations in Julia, <i>SIAM @ UIUC</i></h3>
+        <p><i>a 90 minute workshop covering tensor contractions, matrix product states, and tensor network diagrams implemented in Julia. materials available on <a href="https://github.com/aniket-desh/tensors-uiuc-siam-worshop-2025" style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">GitHub</a>.</i></p>
+    </div>
   </div>
 </body>
 

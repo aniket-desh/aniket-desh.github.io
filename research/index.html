@@ -5,21 +5,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/assets/ad.png" type="image/x-icon" />
-  <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
   <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <link rel="stylesheet" href="/css/style.css">
   <title>research</title>
   <style>
+    html {
+      font-size: 15px;
+    }
+
+    body.tgt-layout {
+      font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+      background-color: #fff;
+      color: #111;
+    }
+
     h1 {
-      font-family: "EB Garamond", "adobe-caslon-pro", "Adobe Caslon Pro", "AdobeCaslonPro-Regular", "Big Caslon", "Adobe Caslon", "Caslon", "Libre Caslon Text", Georgia, "Times New Roman", serif;
-      font-weight: bold;
-      margin-bottom: 0.3em;
+      font-weight: 400;
+      margin-top: 10rem;
+      margin-bottom: 0.2rem;
+      font-size: 2rem;
+      line-height: 1;
     }
     
     .menu {
       margin-bottom: 1.5em;
-      margin-top: 0;
+      margin-top: 0.5em;
       text-align: left;
       font-size: 1rem;
     }
@@ -43,12 +53,35 @@
       margin-right: 0;
     }
 
-    .research-text {
-      margin-bottom: -2em;
+    p {
+      margin-top: 1.4rem;
+      margin-bottom: 1.4rem;
+      padding-right: 0;
+      vertical-align: baseline;
+      font-size: 1rem;
+      line-height: 1.3rem;
     }
 
-    .research-text+.research-text {
-      margin-top: 0.5em;
+    h3 {
+      font-weight: 400;
+      font-size: 1.1em;
+      margin-top: 1.4rem;
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+
+    .profile-section {
+      display: block;
+      gap: 0;
+      margin-bottom: 0;
+    }
+
+    .research-text {
+      margin-bottom: 0;
+    }
+
+    .research-text p {
+      margin-top: 0;
     }
 
     .project-section {
@@ -72,8 +105,9 @@
   </style>
 </head>
 
-<body>
-  <div id="contentContainer">
+<body class="tgt-layout">
+  <div class="container">
+    <div class="text">
 
     <h1>research</h1>
     <!-- <hr> -->
@@ -90,21 +124,17 @@
       </p>
     </div>
 
-    <div class="profile-section">
+    <p>
+      I currently work in efficient linear algebra and theoretical neuroscience. I hope to
+      contribute to the <a
+        href="https://x.com/pfau/status/1974177288322494709"
+        style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">physics of learning</a>, a theory of natural and artificial intelligence.
+    </p>
 
-      <div class="research-text">
-        <p>
-          I currently work in efficient linear algebra and theoretical neuroscience. I hope to
-          contribute to the <a
-            href="https://x.com/pfau/status/1974177288322494709" class="katex-title"
-            style="font-size:15px; font-weight:400; text-decoration:none; color:darkred;">physics of learning</a>, a theory of natural and artificial intelligence.
-        </p </div>
-
-        <div class="research-text">
-          <p>
-            <b><a href="https://lpna.cs.illinois.edu/" class="katex-title" style="font-size:inherit; font-weight:400; text-decoration:none; color:black;"
-                target="_blank">Lab for Parallel Numerical Algorithms</a></b>
-          </p>
+    <p>
+      <b><a href="https://lpna.cs.illinois.edu/" style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:black;"
+          target="_blank">Lab for Parallel Numerical Algorithms</a></b>
+    </p>
 
           <div class="project-section">
             <div style="margin-top: 1em;">
@@ -121,8 +151,7 @@
                 use cases in quantum circuits and chemistry, where exact contraction is intractable.
               </p>
               <p style="margin-bottom: 0.5em;"><b>QSim '25</b> <a href="/research/tensor-contraction/"
-                  class="katex-title"
-                  style="font-size:15px; font-weight:400; text-decoration:none; color:darkred;">, Read more
+                  style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">, Read more
                   here!</a>
               </p>
               <div style="clear: both;"></div>
@@ -146,8 +175,6 @@
               <div style="clear: both;"></div>
             </div>
           </div>
-        </div>
-      </div>
 
 
       <!-- <div class="bio-text">
@@ -174,16 +201,7 @@
       </p>
       More updates soon!
     </div> -->
-
     </div>
-
-
-    <!-- <h2>Other</h2>
-
-    <p>
-        Materials from past applications and proposals can be found <a href="#">here</a>.
-    </p> -->
-
   </div>
 </body>
 

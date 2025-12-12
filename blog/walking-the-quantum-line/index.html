@@ -4,21 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" href="/assets/ad.png" type="image/x-icon" />
     <link rel="stylesheet" href="/css/style.css">
     <title>walking the quantum line — aniket deshpande</title>
     <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
+        html {
+            font-size: 15px;
+        }
+
+        body.tgt-layout {
+            font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+            background-color: #fff;
+            color: #111;
+        }
+
         h1 {
-            font-family: "EB Garamond", "adobe-caslon-pro", "Adobe Caslon Pro", "AdobeCaslonPro-Regular", "Big Caslon", "Adobe Caslon", "Caslon", "Libre Caslon Text", Georgia, "Times New Roman", serif;
-            font-weight: bold;
+            font-weight: 400;
+            margin-top: 10rem;
+            margin-bottom: 0.2rem;
+            font-size: 2rem;
+            line-height: 1;
         }
         
         .menu {
             margin-bottom: 1.5em;
-            margin-top: 0;
+            margin-top: 0.5em;
             text-align: left;
             font-size: 1rem;
         }
@@ -41,15 +52,21 @@
         .menu a:last-child {
             margin-right: 0;
         }
+
+        p {
+            margin-top: 1.4rem;
+            margin-bottom: 1.4rem;
+            padding-right: 0;
+            vertical-align: baseline;
+            font-size: 1rem;
+            line-height: 1.3rem;
+        }
     </style>
 </head>
 
-<body>
-    <div id="contentContainer">
-
-        <div class="top-link">
-            <a href="/blog/">&larr; blog</a>
-        </div>
+<body class="tgt-layout">
+    <div class="container">
+        <div class="text">
 
         <div style="position: relative; margin-bottom: 1em;">
             <svg style="position: absolute; top: -10px; left: 284px; width: calc(100% - 284px); height: 60px; z-index: -1;"
@@ -59,6 +76,9 @@
                     stroke="#888888" stroke-width="1.5" fill="none" opacity="0.6" />
             </svg>
             <h1>walking the quantum line</h1>
+            <div class="top-link" style="margin-top: 0.3em; margin-bottom: 0;">
+                <a href="/blog/">&larr; blog</a>
+            </div>
         </div>
 
         <p><span class="gray-date">05.20.2025</span><br><br>
@@ -184,7 +204,7 @@
                     ideas, especially their connections to quantum learning theory and representation-theoretic models
                     of computation.
                 </p>
-
+        </div>
     </div>
 
     <script>

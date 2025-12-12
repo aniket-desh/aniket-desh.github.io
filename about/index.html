@@ -5,59 +5,41 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/assets/ad.png" type="image/x-icon" />
-  <!-- <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Vollkorn:wght@400;600&display=swap" rel="stylesheet"> -->
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
-  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <title>aniket deshpande</title>
   <style>
+    html {
+      font-size: 15px;
+    }
+
+    body.tgt-layout {
+      font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+      background-color: #fff;
+      color: #111;
+    }
+
     h1 {
-      font-family: "EB Garamond", "adobe-caslon-pro", "Adobe Caslon Pro", "AdobeCaslonPro-Regular", "Big Caslon", "Adobe Caslon", "Caslon", "Libre Caslon Text", Georgia, "Times New Roman", serif;
-      margin-bottom: 0.3em;
-      font-weight: bold;
+      font-weight: 400;
+      margin-top: 10rem;
+      margin-bottom: 0.2rem;
+      font-size: 2rem;
+      line-height: 1;
     }
 
-    .katex-header {
-      font-family: Georgia, 'Bitstream Vera Serif', serif;
-      font-weight: bold;
-      font-size: 32px;
-      margin-bottom: 0.2em;
-      letter-spacing: 0.01em;
+    h1 a {
+      text-decoration: none;
+      color: inherit;
+      display: inline-block;
+      transition: transform 0.15s ease;
     }
 
-    .katex-title {
-      font-family: Georgia, 'Bitstream Vera Serif', serif;
-      font-size: 24px;
-      font-weight: 500;
-      margin-bottom: 1.2em;
-      margin-top: 0.2em;
-    }
-
-    .vollkorn {
-      font-family: 'Crimson Pro', 'Vollkorn', serif;
-      font-size: 1.02rem;
-    }
-
-    .about-contact {
-      margin: 1.5em 0 2em 0;
-      font-size: 1rem;
-    }
-
-    .about-section {
-      margin-bottom: 1.2em;
-    }
-
-    #profile {
-      width: 162px;
-      height: 176px;
-      object-fit: cover;
-      border-radius: 8px;
+    h1 a:hover {
+      transform: skewX(-8deg);
     }
     
     .menu {
       margin-bottom: 1.5em;
-      margin-top: 0;
+      margin-top: 0.5em;
       text-align: left;
       font-size: 1rem;
     }
@@ -80,57 +62,16 @@
     .menu a:last-child {
       margin-right: 0;
     }
-    
-    .profile-layout {
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
-      margin-bottom: 2em;
+
+    p {
+      margin-top: 1.4rem;
+      margin-bottom: 1.4rem;
+      padding-right: 0;
+      vertical-align: baseline;
+      font-size: 1rem;
+      line-height: 1.3rem;
     }
-    
-    .profile-info {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.6;
-      height: 176px;
-      justify-content: space-between;
-    }
-    
-    .profile-info p {
-      margin: 0 0 0.15em 0;
-    }
-    
-    .profile-info .name-bold {
-      font-weight: bold;
-      margin-bottom: 0.2em;
-    }
-    
-    .profile-info .bio-top {
-      margin-bottom: 0.15em;
-    }
-    
-    .profile-info .contact-section {
-      margin-top: auto;
-    }
-    
-    .profile-info .social-icons {
-      margin-top: 0.8em;
-    }
-    
-    .content-below-photo {
-      margin-top: 1.5em;
-    }
-    
-    h1 a {
-      text-decoration: none;
-      color: inherit;
-      display: inline-block;
-      transition: transform 0.15s ease;
-    }
-    h1 a:hover {
-      transform: skewX(-8deg);
-    }
-    
+
     /* Prevent layout shift on hover by using transform instead of font-style */
     a[style*="color:darkred"] {
       display: inline-block;
@@ -142,79 +83,80 @@
   </style>
 </head>
 
-<body>
-  <div id="contentContainer">
+<body class="tgt-layout">
+  <div class="container">
+    <div class="text">
+      <h1><a href="/">aniket deshpande</a></h1>
 
-    <!-- <h1 class="katex-header">Aniket Deshpande</h1> -->
-    <!-- <h2 class="katex-title" style="font-weight:400; font-family: Big Caslon, 'Bitstream Vera Serif', serif;">aniket deshpande</h2> -->
-    <h1><a href="/"> aniket deshpande</a></h1>
-
-    <div class="menu">
-      <p>
-        <a href="/about/">home</a>
-        <a href="/research/">research</a>
-        <a href="/teaching/">teaching</a>
-        <a href="/notes/">notes</a>
-        <a href="/blog/">blog</a>
-        <a href="/code/">code</a>
-        <a href="/cv/cv.pdf">vitae</a>
-      </p>
-    </div>
-
-    <div class="profile-layout">
-      <img id="profile" src="/assets/photo.jpg" alt="Profile Photo">
-      <div class="profile-info vollkorn">
-        <!-- <p class="name-bold bio-top">aniket deshpande</p> -->
-        <p class="bio-top">Undergraduate Student</p>
-        <p class="bio-top">Department of Physics</p>
-        <p class="bio-top">University of Illinois, Urbana-Champaign</p>
-        <div class="contact-section">
-          <p>
-            <a href="https://github.com/aniket-desh" 
-              style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:400; text-decoration:underline; color:black;"
-              target="_blank">github/aniket-desh</a>
-          </p>
-          <p>
-            <a href="https://twitter.com/aniketdxsh" 
-              style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:400; text-decoration:none; color:black;"
-              target="_blank">@aniketdxsh</a>
-          </p>
-          <p>aniket4 [at] illinois [dot] edu</p>
-        </div>
+      <div class="menu">
+        <p>
+          <a href="/about/">home</a>
+          <a href="/research/">research</a>
+          <a href="/teaching/">teaching</a>
+          <a href="/notes/">notes</a>
+          <a href="/blog/">blog</a>
+          <a href="/code/">code</a>
+          <a href="/cv/cv.pdf">vitae</a>
+        </p>
       </div>
-    </div>
 
-    <div class="vollkorn content-below-photo">
+      <br>
+
       <p>
-        currently, I do research in numerical linear algebra and theoretical neuroscience. you can find a summary
+        Undergraduate Student<br>
+        Department of Physics<br>
+        University of Illinois, Urbana-Champaign
+      </p>
+
+      <p>
+        I do research in numerical linear algebra and theoretical neuroscience. you can find a summary
         of my ongoing <a href="/research/"
-          style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">research</a> and a <a
+          style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">research</a> and a <a
           href="/reading/"
-          style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">reading list</a> of books
-        and papers I'm exploring. beyond academics, I enjoy ultimate frisbee and expanding my record collection. I also write on <a href="https://reductionism.substack.com"
-          style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;"
-          target="_blank">Substack</a>!
+          style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">reading list</a> of books
+        and papers I'm exploring. beyond academics, I enjoy ultimate frisbee and expanding my record collection.
         here is a <a href="/graph-walk/"
-          style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">simulation</a> of graph
+          style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">simulation</a> of graph
         random walks!
       </p>
-      <p style="margin-top: 0.5em;">
-        <b style="font-family: 'EB Garamond', 'adobe-caslon-pro', 'Adobe Caslon Pro', 'AdobeCaslonPro-Regular', 'Big Caslon', 'Adobe Caslon', 'Caslon', 'Libre Caslon Text', Georgia, 'Times New Roman', serif; font-size: 1.1em;">news: </b><br>[02.2026] - I will be joining the <a href="https://vectorinstitute.ai/"
-          style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;"
+
+      <p>
+        <b>news:</b><br>
+        [02.2026] - I will be joining the <a href="https://vectorinstitute.ai/"
+          style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;"
           target="_blank">Vector Institute</a> as a visiting research intern! I will be hosted by <a
           href="https://www.matter.toronto.edu/basic-content-page/about-alan"
-          style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;"
+          style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;"
           target="_blank">Alán
-          Aspuru-Guzik</a> and the Matter Lab at the University of Toronto.<br>[08.2025] - "Approximating Tensor
+          Aspuru-Guzik</a> and the Matter Lab at the University of Toronto.<br>
+        [08.2025] - "Approximating Tensor
         Contractions with Annealed Importance Sampling" will be at the poster session at <a
           href="https://qsimconference.org/"
-          style="font-family: 'Crimson Pro', 'Vollkorn', serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;"
+          style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;"
           target="_blank">QSim 2025</a> at IBM, New York
         City.
       </p>
+
+      <br>
+      
+      <p>
+        <a href="https://github.com/aniket-desh" 
+          style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:black;"
+          target="_blank">github/<i>aniket-desh</i></a><br>
+        <a href="https://twitter.com/aniketdxsh" 
+          style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:black;"
+          target="_blank">twitter/<i>aniketdxsh</i></a><br>
+        <a href="https://reductionism.substack.com" 
+          style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:black;"
+          target="_blank">substack/<i>the effective reductionist</i></a><br>
+        <a href="mailto:aniket4@illinois.edu"
+          style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:black;"
+          target="_blank">email/<i>aniket4 [at] illinois [dot] edu</i></a><br>
+      </p>
     </div>
-
-
+    <div class="image">
+      <img src="/assets/photo.jpg" alt="">
+    </div>
   </div>
 </body>
 

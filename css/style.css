@@ -18,6 +18,65 @@ body {
     line-height: 1.7;
 }
 
+/* TGT-style two-column layout */
+body.tgt-layout {
+    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    background-color: #fff;
+    color: #111;
+    font-size: 15px;
+}
+
+.container {
+    float: left;
+    width: 100%;
+    background-color: #fff;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.text {
+    float: left;
+    width: 65%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.image {
+    margin-top: 10rem;
+    float: right;
+    width: 20%;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0;
+    margin-right: 5%;
+}
+
+.image img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+@media only screen and (max-width: 1000px) {
+    .text, .image {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .image {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+
+    .image img {
+        width: 100%;
+        max-width: 360px;
+    }
+}
+
 /* Landing Page Specific */
 body.landing {
     display: flex;
@@ -250,6 +309,13 @@ footer.bottom-nav a:hover {
     padding: 0 20px;
     text-align: left;
     color: #333;
+}
+
+/* Override for TGT layout pages */
+body.tgt-layout #contentContainer {
+    max-width: none;
+    margin: 0;
+    padding: 0;
 }
 
 #infoContainer {

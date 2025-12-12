@@ -3,22 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" href="/assets/ad.png" type="image/x-icon" />
     <link rel="stylesheet" href="/css/style.css">
     <title>notes — aniket deshpande</title>
     <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
+        html {
+            font-size: 15px;
+        }
+
+        body.tgt-layout {
+            font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+            background-color: #fff;
+            color: #111;
+        }
+
         h1 {
-      font-family: "EB Garamond", "adobe-caslon-pro", "Adobe Caslon Pro", "AdobeCaslonPro-Regular", "Big Caslon", "Adobe Caslon", "Caslon", "Libre Caslon Text", Georgia, "Times New Roman", serif;
-      font-weight: bold;
-      margin-bottom: 0.3em;
+            font-weight: 400;
+            margin-top: 10rem;
+            margin-bottom: 0.2rem;
+            font-size: 2rem;
+            line-height: 1;
         }
         
         .menu {
             margin-bottom: 1.5em;
-            margin-top: 0;
+            margin-top: 0.5em;
             text-align: left;
             font-size: 1rem;
         }
@@ -41,6 +51,28 @@
         .menu a:last-child {
             margin-right: 0;
         }
+
+        p {
+            margin-top: 1.4rem;
+            margin-bottom: 1.4rem;
+            padding-right: 0;
+            vertical-align: baseline;
+            font-size: 1rem;
+            line-height: 1.3rem;
+        }
+
+        h3 {
+            font-weight: 400;
+            font-size: 1.3rem;
+            margin-top: 2.1rem;
+            margin-bottom: 1.4rem;
+            line-height: 1;
+        }
+
+        ul {
+            margin-top: 1.4rem;
+            margin-bottom: 1.4rem;
+        }
         
         /* Prevent layout shift on hover by using transform instead of font-style */
         a[style*="color:darkred"] {
@@ -53,8 +85,9 @@
     </style>
 </head>
 
-<body>
-<div id="contentContainer">
+<body class="tgt-layout">
+    <div class="container">
+        <div class="text">
 
     <!-- <div class="top-link">
         <a href="index">&larr; home</a>
@@ -77,7 +110,7 @@
     <p>
         below is a collection of notes from various coursework and self-study. these notes are taken either live during lecture or during my free-time, so they are <i>very</i> prone to mistakes. feel free to reach out with any questions or corrections.
     </p>
-    <h3 class="katex-title">illinois</h3>
+    <h3>illinois</h3>
     <ul class="notes-list">
         <li>
             <a href="/notes/ig.pdf" style="text-decoration:none; color:darkred; font-weight:400;"><i>Information Geometry For Neuroscience</i></a><br>fischer information, statistical manifolds, neural coding, gradient learning, feature learning, neural population models
@@ -110,7 +143,8 @@
             tensor contractions, decompositions (cp/tucker/tt), network states (mps/peps), optimization and sparse kernels, tensor eigenvalues, diagrammatic notation, quantum simulation, electronic structure, hypergraph partitioning
         </li>
     </ul> -->
-</div>
+        </div>
+    </div>
 </body>
 </html>
 

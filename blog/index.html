@@ -3,21 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" href="/assets/ad.png" type="image/x-icon" />
     <link rel="stylesheet" href="/css/style.css">
     <title>blog</title>
     <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
+        html {
+            font-size: 15px;
+        }
+
+        body.tgt-layout {
+            font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+            background-color: #fff;
+            color: #111;
+        }
+
         h1 {
-            font-family: "EB Garamond", "adobe-caslon-pro", "Adobe Caslon Pro", "AdobeCaslonPro-Regular", "Big Caslon", "Adobe Caslon", "Caslon", "Libre Caslon Text", Georgia, "Times New Roman", serif;
-            font-weight: bold;
+            font-weight: 400;
+            margin-top: 10rem;
+            margin-bottom: 0.2rem;
+            font-size: 2rem;
+            line-height: 1;
         }
         
         .menu {
             margin-bottom: 1.5em;
-            margin-top: 0;
+            margin-top: 0.5em;
             text-align: left;
             font-size: 1rem;
         }
@@ -40,6 +51,23 @@
         .menu a:last-child {
             margin-right: 0;
         }
+
+        p {
+            margin-top: 1.4rem;
+            margin-bottom: 1.4rem;
+            padding-right: 0;
+            vertical-align: baseline;
+            font-size: 1rem;
+            line-height: 1.3rem;
+        }
+
+        h3 {
+            font-weight: 400;
+            font-size: 1.3rem;
+            margin-top: 2.1rem;
+            margin-bottom: 1.4rem;
+            line-height: 1;
+        }
         
         /* Prevent layout shift on hover by using transform instead of font-style */
         a[style*="color:darkred"] {
@@ -52,19 +80,15 @@
     </style>
 </head>
 
-<body>
-    <div id="contentContainer">
+<body class="tgt-layout">
+    <div class="container">
+        <div class="text">
 
         <!-- <div class="top-link">
             <a href="index">&larr; home</a>
         </div> -->
 
-        <div style="position: relative; margin-bottom: 1em;">
-            <h1 style="margin: 0;">not so sparse</h1>
-            <!--<img src="/assets/thedinner.png" alt="The Dinner Blog Logo"
-                style="position: absolute; top: 0; right: 0; max-width: 120px;
-                height: auto;"> -->
-        </div>
+        <h1>not so sparse</h1>
 
         <div class="menu">
             <p>
@@ -91,26 +115,26 @@
         </section> -->
 
         <section style="margin-bottom: 1.2em;">
-            <h3 class="katex-title" style="margin-bottom:-1em;">III/ A Ghost in the Machine</h3>
+            <h3>III/ A Ghost in the Machine</h3>
             <p style="margin-bottom:0.3em;">
                <i>uncovering how a single spectral outlier eigenvalue can rise above chaotic bulk dynamics in recurrent neural networks, creating a clean computational channel hidden inside disorder.</i><br>
-                <a href="/blog/a-ghost-in-the-machine/" style="text-decoration:none; color:darkred; font-weight:400;">read more &rarr;</a>
+                <a href="/blog/a-ghost-in-the-machine/" style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">read more &rarr;</a>
             </p>
         </section>
 
          <section style="margin-bottom: 1.2em;">
-            <h3 class="katex-title" style="margin-bottom:-1em;">II / The Slow Art of Fast Mixing</h3>
+            <h3>II / The Slow Art of Fast Mixing</h3>
             <p style="margin-bottom:0.3em;">
                 <i>a closer look at canonical path theory, the justification for rapid mixing in high-dimensional Markov chains. </i><br>
-                <a href="/blog/the-slow-art-of-fast-mixing/" style="text-decoration:none; color:darkred; font-weight:400;">read more &rarr;</a>
+                <a href="/blog/the-slow-art-of-fast-mixing/" style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">read more &rarr;</a>
             </p>
         </section>
 
         <section style="margin-bottom: 1.2em;">
-            <h3 class="katex-title" style="margin-bottom:-1em;">I / Walking the Quantum Line</h3>
+            <h3>I / Walking the Quantum Line</h3>
             <p style="margin-bottom:0.3em;">
                <i>tracing the shared formalism between classical random walks and quantum evolution on graphs, revealing how diffusion and interference arise from a common linear backbone.</i>
-                <a href="/blog/walking-the-quantum-line/" style="text-decoration:none; color:darkred; font-weight:400;">read more &rarr;</a>
+                <a href="/blog/walking-the-quantum-line/" style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">read more &rarr;</a>
             </p>
         </section>
 
@@ -129,7 +153,7 @@
                 <a href="/blog/post-one/">read more &rarr;</a>
             </p>
         </section> -->
-
+        </div>
     </div>
 </body>
 </html>
