@@ -5,20 +5,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="/assets/ad.png" type="image/x-icon" />
-  <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;600&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css"/>
   <title>reading | aniket deshpande</title>
   <style>
+    html {
+      font-size: 15px;
+    }
+
+    body.tgt-layout {
+      font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+      background-color: #fff;
+      color: #111;
+    }
+
     h1 {
-      font-family: "EB Garamond", "adobe-caslon-pro", "Adobe Caslon Pro", "AdobeCaslonPro-Regular", "Big Caslon", "Adobe Caslon", "Caslon", "Libre Caslon Text", Georgia, "Times New Roman", serif;
-      font-weight: bold;
-      margin-bottom: 0.3em;
+      font-weight: 400;
+      margin-top: 10rem;
+      margin-bottom: 0.2rem;
+      font-size: 2rem;
+      line-height: 1;
     }
     
     .menu {
       margin-bottom: 1.5em;
-      margin-top: 0;
+      margin-top: 0.5em;
       text-align: left;
       font-size: 1rem;
     }
@@ -41,11 +51,34 @@
     .menu a:last-child {
       margin-right: 0;
     }
+
+    p {
+      margin-top: 1.4rem;
+      margin-bottom: 1.4rem;
+      padding-right: 0;
+      vertical-align: baseline;
+      font-size: 1rem;
+      line-height: 1.3rem;
+    }
+
+    h3 {
+      font-weight: 400;
+      font-size: 1.3rem;
+      margin-top: 2.1rem;
+      margin-bottom: 1.4rem;
+      line-height: 1;
+    }
+
+    ul {
+      margin-top: 1.4rem;
+      margin-bottom: 1.4rem;
+    }
   </style>
 </head>
 
-<body>
-  <div id="contentContainer">
+<body class="tgt-layout">
+  <div class="container">
+    <div class="text">
 
     <h1>reading list</h1>
     <!-- <hr> -->
@@ -66,32 +99,32 @@
       a running list of books, papers, and articles I'm exploring or have read recently, mostly in theoretical physics, statistics, and learning. beyond my research, I'm deeply passionate about quantum information theory, mathematical finance, and geometry. <br>entries are loosely grouped by topic.
     </p>
 
-    <h3 class="katex-title" style="margin-bottom:0.3em;">mathematics</h3>
+    <h3>mathematics</h3>
     <ul>
       <li><em>Topics in Random Matrix Theory</em> – Tao</li>
       <li><em>An Introduction to Matrix Concentration Inequalities</em> – Tropp</li>
       <li><em>Optimal Transport for Applied Mathematicians</em> – Villani</li>
     </ul>
 
-    <h3 class="katex-title" style="margin-bottom:0.3em;">physics</h3>
+    <h3>physics</h3>
     <ul>
       <li><em>Quantum Channels (lecture notes)</em> – Attal</li>
       <li><em>Geometry, Topology, and Physics</em> – Nakahara</li>
     </ul>
 
-    <h3 class="katex-title" style="margin-bottom:0.3em;">statistics and learning</h3>
+    <h3>statistics and learning</h3>
     <ul>
       <li><em>Theoretical Neuroscience</em> – Dayan & Abbott</li>
       <li><em>Introduction to the Theory of Neural Computation</em> – Hertz, Krogh, & Palmer</li>
     </ul>
 
-    <h3 class="katex-title" style="margin-bottom:0.3em;">miscellaneous & essays</h3>
+    <h3>miscellaneous & essays</h3>
     <ul>
       <li><em>Hydrodynamics of Markets</em> – Lipton</li>
       <li><em>The Maniac</em> – Labatut</li>
       <li><em>The Scaling Era: An Oral History of AI</em> – Patel</li>
     </ul>
-
+    </div>
   </div>
 </body>
 
