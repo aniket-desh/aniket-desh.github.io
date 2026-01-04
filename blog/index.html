@@ -2,169 +2,196 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <link rel="icon" href="/assets/ad.png" type="image/x-icon" />
-    <link rel="stylesheet" href="/css/style.css">
-    <title>blog</title>
+    <title>blog — aniket deshpande</title>
     <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background: #f9e6e6;
+        }
+
+        ::-moz-selection {
+            background: #f9e6e6;
+        }
+
         html {
-            font-size: 15px;
+            overflow-x: hidden;
+            overflow-y: scroll;
         }
 
-        body.tgt-layout {
+        body {
+            width: 100%;
+            margin: 25px 0;
+            padding: 0;
+            background: #fff;
             font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
-            background-color: #fff;
-            color: #111;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.5;
         }
 
-        h1 {
-            font-weight: 400;
-            margin-top: 10rem;
-            margin-bottom: 0.2rem;
-            font-size: 2rem;
-            line-height: 1;
+        a {
+            color: darkred;
+            text-decoration: underline;
         }
-        
-        .menu {
-            margin-bottom: 1.5em;
-            margin-top: 0.5em;
-            text-align: left;
-            font-size: 1rem;
+
+        a:hover {
+            color: #8B0000;
         }
-        
-        .menu p {
-            margin: 0;
-            text-align: left;
+
+        .container {
+            max-width: 1200px;
+            margin: 0 30px;
         }
-        
-        .menu a {
+
+        @media screen and (min-width: 600px) {
+            body {
+                margin: 50px 0 25px;
+            }
+            .container {
+                margin: 0 60px;
+            }
+        }
+
+        @media screen and (min-width: 800px) {
+            body {
+                margin: 120px 0 50px;
+            }
+            .container {
+                margin: 0 140px;
+            }
+        }
+
+        .bio {
+            max-width: 500px;
+        }
+
+        .bio__header {
+            margin-bottom: 20px;
+            font-weight: 700;
+            font-size: 21px;
+        }
+
+        .bio__header a {
             text-decoration: none;
-            margin-right: 1em;
-            display: inline-block;
-            transition: transform 0.15s ease;
-        }
-        .menu a:hover {
-            transform: skewX(-8deg);
-        }
-        
-        .menu a:last-child {
-            margin-right: 0;
+            color: inherit;
         }
 
-        p {
-            margin-top: 1.4rem;
-            margin-bottom: 1.4rem;
-            padding-right: 0;
-            vertical-align: baseline;
-            font-size: 1rem;
-            line-height: 1.3rem;
+        .bio__header a:hover {
+            text-decoration: none;
         }
 
-        h3 {
-            font-weight: 400;
-            font-size: 1.3rem;
-            margin-top: 2.1rem;
-            margin-bottom: 1.4rem;
-            line-height: 1;
+        .bio__tabs {
+            margin-bottom: 20px;
+            font-style: italic;
         }
-        
-        /* Prevent layout shift on hover by using transform instead of font-style */
-        a[style*="color:darkred"] {
-            display: inline-block;
-            transition: transform 0.15s ease;
+
+        .bio__tabs a {
+            text-decoration: none;
+            color: inherit;
         }
-        a[style*="color:darkred"]:hover {
-            transform: skewX(-8deg);
+
+        .bio__tabs a:hover {
+            color: darkred;
+        }
+
+        .content {
+            width: 61%;
+            max-width: 610px;
+        }
+
+        @media screen and (max-width: 800px) {
+            .content {
+                width: 100%;
+            }
+        }
+
+        .page-title {
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .page-desc {
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .post-entry {
+            margin-bottom: 25px;
+        }
+
+        .post-entry h3 {
+            font-weight: 700;
+            font-size: 18px;
+            margin: 0 0 5px 0;
+        }
+
+        .post-entry p {
+            margin: 0;
+            font-style: italic;
+        }
+
+        .post-entry a.read-more {
+            text-decoration: none;
+        }
+
+        .post-entry a.read-more:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 
-<body class="tgt-layout">
+<body>
     <div class="container">
-        <div class="text">
-
-        <!-- <div class="top-link">
-            <a href="index">&larr; home</a>
-        </div> -->
-
-        <h1>not so sparse</h1>
-
-        <div class="menu">
-            <p>
-                <a href="/about/">home</a>
-                <a href="/research/">research</a>
-                <a href="/teaching/">teaching</a>
-                <a href="/notes/">notes</a>
-                <a href="/blog/">blog</a>
-                <a href="/code/">code</a>
+        <div class="bio">
+            <div class="bio__header">
+                <a href="/">not so sparse</a>
+            </div>
+            <div class="bio__tabs">
+                <a href="/about/">about</a> <span class="dot">·</span>
+                <a href="/research/">research</a> <span class="dot">·</span>
+                <a href="/teaching/">teaching</a> <span class="dot">·</span>
+                <a href="/notes/">notes</a> <span class="dot">·</span>
+                <a href="/blog/">blog</a> <span class="dot">·</span>
+                <a href="/code/">code</a> <span class="dot">·</span>
                 <a href="/cv/cv.pdf">vitae</a>
-            </p>
+            </div>
         </div>
 
-        <p>
-            connecting dots between mathematics, machines, and the mind.
-        </p>
+        <div class="content">
+            <p class="page-desc">connecting dots between mathematics, machines, and the mind.</p>
 
-        <!-- <section style="margin-bottom: 1.2em;">
-            <h3 class="katex-title" style="margin-bottom:-1em;">IV / Fault Lines in Phase Space</h3>
-            <p style="margin-bottom:0.3em;">
-               <i>developing a complete theoretical framework showing how low-rank structure creates spectral outliers that predict phase transitions, from fixed points to oscillations to chaos.</i><br>
-                <a href="/blog/fault-lines-in-phase-space/" style="text-decoration:none; color:darkred; font-weight:400;">read more &rarr;</a>
-            </p>
-        </section> -->
+            <div class="post-entry">
+                <h3>IV/ A Ghost in the Machine II</h3>
+                <p>experiments revealing how spectral outliers from low-rank structure track the stability boundary of driven networks, making the ghost quantitative.</p>
+                <a href="/blog/a-ghost-in-the-machine-ii/" class="read-more">read more →</a>
+            </div>
 
-        <section style="margin-bottom: 1.2em;">
-            <h3>IV/ A Ghost in the Machine II</h3>
-            <p style="margin-bottom:0.3em;">
-               <i>experiments revealing how spectral outliers from low-rank structure track the stability boundary of driven networks, making the ghost quantitative.</i><br>
-                <a href="/blog/a-ghost-in-the-machine-ii/" style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">read more &rarr;</a>
-            </p>
-        </section>
+            <div class="post-entry">
+                <h3>III/ A Ghost in the Machine</h3>
+                <p>uncovering how a single spectral outlier eigenvalue can rise above chaotic bulk dynamics in recurrent neural networks, creating a clean computational channel hidden inside disorder.</p>
+                <a href="/blog/a-ghost-in-the-machine/" class="read-more">read more →</a>
+            </div>
 
-        <section style="margin-bottom: 1.2em;">
-            <h3>III/ A Ghost in the Machine</h3>
-            <p style="margin-bottom:0.3em;">
-               <i>uncovering how a single spectral outlier eigenvalue can rise above chaotic bulk dynamics in recurrent neural networks, creating a clean computational channel hidden inside disorder.</i><br>
-                <a href="/blog/a-ghost-in-the-machine/" style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">read more &rarr;</a>
-            </p>
-        </section>
+            <div class="post-entry">
+                <h3>II/ The Slow Art of Fast Mixing</h3>
+                <p>a closer look at canonical path theory, the justification for rapid mixing in high-dimensional Markov chains.</p>
+                <a href="/blog/the-slow-art-of-fast-mixing/" class="read-more">read more →</a>
+            </div>
 
-        
-
-         <section style="margin-bottom: 1.2em;">
-            <h3>II / The Slow Art of Fast Mixing</h3>
-            <p style="margin-bottom:0.3em;">
-                <i>a closer look at canonical path theory, the justification for rapid mixing in high-dimensional Markov chains. </i><br>
-                <a href="/blog/the-slow-art-of-fast-mixing/" style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">read more &rarr;</a>
-            </p>
-        </section>
-
-        <section style="margin-bottom: 1.2em;">
-            <h3>I / Walking the Quantum Line</h3>
-            <p style="margin-bottom:0.3em;">
-               <i>tracing the shared formalism between classical random walks and quantum evolution on graphs, revealing how diffusion and interference arise from a common linear backbone.</i>
-                <a href="/blog/walking-the-quantum-line/" style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">read more &rarr;</a>
-            </p>
-        </section>
-
-        <!-- <section style="margin-bottom: 1.2em;">
-            <h3 class="katex-title" style="margin-bottom:0.3em;">II / An Exploration of PINNs</h3>
-            <p style="margin-bottom:0.3em;">
-                outlining my self-study of physics-informed neural networks (PINNs), a method at the intersection of physics and machine learning for analyzing partial differential equations.
-                <a href="/blog/post-two/">read more &rarr;</a>
-            </p>
-        </section> -->
-
-        <!-- <section style="margin-bottom: 1.2em;">
-            <h3 class="katex-title" style="margin-bottom:0.3em;">I / An Analytic Side Tangent</h3>
-            <p style="margin-bottom:0.3em;">
-                a proof outlining the strictly increasing behavior of a fundamental sequence encountered in undergraduate real analysis.<br>
-                <a href="/blog/post-one/">read more &rarr;</a>
-            </p>
-        </section> -->
+            <div class="post-entry">
+                <h3>I/ Walking the Quantum Line</h3>
+                <p>tracing the shared formalism between classical random walks and quantum evolution on graphs, revealing how diffusion and interference arise from a common linear backbone.</p>
+                <a href="/blog/walking-the-quantum-line/" class="read-more">read more →</a>
+            </div>
         </div>
     </div>
 </body>
 </html>
-

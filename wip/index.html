@@ -1,97 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/assets/ad.png" type="image/x-icon" />
-    <link rel="stylesheet" href="/css/style.css">
-    <title>work in progress — aniket deshpande</title>
-    <style>
-        html {
-            font-size: 15px;
-        }
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+  <link rel="icon" href="/assets/ad.png" type="image/x-icon" />
+  <title>work in progress — aniket deshpande</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        body.tgt-layout {
-            font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
-            background-color: #fff;
-            color: #111;
-        }
+    ::selection {
+      background: #f9e6e6;
+    }
 
-        h1 {
-            font-weight: 400;
-            margin-top: 10rem;
-            margin-bottom: 0.2rem;
-            font-size: 2rem;
-            line-height: 1;
-        }
-        
-        .menu {
-            margin-bottom: 1.5em;
-            margin-top: 0.5em;
-            text-align: left;
-            font-size: 1rem;
-        }
-        
-        .menu p {
-            margin: 0;
-            text-align: left;
-        }
-        
-        .menu a {
-            text-decoration: none;
-            margin-right: 1em;
-            display: inline-block;
-            transition: transform 0.15s ease;
-        }
-        .menu a:hover {
-            transform: skewX(-8deg);
-        }
-        
-        .menu a:last-child {
-            margin-right: 0;
-        }
+    ::-moz-selection {
+      background: #f9e6e6;
+    }
 
-        p {
-            margin-top: 1.4rem;
-            margin-bottom: 1.4rem;
-            padding-right: 0;
-            vertical-align: baseline;
-            font-size: 1rem;
-            line-height: 1.3rem;
-        }
-    </style>
+    html {
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+
+    body {
+      width: 100%;
+      margin: 25px 0;
+      padding: 0;
+      background: #fff;
+      font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    a {
+      color: darkred;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: #8B0000;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 30px;
+    }
+
+    @media screen and (min-width: 600px) {
+      body {
+        margin: 50px 0 25px;
+      }
+      .container {
+        margin: 0 60px;
+      }
+    }
+
+    @media screen and (min-width: 800px) {
+      body {
+        margin: 120px 0 50px;
+      }
+      .container {
+        margin: 0 140px;
+      }
+    }
+
+    .bio {
+      max-width: 500px;
+    }
+
+    .bio__header {
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 21px;
+    }
+
+    .bio__header a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .bio__header a:hover {
+      text-decoration: none;
+    }
+
+    .bio__tabs {
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .bio__tabs a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .bio__tabs a:hover {
+      color: darkred;
+    }
+
+    .content {
+      width: 61%;
+      max-width: 610px;
+    }
+
+    @media screen and (max-width: 800px) {
+      .content {
+        width: 100%;
+      }
+    }
+
+    .page-title {
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .back-link {
+      margin-top: 20px;
+      font-style: italic;
+    }
+
+    .back-link a {
+      text-decoration: none;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 
-<body class="tgt-layout">
-    <div class="container">
-        <div class="text">
-
-        <h1>work in progress</h1>
-        
-        <div class="top-link" style="margin-top: 0.5em; margin-bottom: 1.5em;">
-            <a href="/notes/">&larr; back to notes</a>
-        </div>
-
-        <div class="menu">
-            <p>
-                <a href="/about/">home</a>
-                <a href="/research/">research</a>
-                <a href="/teaching/">teaching</a>
-                <a href="/notes/">notes</a>
-                <a href="/blog/">blog</a>
-                <a href="/code/">code</a>
-                <a href="/cv/cv.pdf">vitae</a>
-            </p>
-        </div>
-
-        <p>
-            this page is under construction.<br>
-            detailed notes will be uploaded here soon.
-        </p>
-        </div>
+<body>
+  <div class="container">
+    <div class="bio">
+      <div class="bio__header">
+        <a href="/">work in progress</a>
+      </div>
+      <div class="bio__tabs">
+        <a href="/about/">about</a> <span class="dot">·</span>
+        <a href="/research/">research</a> <span class="dot">·</span>
+        <a href="/teaching/">teaching</a> <span class="dot">·</span>
+        <a href="/notes/">notes</a> <span class="dot">·</span>
+        <a href="/blog/">blog</a> <span class="dot">·</span>
+        <a href="/code/">code</a> <span class="dot">·</span>
+        <a href="/cv/cv.pdf">vitae</a>
+      </div>
     </div>
+
+    <div class="content">
+      <p>
+        this page is under construction.<br>
+        detailed notes will be uploaded here soon.
+      </p>
+
+      <div class="back-link">
+        <a href="/notes/">← back to notes</a>
+      </div>
+    </div>
+  </div>
 </body>
-
 </html>
-

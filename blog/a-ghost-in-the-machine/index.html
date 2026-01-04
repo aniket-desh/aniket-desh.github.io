@@ -2,226 +2,272 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <link rel="icon" href="/assets/ad.png" type="image/x-icon" />
-    <link rel="stylesheet" href="/css/style.css">
     <title>a ghost in the machine — aniket deshpande</title>
     <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background: #f9e6e6;
+        }
+
+        ::-moz-selection {
+            background: #f9e6e6;
+        }
+
         html {
-            font-size: 15px;
+            overflow-x: hidden;
+            overflow-y: scroll;
         }
 
-        body.tgt-layout {
+        body {
+            width: 100%;
+            margin: 25px 0;
+            padding: 0;
+            background: #fff;
             font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
-            background-color: #fff;
-            color: #111;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.5;
         }
 
-        h1 {
-            font-weight: 400;
-            margin-top: 10rem;
-            margin-bottom: 0.2rem;
-            font-size: 2rem;
-            line-height: 1;
+        a {
+            color: darkred;
+            text-decoration: underline;
         }
-        h3 {
-            font-weight: 400;
-            font-size: 1.3rem;
-            margin-top: 2.1rem;
-            margin-bottom: 1.4rem;
-            line-height: 1;
+
+        a:hover {
+            color: #8B0000;
         }
-        .centered-quote {
-            text-align: center;
-            margin-top: -1rem;
-            margin: 2rem auto;
-            max-width: 40ch;
+
+        .container {
+            max-width: 1200px;
+            margin: 0 30px;
+        }
+
+        @media screen and (min-width: 600px) {
+            body {
+                margin: 50px 0 25px;
+            }
+            .container {
+                margin: 0 60px;
+            }
+        }
+
+        @media screen and (min-width: 800px) {
+            body {
+                margin: 120px 0 50px;
+            }
+            .container {
+                margin: 0 140px;
+            }
+        }
+
+        .bio {
+            max-width: 500px;
+        }
+
+        .bio__header {
+            margin-bottom: 20px;
+            font-weight: 700;
+            font-size: 21px;
+        }
+
+        .bio__header a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .bio__header a:hover {
+            text-decoration: none;
+        }
+
+        .bio__tabs {
+            margin-bottom: 20px;
             font-style: italic;
         }
-        
-        .menu {
-            margin-bottom: 1.5em;
-            margin-top: 0.5em;
-            text-align: left;
-            font-size: 1rem;
-        }
-        
-        .menu p {
-            margin: 0;
-            text-align: left;
-        }
-        
-        .menu a {
+
+        .bio__tabs a {
             text-decoration: none;
-            margin-right: 1em;
-            display: inline-block;
-            transition: transform 0.15s ease;
-        }
-        .menu a:hover {
-            transform: skewX(-8deg);
-        }
-        
-        .menu a:last-child {
-            margin-right: 0;
+            color: inherit;
         }
 
-        p {
-            margin-top: 1.4rem;
-            margin-bottom: 1.4rem;
-            padding-right: 0;
-            vertical-align: baseline;
-            font-size: 1rem;
-            line-height: 1.3rem;
+        .bio__tabs a:hover {
+            color: darkred;
+        }
+
+        .content {
+            width: 81%;
+            max-width: 970px;
+        }
+
+        @media screen and (max-width: 800px) {
+            .content {
+                width: 100%;
+            }
+        }
+
+        .post-title {
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .post-date {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .post-body p {
+            margin-bottom: 20px;
         }
 
         .callout {
             text-align: center;
-            margin: 1.5em 0;
+            margin: 25px 0;
             background-color: #f8f8f8;
-            padding: 1em;
-            border-radius: 8px;
+            padding: 15px;
+            border-radius: 4px;
             font-style: italic;
+        }
+
+        .back-link {
+            margin-top: 40px;
+            font-style: italic;
+        }
+
+        .back-link a {
+            text-decoration: none;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 
-<body class="tgt-layout">
+<body>
     <div class="container">
-        <div class="text">
+        <div class="bio">
+            <div class="bio__header">
+                <a href="/">a ghost in the machine</a>
+            </div>
+            <div class="bio__tabs">
+                <a href="/about/">about</a> <span class="dot">·</span>
+                <a href="/research/">research</a> <span class="dot">·</span>
+                <a href="/teaching/">teaching</a> <span class="dot">·</span>
+                <a href="/notes/">notes</a> <span class="dot">·</span>
+                <a href="/blog/">blog</a> <span class="dot">·</span>
+                <a href="/code/">code</a> <span class="dot">·</span>
+                <a href="/cv/cv.pdf">vitae</a>
+            </div>
+        </div>
 
-    <div style="position: relative; margin-bottom: 1.5em;">
-        <svg style="position: absolute; top: -20px; left: -30px; width: calc(100% + 60px); height: 90px; z-index: -1;" 
-             viewBox="0 0 1000 90" preserveAspectRatio="none">
-            <!-- dendrites -->
-            <path d="M 155 45 Q 125 35 105 25 Q 85 20 65 15" stroke="#888888" stroke-width="1.2" fill="none" opacity="0.5"/>
-            <path d="M 155 50 Q 125 55 105 60 Q 85 65 65 70" stroke="#888888" stroke-width="1.2" fill="none" opacity="0.5"/>
-            <path d="M 155 40 Q 130 30 115 20" stroke="#888888" stroke-width="1" fill="none" opacity="0.5"/>
-            <path d="M 155 55 Q 130 65 115 75" stroke="#888888" stroke-width="1" fill="none" opacity="0.5"/>
-            
-            <!-- soma -->
-            <ellipse cx="180" cy="45" rx="25" ry="18" fill="none" stroke="#888888" stroke-width="1.5" opacity="0.6"/>
+        <div class="content">
+            <p class="post-date">09.28.2025</p>
 
-            <!-- axon hillock -->
-            <path d="M 205 45 Q 220 45 235 45" stroke="#888888" stroke-width="2" fill="none" opacity="0.6"/>
+            <div class="post-body">
+                <p>
+                    This post will be the first of two outlining a project I am completing for a <a href="https://courses.grainger.illinois.edu/ECE598RE/fa2025/">graduate course</a> on dynamical systems, neural networks, and theoretical neuroscience. Specifically, I will be exploring how low-rank structure hidden in high-dimensional random connectivity gives rise to <i>spectral outliers:</i> isolated eigenvalues that dominate the macroscopic behavior of otherwise chaotic networks. We will pull ideas from theories of random matrices, dynamical mean fields, and free probability to understand these phenomena.
+                </p>
 
-            <!-- axon -->
-            <path d="M 235 45 Q 300 40 400 42 Q 500 44 600 41 Q 700 38 800 40 Q 850 41 900 39" stroke="#888888" stroke-width="1.8" fill="none" opacity="0.6"/>
+                <p>
+                    It's natural to now step back and ask: <i>what do we already know about chaotic RNNs? How does structure change the story?</i>
+                </p>
 
-            <!-- axon terminals (synaptic endings) -->
-            <path d="M 880 39 Q 890 35 900 30" stroke="#888888" stroke-width="1" fill="none" opacity="0.5"/>
-            <path d="M 885 40 Q 895 44 905 48" stroke="#888888" stroke-width="1" fill="none" opacity="0.5"/>
-            <path d="M 890 38 Q 900 42 910 45" stroke="#888888" stroke-width="1" fill="none" opacity="0.5"/>
+                <p>
+                    The most relevant recent work here is by Rainer Engelken and collaborators. Their <a href="https://proceedings.neurips.cc/paper_files/paper/2022/hash/e6f29fb27bb400f89f5584c175005679-Abstract-Conference.html">NeurIPS 2022</a> paper developed what they call a non-stationary dynamic mean-field theory (DMFT). Classical DMFT provides us with a way to describe the statistics of large random networks at stationary, but once the network is driven by time-varying inputs, the stationar assumption breaks. Engelken et al. derived a <i>time-resolved closure</i>: equations for the population mean activity, the two-time correlation function of fluctuations, and an auxiliary kernel that makes the system self-consistent. Practically, the framework gives us a tractable way to predict the network's response spectrum, its largest Lyapunov exponent, and even the information-theoretic capacity of the population to transmit signals.
+                </p>
 
-            <!-- synaptic vesicles (small circles at terminals) -->
-            <circle cx="895" cy="32" r="1.5" fill="#888888" opacity="0.4"/>
-            <circle cx="900" cy="46" r="1.5" fill="#888888" opacity="0.4"/>
-            <circle cx="905" cy="43" r="1.5" fill="#888888" opacity="0.4"/>
-        </svg>
+                <p>
+                    We study a continuous-time rate network with \(N\) units. Each unit carries a synaptic current \(h_i(t)\) and fires at rate \(\phi(h_i)\), with \(\phi(x) = \max(0, x)\) (ReLU). The dynamics are given by the differential equation
+                    \[
+                    \tau \frac{d h_i}{dt} = -h_i + \sum_{j=1}^N J_{ij} \phi(h_j) + b I(t) + \xi_i(t).
+                    \]
+                    Here, \(\tau > 0\) is a membrane/leak timescale, \(J \in \mathbb{R}^{N \times N}\) is a connectivity matrix with balanced mean and random heterogeneity:
+                    \[
+                    J_{ij} = -\frac{b}{N}J_0 + \tilde{J}_{ij},\quad \tilde{J}_{ij} \sim \mathcal{N}(0, g^2/N).
+                    \]
+                    \(b > 0\) tunes the <i>tightness of balance</i> (a stronger \(b\) means stronger recurrent inhibition), \(I(t)\) is a common input (e.g. an OU process with correlation time \(\tau_S\)), and \(\xi_i(t)\) is independent Gaussian noise such that \(\langle \xi_i(t) \xi_i(t') \rangle = \sigma^2 \tau \delta(t - t')\). We decompose the currents into a <i>population mean</i> and <i>fluctuations</i>:
+                    \[
+                    h_i(t) = m(t) + \tilde{h}_i(t),\quad m(t) = \frac{1}{N} \sum_{i=1}^N h_i(t),\quad \langle \tilde{h}_i(t) \rangle = 0.
+                    \]
+                    Substituting this into the dynamics and using the mean of \(J\) yields two coupled equations 
+                    \begin{align}
+                        \tau \frac{d m}{dt} &= -m -b J_0 \nu(t) + b I(t) \\
+                        \tau \frac{d \tilde{h}_i}{dt} &= -\tilde{h}_i + \sum_{j=1}^N \tilde{J}_{ij} \phi \left(m(t) + \tilde{h}_{ij}(t)\right) + \tilde{\xi}_i(t)
+                    \end{align}
+                    with the population rate \(\nu(t) = \frac{1}{N} \sum_{i=1}^N \phi\left(m(t) + \tilde{h}_i(t)\right)\). 
+                    Solving the first equation for \(\nu\) gives the <i>balance equation</i>
+                    \[
+                    \nu(t) = \frac{1}{J_0}I(t) - \frac{1}{b J_0} \left(\tau \frac{d m}{dt} + m\right).
+                    \]
+                    In the tight-balance limit \(b \to \infty\), \(\nu(t)\approx I(t)/J_0\) (linear tracking) and the mean mode acquires an effective timescale \(\tau_{\mathrm{eff}} = \tau/b\). This leads to the first core result.
+                </p>
+                    
+                <div class="callout">
+                    "Balance speeds up the population mean by a factor of \(b\)."
+                </div>
+                    
+                <p>
+                    So far, we've seen the spectral fingerprint: the rank-one mean term adds a single eigenvalue at \(-b\), while the random bulk remains a circular cloud of radius \(g\). This lone outlier is the ghost steering the mean activity. 
+                    But spectra are only the beginning. The NeurIPS paper showed how this outlier governs the <i>dynamical timescale</i>  of the mean. Take a step input and watch the population mean \(m(t)\) relax. The prediction from the balance equation is relatively simple:
+                    \[
+                    \tau_{\mathrm{eff}} = \frac{\tau}{b}.
+                    \]
+                    As \(b\) increases, the mean mode tracks input \(b\)-times faster. In simulations, fitting the exponential decay of \(m(t)\) confirms that the timescale drops as \(1/b\). 
+                </p>
 
-        <h1>a ghost in the machine</h1>
-        <div class="top-link" style="margin-top: 0.3em; margin-bottom: 0;">
-            <a href="/blog/">&larr; blog</a>
+                <p>
+                    Faster mean dynamics suggest wider bandwidth for signal encoding. The DMFT closure makes this intuition quantitative. By treading residuals \(\tilde{h}(t)\) as a Gaussian process with covariance \(c(t, s)\), one can compute the input-output <i>coherence</i>
+                    \[
+                    C_{I\nu}(f) = \frac{\left| S_{I\nu}(f)\right|^2}{S_{II}(f) S_{\nu\nu}(f)},
+                    \]
+                    Here, \(S_{I\nu}\) is the cross-spectrum of the input and output, and \(S_{II}\), \(S_{\nu\nu}\) are their respective autospectra. The result is that higher balance values keep coherence close to one across higher frequencies, reflecting faster tracking and higher effective bandwidth.
+                </p>
+
+                <p>
+                    Integrating this coherence function gives us a Gaussian-channel lower bound on the <i>mutual information</i> between the input and output signals.
+                    \[
+                    R_{\mathrm{lb}} = -\int\, df \log_2\left(1 - C_{I\nu}(f)\right).
+                    \]
+                </p>
+
+                <p>
+                    This is the one of the headline results of the paper, and our second core finding.
+                </p>
+                    
+                <div class="callout">
+                    "The information rate grows nearly linearly with balance until it saturates at the bandwidth limit imposed by the input itself."
+                </div>
+
+                <p>
+                    To complete our understanding of this paper, it's worth highlighting a key result from <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010590">a complementary paper</a> done by Engelken et al. This PLOS paper provides code that shows the same non-stationary DMFT framework was used to compute the largest Lyapunov exponent \(\lambda_1\).
+                </p>
+
+                <p>
+                    The surprising finding was that common input is poor at surpressing chaos. Because of balance, the common drive enters the mean equation and is canceled by recurrent inhibition. As a result, \(\lambda_1\) only turns negative at very large input amplitudes. Independent input, on the other hand, enters the fluctuation channel directly and is not canceled, so even small amplitudes can suppress chaos.
+                </p>
+                    
+                <p>
+                    This closes the loop on what we know. Balance plants a real outlier eigenvalue at \(-b\), accelerates the mean mode, broadens encoding bandwidth, and shapes how chaos can be tamed. In the next post, I'll go beyond balance and introduce low-rank perturbations
+                    \[
+                    S = \sum_{k=1}^R m_k u_k v_k^T,
+                    \]
+                    on top of the random bulk. Each term creates a new spectral outlier \(\lambda_{\mathrm{out}}\). My goal is to show that the real part of these outliers predicts exactly when the network bifurcates (from a fixed point to Hopf oscillations to chaos.) The hope is to expend DMFT with low-rank order parameters and make the ghost in the machine fully quantitative.
+                </p>
+
+                <div class="back-link">
+                    <a href="/blog/">← back to blog</a>
+                </div>
+            </div>
         </div>
     </div>
-
-    <p><span class="gray-date">09.28.2025</span><br><br>
-        This post will be the first of two outlining a project I am completing for a <a href="https://courses.grainger.illinois.edu/ECE598RE/fa2025/" class="katex-title"
-            style="font-size:inherit; font-weight:400; text-decoration:none; color:darkred;"
-            onmouseover="this.style.fontStyle='italic';" onmouseout="this.style.fontStyle='normal';">graduate course</a>  on dynamical systems, neural networks, and theoretical neuroscience. Specifically, I will be exploring how low-rank structure hidden in high-dimensional random connectivity gives rise to <i>spectral outliers:</i> isolated eigenvalues that dominate the macroscopic behavior of otherwise chaotic networks. We will pull ideas from theories of random matrices, dynamical mean fields, and free probability to understand these phenomena. <br><br>
-
-            It's natural to now step back and ask: <i>what do we already know about chaotic RNNs? How does structure change the story?</i> <br><br>
-
-            The most relevant recent work here is by Rainer Engelken and collaborators. Their <a href="https://proceedings.neurips.cc/paper_files/paper/2022/hash/e6f29fb27bb400f89f5584c175005679-Abstract-Conference.html" style="text-decoration:none; color:darkred; font-weight:400;" onmouseover="this.style.fontStyle='italic';" onmouseout="this.style.fontStyle='normal';">NeurIPS 2022</a> paper developed what they call a non-stationary dynamic mean-field theory (DMFT). Classical DMFT provides us with a way to describe the statistics of large random networks at stationary, but once the network is driven by time-varying inputs, the stationar assumption breaks. Engelken et al. derived a <i>time-resolved closure</i>: equations for the population mean activity, the two-time correlation function of fluctuations, and an auxiliary kernel that makes the system self-consistent. Practically, the framework gives us a tractable way to predict the network's response spectrum, its largest Lyapunov exponent, and even the information-theoretic capacity of the population to transmit signals. <br><br>
-
-            We study a continuous-time rate network with \(N\) units. Each unit carries a synaptic current \(h_i(t)\) and fires at rate \(\phi(h_i)\), with \(\phi(x) = \max(0, x)\) (ReLU). The dynamics are given by the differential equation
-            \[
-            \tau \frac{d h_i}{dt} = -h_i + \sum_{j=1}^N J_{ij} \phi(h_j) + b I(t) + \xi_i(t).
-            \]
-            Here, \(\tau > 0\) is a membrane/leak timescale, \(J \in \mathbb{R}^{N \times N}\) is a connectivity matrix with balanced mean and random heterogeneity:
-            \[
-            J_{ij} = -\frac{b}{N}J_0 + \tilde{J}_{ij},\quad \tilde{J}_{ij} \sim \mathcal{N}(0, g^2/N).
-            \]
-            \(b > 0\) tunes the <i>tightness of balance</i> (a stronger \(b\) means stronger recurrent inhibition), \(I(t)\) is a common input (e.g. an OU process with correlation time \(\tau_S\)), and \(\xi_i(t)\) is independent Gaussian noise such that \(\langle \xi_i(t) \xi_i(t') \rangle = \sigma^2 \tau \delta(t - t')\). We decompose the currents into a <i>population mean</i> and <i>fluctuations</i>:
-            \[
-            h_i(t) = m(t) + \tilde{h}_i(t),\quad m(t) = \frac{1}{N} \sum_{i=1}^N h_i(t),\quad \langle \tilde{h}_i(t) \rangle = 0.
-            \]
-            Substituting this into the dynamics and using the mean of \(J\) yields two coupled equations 
-            \begin{align}
-                \tau \frac{d m}{dt} &= -m -b J_0 \nu(t) + b I(t) \\
-                \tau \frac{d \tilde{h}_i}{dt} &= -\tilde{h}_i + \sum_{j=1}^N \tilde{J}_{ij} \phi \left(m(t) + \tilde{h}_{ij}(t)\right) + \tilde{\xi}_i(t)
-            \end{align}
-            with the population rate \(\nu(t) = \frac{1}{N} \sum_{i=1}^N \phi\left(m(t) + \tilde{h}_i(t)\right)\). 
-            Solving the first equation for \(\nu\) gives the <i>balance equation</i>
-            \[
-            \nu(t) = \frac{1}{J_0}I(t) - \frac{1}{b J_0} \left(\tau \frac{d m}{dt} + m\right).
-            \]
-            In the tight-balance limit \(b \to \infty\), \(\nu(t)\approx I(t)/J_0\) (linear tracking) and the mean mode acquires an effective timescale \(\tau_{\mathrm{eff}} = \tau/b\). This leads to the first core result.
-            </p>
-            
-            <div class="callout">
-                "Balance speeds up the population mean by a factor of \(b\)."
-            </div>
-            
-            <p>
-            
-            So far, we've seen the spectral fingerprint: the rank-one mean term adds a single eigenvalue at \(-b\), while the random bulk remains a circular cloud of radius \(g\). This lone outlier is the ghost steering the mean activity. 
-            But spectra are only the beginning. The NeurIPS paper showed how this outlier governs the <i>dynamical timescale</i>  of the mean. Take a step input and watch the population mean \(m(t)\) relax. The prediction from the balance equation is relatively simple:
-            \[
-            \tau_{\mathrm{eff}} = \frac{\tau}{b}.
-            \]
-            As \(b\) increases, the mean mode tracks input \(b\)-times faster. In simulations, fitting the exponential decay of \(m(t)\) confirms that the timescale drops as \(1/b\). 
-            </p>
-
-            <p>
-            Faster mean dynamics suggest wider bandwidth for signal encoding. The DMFT closure makes this intuition quantitative. By treading residuals \(\tilde{h}(t)\) as a Gaussian process with covariance \(c(t, s)\), one can compute the input-output <i>coherence</i>
-            \[
-            C_{I\nu}(f) = \frac{\left| S_{I\nu}(f)\right|^2}{S_{II}(f) S_{\nu\nu}(f)},
-            \]
-            Here, \(S_{I\nu}\) is the cross-spectrum of the input and output, and \(S_{II}\), \(S_{\nu\nu}\) are their respective autospectra. The result is that higher balance values keep coherence close to one across higher frequencies, reflecting faster tracking and higher effective bandwidth.
-            </p>
-
-            <p>
-                Integrating this coherence function gives us a Gaussian-channel lower bound on the <i>mutual information</i> between the input and output signals.
-                \[
-                R_{\mathrm{lb}} = -\int\, df \log_2\left(1 - C_{I\nu}(f)\right).
-                \]
-            </p>
-
-            <p>
-                This is the one of the headline results of the paper, and our second core finding.
-            </p>
-            
-            <div class="callout">
-                "The information rate grows nearly linearly with balance until it saturates at the bandwidth limit imposed by the input itself."
-            </div>
-
-            <p>
-                To complete our understanding of this paper, it's worth highlighting a key result from <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010590" style="text-decoration:none; color:darkred; font-weight:400;">a complementary paper</a> done by Engelken et al. This PLOS paper provides code that shows the same non-stationary DMFT framework was used to compute the largest Lyapunov exponent \(\lambda_1\).
-            </p>
-
-            <p>
-                The surprising finding was that common input is poor at surpressing chaos. Because of balance, the common drive enters the mean equation and is canceled by recurrent inhibition. As a result, \(\lambda_1\) only turns negative at very large input amplitudes. Independent input, on the other hand, enters the fluctuation channel directly and is not canceled, so even small amplitudes can suppress chaos.
-            </p>
-            
-            <p>
-                This closes the loop on what we know. Balance plants a real outlier eigenvalue at \(-b\), accelerates the mean mode, broadens encoding bandwidth, and shapes how chaos can be tamed. In the next post, I'll go beyond balance and introduce low-rank perturbations
-                \[
-                S = \sum_{k=1}^R m_k u_k v_k^T,
-                \]
-                on top of the random bulk. Each term creates a new spectral outlier \(\lambda_{\mathrm{out}}\). My goal is to show that the real part of these outliers predicts exactly when the network bifurcates (from a fixed point to Hopf oscillations to chaos.) The hope is to expend DMFT with low-rank order parameters and make the ghost in the machine fully quantitative.
-            </p>
-
-        </div>
-    </div>
-
-<script>
-    function toggleProof(proofId) {
-        const proof = document.getElementById(proofId);
-        proof.classList.toggle('collapsed');
-    }
-</script>
-
 </body>
 </html>
-

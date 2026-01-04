@@ -4,7 +4,7 @@
 :root {
     --text-color: #333;
     --background-color: #fff;
-    --small: 16px;
+    --small: 18px;
 }
 
 /* Global Styles */
@@ -23,7 +23,7 @@ body.tgt-layout {
     font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
     background-color: #fff;
     color: #111;
-    font-size: 15px;
+    font-size: 17px;
 }
 
 .container {
@@ -38,7 +38,7 @@ body.tgt-layout {
 .text {
     float: left;
     width: 65%;
-    margin-left: 5%;
+    margin-left: 10%;
     margin-right: 5%;
 }
 
@@ -49,7 +49,7 @@ body.tgt-layout {
     justify-content: center;
     align-items: center;
     margin-left: 0;
-    margin-right: 5%;
+    margin-right: 10%;
 }
 
 .image img {
@@ -98,7 +98,7 @@ body.landing {
 .logo-text {
     font-family: 'Vollkorn', serif;
     font-weight: 700; /* bold */
-    font-size: 5rem;
+    font-size: 5.75rem;
     color: var(--text-color);
 }
 
@@ -129,7 +129,7 @@ body.landing {
     color: var(--text-color);
     text-decoration: none;
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: 1.3rem;
 }
 
 .top-left-nav ul li a:hover {
@@ -152,7 +152,7 @@ body.landing {
 .bottom-nav ul li a {
     font-family: 'Vollkorn', serif;
     font-weight: 500;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     color: var(--text-color);
     text-decoration: none;
 }
@@ -162,12 +162,12 @@ body.landing {
 }
 
 .art-placeholder {
-    font-size: 1.5rem;
+    font-size: 2rem;
     margin-bottom: 1rem;
 }
 
 .script-text {
-    font-size: 1rem;
+    font-size: 1.3rem;
     color: #777;
     margin-top: 1rem;
 }
@@ -180,7 +180,7 @@ body.landing {
 }
 
 h2 {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 600;
     margin-top: -20px;
     margin-bottom: -15px;
@@ -189,7 +189,7 @@ h2 {
 
 .menu {
     margin-top: 50px;
-    font-size: 1rem;
+    font-size: 1.3rem;
     text-align: center;
     font-family:'Vollkorn', serif;
 }
@@ -229,7 +229,7 @@ a:hover {
 }
 
 footer {
-    font-size: 0.8em;
+    font-size: 0.9em;
     color: #aaa;
     text-align: center;
     margin: 50px 0;
@@ -250,7 +250,7 @@ footer {
 }
 
 h1 {
-    font-size: 1.7rem;
+    font-size: 2rem;
     font-weight: 400;
     text-align: left;
     margin-bottom: -20px;
@@ -287,7 +287,7 @@ hr {
 /* Bottom nav */
 footer.bottom-nav {
     margin-top: 80px;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     text-align: center;
 }
 
@@ -302,9 +302,9 @@ footer.bottom-nav a:hover {
 
 #contentContainer {
     font-family: 'Vollkorn', serif;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.6;
-    max-width: 640px;
+    max-width: 970px;
     margin: 50px auto;
     padding: 0 20px;
     text-align: left;
@@ -336,7 +336,7 @@ body.tgt-layout #contentContainer {
 }
 
 .top-link a {
-    font-size: 0.9rem;
+    font-size: 1.3rem;
     text-decoration: none;
     color: #666;;
 }
@@ -346,7 +346,7 @@ body.tgt-layout #contentContainer {
 }
 
 section h2 {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 600;
     margin-top: 40px;
     margin-bottom: 10px;
@@ -354,14 +354,14 @@ section h2 {
 }
 
 section p {
-    font-size: 1rem;
+    font-size: 1.3rem;
     line-height: 1.6;
     margin-bottom: 30px;
 }
 
 section p a {
     font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
+    font-size: 1.3rem;
     margin-left: 0px;
     color: #888;
     text-decoration: none;
@@ -384,7 +384,7 @@ section p a {
 
 .proof .title::after {
     content: " ▼";
-    font-size: 0.8em;
+    font-size: 0.9em;
     margin-left: auto;
     transition: transform 0.2s;
 }
@@ -404,26 +404,26 @@ section p a {
 /* Gray Date */
 .gray-date {
     color: darkgray;
-    font-size: 0.9rem;
+    font-size: 1.3rem;
 }
 
 .katex-title {
   font-family: Georgia, 'Bitstream Vera Serif', serif;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 500;
   margin-bottom: 0.5em;
   margin-top: 0.2em;
 }
 
 h2.katex-title {
-  font-size: 24px;
+  font-size: 28px;
   font-family: Georgia, 'Bitstream Vera Serif', serif;
   font-weight: 700;
   margin-bottom: 0.2em;
 }
 
 h3.katex-title {
-  font-size: 16px;  /* or 17px if 16 feels too small */
+  font-size: 18px;  /* or 17px if 16 feels too small */
   font-family: Georgia, 'Bitstream Vera Serif', serif;
   font-weight: 500;
   margin-top: 1em;
@@ -455,7 +455,7 @@ h3.katex-title {
 }
 
 .research-text h3 {
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   font-weight: 600;
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -463,7 +463,7 @@ h3.katex-title {
 }
 
 .research-text p {
-  font-size: 1rem;
+  font-size: 1.3rem;
   margin-bottom: 1rem;
   line-height: 1.6;
 }

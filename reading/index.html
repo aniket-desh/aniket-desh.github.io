@@ -1,132 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
   <link rel="icon" href="/assets/ad.png" type="image/x-icon" />
-  <link rel="stylesheet" href="/css/style.css"/>
-  <title>reading | aniket deshpande</title>
+  <title>reading — aniket deshpande</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    ::selection {
+      background: #f9e6e6;
+    }
+
+    ::-moz-selection {
+      background: #f9e6e6;
+    }
+
     html {
-      font-size: 15px;
+      overflow-x: hidden;
+      overflow-y: scroll;
     }
 
-    body.tgt-layout {
+    body {
+      width: 100%;
+      margin: 25px 0;
+      padding: 0;
+      background: #fff;
       font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
-      background-color: #fff;
-      color: #111;
-    }
-
-    h1 {
+      font-size: 16px;
       font-weight: 400;
-      margin-top: 10rem;
-      margin-bottom: 0.2rem;
-      font-size: 2rem;
-      line-height: 1;
-    }
-    
-    .menu {
-      margin-bottom: 1.5em;
-      margin-top: 0.5em;
-      text-align: left;
-      font-size: 1rem;
-    }
-    
-    .menu p {
-      margin: 0;
-      text-align: left;
-    }
-    
-    .menu a {
-      text-decoration: none;
-      margin-right: 1em;
-      display: inline-block;
-      transition: transform 0.15s ease;
-    }
-    .menu a:hover {
-      transform: skewX(-8deg);
-    }
-    
-    .menu a:last-child {
-      margin-right: 0;
+      line-height: 1.5;
     }
 
-    p {
-      margin-top: 1.4rem;
-      margin-bottom: 1.4rem;
-      padding-right: 0;
-      vertical-align: baseline;
-      font-size: 1rem;
-      line-height: 1.3rem;
+    a {
+      color: darkred;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: #8B0000;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 30px;
+    }
+
+    @media screen and (min-width: 600px) {
+      body {
+        margin: 50px 0 25px;
+      }
+      .container {
+        margin: 0 60px;
+      }
+    }
+
+    @media screen and (min-width: 800px) {
+      body {
+        margin: 120px 0 50px;
+      }
+      .container {
+        margin: 0 140px;
+      }
+    }
+
+    .bio {
+      max-width: 500px;
+    }
+
+    .bio__header {
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 21px;
+    }
+
+    .bio__header a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .bio__header a:hover {
+      text-decoration: none;
+    }
+
+    .bio__tabs {
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .bio__tabs a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .bio__tabs a:hover {
+      color: darkred;
+    }
+
+    .content {
+      width: 61%;
+      max-width: 610px;
+    }
+
+    @media screen and (max-width: 800px) {
+      .content {
+        width: 100%;
+      }
+    }
+
+    .page-title {
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 10px;
     }
 
     h3 {
-      font-weight: 400;
-      font-size: 1.3rem;
-      margin-top: 2.1rem;
-      margin-bottom: 1.4rem;
-      line-height: 1;
+      font-weight: 700;
+      font-size: 18px;
+      margin: 25px 0 10px 0;
     }
 
     ul {
-      margin-top: 1.4rem;
-      margin-bottom: 1.4rem;
+      margin: 0 0 20px 0;
+      padding-left: 20px;
+    }
+
+    ul li {
+      margin-bottom: 5px;
+    }
+
+    b, strong {
+      font-weight: 600;
     }
   </style>
 </head>
 
-<body class="tgt-layout">
+<body>
   <div class="container">
-    <div class="text">
-
-    <h1>reading list</h1>
-    <!-- <hr> -->
-
-    <div class="menu">
-      <p>
-        <a href="/about/">home</a>
-        <a href="/research/">research</a>
-        <a href="/teaching/">teaching</a>
-        <a href="/notes/">notes</a>
-        <a href="/blog/">blog</a>
-        <a href="/code/">code</a>
+    <div class="bio">
+      <div class="bio__header">
+        <a href="/">reading list</a>
+      </div>
+      <div class="bio__tabs">
+        <a href="/about/">about</a> <span class="dot">·</span>
+        <a href="/research/">research</a> <span class="dot">·</span>
+        <a href="/teaching/">teaching</a> <span class="dot">·</span>
+        <a href="/notes/">notes</a> <span class="dot">·</span>
+        <a href="/blog/">blog</a> <span class="dot">·</span>
+        <a href="/code/">code</a> <span class="dot">·</span>
         <a href="/cv/cv.pdf">vitae</a>
-      </p>
+      </div>
     </div>
 
-    <p>
-      a running list of books, papers, and articles I'm exploring or have read recently, mostly in theoretical physics, statistics, and learning. beyond my research, I'm deeply passionate about quantum information theory, mathematical finance, and geometry. <br>entries are loosely grouped by topic.
-    </p>
+    <div class="content">
+      <p>
+        a running list of books, papers, and articles I'm exploring or have read recently, mostly in theoretical physics, statistics, and learning. beyond my research, I'm deeply passionate about quantum information theory, mathematical finance, and geometry. entries are loosely grouped by topic.
+      </p>
 
-    <h3>mathematics</h3>
-    <ul>
-      <li><em>Topics in Random Matrix Theory</em> – Tao</li>
-      <li><em>An Introduction to Matrix Concentration Inequalities</em> – Tropp</li>
-      <li><em>Optimal Transport for Applied Mathematicians</em> – Villani</li>
-    </ul>
+      <h3>mathematics</h3>
+      <ul>
+        <li><em>Topics in Random Matrix Theory</em> – Tao</li>
+        <li><em>An Introduction to Matrix Concentration Inequalities</em> – Tropp</li>
+        <li><em>Optimal Transport for Applied Mathematicians</em> – Villani</li>
+      </ul>
 
-    <h3>physics</h3>
-    <ul>
-      <li><em>Quantum Channels (lecture notes)</em> – Attal</li>
-      <li><em>Geometry, Topology, and Physics</em> – Nakahara</li>
-    </ul>
+      <h3>physics</h3>
+      <ul>
+        <li><em>Quantum Channels (lecture notes)</em> – Attal</li>
+        <li><em>Geometry, Topology, and Physics</em> – Nakahara</li>
+      </ul>
 
-    <h3>statistics and learning</h3>
-    <ul>
-      <li><em>Theoretical Neuroscience</em> – Dayan & Abbott</li>
-      <li><em>Introduction to the Theory of Neural Computation</em> – Hertz, Krogh, & Palmer</li>
-    </ul>
+      <h3>statistics and learning</h3>
+      <ul>
+        <li><em>Theoretical Neuroscience</em> – Dayan & Abbott</li>
+        <li><em>Introduction to the Theory of Neural Computation</em> – Hertz, Krogh, & Palmer</li>
+      </ul>
 
-    <h3>miscellaneous & essays</h3>
-    <ul>
-      <li><em>Hydrodynamics of Markets</em> – Lipton</li>
-      <li><em>The Maniac</em> – Labatut</li>
-      <li><em>The Scaling Era: An Oral History of AI</em> – Patel</li>
-    </ul>
+      <h3>miscellaneous & essays</h3>
+      <ul>
+        <li><em>Hydrodynamics of Markets</em> – Lipton</li>
+        <li><em>The Maniac</em> – Labatut</li>
+        <li><em>The Scaling Era: An Oral History of AI</em> – Patel</li>
+      </ul>
     </div>
   </div>
 </body>
-
 </html>
-

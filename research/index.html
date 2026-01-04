@@ -1,209 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
   <link rel="icon" href="/assets/ad.png" type="image/x-icon" />
+  <title>research — aniket deshpande</title>
   <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <link rel="stylesheet" href="/css/style.css">
-  <title>research</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    ::selection {
+      background: #f9e6e6;
+    }
+
+    ::-moz-selection {
+      background: #f9e6e6;
+    }
+
     html {
-      font-size: 15px;
+      overflow-x: hidden;
+      overflow-y: scroll;
     }
 
-    body.tgt-layout {
+    body {
+      width: 100%;
+      margin: 25px 0;
+      padding: 0;
+      background: #fff;
       font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
-      background-color: #fff;
-      color: #111;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.5;
     }
 
-    h1 {
-      font-weight: 400;
-      margin-top: 10rem;
-      margin-bottom: 0.2rem;
-      font-size: 2rem;
-      line-height: 1;
+    a {
+      color: darkred;
+      text-decoration: underline;
     }
-    
-    .menu {
-      margin-bottom: 1.5em;
-      margin-top: 0.5em;
-      text-align: left;
-      font-size: 1rem;
+
+    a:hover {
+      color: #8B0000;
     }
-    
-    .menu p {
-      margin: 0;
-      text-align: left;
+
+    .container {
+      max-width: 1200px;
+      margin: 0 30px;
     }
-    
-    .menu a {
+
+    @media screen and (min-width: 600px) {
+      body {
+        margin: 50px 0 25px;
+      }
+      .container {
+        margin: 0 60px;
+      }
+    }
+
+    @media screen and (min-width: 800px) {
+      body {
+        margin: 120px 0 50px;
+      }
+      .container {
+        margin: 0 140px;
+      }
+    }
+
+    .bio {
+      max-width: 500px;
+    }
+
+    .bio__header {
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 21px;
+    }
+
+    .bio__header a {
       text-decoration: none;
-      margin-right: 1em;
-      display: inline-block;
-      transition: transform 0.15s ease;
-    }
-    .menu a:hover {
-      transform: skewX(-8deg);
-    }
-    
-    .menu a:last-child {
-      margin-right: 0;
+      color: inherit;
     }
 
-    p {
-      margin-top: 1.4rem;
-      margin-bottom: 1.4rem;
-      padding-right: 0;
-      vertical-align: baseline;
-      font-size: 1rem;
-      line-height: 1.3rem;
+    .bio__header a:hover {
+      text-decoration: none;
     }
 
-    h3 {
-      font-weight: 400;
-      font-size: 1.1em;
-      margin-top: 1.4rem;
-      margin-bottom: 0.5rem;
-      line-height: 1;
+    .bio__tabs {
+      margin-bottom: 20px;
+      font-style: italic;
     }
 
-    .profile-section {
-      display: block;
-      gap: 0;
-      margin-bottom: 0;
+    .bio__tabs a {
+      text-decoration: none;
+      color: inherit;
     }
 
-    .research-text {
-      margin-bottom: 0;
+    .bio__tabs a:hover {
+      color: darkred;
     }
 
-    .research-text p {
-      margin-top: 0;
+    .content {
+      width: 61%;
+      max-width: 610px;
+    }
+
+    @media screen and (max-width: 800px) {
+      .content {
+        width: 100%;
+      }
+    }
+
+    .page-title {
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 10px;
     }
 
     .project-section {
-      margin-bottom: 2.5em;
-      padding-bottom: 2em;
+      margin-bottom: 30px;
+      padding-bottom: 25px;
       border-bottom: 1px solid #e0e0e0;
     }
 
     .project-section:last-of-type {
       border-bottom: none;
     }
-    
-    /* Prevent layout shift on hover by using transform instead of font-style */
-    a[style*="color:darkred"] {
-      display: inline-block;
-      transition: transform 0.15s ease;
+
+    .project-section h3 {
+      font-weight: 700;
+      font-size: 18px;
+      margin: 0 0 10px 0;
     }
-    a[style*="color:darkred"]:hover {
-      transform: skewX(-8deg);
+
+    .project-section p {
+      margin: 0 0 10px 0;
+    }
+
+    .project-section img {
+      float: left;
+      width: 150px;
+      height: auto;
+      border: 1px solid #ddd;
+      margin-right: 20px;
+      margin-bottom: 10px;
+    }
+
+    .clearfix {
+      clear: both;
+    }
+
+    b, strong {
+      font-weight: 600;
     }
   </style>
 </head>
 
-<body class="tgt-layout">
+<body>
   <div class="container">
-    <div class="text">
-
-    <h1>research</h1>
-    <!-- <hr> -->
-
-    <div class="menu">
-      <p>
-        <a href="/about/">home</a>
-        <a href="/research/">research</a>
-        <a href="/teaching/">teaching</a>
-        <a href="/notes/">notes</a>
-        <a href="/blog/">blog</a>
-        <a href="/code/">code</a>
+    <div class="bio">
+      <div class="bio__header">
+        <a href="/">research</a>
+      </div>
+      <div class="bio__tabs">
+        <a href="/about/">about</a> <span class="dot">·</span>
+        <a href="/research/">research</a> <span class="dot">·</span>
+        <a href="/teaching/">teaching</a> <span class="dot">·</span>
+        <a href="/notes/">notes</a> <span class="dot">·</span>
+        <a href="/blog/">blog</a> <span class="dot">·</span>
+        <a href="/code/">code</a> <span class="dot">·</span>
         <a href="/cv/cv.pdf">vitae</a>
-      </p>
+      </div>
     </div>
 
-    <p>
-      I currently work in efficient linear algebra and machine learning. I hope to
-      contribute to numerical algorithms for mechanistic interpretability and the <a
-        href="https://x.com/pfau/status/1974177288322494709"
-        style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">physics of learning</a>, a theory of natural and artificial intelligence.
-    </p>
-
-    <p>
-      <b><a href="https://lpna.cs.illinois.edu/" style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:black;"
-          target="_blank">Lab for Parallel Numerical Algorithms</a></b>
-    </p>
-
-          <div class="project-section">
-            <div style="margin-top: 1em;">
-              <img src="/assets/relative-error-beta-sweep.png" alt="Relative error vs beta"
-                style="float: left; width: 200px; height: auto; border: 1px solid #ddd; margin-right: 2em; margin-bottom: 1em;">
-              <h3 style="margin-top: 0; font-size: 1.1em; font-weight: 400;">(i) mcmc for tensor network contractions
-              </h3>
-              <p style="margin-bottom: 0.8em;">
-                We are developing a Markov chain Monte Carlo algorithm to estimate contractions of closed tensor
-                networks. This allows efficient approximation of contraction quantities using methods from statistical
-                physics to improve mixing. Such contractions \[
-                \text{Tr}(ABCD) = \sum_{ijkl} A_{ij}B_{jk}C_{kl}D_{li}
-                \]are trivial in small cases but become \(\#\textsf{P}\)-hard for large networks. Our approach targets
-                use cases in quantum circuits and chemistry, where exact contraction is intractable.
-              </p>
-              <p style="margin-bottom: 0.5em;"><b>QSim '25</b> <a href="/research/tensor-contraction/"
-                  style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">, Read more
-                  here!</a>
-              </p>
-              <div style="clear: both;"></div>
-            </div>
-          </div>
-
-          <div class="project-section">
-            <div>
-              <img src="/assets/amdm_convergence_placeholder.png" alt="AMDM algorithm"
-                style="float: left; width: 200px; height: auto; border: 1px solid #ddd; margin-right: 2em; margin-bottom: 1em;">
-              <h3 style="margin-top: 0; font-size: 1.1em; font-weight: 400;">(ii) bayesian tensor decompositions</h3>
-              <p style="margin-bottom: 0.8em;">
-                We are developing Bayesian algorithms for tensor decomposition and probabilistic linear algebra.
-                Currently, we are building on Alternating Mahalanobis Distance Minimization (AMDM) to design a Bayesian
-                tensor decomposition method with mode-wise covariance modeling. By interpreting AMDM as maximum
-                likelihood estimation under a Kronecker-structured Gaussian prior, we aim to create new optimization
-                schemes that combine statistical inference with deterministic tensor solvers for improved conditioning
-                and uncertainty estimation.
-              </p>
-              <p style="margin-bottom: 0.5em;">More updates soon!</p>
-              <div style="clear: both;"></div>
-            </div>
-          </div>
-
-
-      <!-- <div class="bio-text">
-      <p> 
-        <b><a href="https://conelab.beckman.illinois.edu/" class="katex-title" style="font-size:inherit; font-weight:500;" target="_blank">Computation & Neurodynamics Lab</a></b> <br>
-        I work on extracting analytic Floquet decompositions of periodic dynamical systems using symbolic AI. Given a linear time-periodic system, we seek closed-form expressions for its monodromy matrix and periodic transformation \(P(t)\) so that the dynamics can be represented in a time-invariant form. This enables exact optimal control design in transformed coordinates without relying on purely numerical Floquet computations.
-      </p>
+    <div class="content">
       <p>
-        The systems of interest take the form
-        \[
-          \dot{x}(t) = A(t) x(t), \quad A(t+T) = A(t)
-        \]
-        where \(T\) is the fundamental period. Floquet theory guarantees a decomposition
-        \[
-          \Phi(t) = P(t) e^{R t}
-        \]
-        of the fundamental solution \(\Phi(t)\) into a \(T\)-periodic matrix \(P(t)\) and a constant matrix \(R\) containing the Floquet exponents. The monodromy matrix \(M = \Phi(T)\) satisfies \(M = P(0) e^{R T}\), linking periodic dynamics to their time-invariant equivalent.
+        I currently work in efficient linear algebra and machine learning. I hope to
+        contribute to numerical algorithms for mechanistic interpretability and the <a
+          href="https://x.com/pfau/status/1974177288322494709" target="_blank">physics of learning</a>, a theory of natural and artificial intelligence.
       </p>
+
       <p>
-        We compute numerical decompositions for benchmark systems, then fit symbolic models for \(P(t)\) and \(R\) using sparse regression and periodicity constraints. The learned analytic forms are validated by reconstructing \(\Phi(t)\) and comparing to direct numerical integration. Once obtained, these symbolic decompositions allow the design of optimal controllers via periodic Riccati equations, yielding closed-form feedback laws in the transformed coordinates.
+        <b><a href="https://lpna.cs.illinois.edu/" style="text-decoration:none; color:inherit;" target="_blank">Lab for Parallel Numerical Algorithms</a></b>
       </p>
-      <p>
-        Current work focuses on defining appropriate function bases for symbolic fitting, ensuring periodicity during model discovery, and testing the framework on canonical periodic systems such as the Mathieu equation and parametrically forced oscillators.
-      </p>
-      More updates soon!
-    </div> -->
+
+      <div class="project-section">
+        <img src="/assets/relative-error-beta-sweep.png" alt="Relative error vs beta">
+        <h3>(i) mcmc for tensor network contractions</h3>
+        <p>
+          We are developing a Markov chain Monte Carlo algorithm to estimate contractions of closed tensor
+          networks. This allows efficient approximation of contraction quantities using methods from statistical
+          physics to improve mixing. Such contractions \[
+          \text{Tr}(ABCD) = \sum_{ijkl} A_{ij}B_{jk}C_{kl}D_{li}
+          \]are trivial in small cases but become \(\#\textsf{P}\)-hard for large networks. Our approach targets
+          use cases in quantum circuits and chemistry, where exact contraction is intractable.
+        </p>
+        <p><b>QSim '25</b> <a href="/research/tensor-contraction/">Read more here!</a></p>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="project-section">
+        <img src="/assets/amdm_convergence_placeholder.png" alt="AMDM algorithm">
+        <h3>(ii) bayesian tensor decompositions</h3>
+        <p>
+          We are developing Bayesian algorithms for tensor decomposition and probabilistic linear algebra.
+          Currently, we are building on Alternating Mahalanobis Distance Minimization (AMDM) to design a Bayesian
+          tensor decomposition method with mode-wise covariance modeling. By interpreting AMDM as maximum
+          likelihood estimation under a Kronecker-structured Gaussian prior, we aim to create new optimization
+          schemes that combine statistical inference with deterministic tensor solvers for improved conditioning
+          and uncertainty estimation.
+        </p>
+        <p>More updates soon!</p>
+        <div class="clearfix"></div>
+      </div>
     </div>
   </div>
 </body>
-
 </html>
-

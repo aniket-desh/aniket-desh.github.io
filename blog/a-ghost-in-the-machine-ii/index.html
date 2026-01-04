@@ -2,80 +2,164 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <link rel="icon" href="/assets/ad.png" type="image/x-icon" />
-    <link rel="stylesheet" href="/css/style.css">
     <title>a ghost in the machine ii — aniket deshpande</title>
     <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
     <style>
-        html { font-size: 15px; }
+        * {
+            box-sizing: border-box;
+        }
 
-        body.tgt-layout {
+        ::selection {
+            background: #f9e6e6;
+        }
+
+        ::-moz-selection {
+            background: #f9e6e6;
+        }
+
+        html {
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        body {
+            width: 100%;
+            margin: 25px 0;
+            padding: 0;
+            background: #fff;
             font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
-            background-color: #fff;
-            color: #111;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.5;
         }
 
-        h1 {
-            font-weight: 400;
-            margin-top: 10rem;
-            margin-bottom: 0.2rem;
-            font-size: 2rem;
-            line-height: 1;
-        }
-        h3 {
-            font-weight: 400;
-            font-size: 1.3rem;
-            margin-top: 2.1rem;
-            margin-bottom: 1.4rem;
-            line-height: 1;
+        a {
+            color: darkred;
+            text-decoration: underline;
         }
 
-        p {
-            margin-top: 1.4rem;
-            margin-bottom: 1.4rem;
-            padding-right: 0;
-            vertical-align: baseline;
-            font-size: 1rem;
-            line-height: 1.3rem;
+        a:hover {
+            color: #8B0000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 30px;
+        }
+
+        @media screen and (min-width: 600px) {
+            body {
+                margin: 50px 0 25px;
+            }
+            .container {
+                margin: 0 60px;
+            }
+        }
+
+        @media screen and (min-width: 800px) {
+            body {
+                margin: 120px 0 50px;
+            }
+            .container {
+                margin: 0 140px;
+            }
+        }
+
+        .bio {
+            max-width: 500px;
+        }
+
+        .bio__header {
+            margin-bottom: 20px;
+            font-weight: 700;
+            font-size: 21px;
+        }
+
+        .bio__header a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .bio__header a:hover {
+            text-decoration: none;
+        }
+
+        .bio__tabs {
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .bio__tabs a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .bio__tabs a:hover {
+            color: darkred;
+        }
+
+        .content {
+            width: 81%;
+            max-width: 970px;
+        }
+
+        @media screen and (max-width: 800px) {
+            .content {
+                width: 100%;
+            }
+        }
+
+        .post-title {
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .post-date {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .post-body p {
+            margin-bottom: 20px;
         }
 
         .callout {
             text-align: center;
-            margin: 1.5em 0;
-            background-color: #f8f8f8;
-            padding: 1em;
-            border-radius: 8px;
+            margin: 25px 0;
+            background-color: #eef3f4;
+            padding: 15px;
+            border-radius: 4px;
             font-style: italic;
         }
 
         figure {
-            margin: 2.2rem 0;
+            margin: 25px 0;
             text-align: center;
         }
+
         figure img {
             max-width: 100%;
             height: auto;
-            border-radius: 10px;
+            border-radius: 4px;
         }
-        figure.two-column {
-            display: flex;
-            flex-direction: column;
-        }
+
         figure.two-column > div {
             display: flex;
             gap: 1rem;
             justify-content: center;
             align-items: flex-start;
         }
+
         figure.two-column img {
             max-width: 48%;
             flex: 1;
         }
-        figure.two-column figcaption {
-            width: 100%;
-        }
+
         @media (max-width: 768px) {
             figure.two-column > div {
                 flex-direction: column;
@@ -84,254 +168,217 @@
                 max-width: 100%;
             }
         }
+
         figcaption {
-            font-size: 0.95rem;
-            color: #444;
-            margin-top: 0.65rem;
-            line-height: 1.25rem;
+            font-size: 15px;
+            color: #666;
+            margin-top: 10px;
+            line-height: 1.4;
+            font-style: italic;
+        }
+
+        .back-link {
+            margin-top: 40px;
+            font-style: italic;
+        }
+
+        .back-link a {
+            text-decoration: none;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 
-<body class="tgt-layout">
+<body>
     <div class="container">
-        <div class="text">
+        <div class="bio">
+            <div class="bio__header">
+                <a href="/">a ghost in the machine ii</a>
+            </div>
+            <div class="bio__tabs">
+                <a href="/about/">about</a> <span class="dot">·</span>
+                <a href="/research/">research</a> <span class="dot">·</span>
+                <a href="/teaching/">teaching</a> <span class="dot">·</span>
+                <a href="/notes/">notes</a> <span class="dot">·</span>
+                <a href="/blog/">blog</a> <span class="dot">·</span>
+                <a href="/code/">code</a> <span class="dot">·</span>
+                <a href="/cv/cv.pdf">vitae</a>
+            </div>
+        </div>
 
-            <div style="position: relative; margin-bottom: 1.5em;">
-                <svg style="position: absolute; top: -20px; left: -30px; width: calc(100% + 60px); height: 90px; z-index: -1;"
-                     viewBox="0 0 1000 90" preserveAspectRatio="none">
-                    <!-- dendrites -->
-                    <path d="M 155 45 Q 125 35 105 25 Q 85 20 65 15" stroke="#888888" stroke-width="1.2" fill="none" opacity="0.5"/>
-                    <path d="M 155 50 Q 125 55 105 60 Q 85 65 65 70" stroke="#888888" stroke-width="1.2" fill="none" opacity="0.5"/>
-                    <path d="M 155 40 Q 130 30 115 20" stroke="#888888" stroke-width="1" fill="none" opacity="0.5"/>
-                    <path d="M 155 55 Q 130 65 115 75" stroke="#888888" stroke-width="1" fill="none" opacity="0.5"/>
+        <div class="content">
+            <p class="post-date">12.28.2025</p>
 
-                    <!-- soma -->
-                    <ellipse cx="180" cy="45" rx="25" ry="18" fill="none" stroke="#888888" stroke-width="1.5" opacity="0.6"/>
+            <div class="post-body">
+                <p>
+                    With the semester at its end, I want to reflect on the results I developed from my project (and I'll touch on lessons learned on my <a href="https://reductionism.substack.com">Substack</a>). In the first post, I argued that "balance" plants a single real outlier eigenvalue at \(-b\), and that this outlier quietly controls the macroscopic mean dynamics. Here, I want to do the honest thing: show the experiments. We'll reproduce the baseline spectral and DMFT fingerprints under driven chaos, then push beyond balance by adding a rank-one perturbation and asking a concrete question:
+                </p>
 
-                    <!-- axon hillock -->
-                    <path d="M 205 45 Q 220 45 235 45" stroke="#888888" stroke-width="2" fill="none" opacity="0.6"/>
+                <p>
+                    <i>As we turn up low-rank strength, can a single outlier track the stability of a non-autonomous, OU-driven RNN?</i>
+                </p>
 
-                    <!-- axon -->
-                    <path d="M 235 45 Q 300 40 400 42 Q 500 44 600 41 Q 700 38 800 40 Q 850 41 900 39" stroke="#888888" stroke-width="1.8" fill="none" opacity="0.6"/>
+                <p>
+                    This is, in spirit, the minimal bridge between two worlds: finite-rank spectral theory (outliers) and dynamical systems (Lyapunov exponents).
+                </p>
 
-                    <!-- axon terminals -->
-                    <path d="M 880 39 Q 890 35 900 30" stroke="#888888" stroke-width="1" fill="none" opacity="0.5"/>
-                    <path d="M 885 40 Q 895 44 905 48" stroke="#888888" stroke-width="1" fill="none" opacity="0.5"/>
-                    <path d="M 890 38 Q 900 42 910 45" stroke="#888888" stroke-width="1" fill="none" opacity="0.5"/>
+                <p>
+                    We simulate the same continuous-time rate network with \(N\) units and \(\phi(x)=\max(0,x)\), as in the first post:
+                    \[
+                    \tau \dot h(t) = -h(t) + J \phi(h(t)) + I_{\mathrm{OU}}(t),
+                    \]
+                    with "balanced" connectivity
+                    \[
+                    J = gW - \frac{b}{N}\mathbf{1}\mathbf{1}^\top,
+                    \qquad W_{ij}\sim \mathcal{N}(0,1/N).
+                    \]
+                    The gain \(g\) sets the bulk radius; the balance \(b\) creates the single real outlier at \(-b\). (We keep the same OU statistics as in Engelken et al.: correlation time \(\tau_S\), amplitude \(\sigma_{\mathrm{OU}}\), and strong balance.)
+                </p>
 
-                    <!-- synaptic vesicles -->
-                    <circle cx="895" cy="32" r="1.5" fill="#888888" opacity="0.4"/>
-                    <circle cx="900" cy="46" r="1.5" fill="#888888" opacity="0.4"/>
-                    <circle cx="905" cy="43" r="1.5" fill="#888888" opacity="0.4"/>
-                </svg>
+                <div class="callout">
+                    "In a driven balanced network, the bulk stays high-dimensional, but the mean mode is a one-dimensional ghost."
+                </div>
 
-                <h1>a ghost in the machine ii</h1>
-                <div class="top-link" style="margin-top: 0.3em; margin-bottom: 0;">
-                    <a href="/blog/">&larr; blog</a>
+                <p>
+                    Before doing anything new, I wanted to make sure the machinery is real by reproducing the baseline fingerprints. There are three checks:
+                    <br><br>
+                    (i) Trajectories behave as expected as \(g\) increases: fluctuations grow, but remain bounded under strong balance.<br>
+                    (ii) Non-stationary DMFT qualitatively matches the time-resolved mean \(m(t)\) and variance \(c(t,t)\).<br>
+                    (iii) The spectrum of \(J\) is exactly what it should be: a Ginibre disk of radius \(\approx g\) plus the real outlier at \(-b\).
+                </p>
+
+                <figure>
+                    <img src="/assets/post4/fig1-trajectories.png" alt="raw currents h_i(t) and population mean m(t) in low-g vs high-g regimes under OU drive">
+                    <figcaption>
+                        <b>Figure 1.</b> Raw trajectories \(h_i(t)\) (a few neurons) overlaid with the population mean \(m(t)\), comparing a low-g and high-g regime under OU drive.
+                    </figcaption>
+                </figure>
+
+                <figure>
+                    <img src="/assets/post4/fig2-ns-dmft.png" alt="non-stationary DMFT vs simulation: mean m(t) and variance c(t,t)">
+                    <figcaption>
+                        <b>Figure 2.</b> Non-stationary DMFT (time-resolved closure) vs network simulation: the population mean \(m(t)\) and variance \(c(t,t)\) track qualitatively, which is all we need before asking spectral questions.
+                    </figcaption>
+                </figure>
+
+                <p>
+                    The spectral check is the one I care about most, because everything that follows is an outlier story. If balance is doing what it claims, then \(J\) should look like: circular bulk + one real spike at \(-b\). And that's what we see.
+                </p>
+
+                <figure class="two-column">
+                    <div>
+                        <img src="/assets/post4/fig3a.png" alt="spectrum of J: Ginibre bulk with outlier at -b">
+                        <img src="/assets/post4/fig3b.png" alt="largest Lyapunov exponent as function of g">
+                    </div>
+                    <figcaption>
+                        <b>Figure 3.</b> (Left) Spectrum of \(J\): Ginibre bulk of radius \(\approx g\) plus the balanced outlier at \(-b\). (Right) Largest Lyapunov exponent \(\lambda_1(g)\) under OU drive, approaching the transition as \(g\) increases (but staying negative here).
+                    </figcaption>
+                </figure>
+
+                <p>
+                    This already hints at something subtle. We often talk as if "the transition to chaos" is a crisp curve in parameter space. But at finite \(N\) and finite simulation horizon, the world is softer: \(\lambda_1\) trends toward zero without crossing. That softness matters once we start using spectral proxies.
+                </p>
+
+                <p>
+                    The real object controlling stability in a driven system is not the spectrum of \(J\), but the linearization along the trajectory. To move from connectivity outliers to Jacobian outliers, linearize the dynamics:
+                    \[
+                    A(t) = -I + J D(t), \qquad D(t) = \mathrm{diag}\!\left(\phi'(h(t))\right),
+                    \]
+                    where \(D(t)\) is the <i>gain mask</i> that encodes which neurons are active at time \(t\) under ReLU.
+                </p>
+
+                <p>
+                    If the drive is slow enough, a natural (dangerous) idea is to average:
+                    \[
+                    A_{\mathrm{avg}} = -I + J \bar D, \qquad \bar D \approx \mathbb{E}_t[D(t)].
+                    \]
+                    This is not a theorem. It's a controlled hallucination: "pretend the driven Jacobian is approximately stationary." But it's the right hallucination if you want an outlier story.
+                </p>
+
+                <div class="callout">
+                    "In a non-autonomous network, the outlier you want is not in \(J\). It's in the <i>filtered</i> matrix \(J\bar D\)."
+                </div>
+
+                <p>
+                    Now we move to a rank-one experiment with a surprisingly useful proxy. We add a rank-one perturbation:
+                    \[
+                    J = gW - \frac{b}{N}\mathbf{1}\mathbf{1}^\top + m\,u v^\top,
+                    \]
+                    with \(u,v\) random unit vectors chosen orthogonal to \(\mathbf{1}\) (so we don't just re-inject another mean mode). The knob is \(m\), the low-rank strength.
+                </p>
+
+                <p>
+                    The experiment loop is:<br>
+                    (1) Simulate the OU-driven network at fixed \((g,b)\) while sweeping \(m\);<br>
+                    (2) Build \(A_{\mathrm{avg}}\) from the time-averaged gain mask \(\bar D\);<br>
+                    (3) Extract the eigenvalue of \(A_{\mathrm{avg}}\) with largest real part (the "outlier");<br>
+                    (4) Compute \(\lambda_1\) using the Benettin algorithm along the full time-dependent Jacobian.
+                </p>
+
+                <p>
+                    Here is the punchline: for rank-one structure, there's a scalar proxy for the low-rank outlier:
+                    \[
+                    \hat\lambda_{\mathrm{out}}(m) \;\approx\; m\,\bar\alpha - 1,
+                    \qquad \bar\alpha = v^\top (\bar D u).
+                    \]
+                    This is the smallest possible "low-dimensional stability indicator": one number extracted from \(\bar D\). If \(\hat\lambda_{\mathrm{out}}\) tracks \(\lambda_1\), then we've learned something structural: the low-rank mode is steering the boundary.
+                </p>
+
+                <figure>
+                    <img src="/assets/post4/fig4-low_rank_outlier.png" alt="spectrum of A_avg as m increases; proxy vs empirical outlier real part; LLE vs m">
+                    <figcaption>
+                        <b>Figure 4.</b> Low-rank outlier proxy vs largest Lyapunov exponent. (a) Spectrum of \(A_{\mathrm{avg}}\) as \(m\) increases: a single real outlier drifts right. (b) Proxy \(m(v^\top \bar D u)-1\) compared to the empirical \(\Re \lambda_{\mathrm{out}}(A_{\mathrm{avg}})\). (c) \(\lambda_1(m)\) from Benettin along the full time-dependent Jacobian.
+                    </figcaption>
+                </figure>
+
+                <p>
+                    What I find satisfying is not that the curves coincide. They don't. What matters is that they <i>move together</i>. As \(m\) increases, the outlier of \(A_{\mathrm{avg}}\) slides right; the scalar proxy slides with it; and \(\lambda_1(m)\) trends toward zero. In the parameter range I explored, everything stayed stable (no actual crossing), but the alignment is the central sanity check:
+                </p>
+
+                <p>
+                    <i>The low-rank mode appears to be the first macroscopic "handle" on stability, even under drive.</i>
+                </p>
+
+                <div class="callout">
+                    "\(\lambda_1\) is the verdict. The outlier proxy is an early-warning signal."
+                </div>
+
+                <p>
+                    There is a clean reason to be suspicious about where the proxy fails, and why that's not a defeat. Stability in a driven system is governed by the time-ordered product of Jacobians, a non-commutative object. A single averaged matrix \(A_{\mathrm{avg}}\) cannot capture non-normal transient growth, nor can it see fast input regimes. This is why, in exploratory phase-slices at larger \(g\) and \(m\), the proxy can become positive while sparse \(\lambda_1\) checks remain negative.
+                </p>
+
+                <p>
+                    I don't see this as failure. I see it as a map: it tells us exactly where the quasi-stationary picture breaks.
+                </p>
+
+                <p>
+                    The honest endgame for making the ghost quantitative is not a proxy. It's a full low-rank, non-stationary DMFT, a time-resolved closure not just for the mean \(m(t)\) and covariance \(c(t,s)\), but also for the <i>overlap variables</i> \(\kappa(t)\) that carry low-rank structure. At rank \(R\), these overlaps live in \(\mathbb{R}^R\), and they are the natural "order parameters" of the structured mode.
+                </p>
+
+                <p>
+                    Once you have \((m,c,\kappa)\), the stability question becomes low-dimensional again: linearize the overlap update map and track when the maximal real part crosses zero. That would turn the ghost into a genuine stability boundary, not a heuristic.
+                </p>
+
+                <p>
+                    Concretely, here's what I'm doing next:<br>
+                    (1) Solve the low-rank NS-DMFT equations numerically (including overlaps) instead of relying on trajectory averages;<br>
+                    (2) Map the \((g,m)\) plane at larger \(N\) and longer horizons until \(\lambda_1\) actually crosses zero;<br>
+                    (3) Move beyond rank-one: \(R>1\) structure introduces multiple outliers, and the question becomes <i>which</i> one controls the bifurcation;<br>
+                    (4) Stress test the assumptions: rapid drive, large \(g\), non-normality, different nonlinearities.
+                </p>
+
+                <p>
+                    I'm quite satisfied with my results this semester, despite deeply overextending on my initial goals. I'm very grateful to Rainer Engelken for his guidance and support, the final report is available <a href="/assets/post4/low-rank-rnns.pdf">here</a>.
+                </p>
+
+                <div class="back-link">
+                    <a href="/blog/">← back to blog</a>
                 </div>
             </div>
-
-            <p><span class="gray-date">12.28.2025</span><br><br>
-                With the semester at its end, I want to reflect on the results I developed from my project (and I'll touch on lessons learned on my <a href="https://reductionism.substack.com" style="text-decoration:none; color:darkred; font-weight:400;">Substack</a>). In the first post, I argued that "balance" plants a single real outlier eigenvalue at \(-b\), and that this outlier
-                quietly controls the macroscopic mean dynamics. Here, I want to do the honest thing: show the experiments.
-                We'll reproduce the baseline spectral and DMFT fingerprints under driven chaos, then push beyond balance by adding
-                a rank-one perturbation and asking a concrete question:
-                <br><br>
-                <i>As we turn up low-rank strength, can a single outlier track the stability of a non-autonomous, OU-driven RNN?</i>
-                <br><br>
-                This is, in spirit, the minimal bridge between two worlds: finite-rank spectral theory (outliers) and dynamical systems
-                (Lyapunov exponents).
-            </p>
-
-            <p>
-                We simulate the same continuous-time rate network with \(N\) units and \(\phi(x)=\max(0,x)\), as in the first post:
-                \[
-                \tau \dot h(t) = -h(t) + J \phi(h(t)) + I_{\mathrm{OU}}(t),
-                \]
-                with "balanced" connectivity
-                \[
-                J = gW - \frac{b}{N}\mathbf{1}\mathbf{1}^\top,
-                \qquad W_{ij}\sim \mathcal{N}(0,1/N).
-                \]
-                The gain \(g\) sets the bulk radius; the balance \(b\) creates the single real outlier at \(-b\).
-                (We keep the same OU statistics as in Engelken et al.: correlation time \(\tau_S\), amplitude \(\sigma_{\mathrm{OU}}\), and strong balance.)
-            </p>
-
-            <div class="callout">
-                "In a driven balanced network, the bulk stays high-dimensional, but the mean mode is a one-dimensional ghost."
-            </div>
-
-            <p>
-                Before doing anything new, I wanted to make sure the machinery is real by reproducing the baseline fingerprints. There are three checks:
-                <br><br>
-                (i) Trajectories behave as expected as \(g\) increases: fluctuations grow, but remain bounded under strong balance.
-                <br>
-                (ii) Non-stationary DMFT qualitatively matches the time-resolved mean \(m(t)\) and variance \(c(t,t)\).
-                <br>
-                (iii) The spectrum of \(J\) is exactly what it should be: a Ginibre disk of radius \(\approx g\) plus the real outlier at \(-b\).
-            </p>
-
-            <figure>
-                <img src="/assets/post4/fig1-trajectories.png"
-                     alt="raw currents h_i(t) and population mean m(t) in low-g vs high-g regimes under OU drive">
-                <figcaption>
-                    <b>Figure 1.</b> Raw trajectories \(h_i(t)\) (a few neurons) overlaid with the population mean \(m(t)\),
-                    comparing a low-g and high-g regime under OU drive.
-                </figcaption>
-            </figure>
-
-            <figure>
-                <img src="/assets/post4/fig2-ns-dmft.png"
-                     alt="non-stationary DMFT vs simulation: mean m(t) and variance c(t,t)">
-                <figcaption>
-                    <b>Figure 2.</b> Non-stationary DMFT (time-resolved closure) vs network simulation:
-                    the population mean \(m(t)\) and variance \(c(t,t)\) track qualitatively, which is all we need before asking spectral questions.
-                </figcaption>
-            </figure>
-
-            <p>
-                The spectral check is the one I care about most, because everything that follows is an outlier story.
-                If balance is doing what it claims, then \(J\) should look like: circular bulk + one real spike at \(-b\).
-                And that's what we see.
-            </p>
-
-            <figure class="two-column">
-                <div>
-                    <img src="/assets/post4/fig3a.png" 
-                         alt="spectrum of J: Ginibre bulk with outlier at -b">
-                    <img src="/assets/post4/fig3b.png" 
-                         alt="largest Lyapunov exponent as function of g">
-                </div>
-                <figcaption>
-                    <b>Figure 3.</b> (Left) Spectrum of \(J\): Ginibre bulk of radius \(\approx g\) plus the balanced outlier at \(-b\).
-                    (Right) Largest Lyapunov exponent \(\lambda_1(g)\) under OU drive, approaching the transition as \(g\) increases (but staying negative here).
-                </figcaption>
-            </figure>
-
-            <p>
-                This already hints at something subtle. We often talk as if "the transition to chaos" is a crisp curve in parameter space.
-                But at finite \(N\) and finite simulation horizon, the world is softer: \(\lambda_1\) trends toward zero without crossing.
-                That softness matters once we start using spectral proxies.
-            </p>
-
-            <p>
-                The real object controlling stability in a driven system is not the spectrum of \(J\), but the linearization along the trajectory. To move from connectivity outliers to Jacobian outliers,
-                Linearize the dynamics:
-                \[
-                A(t) = -I + J D(t), \qquad D(t) = \mathrm{diag}\!\left(\phi'(h(t))\right),
-                \]
-                where \(D(t)\) is the <i>gain mask</i> that encodes which neurons are active at time \(t\) under ReLU.
-                <br><br>
-                If the drive is slow enough, a natural (dangerous) idea is to average:
-                \[
-                A_{\mathrm{avg}} = -I + J \bar D, \qquad \bar D \approx \mathbb{E}_t[D(t)].
-                \]
-                This is not a theorem. It's a controlled hallucination: "pretend the driven Jacobian is approximately stationary."
-                But it's the right hallucination if you want an outlier story.
-            </p>
-
-            <div class="callout">
-                "In a non-autonomous network, the outlier you want is not in \(J\). It's in the <i>filtered</i> matrix \(J\bar D\)."
-            </div>
-
-            <p>
-                Now we move to a rank-one experiment with a surprisingly useful proxy. We add a rank-one perturbation:
-                \[
-                J = gW - \frac{b}{N}\mathbf{1}\mathbf{1}^\top + m\,u v^\top,
-                \]
-                with \(u,v\) random unit vectors chosen orthogonal to \(\mathbf{1}\) (so we don't just re-inject another mean mode).
-                The knob is \(m\), the low-rank strength.
-                <br><br>
-                The experiment loop is:
-                <br>
-                (1) Simulate the OU-driven network at fixed \((g,b)\) while sweeping \(m\);
-                <br>
-                (2) Build \(A_{\mathrm{avg}}\) from the time-averaged gain mask \(\bar D\);
-                <br>
-                (3) Extract the eigenvalue of \(A_{\mathrm{avg}}\) with largest real part (the "outlier");
-                <br>
-                (4) Compute \(\lambda_1\) using the Benettin algorithm along the full time-dependent Jacobian.
-            </p>
-
-            <p>
-                Here is the punchline: for rank-one structure, there's a scalar proxy for the low-rank outlier:
-                \[
-                \hat\lambda_{\mathrm{out}}(m) \;\approx\; m\,\bar\alpha - 1,
-                \qquad \bar\alpha = v^\top (\bar D u).
-                \]
-                This is the smallest possible "low-dimensional stability indicator": one number extracted from \(\bar D\).
-                If \(\hat\lambda_{\mathrm{out}}\) tracks \(\lambda_1\), then we've learned something structural:
-                the low-rank mode is steering the boundary.
-            </p>
-
-            <figure>
-                <img src="/assets/post4/fig4-low_rank_outlier.png"
-                     alt="spectrum of A_avg as m increases; proxy vs empirical outlier real part; LLE vs m">
-                <figcaption>
-                    <b>Figure 4.</b> Low-rank outlier proxy vs largest Lyapunov exponent.
-                    (a) Spectrum of \(A_{\mathrm{avg}}\) as \(m\) increases: a single real outlier drifts right.
-                    (b) Proxy \(m(v^\top \bar D u)-1\) compared to the empirical \(\Re \lambda_{\mathrm{out}}(A_{\mathrm{avg}})\).
-                    (c) \(\lambda_1(m)\) from Benettin along the full time-dependent Jacobian.
-                </figcaption>
-            </figure>
-
-            <p>
-                What I find satisfying is not that the curves coincide. They don't.
-                What matters is that they <i>move together</i>.
-                As \(m\) increases, the outlier of \(A_{\mathrm{avg}}\) slides right; the scalar proxy slides with it; and \(\lambda_1(m)\) trends toward zero.
-                In the parameter range I explored, everything stayed stable (no actual crossing), but the alignment is the central sanity check:
-                <br><br>
-                <i>The low-rank mode appears to be the first macroscopic "handle" on stability, even under drive.</i>
-            </p>
-
-            <div class="callout">
-                "\(\lambda_1\) is the verdict. The outlier proxy is an early-warning signal."
-            </div>
-
-            <p>
-                There is a clean reason to be suspicious about where the proxy fails, and why that's not a defeat. Stability in a driven system is governed by the time-ordered product
-                of Jacobians, a non-commutative object.
-                A single averaged matrix \(A_{\mathrm{avg}}\) cannot capture non-normal transient growth, nor can it see fast input regimes.
-                This is why, in exploratory phase-slices at larger \(g\) and \(m\), the proxy can become positive while sparse \(\lambda_1\) checks remain negative.
-                <br><br>
-                I don't see this as failure. I see it as a map:
-                it tells us exactly where the quasi-stationary picture breaks.
-            </p>
-
-            <p>
-                The honest endgame for making the ghost quantitative is not a proxy. It's a full low-rank, non-stationary DMFT, a time-resolved closure not just for the mean \(m(t)\)
-                and covariance \(c(t,s)\), but also for the <i>overlap variables</i> \(\kappa(t)\) that carry low-rank structure.
-                At rank \(R\), these overlaps live in \(\mathbb{R}^R\), and they are the natural "order parameters" of the structured mode.
-                <br><br>
-                Once you have \((m,c,\kappa)\), the stability question becomes low-dimensional again:
-                linearize the overlap update map and track when the maximal real part crosses zero.
-                That would turn the ghost into a genuine stability boundary, not a heuristic.
-            </p>
-
-
-            <p>
-                Concretely, here's what I'm doing next:
-                <br><br>
-                (1) Solve the low-rank NS-DMFT equations numerically (including overlaps) instead of relying on trajectory averages;
-                <br>
-                (2) Map the \((g,m)\) plane at larger \(N\) and longer horizons until \(\lambda_1\) actually crosses zero;
-                <br>
-                (3) Move beyond rank-one: \(R>1\) structure introduces multiple outliers, and the question becomes <i>which</i> one controls the bifurcation;
-                <br>
-                (4) Stress test the assumptions: rapid drive, large \(g\), non-normality, different nonlinearities.
-                <br><br>
-                I'm quite satisfied with my results this semester, despite deeply overextending on my initial goals. I'm very grateful to Rainer Engelken for his guidance and support, the final report is available <a href="/assets/post4/low-rank-rnns.pdf" style="text-decoration:none; color:darkred; font-weight:400;">here</a>.
-            </p>
-
         </div>
     </div>
-
-    <script>
-        function toggleProof(proofId) {
-            const proof = document.getElementById(proofId);
-            proof.classList.toggle('collapsed');
-        }
-    </script>
 </body>
 </html>

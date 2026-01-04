@@ -1,164 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
   <link rel="icon" href="/assets/ad.png" type="image/x-icon" />
-  <link rel="stylesheet" href="/css/style.css">
   <title>aniket deshpande</title>
+  <meta name="description" content="Undergraduate student in physics at the University of Illinois, Urbana-Champaign.">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    ::selection {
+      background: #f9e6e6;
+    }
+
+    ::-moz-selection {
+      background: #f9e6e6;
+    }
+
     html {
-      font-size: 15px;
+      overflow-x: hidden;
+      overflow-y: scroll;
     }
 
-    body.tgt-layout {
+    body {
+      width: 100%;
+      margin: 25px 0;
+      padding: 0;
+      background: #fff;
       font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
-      background-color: #fff;
-      color: #111;
-    }
-
-    h1 {
+      font-size: 16px;
       font-weight: 400;
-      margin-top: 10rem;
-      margin-bottom: 0.2rem;
-      font-size: 2rem;
-      line-height: 1;
+      line-height: 1.5;
     }
 
-    h1 a {
+    a {
+      color: darkred;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: #8B0000;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 30px;
+    }
+
+    @media screen and (min-width: 600px) {
+      body {
+        margin: 50px 0 25px;
+      }
+      .container {
+        margin: 0 60px;
+      }
+    }
+
+    @media screen and (min-width: 800px) {
+      body {
+        margin: 120px 0 50px;
+      }
+      .container {
+        margin: 0 140px;
+      }
+    }
+
+    .bio {
+      max-width: 500px;
+    }
+
+    .bio__header {
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 21px;
+    }
+
+    .bio__header a {
       text-decoration: none;
       color: inherit;
-      display: inline-block;
-      transition: transform 0.15s ease;
     }
 
-    h1 a:hover {
-      transform: skewX(-8deg);
-    }
-    
-    .menu {
-      margin-bottom: 1.5em;
-      margin-top: 0.5em;
-      text-align: left;
-      font-size: 1rem;
-    }
-    
-    .menu p {
-      margin: 0;
-      text-align: left;
-    }
-    
-    .menu a {
+    .bio__header a:hover {
       text-decoration: none;
-      margin-right: 1em;
-      display: inline-block;
-      transition: transform 0.15s ease;
-    }
-    .menu a:hover {
-      transform: skewX(-8deg);
-    }
-    
-    .menu a:last-child {
-      margin-right: 0;
     }
 
-    p {
-      margin-top: 1.4rem;
-      margin-bottom: 1.4rem;
-      padding-right: 0;
-      vertical-align: baseline;
-      font-size: 1rem;
-      line-height: 1.3rem;
+    .bio__tabs {
+      margin-bottom: 20px;
+      font-style: italic;
     }
 
-    /* Prevent layout shift on hover by using transform instead of font-style */
-    a[style*="color:darkred"] {
-      display: inline-block;
-      transition: transform 0.15s ease;
+    .bio__tabs a {
+      text-decoration: none;
+      color: inherit;
     }
-    a[style*="color:darkred"]:hover {
-      transform: skewX(-8deg);
+
+    .bio__tabs a:hover {
+      color: darkred;
+    }
+
+    .bio__social {
+      margin: 0;
+      margin-top: 50px;
+      padding: 0;
+      list-style: none;
+      font-style: italic;
+    }
+
+    .bio__social a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .bio__social a:hover {
+      color: darkred;
+    }
+
+    .bio__photo {
+      float: right;
+      padding-left: 0;
+      margin-left: -60px;
+      margin-right: 350px;
+      margin-top: 20px;
+    }
+
+    .bio__photo img {
+      width: 160px;
+      height: auto;
+      border-radius: 4px;
+    }
+
+    .content {
+      width: 61%;
+      max-width: 610px;
+    }
+
+    @media screen and (max-width: 800px) {
+      .bio__photo {
+        float: none;
+        padding-left: 0;
+        margin-bottom: 20px;
+      }
+      .content {
+        width: 100%;
+      }
+    }
+
+    b, strong {
+      font-weight: 600;
     }
   </style>
 </head>
 
-<body class="tgt-layout">
+<body>
   <div class="container">
-    <div class="text">
-      <h1><a href="/">aniket deshpande</a></h1>
-
-      <div class="menu">
-        <p>
-          <a href="/about/">home</a>
-          <a href="/research/">research</a>
-          <a href="/teaching/">teaching</a>
-          <a href="/notes/">notes</a>
-          <a href="/blog/">blog</a>
-          <a href="/code/">code</a>
-          <a href="/cv/cv.pdf">vitae</a>
-        </p>
+    <div class="bio">
+      <div class="bio__header">
+        <a href="/">aniket deshpande</a>
       </div>
+      <div class="bio__tabs">
+        <a href="/about/">about</a> <span class="dot">·</span>
+        <a href="/research/">research</a> <span class="dot">·</span>
+        <a href="/teaching/">teaching</a> <span class="dot">·</span>
+        <a href="/notes/">notes</a> <span class="dot">·</span>
+        <a href="/blog/">blog</a> <span class="dot">·</span>
+        <a href="/code/">code</a> <span class="dot">·</span>
+        <a href="/cv/cv.pdf">vitae</a>
+      </div>
+    </div>
 
-      <br>
+    <div class="bio__photo">
+      <img src="/assets/photo.jpg">
+    </div>
+
+    <div class="content">
 
       <p>
-        Undergraduate Student<br>
-        Department of Physics<br>
-        University of Illinois, Urbana-Champaign
-      </p>
-
-      <p>
-        I do research in numerical linear algebra and machine learning. you can find a summary
-        of my ongoing <a href="/research/"
-          style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">research</a> and a <a
-          href="/reading/"
-          style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">reading list</a> of books
-        and papers I'm exploring. beyond academics, I enjoy ultimate frisbee and expanding my record collection.
-        here is a <a href="/graph-walk/"
-          style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;">simulation</a> of graph
-        random walks!
+        I am a physics student at UIUC. I do research in numerical linear algebra and machine learning. You can find a summary
+        of my ongoing <a href="/research/">research</a> and a <a href="/reading/">reading list</a> of books
+        and papers I'm exploring. Beyond academics, I enjoy ultimate frisbee and expanding my record collection.
+        Here is a <a href="/graph-walk/">simulation</a> of graph random walks!
       </p>
 
       <p>
         <b>news:</b><br>
-        [02.2026] - I will be joining the <a href="https://vectorinstitute.ai/"
-          style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;"
-          target="_blank">Vector Institute</a> as a visiting research intern! I will be hosted by <a
-          href="https://www.matter.toronto.edu/basic-content-page/about-alan"
-          style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;"
-          target="_blank">Alán
-          Aspuru-Guzik</a> and the Matter Lab at the University of Toronto.<br>
-        [08.2025] - "Approximating Tensor
-        Contractions with Annealed Importance Sampling" will be at the poster session at <a
-          href="https://qsimconference.org/"
-          style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:darkred;"
-          target="_blank">QSim 2025</a> at IBM, New York
-        City.
-      </p>
-
-      <br>
-      
-      <p>
-        <a href="https://github.com/aniket-desh" 
-          style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:black;"
-          target="_blank">github/<i>aniket-desh</i></a><br>
-        <a href="https://twitter.com/aniketdxsh" 
-          style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:black;"
-          target="_blank">twitter/<i>aniketdxsh</i></a><br>
-        <a href="https://reductionism.substack.com" 
-          style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:black;"
-          target="_blank">substack/<i>the effective reductionist</i></a><br>
-        <a href="mailto:aniket4@illinois.edu"
-          style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; font-size:inherit; font-weight:400; text-decoration:none; color:black;"
-          target="_blank">email/<i>aniket4 [at] illinois [dot] edu</i></a><br>
+        [02.2026] - I will be joining the <a href="https://vectorinstitute.ai/" target="_blank">Vector Institute</a> as a visiting research intern! I will be hosted by <a href="https://www.matter.toronto.edu/basic-content-page/about-alan" target="_blank">Alán Aspuru-Guzik</a> and the Matter Lab at the University of Toronto.<br>
+        [08.2025] - "Approximating Tensor Contractions with Annealed Importance Sampling" will be at the poster session at <a href="https://qsimconference.org/" target="_blank">QSim 2025</a> at IBM, New York City.
       </p>
     </div>
-    <div class="image">
-      <img src="/assets/photo.jpg" alt="">
+
+    <div class="socials">
+      <ul class="bio__social">
+        <li><a href="mailto:aniket4@illinois.edu" target="_blank">email / aniket4@illinois.edu</a></li>
+        <li><a href="https://github.com/aniket-desh" target="_blank">github / aniket-desh</a></li>
+        <li><a href="https://twitter.com/aniketdxsh" target="_blank">twitter / aniketdxsh</a></li>
+        <li><a href="https://reductionism.substack.com" target="_blank">substack / the effective reductionist</a></li>
+      </ul>
     </div>
   </div>
 </body>
-
 </html>
-
