@@ -144,6 +144,51 @@
             margin-bottom: 15px;
         }
 
+        .sidebar {
+            background-color: #f8f8f8;
+            border-left: 3px solid #8B0000;
+            padding: 12px 15px;
+            margin: 20px 0;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .sidebar-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .sidebar-ref {
+            display: inline-block;
+            font-size: 0.75em;
+            vertical-align: super;
+            color: #8B0000;
+            font-weight: 700;
+            margin-left: 2px;
+            text-decoration: none;
+        }
+
+        .sidebar-number {
+            color: #8B0000;
+            font-weight: 700;
+            margin-right: 4px;
+        }
+
+        @media screen and (min-width: 1200px) {
+            .post-body {
+                position: relative;
+            }
+
+            .sidebar {
+                position: absolute;
+                left: calc(100% + 40px);
+                width: 280px;
+                margin: 0;
+                font-size: 14px;
+            }
+        }
+
         .back-link {
             margin-top: 40px;
             font-style: italic;
@@ -193,7 +238,16 @@
                     \[
                     H = \sum_{i=1}^{n-1}Z_{i}Z_{i+1} + \sum_{i=1}^{n}h_iX_i
                     \]
-                    With a Suzuki-Trotter decomposition, this quantum system becomes a classical one in \(n \times \beta\) space-time, with a Gibbs distribution over paths \(x \in \{0, 1 \}^{n\beta}\). Sampling from this distribution using MCMC requires Glauber dynamics. However, our estimates can be wildly inaccurate unless we prove mixing time to be <i>small</i>.
+                    With a Suzuki-Trotter decomposition, this quantum system becomes a classical one in \(n \times \beta\) space-time, with a Gibbs distribution over paths \(x \in \{0, 1 \}^{n\beta}\). Sampling from this distribution using MCMC requires Glauber dynamics. However, our estimates can be wildly inaccurate unless we prove mixing time<span class="sidebar-ref">[1]</span> to be <i>small</i>.
+
+                <div class="sidebar">
+                    <div class="sidebar-title"><span class="sidebar-number">[1]</span>Mixing time</div>
+                    The mixing time is defined as
+                    \[
+                    \tau(\epsilon) = \min\{t : \|\mu_t - \pi\|_{TV} \leq \epsilon\}
+                    \]
+                    where \(\mu_t\) is the distribution after \(t\) steps and \(\pi\) is the stationary distribution. It measures how many steps are needed to get \(\epsilon\)-close in total variation distance.
+                </div>
                 </p>
 
                 <p>
@@ -201,7 +255,14 @@
                     \[
                     P(x) \propto \exp \left( \sum_{(i, j) \in E} \theta_{ij} x_i x_j + \sum_{i}\theta_i x_i \right)
                     \]
-                    and we want to compute marginal probabilities \(P(X_i = 1)\). Exact inference is \(\mathsf{\# P}\)-hard, so we use Gibbs sampling. But how long does this take to converge to the true distribution? Once again, this depends on how fast the Markov chain mixes. Both of these examples illustrate that sampling is not just a numerical tool, but a computational lifeline in dire need of some theoretical justifications: <i>do these chains converge fast enough for meaningful inference?</i>
+                    and we want to compute marginal probabilities \(P(X_i = 1)\). Exact inference is \(\mathsf{\# P}\)-hard, so we use Gibbs sampling. But how long does this take to converge<span class="sidebar-ref">[2]</span> to the true distribution?
+
+                <div class="sidebar">
+                    <div class="sidebar-title"><span class="sidebar-number">[2]</span>Total variation distance</div>
+                    Total variation distance \(\|\mu - \pi\|_{TV} = \frac{1}{2}\sum_x |\mu(x) - \pi(x)|\) measures how far a distribution \(\mu\) is from the stationary distribution \(\pi\). It's the natural metric for convergence: at most 1, and 0 only when distributions are identical.
+                </div>
+
+                Once again, this depends on how fast the Markov chain mixes. Both of these examples illustrate that sampling is not just a numerical tool, but a computational lifeline in dire need of some theoretical justifications: <i>do these chains converge fast enough for meaningful inference?</i>
                 </p>
 
                 <p>
@@ -209,22 +270,40 @@
                     \[
                     \rho = \max_{e \in E} \frac{1}{Q(e)} \sum_{(x, y) : e \in \gamma_{x, y}} \pi(x)\pi(y)
                     \]
-                    where \( Q(e) = \pi(u) P(u, v)\) is the ergodic flow through edge \(e_{u \to v}\). In 1989, Jerrum and Sinclair showed that one can lower-bound the <i>conductance</i> \(\Phi\) and <i>spectral gap</i> \(\lambda_1\) with
+                    where \( Q(e) = \pi(u) P(u, v)\) is the ergodic flow through edge \(e_{u \to v}\).
+
+                <div class="sidebar">
+                    <div class="sidebar-title"><span class="sidebar-number">[3]</span>Conductance</div>
+                    Conductance \(\Phi\) measures the bottleneck probability flow: how easily probability mass can move between large sets. Larger \(\Phi\) means fewer bottlenecks and faster mixing.
+                </div>
+
+                In 1989, Jerrum and Sinclair showed that one can lower-bound the <i>conductance</i><span class="sidebar-ref">[3]</span> \(\Phi\) and <i>spectral gap</i><span class="sidebar-ref">[4]</span> \(\lambda_1\) with
                     \[
                     \Phi \geq \frac{1}{2\rho},\quad \lambda_1 \geq \frac{1}{2\rho^2}
                     \]
-                    yielding a mixing-time bound (in total variation) of 
+                yielding a mixing-time bound (in total variation) of
                     \[
                     \tau(\epsilon) \leq \frac{2}{\Phi^2} \left(\ln \frac{1}{\pi_{min}} + \ln \frac{1}{\epsilon} \right).
                     \]
+
+                <div class="sidebar">
+                    <div class="sidebar-title"><span class="sidebar-number">[4]</span>Spectral gap</div>
+                    The spectral gap \(\lambda_1 = 1 - |\lambda_2|\) measures the separation between the largest and second-largest eigenvalue of the transition matrix. Larger gap means exponentially faster convergence.
+                </div>
                 </p>
 
                 <p>
-                    This foundational result was the justification for their FPRAS algorithm for approximating the permanent of a matrix, and has since been generalized. However, canonical paths designate a single path to each pair of states potentially causing large congestion. So, we introduce <i>fractional flows</i>, a probability distribution over paths for each pair. Let \( f_{x, y}(\gamma)\) be the amount of flow along path \(\gamma\) from \(x\) to \(y\), subject to the constraint:
+                    This foundational result was the justification for their FPRAS<span class="sidebar-ref">[5]</span> algorithm for approximating the permanent of a matrix, and has since been generalized. However, canonical paths designate a single path to each pair of states potentially causing large congestion. So, we introduce <i>fractional flows</i>, a probability distribution over paths for each pair. Let \( f_{x, y}(\gamma)\) be the amount of flow along path \(\gamma\) from \(x\) to \(y\), subject to the constraint:
                     \[
                     \sum_{\gamma \in \Gamma} f_{x, y}(\gamma) = \pi(x) \pi(y).
                     \]
-                    The total load on an edge \(e\) and fractional congestion are defined as
+
+                <div class="sidebar">
+                    <div class="sidebar-title"><span class="sidebar-number">[5]</span>FPRAS</div>
+                    A Fully Polynomial Randomized Approximation Scheme is a randomized algorithm that computes a \((1 \pm \epsilon)\)-approximation in time polynomial in both the input size and \(1/\epsilon\).
+                </div>
+
+                The total load on an edge \(e\) and fractional congestion are defined as
                     \[
                     F(e) = \sum_{x, y}\sum_{\gamma \ni e} f_{x, y}(\gamma),\quad \rho_f = \max_{e \in E} \frac{F(e)}{Q(e)}.
                     \]

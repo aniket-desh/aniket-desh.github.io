@@ -137,6 +137,91 @@
             font-style: italic;
         }
 
+        figure {
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        figure.two-column > div {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        figure.two-column img {
+            max-width: 48%;
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            figure.two-column > div {
+                flex-direction: column;
+            }
+            figure.two-column img {
+                max-width: 100%;
+            }
+        }
+
+        figcaption {
+            font-size: 15px;
+            color: #666;
+            margin-top: 10px;
+            line-height: 1.4;
+            font-style: italic;
+        }
+
+        .sidebar {
+            background-color: #f8f8f8;
+            border-left: 3px solid #8B0000;
+            padding: 12px 15px;
+            margin: 20px 0;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .sidebar-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .sidebar-ref {
+            display: inline-block;
+            font-size: 0.75em;
+            vertical-align: super;
+            color: #8B0000;
+            font-weight: 700;
+            margin-left: 2px;
+            text-decoration: none;
+        }
+
+        .sidebar-number {
+            color: #8B0000;
+            font-weight: 700;
+            margin-right: 4px;
+        }
+
+        @media screen and (min-width: 1200px) {
+            .post-body {
+                position: relative;
+            }
+
+            .sidebar {
+                position: absolute;
+                left: calc(100% + 40px);
+                width: 280px;
+                margin: 0;
+                font-size: 14px;
+            }
+        }
+
         .back-link {
             margin-top: 40px;
             font-style: italic;
@@ -170,11 +255,11 @@
         </div>
 
         <div class="content">
-            <p class="post-date">09.28.2025</p>
+            <p class="post-date">12.28.2025</p>
 
             <div class="post-body">
                 <p>
-                    This post will be the first of two outlining a project I am completing for a <a href="https://courses.grainger.illinois.edu/ECE598RE/fa2025/">graduate course</a> on dynamical systems, neural networks, and theoretical neuroscience. Specifically, I will be exploring how low-rank structure hidden in high-dimensional random connectivity gives rise to <i>spectral outliers:</i> isolated eigenvalues that dominate the macroscopic behavior of otherwise chaotic networks. We will pull ideas from theories of random matrices, dynamical mean fields, and free probability to understand these phenomena.
+                    This post outlines a project I completed for a <a href="https://courses.grainger.illinois.edu/ECE598RE/fa2025/">graduate course</a> on dynamical systems, neural networks, and theoretical neuroscience. I explore how low-rank structure hidden in high-dimensional random connectivity gives rise to <i>spectral outliers:</i> isolated eigenvalues that dominate the macroscopic behavior of otherwise chaotic networks, and how these outliers can serve as early-warning signals for bifurcations in driven recurrent networks. The investigation blends random matrix theory, dynamical mean-field theory, and spectral analysis to make a conceptual ghost quantitative.
                 </p>
 
                 <p>
@@ -194,7 +279,14 @@
                     \[
                     J_{ij} = -\frac{b}{N}J_0 + \tilde{J}_{ij},\quad \tilde{J}_{ij} \sim \mathcal{N}(0, g^2/N).
                     \]
-                    \(b > 0\) tunes the <i>tightness of balance</i> (a stronger \(b\) means stronger recurrent inhibition), \(I(t)\) is a common input (e.g. an OU process with correlation time \(\tau_S\)), and \(\xi_i(t)\) is independent Gaussian noise such that \(\langle \xi_i(t) \xi_i(t') \rangle = \sigma^2 \tau \delta(t - t')\). We decompose the currents into a <i>population mean</i> and <i>fluctuations</i>:
+                    \(b > 0\) tunes the <i>tightness of balance</i><span class="sidebar-ref">[1]</span> (a stronger \(b\) means stronger recurrent inhibition), \(I(t)\) is a common input (e.g. an OU process with correlation time \(\tau_S\)), and \(\xi_i(t)\) is independent Gaussian noise such that \(\langle \xi_i(t) \xi_i(t') \rangle = \sigma^2 \tau \delta(t - t')\).
+
+                <div class="sidebar">
+                    <div class="sidebar-title"><span class="sidebar-number">[1]</span>Tightness of balance</div>
+                    Larger \(b\) means excitation and inhibition cancel more precisely in the mean. This "tight balance" confines chaos to high-dimensional fluctuations while the mean mode stays clean and fast.
+                </div>
+
+                We decompose the currents into a <i>population mean</i> and <i>fluctuations</i>:
                     \[
                     h_i(t) = m(t) + \tilde{h}_i(t),\quad m(t) = \frac{1}{N} \sum_{i=1}^N h_i(t),\quad \langle \tilde{h}_i(t) \rangle = 0.
                     \]
@@ -248,7 +340,12 @@
                 </div>
 
                 <p>
-                    To complete our understanding of this paper, it's worth highlighting a key result from <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010590">a complementary paper</a> done by Engelken et al. This PLOS paper provides code that shows the same non-stationary DMFT framework was used to compute the largest Lyapunov exponent \(\lambda_1\).
+                    To complete our understanding of this paper, it's worth highlighting a key result from <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010590">a complementary paper</a> done by Engelken et al. This PLOS paper provides code that shows the same non-stationary DMFT framework was used to compute the largest Lyapunov exponent<span class="sidebar-ref">[2]</span> \(\lambda_1\).
+
+                <div class="sidebar">
+                    <div class="sidebar-title"><span class="sidebar-number">[2]</span>Lyapunov exponents</div>
+                    The largest Lyapunov exponent \(\lambda_1\) measures how fast nearby trajectories diverge exponentially. Positive means chaos, negative means stability, zero marks the bifurcation boundary.
+                </div>
                 </p>
 
                 <p>
@@ -256,11 +353,147 @@
                 </p>
                     
                 <p>
-                    This closes the loop on what we know. Balance plants a real outlier eigenvalue at \(-b\), accelerates the mean mode, broadens encoding bandwidth, and shapes how chaos can be tamed. In the next post, I'll go beyond balance and introduce low-rank perturbations
+                    This closes the loop on what we know. Balance plants a real outlier eigenvalue at \(-b\), accelerates the mean mode, broadens encoding bandwidth, and shapes how chaos can be tamed. But the story doesn't end with theory. The natural next question is experimental: <i>can we go beyond balance and use low-rank structure to predict when a driven network crosses the stability boundary?</i>
+                </p>
+
+                <p>
+                    Before pushing into new territory, I wanted to confirm the baseline machinery by reproducing the spectral and DMFT fingerprints under driven chaos. There are three sanity checks:
+                </p>
+
+                <p>
+                    (i) Trajectories behave as expected as \(g\) increases: fluctuations grow, but remain bounded under strong balance.<br>
+                    (ii) Non-stationary DMFT qualitatively matches the time-resolved mean \(m(t)\) and variance \(c(t,t)\).<br>
+                    (iii) The spectrum of \(J\) is exactly what it should be: a Ginibre disk of radius \(\approx g\) plus the real outlier at \(-b\).
+                </p>
+
+                <figure>
+                    <img src="/assets/post4/fig1-trajectories.png" alt="raw currents h_i(t) and population mean m(t) in low-g vs high-g regimes under OU drive">
+                    <figcaption>
+                        <b>Figure 1.</b> Raw trajectories \(h_i(t)\) (a few neurons) overlaid with the population mean \(m(t)\), comparing a low-g and high-g regime under OU drive.
+                    </figcaption>
+                </figure>
+
+                <figure>
+                    <img src="/assets/post4/fig2-ns-dmft.png" alt="non-stationary DMFT vs simulation: mean m(t) and variance c(t,t)">
+                    <figcaption>
+                        <b>Figure 2.</b> Non-stationary DMFT (time-resolved closure) vs network simulation: the population mean \(m(t)\) and variance \(c(t,t)\) track qualitatively, which is all we need before asking spectral questions.
+                    </figcaption>
+                </figure>
+
+                <p>
+                    The spectral check is the one I care about most, because everything that follows is an outlier story. If balance is doing what it claims, then \(J\) should look like: circular bulk + one real spike at \(-b\). And that's exactly what emerges.
+                </p>
+
+                <figure class="two-column">
+                    <div>
+                        <img src="/assets/post4/fig3a.png" alt="spectrum of J: Ginibre bulk with outlier at -b">
+                        <img src="/assets/post4/fig3b.png" alt="largest Lyapunov exponent as function of g">
+                    </div>
+                    <figcaption>
+                        <b>Figure 3.</b> (Left) Spectrum of \(J\): Ginibre bulk of radius \(\approx g\) plus the balanced outlier at \(-b\). (Right) Largest Lyapunov exponent \(\lambda_1(g)\) under OU drive, approaching the transition as \(g\) increases (but staying negative here).
+                    </figcaption>
+                </figure>
+
+                <p>
+                    This already hints at something subtle. We often talk as if "the transition to chaos" is a crisp curve in parameter space. But at finite \(N\) and finite simulation horizon, the world is softer: \(\lambda_1\) trends toward zero without crossing. That softness matters once we start using spectral proxies.
+                </p>
+
+                <p>
+                    The real object controlling stability in a driven system is not the spectrum of \(J\), but the linearization along the trajectory. To move from connectivity outliers to Jacobian outliers, linearize the dynamics:
                     \[
-                    S = \sum_{k=1}^R m_k u_k v_k^T,
+                    A(t) = -I + J D(t), \qquad D(t) = \mathrm{diag}\!\left(\phi'(h(t))\right),
                     \]
-                    on top of the random bulk. Each term creates a new spectral outlier \(\lambda_{\mathrm{out}}\). My goal is to show that the real part of these outliers predicts exactly when the network bifurcates (from a fixed point to Hopf oscillations to chaos.) The hope is to expend DMFT with low-rank order parameters and make the ghost in the machine fully quantitative.
+                    where \(D(t)\) is the <i>gain mask</i> that encodes which neurons are active at time \(t\) under ReLU.
+                </p>
+
+                <p>
+                    If the drive is slow enough, a natural (dangerous) idea is to average:
+                    \[
+                    A_{\mathrm{avg}} = -I + J \bar D, \qquad \bar D \approx \mathbb{E}_t[D(t)].
+                    \]
+                    This is not a theorem. It's a controlled hallucination: "pretend the driven Jacobian is approximately stationary." But it's the right hallucination if you want an outlier story.
+                </p>
+
+                <div class="callout">
+                    "In a non-autonomous network, the outlier you want is not in \(J\). It's in the <i>filtered</i> matrix \(J\bar D\)."
+                </div>
+
+                <p>
+                    Now we move to a rank-one experiment with a surprisingly useful proxy. Add a rank-one perturbation:
+                    \[
+                    J = gW - \frac{b}{N}\mathbf{1}\mathbf{1}^\top + m\,u v^\top,
+                    \]
+                    with \(u,v\) random unit vectors chosen orthogonal to \(\mathbf{1}\) (so we don't just re-inject another mean mode). The knob is \(m\), the low-rank strength.
+                </p>
+
+                <p>
+                    The experiment loop is:<br>
+                    (1) Simulate the OU-driven network at fixed \((g,b)\) while sweeping \(m\);<br>
+                    (2) Build \(A_{\mathrm{avg}}\) from the time-averaged gain mask \(\bar D\);<br>
+                    (3) Extract the eigenvalue of \(A_{\mathrm{avg}}\) with largest real part (the "outlier");<br>
+                    (4) Compute \(\lambda_1\) using the Benettin algorithm<span class="sidebar-ref">[3]</span> along the full time-dependent Jacobian.
+
+                <div class="sidebar">
+                    <div class="sidebar-title"><span class="sidebar-number">[3]</span>Benettin algorithm</div>
+                    The Benettin algorithm computes Lyapunov exponents by tracking orthonormalized perturbation vectors along the trajectory, avoiding exponential overflow that would occur with naive methods.
+                </div>
+                </p>
+
+                <p>
+                    Here is the punchline: for rank-one structure, there's a scalar proxy for the low-rank outlier:
+                    \[
+                    \hat\lambda_{\mathrm{out}}(m) \;\approx\; m\,\bar\alpha - 1,
+                    \qquad \bar\alpha = v^\top (\bar D u).
+                    \]
+                    This is the smallest possible "low-dimensional stability indicator": one number extracted from \(\bar D\). If \(\hat\lambda_{\mathrm{out}}\) tracks \(\lambda_1\), then we've learned something structural: the low-rank mode is steering the boundary.
+                </p>
+
+                <figure>
+                    <img src="/assets/post4/fig4-low_rank_outlier.png" alt="spectrum of A_avg as m increases; proxy vs empirical outlier real part; LLE vs m">
+                    <figcaption>
+                        <b>Figure 4.</b> Low-rank outlier proxy vs largest Lyapunov exponent. (a) Spectrum of \(A_{\mathrm{avg}}\) as \(m\) increases: a single real outlier drifts right. (b) Proxy \(m(v^\top \bar D u)-1\) compared to the empirical \(\Re \lambda_{\mathrm{out}}(A_{\mathrm{avg}})\). (c) \(\lambda_1(m)\) from Benettin along the full time-dependent Jacobian.
+                    </figcaption>
+                </figure>
+
+                <p>
+                    What I find satisfying is not that the curves coincide. They don't. What matters is that they <i>move together</i>. As \(m\) increases, the outlier of \(A_{\mathrm{avg}}\) slides right; the scalar proxy slides with it; and \(\lambda_1(m)\) trends toward zero. In the parameter range I explored, everything stayed stable (no actual crossing), but the alignment is the central sanity check:
+                </p>
+
+                <p>
+                    <i>The low-rank mode appears to be the first macroscopic "handle" on stability, even under drive.</i>
+                </p>
+
+                <div class="callout">
+                    "\(\lambda_1\) is the verdict. The outlier proxy is an early-warning signal."
+                </div>
+
+                <p>
+                    There is a clean reason to be suspicious about where the proxy fails, and why that's not a defeat. Stability in a driven system is governed by the time-ordered product of Jacobians, a non-commutative object. A single averaged matrix \(A_{\mathrm{avg}}\) cannot capture non-normal transient growth<span class="sidebar-ref">[4]</span>, nor can it see fast input regimes. This is why, in exploratory phase-slices at larger \(g\) and \(m\), the proxy can become positive while sparse \(\lambda_1\) checks remain negative.
+
+                <div class="sidebar">
+                    <div class="sidebar-title"><span class="sidebar-number">[4]</span>Non-normal growth</div>
+                    Non-normal matrices can amplify perturbations transiently even when all eigenvalues are stable. The time-ordered product of Jacobians is non-commutative, so eigenvalues of \(A_{\mathrm{avg}}\) miss this transient amplification.
+                </div>
+                </p>
+
+                <p>
+                    I don't see this as failure. I see it as a map: it tells us exactly where the quasi-stationary picture breaks.
+                </p>
+
+                <p>
+                    The honest endgame for making the ghost quantitative is not a proxy. It's a full low-rank, non-stationary DMFT: a time-resolved closure not just for the mean \(m(t)\) and covariance \(c(t,s)\), but also for the <i>overlap variables</i> \(\kappa(t)\) that carry low-rank structure. At rank \(R\), these overlaps live in \(\mathbb{R}^R\), and they are the natural "order parameters" of the structured mode.
+                </p>
+
+                <p>
+                    Once you have \((m,c,\kappa)\), the stability question becomes low-dimensional again: linearize the overlap update map and track when the maximal real part crosses zero. That would turn the ghost into a genuine stability boundary, not a heuristic.
+                </p>
+
+                <p>
+                    The path forward is clear. Solve the low-rank NS-DMFT equations numerically (including overlaps) instead of relying on trajectory averages. Map the \((g,m)\) plane at larger \(N\) and longer horizons until \(\lambda_1\) actually crosses zero. Move beyond rank-one: \(R>1\) structure introduces multiple outliers, and the question becomes <i>which</i> one controls the bifurcation. Stress test the assumptions: rapid drive, large \(g\), non-normality, different nonlinearities.
+                </p>
+
+                <p>
+                    What began as a study of spectral outliers in balanced networks ended in a concrete bridge between finite-rank matrix theory and the stability of non-autonomous dynamical systems. The ghost is no longer just a metaphor. It's a quantifiable signal, a low-dimensional order parameter hidden inside high-dimensional chaos. I'm grateful to Rainer Engelken for his guidance throughout this project; the full technical report is available <a href="/assets/post4/low-rank-rnns.pdf">here</a>.
                 </p>
 
                 <div class="back-link">
