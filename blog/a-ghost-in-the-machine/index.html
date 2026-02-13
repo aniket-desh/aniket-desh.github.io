@@ -354,10 +354,8 @@
                 </p>
 
                 <p>
-                    Before pushing into new territory, I wanted to confirm the baseline machinery by reproducing the spectral and DMFT fingerprints under driven chaos. There are three sanity checks:
-                </p>
-
-                <p>
+                    Before doing anything new, I wanted to make sure the machinery is real. That means reproducing the baseline spectral and DMFT fingerprints under driven chaos. There are three checks:
+                    <br><br>
                     (i) Trajectories behave as expected as \(g\) increases: fluctuations grow, but remain bounded under strong balance.<br>
                     (ii) Non-stationary DMFT qualitatively matches the time-resolved mean \(m(t)\) and variance \(c(t,t)\).<br>
                     (iii) The spectrum of \(J\) is exactly what it should be: a Ginibre disk of radius \(\approx g\) plus the real outlier at \(-b\).
@@ -378,7 +376,7 @@
                 </figure>
 
                 <p>
-                    The spectral check is the one I care about most, because everything that follows is an outlier story. If balance is doing what it claims, then \(J\) should look like: circular bulk + one real spike at \(-b\). And that's exactly what emerges.
+                    The spectral check is the one I care about most, because everything that follows is an outlier story. If balance is doing what it claims, then \(J\) should look like: circular bulk + one real spike at \(-b\). And that's what we see.
                 </p>
 
                 <figure class="two-column">
@@ -396,7 +394,7 @@
                 </p>
 
                 <p>
-                    The real object controlling stability in a driven system is not the spectrum of \(J\), but the linearization along the trajectory. To move from connectivity outliers to Jacobian outliers, linearize the dynamics:
+                    Stability under drive lives in the linearization along the trajectory. To move from connectivity outliers to Jacobian outliers, linearize the dynamics:
                     \[
                     A(t) = -I + J D(t), \qquad D(t) = \mathrm{diag}\!\left(\phi'(h(t))\right),
                     \]
@@ -416,7 +414,7 @@
                 </div>
 
                 <p>
-                    Now we move to a rank-one experiment with a surprisingly useful proxy. Add a rank-one perturbation:
+                    Now we move to a rank-one experiment with a surprisingly useful proxy. Adding a rank-one perturbation,
                     \[
                     J = gW - \frac{b}{N}\mathbf{1}\mathbf{1}^\top + m\,u v^\top,
                     \]
@@ -437,7 +435,7 @@
                 </p>
 
                 <p>
-                    Here is the punchline: for rank-one structure, there's a scalar proxy for the low-rank outlier:
+                    Importantly, for rank-one structure, there's a scalar proxy for the low-rank outlier:
                     \[
                     \hat\lambda_{\mathrm{out}}(m) \;\approx\; m\,\bar\alpha - 1,
                     \qquad \bar\alpha = v^\top (\bar D u).
@@ -453,11 +451,7 @@
                 </figure>
 
                 <p>
-                    What I find satisfying is not that the curves coincide. They don't. What matters is that they <i>move together</i>. As \(m\) increases, the outlier of \(A_{\mathrm{avg}}\) slides right; the scalar proxy slides with it; and \(\lambda_1(m)\) trends toward zero. In the parameter range I explored, everything stayed stable (no actual crossing), but the alignment is the central sanity check:
-                </p>
-
-                <p>
-                    <i>The low-rank mode appears to be the first macroscopic "handle" on stability, even under drive.</i>
+                    I was satisified to see that the curves <i>move together</i>. As \(m\) increases, the outlier of \(A_{\mathrm{avg}}\) slides right; the scalar proxy slides with it; and \(\lambda_1(m)\) trends toward zero. In the parameter range I explored, everything stayed stable (no actual crossing), but the alignment is the central sanity check. The low-rank mode appears to be the first macroscopic "handle" on stability, even under drive.
                 </p>
 
                 <div class="callout">
@@ -465,7 +459,7 @@
                 </div>
 
                 <p>
-                    There is a clean reason to be suspicious about where the proxy fails, and why that's not a defeat. Stability in a driven system is governed by the time-ordered product of Jacobians, a non-commutative object. A single averaged matrix \(A_{\mathrm{avg}}\) cannot capture non-normal transient growth<span class="sidebar-ref">[4]</span>, nor can it see fast input regimes. This is why, in exploratory phase-slices at larger \(g\) and \(m\), the proxy can become positive while sparse \(\lambda_1\) checks remain negative.
+                    There is a clean reason to be suspicious about where the proxy fails. Stability in a driven system is governed by the time-ordered product of Jacobians, a non-commutative object. A single averaged matrix \(A_{\mathrm{avg}}\) cannot capture non-normal transient growth<span class="sidebar-ref">[4]</span>, nor can it see fast input regimes. This is why, in exploratory phase-slices at larger \(g\) and \(m\), the proxy can become positive while sparse \(\lambda_1\) checks remain negative.
 
                 <div class="sidebar">
                     <div class="sidebar-title"><span class="sidebar-number">[4]</span>Non-normal growth</div>
@@ -474,11 +468,11 @@
                 </p>
 
                 <p>
-                    I don't see this as failure. I see it as a map: it tells us exactly where the quasi-stationary picture breaks.
+                    While the proxy is not a perfect predictor, it does capture where the quasi-stationary picture breaks.
                 </p>
 
                 <p>
-                    The honest endgame for making the ghost quantitative is not a proxy. It's a full low-rank, non-stationary DMFT: a time-resolved closure not just for the mean \(m(t)\) and covariance \(c(t,s)\), but also for the <i>overlap variables</i> \(\kappa(t)\) that carry low-rank structure. At rank \(R\), these overlaps live in \(\mathbb{R}^R\), and they are the natural "order parameters" of the structured mode.
+                    The honest endgame is a full low-rank, non-stationary DMFT: a time-resolved closure not just for the mean \(m(t)\) and covariance \(c(t,s)\), but also for the <i>overlap variables</i> \(\kappa(t)\) that carry low-rank structure. At rank \(R\), these overlaps live in \(\mathbb{R}^R\), and they are the natural "order parameters" of the structured mode.
                 </p>
 
                 <p>
@@ -486,11 +480,11 @@
                 </p>
 
                 <p>
-                    The path forward is clear. Solve the low-rank NS-DMFT equations numerically (including overlaps) instead of relying on trajectory averages. Map the \((g,m)\) plane at larger \(N\) and longer horizons until \(\lambda_1\) actually crosses zero. Move beyond rank-one: \(R>1\) structure introduces multiple outliers, and the question becomes <i>which</i> one controls the bifurcation. Stress test the assumptions: rapid drive, large \(g\), non-normality, different nonlinearities.
+                    Some concrete next steps would be to solve the low-rank NS-DMFT equations numerically, including overlaps, instead of relying on trajectory averages. Then, map the \((g,m)\) plane at larger \(N\) and longer horizons until \(\lambda_1\) actually crosses zero. Beyond rank-one, \(R>1\) structure introduces multiple outliers, and the question becomes <i>which</i> one controls the bifurcation. Finally, stress test the assumptions: rapid drive, large \(g\), non-normality, different nonlinearities.
                 </p>
 
                 <p>
-                    What began as a study of spectral outliers in balanced networks ended in a concrete bridge between finite-rank matrix theory and the stability of non-autonomous dynamical systems. The ghost is no longer just a metaphor. It's a quantifiable signal, a low-dimensional order parameter hidden inside high-dimensional chaos. I'm grateful to Rainer Engelken for his guidance throughout this project; the full technical report is available <a href="/assets/post4/low-rank-rnns.pdf">here</a>.
+                    I'm quite satisfied with how far this project got, despite deeply overextending on my initial goals. I'm grateful to Rainer Engelken for his guidance throughout; the full technical report is available <a href="/assets/post4/low-rank-rnns.pdf">here</a>.
                 </p>
 
                 <div class="back-link">
