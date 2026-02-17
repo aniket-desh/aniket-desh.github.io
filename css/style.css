@@ -4,7 +4,7 @@
 :root {
     --text-color: #333;
     --background-color: #fff;
-    --small: 18px;
+    --small: 19px;
 }
 
 /* Global Styles */
@@ -20,10 +20,10 @@ body {
 
 /* TGT-style two-column layout */
 body.tgt-layout {
-    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    font-family: "Newsreader", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
     background-color: #fff;
     color: #111;
-    font-size: 17px;
+    font-size: 18px;
 }
 
 .container {
@@ -301,7 +301,7 @@ footer.bottom-nav a:hover {
 
 #contentContainer {
     font-family: 'Vollkorn', serif;
-    font-size: 18px;
+    font-size: 19px;
     line-height: 1.6;
     max-width: 970px;
     margin: 50px auto;
@@ -408,21 +408,21 @@ section p a {
 
 .katex-title {
   font-family: Georgia, 'Bitstream Vera Serif', serif;
-  font-size: 28px;
+  font-size: 31px;
   font-weight: 500;
   margin-bottom: 0.5em;
   margin-top: 0.2em;
 }
 
 h2.katex-title {
-  font-size: 28px;
+  font-size: 31px;
   font-family: Georgia, 'Bitstream Vera Serif', serif;
   font-weight: 700;
   margin-bottom: 0.2em;
 }
 
 h3.katex-title {
-  font-size: 18px;  /* or 17px if 16 feels too small */
+  font-size: 20px;
   font-family: Georgia, 'Bitstream Vera Serif', serif;
   font-weight: 500;
   margin-top: 1em;
