@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <link rel="icon" href="/assets/ad.png" type="image/x-icon" />
-    <title>blog — aniket deshpande</title>
+    <title>predicting quantum properties — aniket deshpande</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&display=swap" rel="stylesheet">
@@ -110,38 +110,154 @@
             max-width: none;
         }
 
-        .page-title {
+        .post-title {
             font-weight: 700;
             font-size: 20px;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
-        .page-desc {
+        .post-date {
+            color: #666;
             font-style: italic;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
-        .post-entry {
-            margin-bottom: 25px;
+        .post-body p {
+            margin-bottom: 20px;
         }
 
-        .post-entry h3 {
-            font-weight: 700;
-            font-size: 20px;
-            margin: 0 0 5px 0;
-        }
-
-        .post-entry p {
-            margin: 0;
+        .callout {
+            text-align: center;
+            margin: 25px 0;
+            background-color: #f8f8f8;
+            padding: 15px;
+            border-radius: 4px;
             font-style: italic;
         }
 
-        .post-entry a.read-more {
+        figure {
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        figure.two-column > div {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        figure.two-column img {
+            max-width: 48%;
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            figure.two-column > div {
+                flex-direction: column;
+            }
+            figure.two-column img {
+                max-width: 100%;
+            }
+        }
+
+        figcaption {
+            font-size: 16px;
+            color: #666;
+            margin-top: 10px;
+            line-height: 1.4;
+            font-style: italic;
+        }
+
+        .sidebar {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            margin: 20px 0;
+            font-size: 15px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .sidebar-title {
+            font-weight: 400;
+            margin-bottom: 4px;
+            color: #333;
+        }
+
+        .sidebar-ref {
+            display: inline-block;
+            font-size: 0.75em;
+            vertical-align: super;
+            color: #8B0000;
+            font-weight: 600;
+            margin-left: 2px;
             text-decoration: none;
         }
 
-        .post-entry a.read-more:hover {
+        .sidebar-number {
+            color: #8B0000;
+            font-weight: 600;
+            margin-right: 4px;
+        }
+
+        @media screen and (min-width: 1100px) {
+            .post-body {
+                position: relative;
+            }
+
+            .sidebar {
+                position: absolute;
+                left: calc(100% + 30px);
+                width: 240px;
+                margin: 0;
+                font-size: 14px;
+                line-height: 1.45;
+            }
+        }
+
+        .back-link {
+            margin-top: 40px;
+            font-style: italic;
+        }
+
+        .back-link a {
+            text-decoration: none;
+        }
+
+        .back-link a:hover {
             text-decoration: underline;
+        }
+
+        pre {
+            background: #f5f5f5;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 15px;
+            padding: 16px;
+            font-family: monospace;
+        }
+
+        code {
+            font-family: monospace;
+            font-size: 15px;
+            background: #f5f5f5;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+        }
+
+        :not(pre) > code {
+            padding: 2px 5px;
         }
     </style>
 </head>
@@ -150,7 +266,7 @@
     <div class="container">
         <div class="bio">
             <div class="bio__header">
-                <a href="/">not so sparse</a>
+                <a href="/">predicting quantum properties</a>
             </div>
             <div class="bio__tabs">
                 <a href="/about/">about</a> <span class="dot">·</span>
@@ -164,30 +280,14 @@
         </div>
 
         <div class="content">
-            <p class="page-desc">connecting dots between mathematics, machines, and the mind.</p>
+            <p class="post-date">02.22.2026</p>
 
-            <div class="post-entry">
-                <h3>[iv] predicting quantum properties</h3>
-                <p>coming soon.</p>
-                <a href="/blog/predicting-quantum-properties/" class="read-more">read more →</a>
-            </div>
+            <div class="post-body">
+                <!-- content goes here -->
 
-            <div class="post-entry">
-                <h3>[iii] a ghost in the machine</h3>
-                <p>uncovering how spectral outliers from low-rank structure rise above chaotic bulk dynamics in recurrent neural networks, and how these isolated eigenvalues can serve as early-warning signals for bifurcations in driven systems.</p>
-                <a href="/blog/a-ghost-in-the-machine/" class="read-more">read more →</a>
-            </div>
-
-            <div class="post-entry">
-                <h3>[ii] the slow art of fast mixing</h3>
-                <p>a closer look at canonical path theory, the justification for rapid mixing in high-dimensional Markov chains.</p>
-                <a href="/blog/the-slow-art-of-fast-mixing/" class="read-more">read more →</a>
-            </div>
-
-            <div class="post-entry">
-                <h3>[i] walking the quantum line</h3>
-                <p>tracing the shared formalism between classical random walks and quantum evolution on graphs, revealing how diffusion and interference arise from a common linear backbone.</p>
-                <a href="/blog/walking-the-quantum-line/" class="read-more">read more →</a>
+                <div class="back-link">
+                    <a href="/blog/">← back to blog</a>
+                </div>
             </div>
         </div>
     </div>
