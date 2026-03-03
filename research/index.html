@@ -116,17 +116,34 @@
       margin-bottom: 10px;
     }
 
+    .projects-toggle {
+      color: gray;
+      cursor: pointer;
+      font-size: 16px;
+      user-select: none;
+      display: inline;
+    }
+
+    .projects-toggle:hover {
+      color: #555;
+    }
+
+    .projects-dropdown {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.35s ease;
+    }
+
+    .projects-dropdown.open {
+      max-height: 1200px;
+    }
+
     .project-section {
       display: flex;
       flex-direction: row-reverse;
       gap: 20px;
-      margin-bottom: 30px;
-      padding-bottom: 25px;
-      border-bottom: 1px solid #e0e0e0;
-    }
-
-    .project-section:last-of-type {
-      border-bottom: none;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
     }
 
     .project-section h3 {
@@ -137,6 +154,7 @@
 
     .lab-title {
       font-size: 17px;
+      margin-bottom: 5px;
     }
 
     .project-section p {
@@ -195,18 +213,17 @@
         <b><a href="https://lpna.cs.illinois.edu/" style="text-decoration:none; color:inherit;" target="_blank">Lab for Parallel Numerical Algorithms</a></b>
       </p>
 
-      <p>currently, I work on tensor algorithms for statistical learning.</p>
+      <p style="margin-top: 0;">I work on tensor algorithms with <a href="https://solomonik.cs.illinois.edu/" target="_blank">Edgar Solomonik</a>. <br> <span class="projects-toggle" onclick="var d=this.parentElement.nextElementSibling; d.classList.toggle('open'); this.innerHTML = d.classList.contains('open') ? '<i>← hide active projects</i>' : '<i>→ see active projects</i>';"><i>→ see active projects</i></span></p>
+      <div class="projects-dropdown">
+
       <div class="project-section">
         <!-- <img src="/assets/amdm_convergence_placeholder.png" alt="AMDM algorithm"> -->
         <div class="project-content">
-          <h3>(i) bayesian tensor decompositions</h3>
+          <h3>[i] bayesian tensor decompositions</h3>
           <p>
             We are exploring Bayesian algorithms for tensor decomposition and probabilistic linear algebra.
-            Currently, we are building on Alternating Mahalanobis Distance Minimization (AMDM) to design a Bayesian
-            tensor decomposition method with mode-wise covariance modeling. By interpreting AMDM as maximum
-            likelihood estimation under a Kronecker-structured Gaussian prior, we aim to create new optimization
-            schemes that combine statistical inference with deterministic tensor solvers for improved conditioning
-            and uncertainty estimation.
+            Currently, we are building on Alternating Mahalanobis Distance Minimization (AMDM) to design a
+            decomposition method with mode-wise covariance modeling.
           </p>
           <p>More updates soon!</p>
         </div>
@@ -215,7 +232,7 @@
       <div class="project-section">
         <!-- <img src="/assets/relative-error-beta-sweep.png" alt="Relative error vs beta"> -->
         <div class="project-content">
-          <h3>(ii) mcmc for tensor network contractions</h3>
+          <h3>[ii] mcmc for tensor network contractions</h3>
           <p>
             We are developing a Markov chain Monte Carlo algorithm to estimate contractions of closed tensor
             networks. This allows efficient approximation of contraction quantities using methods from statistical
@@ -227,6 +244,8 @@
           <p><a href="/research/tensor-contraction/">Read more here!</a></p>
         </div>
       </div>
+
+      </div><!-- end projects-dropdown -->
 
     </div>
   </div>
