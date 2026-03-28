@@ -142,51 +142,85 @@
             margin-bottom: 15px;
         }
 
-        .sidebar {
-            background-color: transparent;
-            border: none;
-            padding: 0;
-            margin: 20px 0;
+        sup {
+            position: relative;
+        }
+
+        .footnote-ref {
+            background: none;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-decoration: none;
+            color: #8B0000;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footnote-ref:hover {
+            text-decoration: none;
+            color: #8B0000;
+        }
+
+        .footnote-tooltip {
+            z-index: 10;
+            background-color: #fff;
+            visibility: hidden;
+            width: 36vw;
+            max-width: 350px;
+            padding: 14px 18px;
             font-size: 15px;
+            font-weight: 400;
             line-height: 1.5;
             color: #333;
+            position: absolute;
+            top: calc(100% + 0.5em);
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
         }
 
-        .sidebar-title {
-            font-weight: 400;
-            margin-bottom: 4px;
-            color: #333;
+        @media screen and (min-width: 768px) {
+            sup .footnote-ref:hover + .footnote-tooltip {
+                visibility: visible;
+            }
         }
 
-        .sidebar-ref {
-            display: inline-block;
-            font-size: 0.75em;
-            vertical-align: super;
-            color: #8B0000;
+        .footnotes-sep {
+            margin-top: 40px;
+            border: none;
+            border-top: 1px solid #ddd;
+        }
+
+        .footnotes {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .footnotes ol {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .footnotes li {
+            margin-bottom: 10px;
+        }
+
+        .footnotes li sup {
             font-weight: 600;
-            margin-left: 2px;
+            color: #8B0000;
+        }
+
+        .footnote-backref {
             text-decoration: none;
-        }
-
-        .sidebar-number {
             color: #8B0000;
-            font-weight: 600;
-            margin-right: 4px;
+            margin-left: 4px;
+            font-size: 0.75em;
         }
 
-        @media screen and (min-width: 1100px) {
-            .post-body {
-                position: relative;
-            }
-
-            .sidebar {
-                position: absolute;
-                left: calc(100% + 30px);
-                width: 240px;
-                margin: 0;
-                font-size: 14px;
-                line-height: 1.45;
-            }
+        .footnote-backref:hover {
+            text-decoration: underline;
         }
 
         .back-link {
@@ -238,16 +272,7 @@
                     \[
                     H = \sum_{i=1}^{n-1}Z_{i}Z_{i+1} + \sum_{i=1}^{n}h_iX_i
                     \]
-                    With a Suzuki-Trotter decomposition, this quantum system becomes a classical one in \(n \times \beta\) space-time, with a Gibbs distribution over paths \(x \in \{0, 1 \}^{n\beta}\). Sampling from this distribution using MCMC requires Glauber dynamics. However, our estimates can be wildly inaccurate unless we prove mixing time<span class="sidebar-ref">[1]</span> to be <i>small</i>.
-
-                <div class="sidebar">
-                    <div class="sidebar-title"><span class="sidebar-number">[1]</span>Mixing time</div>
-                    The mixing time is defined as
-                    \[
-                    \tau(\epsilon) = \min\{t : \|\mu_t - \pi\|_{TV} \leq \epsilon\}
-                    \]
-                    where \(\mu_t\) is the distribution after \(t\) steps and \(\pi\) is the stationary distribution. It measures how many steps are needed to get \(\epsilon\)-close in total variation distance.
-                </div>
+                    With a Suzuki-Trotter decomposition, this quantum system becomes a classical one in \(n \times \beta\) space-time, with a Gibbs distribution over paths \(x \in \{0, 1 \}^{n\beta}\). Sampling from this distribution using MCMC requires Glauber dynamics. However, our estimates can be wildly inaccurate unless we prove mixing time<sup>1</sup> to be <i>small</i>.
                 </p>
 
                 <p>
@@ -255,12 +280,7 @@
                     \[
                     P(x) \propto \exp \left( \sum_{(i, j) \in E} \theta_{ij} x_i x_j + \sum_{i}\theta_i x_i \right)
                     \]
-                    and we want to compute marginal probabilities \(P(X_i = 1)\). Exact inference is \(\mathsf{\# P}\)-hard, so we use Gibbs sampling. But how long does this take to converge<span class="sidebar-ref">[2]</span> to the true distribution?
-
-                <div class="sidebar">
-                    <div class="sidebar-title"><span class="sidebar-number">[2]</span>Total variation distance</div>
-                    Total variation distance \(\|\mu - \pi\|_{TV} = \frac{1}{2}\sum_x |\mu(x) - \pi(x)|\) measures how far a distribution \(\mu\) is from the stationary distribution \(\pi\). It's the natural metric for convergence: at most 1, and 0 only when distributions are identical.
-                </div>
+                    and we want to compute marginal probabilities \(P(X_i = 1)\). Exact inference is \(\mathsf{\# P}\)-hard, so we use Gibbs sampling. But how long does this take to converge<sup>2</sup> to the true distribution?
 
                 Once again, this depends on how fast the Markov chain mixes. Both of these examples illustrate that sampling is not just a numerical tool, but a computational lifeline in dire need of some theoretical justifications: <i>do these chains converge fast enough for meaningful inference?</i>
                 </p>
@@ -272,12 +292,7 @@
                     \]
                     where \( Q(e) = \pi(u) P(u, v)\) is the ergodic flow through edge \(e_{u \to v}\).
 
-                <div class="sidebar">
-                    <div class="sidebar-title"><span class="sidebar-number">[3]</span>Conductance</div>
-                    Conductance \(\Phi\) measures the bottleneck probability flow: how easily probability mass can move between large sets. Larger \(\Phi\) means fewer bottlenecks and faster mixing.
-                </div>
-
-                In 1989, Jerrum and Sinclair showed that one can lower-bound the <i>conductance</i><span class="sidebar-ref">[3]</span> \(\Phi\) and <i>spectral gap</i><span class="sidebar-ref">[4]</span> \(\lambda_1\) with
+                In 1989, Jerrum and Sinclair showed that one can lower-bound the <i>conductance</i><sup>3</sup> \(\Phi\) and <i>spectral gap</i><sup>4</sup> \(\lambda_1\) with
                     \[
                     \Phi \geq \frac{1}{2\rho},\quad \lambda_1 \geq \frac{1}{2\rho^2}
                     \]
@@ -285,23 +300,13 @@
                     \[
                     \tau(\epsilon) \leq \frac{2}{\Phi^2} \left(\ln \frac{1}{\pi_{min}} + \ln \frac{1}{\epsilon} \right).
                     \]
-
-                <div class="sidebar">
-                    <div class="sidebar-title"><span class="sidebar-number">[4]</span>Spectral gap</div>
-                    The spectral gap \(\lambda_1 = 1 - |\lambda_2|\) measures the separation between the largest and second-largest eigenvalue of the transition matrix. Larger gap means exponentially faster convergence.
-                </div>
                 </p>
 
                 <p>
-                    This foundational result was the justification for their FPRAS<span class="sidebar-ref">[5]</span> algorithm for approximating the permanent of a matrix, and has since been generalized. However, canonical paths designate a single path to each pair of states potentially causing large congestion. So, we introduce <i>fractional flows</i>, a probability distribution over paths for each pair. Let \( f_{x, y}(\gamma)\) be the amount of flow along path \(\gamma\) from \(x\) to \(y\), subject to the constraint:
+                    This foundational result was the justification for their FPRAS<sup>5</sup> algorithm for approximating the permanent of a matrix, and has since been generalized. However, canonical paths designate a single path to each pair of states potentially causing large congestion. So, we introduce <i>fractional flows</i>, a probability distribution over paths for each pair. Let \( f_{x, y}(\gamma)\) be the amount of flow along path \(\gamma\) from \(x\) to \(y\), subject to the constraint:
                     \[
                     \sum_{\gamma \in \Gamma} f_{x, y}(\gamma) = \pi(x) \pi(y).
                     \]
-
-                <div class="sidebar">
-                    <div class="sidebar-title"><span class="sidebar-number">[5]</span>FPRAS</div>
-                    A Fully Polynomial Randomized Approximation Scheme is a randomized algorithm that computes a \((1 \pm \epsilon)\)-approximation in time polynomial in both the input size and \(1/\epsilon\).
-                </div>
 
                 The total load on an edge \(e\) and fractional congestion are defined as
                     \[
@@ -325,6 +330,17 @@
                     In summary, the journey from Jerrum & Sinclair's classical framework to the modern refinement by Chen et al. illustrates the mathematical richness of sampling theory. For problems in quantum simulation and learning algorithms, where sampling is vital, this theory is mathematical assurance that Monte Carlo isn't just plausible, it's provably fast.
                 </p>
 
+                <hr class="footnotes-sep">
+                <section class="footnotes">
+                    <ol>
+                        <li>The mixing time is defined as \[\tau(\epsilon) = \min\{t : \|\mu_t - \pi\|_{TV} \leq \epsilon\}\] where \(\mu_t\) is the distribution after \(t\) steps and \(\pi\) is the stationary distribution. It measures how many steps are needed to get \(\epsilon\)-close in total variation distance.</li>
+                        <li>Total variation distance \(\|\mu - \pi\|_{TV} = \frac{1}{2}\sum_x |\mu(x) - \pi(x)|\) measures how far a distribution \(\mu\) is from the stationary distribution \(\pi\). It's the natural metric for convergence: at most 1, and 0 only when distributions are identical.</li>
+                        <li>Conductance \(\Phi\) measures the bottleneck probability flow: how easily probability mass can move between large sets. Larger \(\Phi\) means fewer bottlenecks and faster mixing.</li>
+                        <li>The spectral gap \(\lambda_1 = 1 - |\lambda_2|\) measures the separation between the largest and second-largest eigenvalue of the transition matrix. Larger gap means exponentially faster convergence.</li>
+                        <li>A Fully Polynomial Randomized Approximation Scheme is a randomized algorithm that computes a \((1 \pm \epsilon)\)-approximation in time polynomial in both the input size and \(1/\epsilon\).</li>
+                    </ol>
+                </section>
+
                 <h3>references</h3>
                 <ul>
                     <li><strong>Chen et al. (2025)</strong> – <em>Faster Mixing of the Jerrum–Sinclair Chain</em>.<br>Shows the mixing time is \(\widetilde O(\Delta^2 m)\) for the perfect-matching chain. <a href="https://arxiv.org/abs/2504.02740" target="_blank">arxiv.org</a></li>
@@ -342,5 +358,52 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var body = document.querySelector('.post-body');
+            var footnotes = document.querySelector('.footnotes');
+            if (!body || !footnotes) return;
+
+            var sups = body.querySelectorAll('sup');
+            var items = footnotes.querySelectorAll('li');
+
+            sups.forEach(function(sup, i) {
+                var n = sup.textContent.trim();
+                if (!/^\d+$/.test(n)) return;
+
+                sup.id = 'fnref:' + n;
+
+                var link = document.createElement('a');
+                link.href = '#fn:' + n;
+                link.className = 'footnote-ref';
+                link.textContent = '[' + n + ']';
+
+                sup.textContent = '';
+                sup.appendChild(link);
+
+                var li = items[parseInt(n) - 1];
+                if (li) {
+                    var tooltip = document.createElement('div');
+                    tooltip.className = 'footnote-tooltip';
+                    tooltip.innerHTML = '<sup>' + n + '</sup> ' + li.innerHTML;
+                    sup.appendChild(tooltip);
+
+                    li.id = 'fn:' + n;
+                    var numSup = document.createElement('sup');
+                    numSup.textContent = n;
+                    var backLink = document.createElement('a');
+                    backLink.href = '#fnref:' + n;
+                    backLink.className = 'footnote-backref';
+                    backLink.textContent = '↩';
+
+                    var original = li.innerHTML;
+                    li.innerHTML = '';
+                    li.appendChild(numSup);
+                    li.insertAdjacentHTML('beforeend', ' ' + original + ' ');
+                    li.appendChild(backLink);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <link rel="icon" href="/assets/penrose-logo.png" type="image/x-icon" />
+    <title>attention seeking — aniket deshpande</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&display=swap" rel="stylesheet">
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background: #f9e6e6;
+        }
+
+        ::-moz-selection {
+            background: #f9e6e6;
+        }
+
+        html {
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        body {
+            width: 100%;
+            margin: 25px 0;
+            padding: 0;
+            background: #fff;
+            font-family: "Newsreader", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        a {
+            color: darkred;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: #8B0000;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        @media screen and (min-width: 600px) {
+            body {
+                margin: 50px 0 25px;
+            }
+            .container {
+                padding: 0 24px;
+            }
+        }
+
+        @media screen and (min-width: 800px) {
+            body {
+                margin: 120px 0 50px;
+            }
+            .container {
+                padding: 0 24px;
+            }
+        }
+
+        .bio {
+            max-width: none;
+        }
+
+        .bio__header {
+            margin-bottom: 20px;
+            font-weight: 590;
+            font-size: 23px;
+        }
+
+        .bio__header a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .bio__header a:hover {
+            text-decoration: none;
+        }
+
+        .bio__tabs {
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .bio__tabs a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .bio__tabs a:hover {
+            color: darkred;
+        }
+
+        .content {
+            width: 100%;
+            max-width: none;
+        }
+
+        .post-title {
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .post-date {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .post-body p {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-weight: 600;
+            font-size: 17px;
+            margin-bottom: 2px !important;
+        }
+
+        .section-title + p {
+            margin-top: 0;
+        }
+
+        ol.references {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #555;
+            padding-left: 1.5em;
+        }
+
+        ol.references li {
+            margin-bottom: 10px;
+        }
+
+        ol.references a {
+            color: darkred;
+        }
+
+        .callout {
+            text-align: center;
+            margin: 25px 0;
+            background-color: #f8f8f8;
+            padding: 15px;
+            border-radius: 4px;
+            font-style: italic;
+        }
+
+        figure {
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        figure.two-column > div {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        figure.two-column img {
+            max-width: 48%;
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            figure.two-column > div {
+                flex-direction: column;
+            }
+            figure.two-column img {
+                max-width: 100%;
+            }
+        }
+
+        figcaption {
+            font-size: 16px;
+            color: #666;
+            margin-top: 10px;
+            line-height: 1.4;
+            font-style: italic;
+        }
+
+        sup {
+            position: relative;
+        }
+
+        .footnote-ref {
+            background: none;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-decoration: none;
+            color: #8B0000;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footnote-ref:hover {
+            text-decoration: none;
+            color: #8B0000;
+        }
+
+        .footnote-tooltip {
+            z-index: 10;
+            background-color: #fff;
+            visibility: hidden;
+            width: 36vw;
+            max-width: 350px;
+            padding: 14px 18px;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #333;
+            position: absolute;
+            top: calc(100% + 0.5em);
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+        }
+
+        @media screen and (min-width: 768px) {
+            sup .footnote-ref:hover + .footnote-tooltip {
+                visibility: visible;
+            }
+        }
+
+        .footnotes-sep {
+            margin-top: 40px;
+            border: none;
+            border-top: 1px solid #ddd;
+        }
+
+        .footnotes {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .footnotes ol {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .footnotes li {
+            margin-bottom: 10px;
+        }
+
+        .footnotes li sup {
+            font-weight: 600;
+            color: #8B0000;
+        }
+
+        .footnote-backref {
+            text-decoration: none;
+            color: #8B0000;
+            margin-left: 4px;
+            font-size: 0.75em;
+        }
+
+        .footnote-backref:hover {
+            text-decoration: underline;
+        }
+
+        /* Animation styles */
+        .anim-figure {
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .anim-container {
+            display: flex;
+            gap: 12px;
+            max-width: 100%;
+        }
+
+        .anim-panel {
+            flex: 1;
+            background: #f8f8f8;
+            border-radius: 4px;
+            padding: 12px 12px 8px;
+        }
+
+        .panel-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .bar-row {
+            display: flex;
+            align-items: flex-end;
+            gap: 1px;
+            height: 150px;
+        }
+
+        .bar-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            height: 100%;
+        }
+
+        .bar {
+            width: 100%;
+            border-radius: 2px 2px 0 0;
+            transition: height 0.08s ease-out;
+            min-height: 1px;
+        }
+
+        .bar.mc { background-color: #cc241d; }
+        .bar.sm { background-color: #458588; }
+
+        .anim-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .anim-btn {
+            font-family: inherit;
+            font-size: 13px;
+            background: none;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            padding: 4px 14px;
+            cursor: pointer;
+            color: #444;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .anim-btn:hover { border-color: #999; }
+
+        .anim-status {
+            font-size: 13px;
+            color: #666;
+        }
+
+        @media (max-width: 500px) {
+            .anim-container { flex-direction: column; }
+        }
+
+
+        .back-link {
+            margin-top: 40px;
+            font-style: italic;
+        }
+
+        .back-link a {
+            text-decoration: none;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="bio">
+            <div class="bio__header">
+                <a href="/">attention seeking</a>
+            </div>
+            <div class="bio__tabs">
+                <a href="/about/">about</a> <span class="dot">·</span>
+                <a href="/research/">research</a> <span class="dot">·</span>
+                <a href="/teaching/">teaching</a> <span class="dot">·</span>
+                <a href="/notes/">notes</a> <span class="dot">·</span>
+                <a href="/blog/">blog</a> <span class="dot">·</span>
+                <a href="/code/">code</a> <span class="dot">·</span>
+                <a href="/cv/cv.pdf">vitae</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <p class="post-date">03.27.2026</p>
+
+            <div class="post-body">
+
+                <p>
+                    I am (finally) taking a course on statistical physics, and have found that the field connects a multitude of my research interests in an oddly<sup>1</sup> elegant way. In this post, I want to share some overlapping ideas between statistical mechanics, (softmax) self-attention, regression, and neuroscientific theories of memory. My hope is that, after reading this, one appreciates the lack of walls between these fields in the same way that I do.
+                </p>
+                <p class="section-title">I. Hedging Your Tokens</p>
+                <p>
+                    Consider a physical system of \(N\) discrete states, with the \(j\)-th state carrying an energy \(E_j\). When this system is in thermal equilibrium with a heat bath of temperature \(T\), the probability of finding the system in state \(j\) is given by the Boltzmann distribution:
+                    \[
+                        p_j = \frac{e^{-\beta E_j}}{Z},\quad \text{where } Z = \sum_{k=1}^N e^{-\beta E_k} \text{ and } \beta = \frac{1}{k_B T}.
+                    \]
+                    Here, \(\beta\) is the inverse temperature and \(Z\) is the partition function. \(Z\) serves as both a normalization constant and also a generator function that encodes all thermodynamic properties of the system. For instance, the average energy \(\langle E \rangle\) can be computed as
+                    \[
+                        \langle E \rangle = -\frac{\partial \log Z}{\partial \beta}.
+                    \]
+                    We are interested in a specific quantity, called the Helmholtz free energy, defined as
+                    \[
+                        F = -\frac{1}{\beta} \log Z = \langle E \rangle - TS,
+                    \]
+                    where \(S\) is the system's entropy. The free energy \(F\) captures the tradeoff between energy and entropy, and is a fundamental quantity in thermodynamics that determines the system's equilibrium properties and phase transitions. We are also interested in macroscopic observables; they are computed as a thermal average over microstates:
+                    \[
+                    \langle O\rangle = \sum_{j=1}^N p_j O_j = \frac{1}{Z} \sum_{j=1}^N O_j e^{-\beta E_j}.
+                    \]
+                    With these definitions, we can describe (almost)<sup>2</sup> everything in equilibrium statistical mechanics. States compete for occupancy based on their energies and \(\beta\) controls how sharply the measure discriminates between them. At high temperatures (low \(\beta\)), all states become equally likely: the system forgets its energy landscape and becomes maximally entropic. At low temperatures (high \(\beta\)), the system becomes more deterministic, concentrating its probability mass on the lowest-energy states, "freezing out" higher-energy states.
+                </p>
+                <p>
+                    Now, consider a different system: a transformer processing a token sequence. A query token arrives and needs to retrieve information from a context of \(N\) tokens, each carrying a value vector. The query has finite representational capacity, it can only output a single vector, which must be some weighted average of the stored values. This becomes an allocation problem: how should the query distribute a finite budget of weight across the context tokens to best retrieve the information most relevant to the query?
+                </p>
+                <p>
+                    This is, clearly, a constrained optimization problem, and it is governed by two competing objectives. The query aims to <i>concentrate</i> on the most compatible tokens, those whose keys align well with the query, because they carry the most relevant information. However, it also wants to <i>hedge</i> against committing too aggressively to any single token, because the key similarities are computed from noisy representations that might not be strictly relevant. Concentration is an energy-minimization problem, while hedging is an entropy-maximization one.
+                </p>
+                <p>
+                    Let us define the energy of the \(j\)-th context token relative to the query as
+                    \[
+                     E_j = -q^T k_j,
+                    \]
+                    where \(q\) is the query vector and \(k_j\) is the key vector of token \(j\). Tokens with high query-key alignment will have lower energy; tokens with low alignment will have higher energy. With this definition, the free energy of a probability distribution \(p\) over context tokens is
+                    \[
+                    F[p] = \sum_{j} p_j E_j + \frac 1\beta \sum_j p_j \log\, p_j = -\sum_j p_j q^T k_j + \frac 1\beta \sum_j p_j \log\, p_j.
+                    \]
+                    The first term rewards the concentration objective on compatible tokens. The second term, a negative Shannon entropy, penalizes overcommitment to any single token, thus encouraging hedging. The distribution that optimally balances these objectives is the one that minimizes the free energy. We derive it here, first by setting up the Lagrangian for this constrained optimization problem:
+                    \[
+                    \mathcal{L}(p, \lambda) = F[p] + \lambda\left(\sum_j p_j - 1\right) = -\sum_j p_j q^T k_j + \frac 1\beta \sum_j p_j \log\, p_j + \lambda\left(\sum_j p_j - 1\right).
+                    \]
+                    We then take the functional derivative with respect to \(p_j\) and set it to zero:
+                    \[
+                    \frac{\partial \mathcal{L}}{\partial p_j} = -q^T k_j + \frac{1}{\beta} (1 + \log\, p_j) + \lambda = 0.
+                    \]
+                    Solving for \(p_j\) recovers a familiar form:
+                    \[
+                    p_j = \frac{\exp\left(\beta q^T k_j\right)}{\sum_{\ell} \exp\left(\beta q^T k_\ell\right)}.
+                    \]
+                    This is the Boltzmann distribution! The Lagrange multiplier calculation is classical, and the exponential form is <i>forced</i> by the variational principle, not a choice. Any system that allocates probability over discrete options by trading off expected compatibility against distributional uncertainty will arrive at the Gibbs measure<sup>3</sup>. Recall that each token also carries a value vector \(v_j\). The output of the allocation, the query's retrieved information, the thermal expectation of these values:
+                    \[
+                    \langle v \rangle = \sum_j p_j v_j = \frac{\sum_j v_j \exp\left(\beta q^T k_j\right)}{\sum_{\ell} \exp\left(\beta q^T k_\ell\right)} = \mathrm{softmax}\left(\beta q^T k\right) v.
+                    \]
+                    By allowing context tokens to compete for retrieval in a physically-plausible way, we have recovered the softmax attention formula from a free-energy minimization principle. The temperature \(T\) (or inverse temperature \(\beta\)) controls how much the query hedges its bets across the context. At high temperatures, the query retrieves a more uniform average of all values, while at low temperatures, it concentrates on the most compatible token.
+                </p>
+                <figure class="anim-figure" id="anim1-root">
+                    <div class="anim-container">
+                        <div class="anim-panel">
+                            <div class="panel-label">Metropolis Monte Carlo</div>
+                            <div class="bar-row" id="anim1-mc"></div>
+                        </div>
+                        <div class="anim-panel">
+                            <div class="panel-label">Softmax Attention</div>
+                            <div class="bar-row" id="anim1-sm"></div>
+                        </div>
+                    </div>
+                    <div class="anim-controls">
+                        <button class="anim-btn" id="anim1-btn">play</button>
+                        <button class="anim-btn" id="anim1-reset">reset</button>
+                        <span class="anim-status" id="anim1-status">step 0</span>
+                    </div>
+                    <figcaption>
+                        <b>Figure 1.</b> A single particle hops between \(N = 30\) energy levels via the Metropolis rule. The empirical histogram (left, <span style="color:#cc241d">red</span>) converges to the softmax attention weights (right, <span style="color:#458588">teal</span>), computed from the same energies \(E_j = -q^\top k_j\) at fixed \(\beta = 2\).
+                    </figcaption>
+                </figure>
+
+                <figure class="anim-figure" id="anim2-root">
+                    <div class="anim-container">
+                        <div class="anim-panel">
+                            <div class="panel-label">Monte Carlo</div>
+                            <div class="bar-row" id="anim2-mc"></div>
+                        </div>
+                        <div class="anim-panel">
+                            <div class="panel-label">Softmax</div>
+                            <div class="bar-row" id="anim2-sm"></div>
+                        </div>
+                    </div>
+                    <div class="anim-controls">
+                        <button class="anim-btn" id="anim2-btn">play</button>
+                        <button class="anim-btn" id="anim2-reset">reset</button>
+                        <span class="anim-status" id="anim2-status">&beta; = 0.10</span>
+                    </div>
+                    <figcaption>
+                        <b>Figure 2.</b> Temperature sweep: \(\beta\) increases from 0.1 to 5. Both panels reshape in lockstep — uniform at low \(\beta\), peaked at high \(\beta\) — but through different mechanisms (stochastic sampling vs. deterministic exponentiation).
+                    </figcaption>
+                </figure>
+
+                <p class="section-title">II. Do You Remember?</p>
+                <p>
+                    So we have established that softmax attention is a Boltzmann distribution: the attention weights emerge from a free-energy minimization principle balancing concentration against hedging. This raises some deeper questions. What <i>kind</i> of computational system is this? What is the attention mechanism <i>actually</i> doing when it retrieves a weighted combination of stored values based on their compatibility with the query?
+                </p>
+                <p> The answer predates the transformer architecture by decades: associative memory. </p>
+                <p>
+                    An associative memory is a system that stores patterns and retrieves them by content rather than by address. Instead of saying "read memory location 0x7FFF", we present a cue. The cue is possibly noisy, possibly partial, and the system returns the stored pattern most compatible with that cue. The retrieval works in three components: a set of stored items, a similarity (or energy) function that determines compatibility with the cue, and a retrieval rule that moves the cue toward stored patterns (or a weighted combination of them). This is <i>content-addressable</i> memory; the query itself determines what gets retrieved. Self-attention follows precisely the same structure. Keys and values represent stored memories. The query is a noisy cue that aims to retrieve relevant information from the context. The dot product \(q^T k_j\) measures the compatibility between the query and all stored items. The softmax normalizes these into a retrieval distribution, and the output \(\sum_j \alpha_j v_j\)<sup>4</sup> is the retrieved memory.
+                </p>
+                <p>
+                    The canonical example of an associative memory in physics is the Hopfield network. In its classical form, the system consists of \(N\) binary neurons \(s_i \in \{-1, 1\}\) and \(M\) stored patterns \( \xi^\mu \in \{-1, 1\}^N \) for \(\mu = 1, \ldots, M\). The network stores patterns via a Hebbian<sup>5</sup> coupling matrix
+                    \[
+                    J_{ij} = \frac{1}{N} \sum_{\mu=1}^M \xi_i^\mu \xi_j^\mu,
+                    \]
+                    and the energy of a configuration \(s\) is given by
+                    \[
+                    E(s) = -\frac{1}{2} \sum_{i,j} J_{ij} s_i s_j = -\frac{1}{2}s^T J s.
+                    \]
+                    Stored patterns are local minima in this energy landscape. We can retrieve a pattern by initializing the network with a noisy cue and letting it evolve according to the update rule, or equivalently, letting the dynamics evolve by flipping spins to reduce energy.
+                </p>
+
+                <figure class="anim-figure" id="hopfield-root">
+                    <div class="anim-container">
+                        <div class="anim-panel">
+                            <div class="panel-label">Network State</div>
+                            <canvas id="hopfield-state" width="320" height="320" style="width:100%;image-rendering:pixelated;border-radius:2px;"></canvas>
+                        </div>
+                        <div class="anim-panel">
+                            <div class="panel-label">Target Pattern</div>
+                            <canvas id="hopfield-target" width="320" height="320" style="width:100%;image-rendering:pixelated;border-radius:2px;"></canvas>
+                        </div>
+                    </div>
+                    <div style="margin-top:10px;">
+                        <div class="panel-label" id="hopfield-elabel">Energy</div>
+                        <canvas id="hopfield-energy" height="100" style="width:100%;height:100px;border-radius:2px;background:#f8f8f8;"></canvas>
+                    </div>
+                    <div class="anim-controls">
+                        <button class="anim-btn" id="hopfield-btn">play</button>
+                        <button class="anim-btn" id="hopfield-reset">reset</button>
+                        <span class="anim-status" id="hopfield-status">step 0</span>
+                    </div>
+                    <figcaption>
+                        <b>Figure 3.</b> A Hopfield network of \(N = 1024\) binary spins stores 8 patterns. The network is initialized with a noisy version of one pattern (40% flipped) and evolves via asynchronous updates that minimize \(E(s) = -\frac{1}{2}s^\top J s\). The state (left) converges to the stored memory (right); the energy trace (bottom) shows the descent.
+                    </figcaption>
+                </figure>
+
+                <p>
+                    The physics of the Hopfield network is <i>incredibly</i> well-studied. Amit, Gutfreund, and Sompolinsky's seminal 1985 paper analyzed the network's capacity to store and retrieve patterns, showing that it can robustly store up to \(0.138N\) random patterns before retrieval degrades. The network undergoes a phase transition as the number of stored patterns increases, transitioning from a regime of perfect retrieval to one of spurious states and retrieval failure. The free energy landscape of the Hopfield network is rich with local minima corresponding to stored patterns, and the dynamics of retrieval can be understood as a descent in this landscape. The storage capacity scaling as \(M \sim 0.14 N\) poses an issue: one can only store about 14% as many patterns as one has neurons before retrieval fails due to interference between memories. This is due to the quadratic interaction \(s^T J s\) creating shadow energy basins that blur together when too many patterns are stored.
+                </p>
+                <p>
+                    The modern Hopfield line, initiated by Krotov and Hopfield, fixes this by replacing the quadratic interaction with a higher-order one, an exponential interaction. This sharpens the energy basins dramatically, allowing the storage capacity to jump from \(M \sim 0.14 N\) to \(M \sim \exp(\alpha N)\) for some \(\alpha > 0\). Demircigil et al. proved this rigorously in 2017, and Ramsauer et al. took this model to its logical conclusion in 2020. For stored patterns \(X = [x_1, \ldots, x_M]\) and a query state \(\xi\), the continuous Hopfield energy is
+                    \[
+                    E(\xi) = -\frac{1}{\beta} \underbrace{\log\sum_{\mu=1}^M \exp\left(\beta \xi^T x_\mu\right)}_{\text{log-sum-exp}}.
+                    \]
+                    To minimize this energy, we compute the gradient
+                    \[
+                    \nabla E(\xi) = -\frac{1}{\beta} \frac{\sum_{\mu=1}^M x_\mu \exp\left(\beta \xi^T x_\mu\right)}{\sum_{\nu=1}^M \exp\left(\beta \xi^T x_\nu\right)} = \mathrm{softmax}\left(\beta \xi^T X\right) X.
+                    \]
+                    Yet again, we have recovered softmax attention. The query state \(\xi\) is updated to a softmax-weighted combination of the stored patterns \(X\) with inverse temperature \(\beta\). A single attention step is a single step of energy minimization in a modern Hopfield network. The log-sum-exp in the energy is the free energy of the system (the same object we derived in section I), now appearing as the energy function of an associative memory. Ramsauer et al. continued to show that the energy landscape of the Hopfield network has three regimes of interest:
+                    <ul>
+                        <li>A <i>global</i> fixed point, where \(\xi\) is the average of all stored patterns. This corresponds to uniform attention, the high-temperature (paramagnetic) phase.</li>
+                        <li>A <i>metastable</i> phase, where \(\xi\) is a weighted average over a subset of patterns. This corresponds to distributed attention over a few relevant tokens.</li>
+                        <li>A <i>single-pattern</i> fixed point, where \(\xi\) has converged to one stored pattern. This corresponds to peaked, nearly one-hot attention, the low-temperature (ferromagnetic) phase.</li>
+                    </ul>
+                    \(\beta\) controls which regime dominates, exactly as temperature controls phases in physical systems. Statistical mechanics provides a powerful lens to understand why attention works well in practice: transformers operate in the metastable regime of an associative memory.
+                </p>
+                <p>
+                    Developed almost simultaneously with Hopfield networks, there is a second associative memory architecture that connects to attention in a completely different mathematical route: Kanerva's sparse distributed memory. SDM was designed to solve the "best match problem"; given a set of stored memories and a query, return the best match to the query quickly. SDM operates in high-dimensional binary space \(\{0, 1\}^N\). There are three main primitives:
+                    <ul>
+                        <li>Patterns: the memories to be stored, with address \(p_a^\mu\) and pointer \(p_p^\mu\).</li>
+                        <li>Neurons: fixed addresses \(x_a^\tau\) in the space that store superpositions of nearby patterns.</li>
+                        <li>Query: the input pattern \(\xi\).</li>
+                    </ul>
+                    To find the best match to \(\xi\), we utilize the Hamming distance \(d(x_a^\tau, \xi)\) between binary vectors. The write operation distributes each pattern's pointer to all neurons within Hamming distance \(d\) of the pattern's address. The read operation retrieves from neurons within \(d\) of the query and averages them. This average is effectively weighted because a pattern that is closer to the query has written to more neurons that the query will read from. Geometrically, the weight of each pattern is the <i>circle intersection</i> between the query's read neighborhood and the pattern's write neighborhood:
+                    \[
+                    \xi^{\text{new}} = g\left( \frac{\sum_{p \in P} \mathcal{I}\left( d(p_a, \xi), d, n\right)p_p}{\sum_{p \in P} \mathcal{I}\left( d(p_a, \xi), d, n\right)} \right),
+                    \]
+                    where \(\mathcal I(d_v, d, n) = \left| O_n(p_a, d) \cap O_n(\xi, d) \right|\) counts the number of binary vectors in the intersection of two Hamming balls. It might be difficult to visualize how this retrieval works, so I <i>highly</i> recommend <a href="https://www.youtube.com/watch?v=dEFn6nnoC-8" target="_blank">Trenton Bricken</a>'s excellent analogy with Mormon missionaries, which he presents in his doctoral defense<sup>6</sup>. This mechanism is a purely geometric, combinatorial object. No energies, partition functions, appear. Just counting lattice points in overlapping neighborhoods. And yet, Bricken and Pehlevan showed that this circle intersection is <i>approximately exponential</i> in the distance between query and pattern:
+                    \[
+                    \mathcal I(d(p_a, \xi), d, n) \approx c_1 \exp\left(-c_2 \cdot d(p_a, \xi)\right),
+                    \]
+                    the approximation holds tightest for the closest, most important patterns (those within \(d(p_a, \xi) \leq 2d\)), which are exactly the ones that dominate the retrieval. Omitting some proof details for brevity, the next step is to map Hamming distance to cosine similarity. For \(L^2\)-normalized continuous vectors \(\hat a\), \(\hat b\), the relationship is
+                    \[
+                    d(a, b) = \left\lfloor \frac n2 \left(1 - \hat a^T \hat b\right) \right\rfloor.
+                    \]
+                    Substituting this into the exponential approximation of the circle intersection, we again recover our familiar formula:
+                    \[
+                    \mathcal I \approx c_3 \exp\left(\beta \hat p_a^T \hat \xi\right),
+                    \]
+                    and the SDM read rule becomes
+                    \[
+                    \tilde{\xi}^{\text{new}} = \hat{P}_p \mathrm{softmax}\left(\beta \hat{P}_a^T \hat{\xi}\right),
+                    \]
+                    which is transformer attention with a fitted \(\beta\).
+                </p>
+                <p>
+                    What makes this particularly remarkable is the chain of implications. We showed that softmax attention is a Boltzmann distribution: a free energy minimization principle. Bricken and Pehlevan showed that SDM's retrieval dynamics approximate softmax attention. Therefore, is SDM implementing an approximation of the same free energy principle, even though its original formulation involves no statistical mechanics? The exponential weighting that a Gibbs measure assigns to states by energy is the same exponential weighting that high-dimensional geometry assigns to stored patterns by distance. The approximate exponentiality of the circle intersection is a consequence of concentration of measure in high dimensions. This is the same mathematics that makes the Boltzmann distribution the universal equilibrium measure.
+                    <br><br>
+                    The relationship between these architectures is clarified by a result due to Keeler (1988): SDM is a generalization of the classical Hopfield network. Hopfield networks are the special case where there is no distributed read/write (\(d=0\)), neurons coincide with patterns (\(r=m\)), and pattern weighting is a rescaled Hamming distance without thresholding. 
+                </p>
+
+                <figure class="anim-figure" id="sdm-root">
+                    <div class="anim-container">
+                        <div class="anim-panel">
+                            <div class="panel-label">Hamming Ball Intersection</div>
+                            <canvas id="sdm-geom" height="260" style="width:100%;height:260px;border-radius:2px;"></canvas>
+                        </div>
+                        <div class="anim-panel">
+                            <div class="panel-label" id="sdm-title">log &#x2111;(d<sub>v</sub>) &middot; n = 64, d = 5</div>
+                            <canvas id="sdm-log" height="260" style="width:100%;height:260px;border-radius:2px;"></canvas>
+                        </div>
+                    </div>
+                    <div class="anim-controls" style="flex-wrap:wrap;gap:8px 16px;">
+                        <label class="anim-status">d =&nbsp;</label>
+                        <input type="range" id="sdm-d-slider" min="2" max="30" value="5" style="flex:1;min-width:80px;">
+                        <span class="anim-status" id="sdm-dval">5</span>
+                        <label class="anim-status">n =&nbsp;</label>
+                        <input type="range" id="sdm-n-slider" min="16" max="128" value="64" step="8" style="flex:1;min-width:80px;">
+                        <span class="anim-status" id="sdm-nval">64</span>
+                    </div>
+                    <figcaption>
+                        <b>Figure 4.</b> After Bricken &amp; Pehlevan (2021). Left: two Hamming balls of radius \(d\) centered on the query \(\xi\) and a pattern \(p\), separated by distance \(d_v\). The shaded overlap is the circle intersection \(\mathcal{I}\). Right: \(\log \mathcal{I}(d_v)\) (<span style="color:#458588">teal dots</span>) falls on a straight line — the fitted exponential (<span style="color:#cc241d">red dashed</span>) — confirming that the intersection is approximately \(e^{\beta \cos(q, k)}\). The approximation tightens as \(n\) increases (concentration of measure).
+                    </figcaption>
+                </figure>
+                <p class="section-title">III. Kernels of Truth</p>
+                <p>
+                    We have now arrived at softmax attention from two directions: as a Boltzmann distribution from free energy minimization, and as the retrieval rule of an associative memory. There is a third perspective, arguably the most elementary, that reaches the same formula from classical nonparametric statistics. This derivation, while first realized by Yu et al., follows a recent <a href="https://blog.tilderesearch.com/vignettes/regression" target="_blank">vignette</a> by Dhruv Pai at Tilde Research, and I present it here to close the triangle. The setting is regression. We have \(n\) input-output pairs \(x_i, y_i\) and aim to predict the output at a new query point \(x_0\). The simplest possible model is a constant predictor: \(\hat f(x_0) = \beta_0\), fit by minimizing
+                    \[
+                    \sum_{i=1}^n (y_i - \beta_0)^2,
+                    \]
+                    giving \(\beta_0 = \frac 1n \sum_{i=1}^n y_i\). This is the global mean, an estimator that ignores where \(x_0\) sits relative to the data. The fix is to make the model <i>locally</i> constant: weigh each observation by its proximity to the query (you can see where this is going). Introduce a kernel \(K_h(x_i, x_0) = K(\|x_i - x_0\| / h)\) that decays with distance, upweighting nearby points and downweighting distant ones with bandwidth \(h\) controlling the scale of locality. The kernel-weighed least squares problem is
+                    \[
+                   \hat{\beta}_0 = \arg\min_{\beta}\sum_{i=1}^n K_h(x_i, x_0) (y_i - \beta)^2.
+                    \]
+                    Taking the derivative and setting it to zero gives the Nadaraya-Watson estimator:
+                    \[
+                    \hat{f}(x_0) = \frac{\sum_{i=1}^n K_h(x_i, x_0) y_i}{\sum_{j=1}^n K_h(x_j, x_0)}.
+                    \]
+                    This is the weighted average of observed outputs, with weights proportional to the kernel similarity between the query point and each stored input. This particular estimator has a large history in econometric and nonparametric statistics. Now, we relabel<sup>7</sup>. Let the inputs \(x_i\) be keys \(k_i\), the outputs \(y_i\) be values \(v_i\), and the query point \(x_0\) be a query \(q\). We choose the Gaussian kernel for its nice properties, giving
+                    \[
+                    K_h(k_i, q) = \exp\left(-\frac{\|k_i - q\|^2}{2h^2}\right),
+                    \]
+                    and assume that queries and keys are \(L^2\)-normalized (the \(QK\)-norm)<sup>8</sup>. Then the squared distance simplifies
+                    \[
+                    \|q - k_i\|^2 = \|q\|^2 + \|k_i\|^2 - 2 q^T k_i = 2(1 - q^T k_i).
+                    \]
+                    Setting the bandwidth \(h = \sqrt{\tau}\), where \(\tau\) is a temperature parameter, the kernel becomes
+                    \[
+                    K_\tau(k_i, q) = \exp\left(-\frac{1 - q^T k_i}{\tau}\right) = \exp\left(\frac{q^T k_i}{\tau}\right) \underbrace{\exp\left(-\frac{1}{\tau}\right)}_{\text{constant}}.
+                    \]
+                    The constant term cancels in the numerator-denominator ratio. The Nadaraya-Watson estimator becomes
+                    \[
+                    \hat{f}(q) = \frac{\sum_{i=1}^n \exp\left(\frac{q^T k_i}{\tau}\right) v_i}{\sum_{j=1}^n \exp\left(\frac{q^T k_j}{\tau}\right)} = \mathrm{softmax}\left(\frac{q^T K}{\tau}\right) V.
+                    \]
+                    Softmax attention, once more, with \(\tau = 1/\beta\) playing the role of kernel bandwidth. 
+                </p>
+                <p>
+                    What is striking is how little the three derivations share on the surface. The statistical mechanics route minimizes a free energy functional with an entropy regularizer and recovers the Boltzmann distribution through a Lagrange multiplier argument. The associative memory route defines an energy landscape over stored patterns and derives the softmax as the gradient of a log-sum-exp energy. The regression route solves a kernel-weighted least squares problem and recovers a ratio of exponential similarity weights. The statistical mechanics tells us about energy, entropy, temperature, and phase transitions. The memory picture tells us about storage, retrieval, capacity, and metastability. The regression picture tells us about attention as a learned similarity-weighted estimator over in-context data. What looks, in the transformer, like a neural network primitive is the meeting point of thermodynamics, memory, and estimation. The walls between these fields are thinner than we are usually taught to believe.
+                </p>
+                <p>
+                    Studying for this post has been both deeply rewarding and challenging for my worldview. I came in asking whether the universe computes. I am leaving less certain that this is the right question. Over implementation and a physical substrate, the three derivations share a problem statement — how to distribute belief over possibilities under constraint. The Boltzmann distribution, softmax attention, and the Nadaraya-Watson estimator are <i>the</i> singular solution to the same inferential problem, discovered independently by thermodynamics, machine learning, and statistics. If there is a sense in which the universe computes, it may be this: that the universe is, at every scale, solving the problem of inference — and we keep rediscovering its solution.
+                </p>
+
+                <hr class="footnotes-sep">
+                <section class="footnotes">
+                    <ol>
+                        <li>"Oddly" is a massive understatement. Some of the correspondences between statistical mechanics, neuroscience, and learning theory have genuinely changed how I think about what the universe is doing. The boundary between a physical process and a computation is <i>much</i> thinner than I was taught to believe — and I'm not sure it exists at all.</li>
+                        <li>Our specific setup is known as the <i>canonical ensemble</i>, where the system can exchange energy with a heat bath but has a fixed number of particles and volume. In situations where the particles themselves can move in and out of the system, we would use the <i>grand canonical ensemble</i>, which introduces a chemical potential \(\mu\) to account for particle exchange. For the purposes of the connections I wish to draw here, the canonical ensemble suffices.</li>
+                        <li>A Gibbs measure is the infinite-volume, rigorous generalization of the Boltzmann distribution. In our finite-volume setting, the terms are used interchangeably.</li>
+                        <li>Here, \(\alpha_j\) represents the attention weight for the \(j\)-th key-value pair.</li>
+                        <li>Hebbian learning is a principle that states that the synaptic strength between two neurons increases if they are activated together. In the context of the Hopfield network, the Hebbian rule encodes the stored patterns into the network's connectivity, allowing for associative retrieval based on partial or noisy cues. Famously, "neurons that fire together, wire together."</li>
+                        <li>Bricken is also a leading researcher in <a href="https://transformer-circuits.pub/2023/monosemantic-features/index.html" target="_blank">Anthropic's interpretability effort</a>. His work and research taste were instrumental in my decision to pursue a research career in mechanistic interpretability. Thanks, Trenton!</li>
+                        <li>It is understandable to wonder if we are forcing a connection with this relabeling. Note that we are preserving the functional roles and relationships of every variable. NW regression takes no interest in the names of variables; it only requires a similarity space for conditioning with \(x_i\) and \(x_0\) and a target object to be averaged with \(y_i\). Attention follows the same structure, allowing for a relabeling.</li>
+                        <li>\(QK\)-norm, where query and key vectors are \(L^2\)-normalized before computing dot products, was developed independently by Henry et al. (2020). Bricken and Pehlevan's SDM analysis predicted it as a useful inductive bias: SDM requires cosine similarity for its circle intersection to approximate the exponential. That the transformer community arrived at the same normalization from engineering considerations is another instance of epistemic convergence.</li>
+                    </ol>
+                </section>
+
+                <p class="section-title">References</p>
+                <ol class="references">
+                    <li><a href="https://www.pnas.org/doi/10.1073/pnas.79.8.2554" target="_blank">Neural networks and physical systems with emergent collective computational abilities</a><br>Hopfield, J. J. (1982).</li>
+                    <li><a href="https://journals.aps.org/pra/abstract/10.1103/PhysRevA.32.1007" target="_blank">Spin-glass models of neural networks</a><br>Amit, D. J., Gutfreund, H. and Sompolinsky, H. (1985).</li>
+                    <li><a href="https://arxiv.org/abs/1606.01164" target="_blank">Dense Associative Memory for Pattern Recognition</a><br>Krotov, D. and Hopfield, J. J. (2016).</li>
+                    <li><a href="https://arxiv.org/abs/1702.01929" target="_blank">On a Model of Associative Memory with Huge Storage Capacity</a><br>Demircigil, M., Heusel, J., L&ouml;we, M., Upgang, S. and Vermet, F. (2017).</li>
+                    <li><a href="https://arxiv.org/abs/2008.02217" target="_blank">Hopfield Networks is All You Need</a><br>Ramsauer, H., Sch&auml;fl, B., Lehner, J., Seidl, P., Widrich, M. and others (2021).</li>
+                    <li><a href="https://mitpress.mit.edu/9780262111324/sparse-distributed-memory/" target="_blank">Sparse Distributed Memory</a><br>Kanerva, P. (1988).</li>
+                    <li><a href="https://arxiv.org/abs/2111.05498" target="_blank">Attention Approximates Sparse Distributed Memory</a><br>Bricken, T. and Pehlevan, C. (2021).</li>
+                    <li><a href="https://doi.org/10.1016/0364-0213(88)90026-4" target="_blank">Comparison between Kanerva's SDM and Hopfield-type neural networks</a><br>Keeler, J. D. (1988).</li>
+                    <li><a href="https://transformer-circuits.pub/2023/monosemantic-features/index.html" target="_blank">Towards Monosemanticity: Decomposing Language Models With Dictionary Learning</a><br>Bricken, T., Templeton, A., Batson, J., Chen, B., Jermyn, A., Conerly, T. and others (2023).</li>
+                    <li><a href="https://doi.org/10.1137/1109020" target="_blank">On Estimating Regression</a><br>Nadaraya, E. A. (1964).</li>
+                    <li><a href="https://www.jstor.org/stable/25049340" target="_blank">Smooth Regression Analysis</a><br>Watson, G. S. (1964).</li>
+                    <li><a href="https://blog.tilderesearch.com/vignettes/regression" target="_blank">Regression is All You Need</a><br>Pai, D. (2025).</li>
+                    <li><a href="https://arxiv.org/abs/2010.04245" target="_blank">Query-Key Normalization for Transformers</a><br>Henry, A., Dachapally, P. R., Pawar, S. and Chen, Y. (2020).</li>
+                    <li><a href="https://arxiv.org/abs/1706.03762" target="_blank">Attention is All You Need</a><br>Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, L. and Polosukhin, I. (2017).</li>
+                </ol>
+
+                <div class="back-link">
+                    <a href="/blog/">← back to blog</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ---- Shared setup ----
+            var N = 30;
+            // Seeded pseudo-random keys for reproducibility
+            var keys = [0.9, 0.3, -0.2, 0.7, -0.5, 0.1, 0.6, -0.1,
+                        0.4, -0.3, 0.8, -0.6, 0.2, -0.4, 0.5, 0.0,
+                        -0.7, 0.35, -0.15, 0.55, -0.45, 0.75, -0.25, 0.15,
+                        -0.35, 0.65, -0.55, 0.25, -0.1, 0.45];
+            var labels = null;
+
+            function softmax(logits, beta) {
+                var max = Math.max.apply(null, logits);
+                var exps = logits.map(function(l) { return Math.exp(beta * (l - max)); });
+                var sum = exps.reduce(function(a, b) { return a + b; }, 0);
+                return exps.map(function(e) { return e / sum; });
+            }
+
+            function buildBars(container, cls) {
+                var bars = [];
+                for (var i = 0; i < N; i++) {
+                    var wrapper = document.createElement('div');
+                    wrapper.className = 'bar-wrapper';
+                    var bar = document.createElement('div');
+                    bar.className = 'bar ' + cls;
+                    bar.style.height = '0%';
+                    wrapper.appendChild(bar);
+                    container.appendChild(wrapper);
+                    bars.push(bar);
+                }
+                return bars;
+            }
+
+            function updateBars(bars, probs) {
+                var max = Math.max.apply(null, probs);
+                if (max === 0) max = 1;
+                for (var i = 0; i < bars.length; i++) {
+                    bars[i].style.height = (probs[i] / max * 95) + '%';
+                }
+            }
+
+            // ---- Animation 1: MC Convergence ----
+            (function() {
+                var beta = 2.0;
+                var target = softmax(keys, beta);
+                var mcBars = buildBars(document.getElementById('anim1-mc'), 'mc');
+                var smBars = buildBars(document.getElementById('anim1-sm'), 'sm');
+                updateBars(smBars, target);
+
+                var counts = new Array(N);
+                for (var i = 0; i < N; i++) counts[i] = 0;
+                var state = 0;
+                var totalSteps = 0;
+                var running = false;
+                var rafId = null;
+
+                var btn = document.getElementById('anim1-btn');
+                var resetBtn = document.getElementById('anim1-reset');
+                var status = document.getElementById('anim1-status');
+
+                function mcStep() {
+                    var proposed = Math.floor(Math.random() * N);
+                    var dE = -keys[proposed] - (-keys[state]);
+                    if (dE < 0 || Math.random() < Math.exp(-beta * dE)) {
+                        state = proposed;
+                    }
+                    counts[state]++;
+                    totalSteps++;
+                }
+
+                function frame() {
+                    if (!running) return;
+                    for (var i = 0; i < 20; i++) mcStep();
+                    var dist = counts.map(function(c) { return c / totalSteps; });
+                    updateBars(mcBars, dist);
+                    status.textContent = 'step ' + totalSteps;
+                    rafId = requestAnimationFrame(frame);
+                }
+
+                btn.addEventListener('click', function() {
+                    running = !running;
+                    btn.textContent = running ? 'pause' : 'play';
+                    if (running) rafId = requestAnimationFrame(frame);
+                });
+
+                resetBtn.addEventListener('click', function() {
+                    running = false;
+                    if (rafId) cancelAnimationFrame(rafId);
+                    for (var i = 0; i < N; i++) counts[i] = 0;
+                    state = 0;
+                    totalSteps = 0;
+                    updateBars(mcBars, counts);
+                    status.textContent = 'step 0';
+                    btn.textContent = 'play';
+                });
+            })();
+
+            // ---- Animation 2: Temperature Sweep ----
+            (function() {
+                var betaMin = 0.1, betaMax = 5.0, betaSteps = 120;
+                var mcBars = buildBars(document.getElementById('anim2-mc'), 'mc');
+                var smBars = buildBars(document.getElementById('anim2-sm'), 'sm');
+                var running = false;
+                var currentStep = 0;
+                var rafId = null;
+                var frameDelay = 0;
+
+                var btn = document.getElementById('anim2-btn');
+                var resetBtn = document.getElementById('anim2-reset');
+                var status = document.getElementById('anim2-status');
+
+                function runBurst(beta, nSteps) {
+                    var counts = new Array(N);
+                    for (var i = 0; i < N; i++) counts[i] = 0;
+                    var st = Math.floor(Math.random() * N);
+                    for (var s = 0; s < nSteps; s++) {
+                        var proposed = Math.floor(Math.random() * N);
+                        var dE = -keys[proposed] - (-keys[st]);
+                        if (dE < 0 || Math.random() < Math.exp(-beta * dE)) {
+                            st = proposed;
+                        }
+                        counts[st]++;
+                    }
+                    return counts.map(function(c) { return c / nSteps; });
+                }
+
+                function frame() {
+                    if (!running) return;
+                    frameDelay++;
+                    if (frameDelay < 2) { rafId = requestAnimationFrame(frame); return; }
+                    frameDelay = 0;
+
+                    if (currentStep >= betaSteps) currentStep = 0;
+                    var beta = betaMin + (betaMax - betaMin) * currentStep / betaSteps;
+                    var smDist = softmax(keys, beta);
+                    var mcDist = runBurst(beta, 500);
+                    updateBars(smBars, smDist);
+                    updateBars(mcBars, mcDist);
+                    status.innerHTML = '&beta; = ' + beta.toFixed(2);
+                    currentStep++;
+                    rafId = requestAnimationFrame(frame);
+                }
+
+                btn.addEventListener('click', function() {
+                    running = !running;
+                    btn.textContent = running ? 'pause' : 'play';
+                    if (running) rafId = requestAnimationFrame(frame);
+                });
+
+                resetBtn.addEventListener('click', function() {
+                    running = false;
+                    if (rafId) cancelAnimationFrame(rafId);
+                    currentStep = 0;
+                    updateBars(mcBars, new Array(N).fill(0));
+                    updateBars(smBars, new Array(N).fill(0));
+                    status.innerHTML = '&beta; = 0.10';
+                    btn.textContent = 'play';
+                });
+            })();
+
+            // ---- Animation 3: Hopfield Network ----
+            (function() {
+                var HN = 128; // grid side length
+                var NN = HN * HN; // 1024 spins
+                var numPatterns = 8;
+                var noiseRate = 0.4;
+                var flipsPerFrame = 200;
+
+                var bk = Math.max(4, Math.round(HN / 8)); // block size scales with grid
+
+                function makePattern(idx) {
+                    var p = new Int8Array(NN);
+                    for (var i = 0; i < NN; i++) {
+                        var r = Math.floor(i / HN), c = i % HN;
+                        var v;
+                        switch (idx) {
+                            case 0: // checkerboard blocks
+                                v = (Math.floor(r / bk) + Math.floor(c / bk)) % 2 === 0 ? 1 : -1; break;
+                            case 1: // horizontal stripes
+                                v = Math.floor(r / bk) % 2 === 0 ? 1 : -1; break;
+                            case 2: // concentric diamond rings
+                                var d = Math.abs(r - HN/2 + 0.5) + Math.abs(c - HN/2 + 0.5);
+                                v = Math.floor(d / bk) % 2 === 0 ? 1 : -1; break;
+                            case 3: // vertical stripes
+                                v = Math.floor(c / bk) % 2 === 0 ? 1 : -1; break;
+                            case 4: // concentric circles
+                                var dx = r - HN/2 + 0.5, dy = c - HN/2 + 0.5;
+                                v = Math.floor(Math.sqrt(dx*dx + dy*dy) / bk) % 2 === 0 ? 1 : -1; break;
+                            case 5: // diagonal stripes (top-left to bottom-right)
+                                v = Math.floor((r + c) / bk) % 2 === 0 ? 1 : -1; break;
+                            case 6: // cross
+                                v = (Math.abs(r - HN/2 + 0.5) < bk || Math.abs(c - HN/2 + 0.5) < bk) ? 1 : -1; break;
+                            case 7: // quadrants
+                                v = ((r < HN/2) === (c < HN/2)) ? 1 : -1; break;
+                        }
+                        p[i] = v;
+                    }
+                    return p;
+                }
+
+                var patterns = [];
+                for (var p = 0; p < numPatterns; p++) patterns.push(makePattern(p));
+
+                // Precompute local field contributions per pattern (pattern overlaps)
+                // localField(i) = sum_mu xi_i^mu * (sum_j!=i xi_j^mu * s_j) / NN
+                // We track running overlaps m_mu = sum_j xi_j^mu * s_j for speed
+                var overlaps = new Float64Array(numPatterns);
+
+                function computeOverlaps() {
+                    for (var mu = 0; mu < numPatterns; mu++) {
+                        var sum = 0;
+                        var pat = patterns[mu];
+                        for (var j = 0; j < NN; j++) sum += pat[j] * state[j];
+                        overlaps[mu] = sum;
+                    }
+                }
+
+                function localField(i) {
+                    var h = 0;
+                    for (var mu = 0; mu < numPatterns; mu++) {
+                        // subtract self-coupling
+                        h += patterns[mu][i] * (overlaps[mu] - patterns[mu][i] * state[i]);
+                    }
+                    return h / NN;
+                }
+
+                function flipSpin(i) {
+                    var oldS = state[i];
+                    var h = localField(i);
+                    var newS = h >= 0 ? 1 : -1;
+                    if (newS !== oldS) {
+                        state[i] = newS;
+                        // Update running overlaps
+                        for (var mu = 0; mu < numPatterns; mu++) {
+                            overlaps[mu] += patterns[mu][i] * (newS - oldS);
+                        }
+                    }
+                }
+
+                // State
+                var state = new Int8Array(NN);
+                var targetIdx = 0;
+                var target = patterns[targetIdx];
+
+                function corrupt() {
+                    for (var i = 0; i < NN; i++) {
+                        state[i] = (Math.random() < noiseRate) ? -target[i] : target[i];
+                    }
+                    computeOverlaps();
+                }
+                corrupt();
+
+                // Canvas rendering
+                var stateCanvas = document.getElementById('hopfield-state');
+                var targetCanvas = document.getElementById('hopfield-target');
+                var energyCanvas = document.getElementById('hopfield-energy');
+                var stateCtx = stateCanvas.getContext('2d');
+                var targetCtx = targetCanvas.getContext('2d');
+                var energyCtx = energyCanvas.getContext('2d');
+
+                // Set canvas resolution to match grid
+                stateCanvas.width = HN; stateCanvas.height = HN;
+                targetCanvas.width = HN; targetCanvas.height = HN;
+
+                var dark = [60, 56, 54]; // #3c3836
+                var light = [235, 219, 178]; // #ebdbb2
+
+                function renderCanvas(ctx, spins) {
+                    var img = ctx.createImageData(HN, HN);
+                    for (var i = 0; i < NN; i++) {
+                        var rgb = spins[i] === 1 ? dark : light;
+                        var off = i * 4;
+                        img.data[off] = rgb[0];
+                        img.data[off+1] = rgb[1];
+                        img.data[off+2] = rgb[2];
+                        img.data[off+3] = 255;
+                    }
+                    ctx.putImageData(img, 0, 0);
+                }
+
+                renderCanvas(targetCtx, target);
+                renderCanvas(stateCtx, state);
+
+                // Energy tracking (normalized so ground state = 0)
+                // Ground state energy: when state = target, overlap with target = NN
+                var E_ground = 0;
+                for (var mu = 0; mu < numPatterns; mu++) {
+                    var ov = 0;
+                    for (var j = 0; j < NN; j++) ov += patterns[mu][j] * target[j];
+                    E_ground -= ov * ov;
+                }
+                E_ground = E_ground / (2 * NN);
+
+                function computeEnergy() {
+                    var E = 0;
+                    for (var mu = 0; mu < numPatterns; mu++) {
+                        E -= overlaps[mu] * overlaps[mu];
+                    }
+                    return E / (2 * NN) - E_ground;
+                }
+
+                var energyHistory = [];
+                var maxEnergyPoints = 400;
+
+                var elabel = document.getElementById('hopfield-elabel');
+
+                function drawEnergy() {
+                    var w = energyCanvas.width = energyCanvas.clientWidth * 2;
+                    var h = energyCanvas.height = energyCanvas.clientHeight * 2;
+                    energyCtx.clearRect(0, 0, w, h);
+
+                    var cur = energyHistory.length > 0 ? energyHistory[energyHistory.length-1] : 0;
+                    elabel.textContent = 'Energy \u00B7 E = ' + cur.toFixed(1);
+
+                    if (energyHistory.length < 2) return;
+
+                    var eMin = Infinity, eMax = -Infinity;
+                    for (var i = 0; i < energyHistory.length; i++) {
+                        if (energyHistory[i] < eMin) eMin = energyHistory[i];
+                        if (energyHistory[i] > eMax) eMax = energyHistory[i];
+                    }
+                    var range = eMax - eMin || 1;
+                    var pad = 10;
+
+                    energyCtx.strokeStyle = '#cc241d';
+                    energyCtx.lineWidth = 2;
+                    energyCtx.beginPath();
+                    for (var i = 0; i < energyHistory.length; i++) {
+                        var x = pad + (w - 2 * pad) * i / (maxEnergyPoints - 1);
+                        var y = pad + (h - 2 * pad) * (1 - (energyHistory[i] - eMin) / range);
+                        if (i === 0) energyCtx.moveTo(x, y);
+                        else energyCtx.lineTo(x, y);
+                    }
+                    energyCtx.stroke();
+                }
+
+                energyHistory.push(computeEnergy());
+                drawEnergy();
+
+                var running = false;
+                var rafId = null;
+                var totalSteps = 0;
+                var btn = document.getElementById('hopfield-btn');
+                var resetBtn = document.getElementById('hopfield-reset');
+                var statusEl = document.getElementById('hopfield-status');
+
+                function frame() {
+                    if (!running) return;
+                    for (var k = 0; k < flipsPerFrame; k++) {
+                        var i = Math.floor(Math.random() * NN);
+                        flipSpin(i);
+                        totalSteps++;
+                    }
+                    renderCanvas(stateCtx, state);
+
+                    if (energyHistory.length >= maxEnergyPoints) energyHistory.shift();
+                    energyHistory.push(computeEnergy());
+                    drawEnergy();
+
+                    statusEl.textContent = 'step ' + totalSteps;
+                    rafId = requestAnimationFrame(frame);
+                }
+
+                btn.addEventListener('click', function() {
+                    running = !running;
+                    btn.textContent = running ? 'pause' : 'play';
+                    if (running) rafId = requestAnimationFrame(frame);
+                });
+
+                resetBtn.addEventListener('click', function() {
+                    running = false;
+                    if (rafId) cancelAnimationFrame(rafId);
+                    targetIdx = (targetIdx + 1) % numPatterns;
+                    target = patterns[targetIdx];
+                    // Recompute ground state energy for new target
+                    E_ground = 0;
+                    for (var mu = 0; mu < numPatterns; mu++) {
+                        var ov = 0;
+                        for (var j = 0; j < NN; j++) ov += patterns[mu][j] * target[j];
+                        E_ground -= ov * ov;
+                    }
+                    E_ground = E_ground / (2 * NN);
+                    corrupt();
+                    renderCanvas(targetCtx, target);
+                    renderCanvas(stateCtx, state);
+                    energyHistory = [computeEnergy()];
+                    drawEnergy();
+                    totalSteps = 0;
+                    statusEl.textContent = 'step 0';
+                    btn.textContent = 'play';
+                });
+            })();
+
+            // ---- Figure 4: SDM Circle Intersection (dual panel) ----
+            (function() {
+                var n = 64;
+
+                function logBinom(a, b) {
+                    if (b < 0 || b > a) return -Infinity;
+                    if (b === 0 || b === a) return 0;
+                    var s = 0;
+                    if (b > a - b) b = a - b;
+                    for (var i = 0; i < b; i++) s += Math.log(a - i) - Math.log(i + 1);
+                    return s;
+                }
+
+                function circleIntersect(dv, d, nn) {
+                    if (dv > 2 * d) return 0;
+                    var logTotal = -Infinity;
+                    for (var i = 0; i <= dv; i++) {
+                        var maxJ = Math.min(d - i, d - dv + i, nn - dv);
+                        if (maxJ < 0) continue;
+                        for (var j = 0; j <= maxJ; j++) {
+                            var logTerm = logBinom(dv, i) + logBinom(nn - dv, j);
+                            if (logTotal === -Infinity) logTotal = logTerm;
+                            else {
+                                var mx = Math.max(logTotal, logTerm);
+                                logTotal = mx + Math.log(Math.exp(logTotal - mx) + Math.exp(logTerm - mx));
+                            }
+                        }
+                    }
+                    return logTotal; // return LOG value
+                }
+
+                var geomCanvas = document.getElementById('sdm-geom');
+                var logCanvas = document.getElementById('sdm-log');
+                var geomCtx = geomCanvas.getContext('2d');
+                var logCtx = logCanvas.getContext('2d');
+                var dSlider = document.getElementById('sdm-d-slider');
+                var nSlider = document.getElementById('sdm-n-slider');
+                var dvalEl = document.getElementById('sdm-dval');
+                var nvalEl = document.getElementById('sdm-nval');
+                var titleEl = document.getElementById('sdm-title');
+
+                function draw(d, nn) {
+                    // ---- Left panel: geometric schematic ----
+                    var gw = geomCanvas.width = geomCanvas.clientWidth * 2;
+                    var gh = geomCanvas.height = geomCanvas.clientHeight * 2;
+                    geomCtx.clearRect(0, 0, gw, gh);
+
+                    var cx = gw / 2, cy = gh / 2;
+                    var maxR = Math.min(gw, gh) * 0.38;
+                    // radius of circles proportional to d/n
+                    var r = maxR * Math.min(d / (nn * 0.35), 1);
+                    // slider for dv: show a representative dv
+                    var dv_show = Math.min(d, Math.floor(nn * 0.15)); // representative distance
+                    // separation proportional to dv
+                    var sep = maxR * 0.8 * dv_show / Math.max(2 * d, 1);
+                    var c1x = cx - sep, c2x = cx + sep;
+
+                    // Draw circles
+                    geomCtx.globalAlpha = 0.15;
+                    geomCtx.fillStyle = '#458588';
+                    geomCtx.beginPath(); geomCtx.arc(c1x, cy, r, 0, 2 * Math.PI); geomCtx.fill();
+                    geomCtx.fillStyle = '#cc241d';
+                    geomCtx.beginPath(); geomCtx.arc(c2x, cy, r, 0, 2 * Math.PI); geomCtx.fill();
+
+                    // Draw overlap region
+                    if (sep < r) {
+                        geomCtx.globalAlpha = 0.35;
+                        geomCtx.fillStyle = '#b16286'; // gruvbox purple for overlap
+                        geomCtx.save();
+                        geomCtx.beginPath();
+                        geomCtx.arc(c1x, cy, r, 0, 2 * Math.PI);
+                        geomCtx.clip();
+                        geomCtx.beginPath();
+                        geomCtx.arc(c2x, cy, r, 0, 2 * Math.PI);
+                        geomCtx.fill();
+                        geomCtx.restore();
+                    }
+
+                    geomCtx.globalAlpha = 1;
+                    // Circle outlines
+                    geomCtx.strokeStyle = '#458588'; geomCtx.lineWidth = 2.5;
+                    geomCtx.beginPath(); geomCtx.arc(c1x, cy, r, 0, 2 * Math.PI); geomCtx.stroke();
+                    geomCtx.strokeStyle = '#cc241d'; geomCtx.lineWidth = 2.5;
+                    geomCtx.beginPath(); geomCtx.arc(c2x, cy, r, 0, 2 * Math.PI); geomCtx.stroke();
+
+                    // Labels
+                    geomCtx.font = '22px sans-serif'; geomCtx.textAlign = 'center';
+                    geomCtx.fillStyle = '#458588';
+                    geomCtx.fillText('\u03BE', c1x - r * 0.4, cy - r - 12);
+                    geomCtx.fillStyle = '#cc241d';
+                    geomCtx.fillText('p', c2x + r * 0.4, cy - r - 12);
+
+                    // d_v arrow
+                    geomCtx.strokeStyle = '#666'; geomCtx.lineWidth = 1.5;
+                    geomCtx.setLineDash([4, 3]);
+                    geomCtx.beginPath(); geomCtx.moveTo(c1x, cy); geomCtx.lineTo(c2x, cy); geomCtx.stroke();
+                    geomCtx.setLineDash([]);
+                    geomCtx.fillStyle = '#666'; geomCtx.font = '18px sans-serif';
+                    geomCtx.fillText('d\u1D65 = ' + dv_show, cx, cy - 8);
+
+                    // Radius label
+                    geomCtx.strokeStyle = '#999'; geomCtx.lineWidth = 1;
+                    geomCtx.beginPath(); geomCtx.moveTo(c1x, cy); geomCtx.lineTo(c1x, cy + r); geomCtx.stroke();
+                    geomCtx.fillStyle = '#999'; geomCtx.font = '16px sans-serif';
+                    geomCtx.fillText('d=' + d, c1x - 20, cy + r / 2 + 5);
+
+                    // Overlap label
+                    if (sep < r) {
+                        geomCtx.fillStyle = '#b16286'; geomCtx.font = 'italic 18px sans-serif';
+                        geomCtx.fillText('\u2110', cx, cy + r + 24);
+                    }
+
+                    // ---- Right panel: log-scale plot ----
+                    var w = logCanvas.width = logCanvas.clientWidth * 2;
+                    var h = logCanvas.height = logCanvas.clientHeight * 2;
+                    logCtx.clearRect(0, 0, w, h);
+
+                    // Compute log circle intersections
+                    var maxDv = nn;
+                    var logCI = [];
+                    for (var dv = 0; dv <= maxDv; dv++) {
+                        logCI.push(circleIntersect(dv, d, nn));
+                    }
+
+                    // Fit line in log space for dv <= 2d
+                    var fitN = Math.min(2 * d + 1, logCI.length);
+                    var sX = 0, sY = 0, sXX = 0, sXY = 0, fc = 0;
+                    for (var dv = 0; dv < fitN; dv++) {
+                        if (logCI[dv] > -Infinity) {
+                            sX += dv; sY += logCI[dv]; sXX += dv * dv; sXY += dv * logCI[dv];
+                            fc++;
+                        }
+                    }
+                    var slope = 0, intercept = 0;
+                    if (fc > 1) {
+                        slope = (fc * sXY - sX * sY) / (fc * sXX - sX * sX);
+                        intercept = (sY - slope * sX) / fc;
+                    }
+                    var beta = -slope * nn / 2; // convert to beta in cos-similarity space
+
+                    titleEl.innerHTML = 'log \u2110(d<sub>v</sub>) \u00B7 n=' + nn + ', d=' + d + ', \u03B2\u2248' + beta.toFixed(1);
+
+                    // Plot bounds
+                    var pad = { l: 55, r: 15, t: 12, b: 38 };
+                    var pw = w - pad.l - pad.r;
+                    var ph = h - pad.t - pad.b;
+
+                    // Find y range from nonzero values
+                    var yMin = Infinity, yMax = -Infinity;
+                    for (var dv = 0; dv <= Math.min(2 * d + 5, maxDv); dv++) {
+                        if (logCI[dv] > -Infinity) {
+                            if (logCI[dv] < yMin) yMin = logCI[dv];
+                            if (logCI[dv] > yMax) yMax = logCI[dv];
+                        }
+                    }
+                    // Also include the fit line extent
+                    var fitEnd = intercept + slope * Math.min(2 * d + 5, maxDv);
+                    if (fitEnd < yMin) yMin = fitEnd;
+                    if (yMax === yMin) { yMax += 1; yMin -= 1; }
+                    var yRange = yMax - yMin;
+                    yMin -= yRange * 0.05; yMax += yRange * 0.05;
+
+                    var xMax = Math.min(2 * d + 10, maxDv);
+
+                    function toX(dv) { return pad.l + pw * dv / xMax; }
+                    function toY(v) { return pad.t + ph * (1 - (v - yMin) / (yMax - yMin)); }
+
+                    // Grid
+                    logCtx.strokeStyle = '#e8e8e8'; logCtx.lineWidth = 1;
+                    for (var i = 0; i <= 4; i++) {
+                        var gy = pad.t + ph * i / 4;
+                        logCtx.beginPath(); logCtx.moveTo(pad.l, gy); logCtx.lineTo(w - pad.r, gy); logCtx.stroke();
+                    }
+
+                    // Axes
+                    logCtx.strokeStyle = '#999'; logCtx.lineWidth = 1.5;
+                    logCtx.beginPath();
+                    logCtx.moveTo(pad.l, pad.t); logCtx.lineTo(pad.l, h - pad.b);
+                    logCtx.lineTo(w - pad.r, h - pad.b); logCtx.stroke();
+
+                    // X ticks
+                    logCtx.fillStyle = '#666'; logCtx.font = '18px sans-serif'; logCtx.textAlign = 'center';
+                    var xStep = Math.max(1, Math.round(xMax / 5));
+                    for (var tick = 0; tick <= xMax; tick += xStep) {
+                        var tx = toX(tick);
+                        logCtx.fillText(tick, tx, h - pad.b + 20);
+                        logCtx.beginPath(); logCtx.moveTo(tx, h - pad.b); logCtx.lineTo(tx, h - pad.b + 4); logCtx.stroke();
+                    }
+                    logCtx.fillText('d\u1D65', pad.l + pw / 2, h - 4);
+
+                    // Y ticks (log values)
+                    logCtx.textAlign = 'right';
+                    for (var i = 0; i <= 4; i++) {
+                        var yv = yMax - (yMax - yMin) * i / 4;
+                        logCtx.fillText(yv.toFixed(0), pad.l - 5, pad.t + ph * i / 4 + 5);
+                    }
+
+                    // Fitted exponential line (red dashed) — straight on log scale
+                    logCtx.strokeStyle = '#cc241d'; logCtx.lineWidth = 2.5;
+                    logCtx.setLineDash([8, 5]);
+                    logCtx.beginPath();
+                    for (var dv = 0; dv <= xMax; dv++) {
+                        var fy = intercept + slope * dv;
+                        var x = toX(dv), y = toY(fy);
+                        if (y > h - pad.b) y = h - pad.b;
+                        if (y < pad.t) y = pad.t;
+                        if (dv === 0) logCtx.moveTo(x, y); else logCtx.lineTo(x, y);
+                    }
+                    logCtx.stroke();
+                    logCtx.setLineDash([]);
+
+                    // Circle intersection dots (teal)
+                    logCtx.fillStyle = '#458588';
+                    for (var dv = 0; dv <= xMax; dv++) {
+                        if (logCI[dv] <= -Infinity) continue;
+                        var x = toX(dv), y = toY(logCI[dv]);
+                        if (y > h - pad.b || y < pad.t) continue;
+                        logCtx.beginPath();
+                        logCtx.arc(x, y, 4, 0, 2 * Math.PI);
+                        logCtx.fill();
+                    }
+
+                    // 2d boundary line
+                    if (2 * d < xMax) {
+                        logCtx.strokeStyle = '#999'; logCtx.lineWidth = 1;
+                        logCtx.setLineDash([3, 3]);
+                        var bx = toX(2 * d);
+                        logCtx.beginPath(); logCtx.moveTo(bx, pad.t); logCtx.lineTo(bx, h - pad.b); logCtx.stroke();
+                        logCtx.setLineDash([]);
+                        logCtx.fillStyle = '#999'; logCtx.font = '16px sans-serif'; logCtx.textAlign = 'left';
+                        logCtx.fillText('2d', bx + 4, pad.t + 14);
+                    }
+
+                    // Legend
+                    var lx = w - pad.r - pw * 0.38, ly = h - pad.b - 50;
+                    logCtx.font = '16px sans-serif';
+                    logCtx.fillStyle = '#458588';
+                    logCtx.beginPath(); logCtx.arc(lx, ly, 4, 0, 2 * Math.PI); logCtx.fill();
+                    logCtx.fillStyle = '#444'; logCtx.textAlign = 'left';
+                    logCtx.fillText('log \u2110(d\u1D65)', lx + 10, ly + 5);
+                    ly += 20;
+                    logCtx.strokeStyle = '#cc241d'; logCtx.lineWidth = 2; logCtx.setLineDash([6, 4]);
+                    logCtx.beginPath(); logCtx.moveTo(lx - 8, ly); logCtx.lineTo(lx + 8, ly); logCtx.stroke();
+                    logCtx.setLineDash([]);
+                    logCtx.fillStyle = '#444';
+                    logCtx.fillText('exp fit', lx + 10, ly + 5);
+                }
+
+                function update() {
+                    var d = parseInt(dSlider.value);
+                    n = parseInt(nSlider.value);
+                    dvalEl.textContent = d;
+                    nvalEl.textContent = n;
+                    draw(d, n);
+                }
+
+                dSlider.addEventListener('input', update);
+                nSlider.addEventListener('input', update);
+                update();
+            })();
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var body = document.querySelector('.post-body');
+            var footnotes = document.querySelector('.footnotes');
+            if (!body || !footnotes) return;
+
+            var sups = body.querySelectorAll('sup');
+            var items = footnotes.querySelectorAll('li');
+
+            sups.forEach(function(sup, i) {
+                var n = sup.textContent.trim();
+                if (!/^\d+$/.test(n)) return;
+
+                sup.id = 'fnref:' + n;
+
+                // Create link
+                var link = document.createElement('a');
+                link.href = '#fn:' + n;
+                link.className = 'footnote-ref';
+                link.textContent = '[' + n + ']';
+
+                sup.textContent = '';
+                sup.appendChild(link);
+
+                // Create tooltip from corresponding footnote
+                var li = items[parseInt(n) - 1];
+                if (li) {
+                    var tooltip = document.createElement('div');
+                    tooltip.className = 'footnote-tooltip';
+                    tooltip.innerHTML = '<sup>' + n + '</sup> ' + li.innerHTML;
+                    sup.appendChild(tooltip);
+
+                    // Wire up the footnote item
+                    li.id = 'fn:' + n;
+                    var numSup = document.createElement('sup');
+                    numSup.textContent = n;
+                    var backLink = document.createElement('a');
+                    backLink.href = '#fnref:' + n;
+                    backLink.className = 'footnote-backref';
+                    backLink.textContent = '↩';
+
+                    var original = li.innerHTML;
+                    li.innerHTML = '';
+                    li.appendChild(numSup);
+                    li.insertAdjacentHTML('beforeend', ' ' + original + ' ');
+                    li.appendChild(backLink);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

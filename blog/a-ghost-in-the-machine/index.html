@@ -175,51 +175,85 @@
             font-style: italic;
         }
 
-        .sidebar {
-            background-color: transparent;
-            border: none;
-            padding: 0;
-            margin: 20px 0;
+        sup {
+            position: relative;
+        }
+
+        .footnote-ref {
+            background: none;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-decoration: none;
+            color: #8B0000;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footnote-ref:hover {
+            text-decoration: none;
+            color: #8B0000;
+        }
+
+        .footnote-tooltip {
+            z-index: 10;
+            background-color: #fff;
+            visibility: hidden;
+            width: 36vw;
+            max-width: 350px;
+            padding: 14px 18px;
             font-size: 15px;
+            font-weight: 400;
             line-height: 1.5;
             color: #333;
+            position: absolute;
+            top: calc(100% + 0.5em);
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
         }
 
-        .sidebar-title {
-            font-weight: 400;
-            margin-bottom: 4px;
-            color: #333;
+        @media screen and (min-width: 768px) {
+            sup .footnote-ref:hover + .footnote-tooltip {
+                visibility: visible;
+            }
         }
 
-        .sidebar-ref {
-            display: inline-block;
-            font-size: 0.75em;
-            vertical-align: super;
-            color: #8B0000;
+        .footnotes-sep {
+            margin-top: 40px;
+            border: none;
+            border-top: 1px solid #ddd;
+        }
+
+        .footnotes {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .footnotes ol {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .footnotes li {
+            margin-bottom: 10px;
+        }
+
+        .footnotes li sup {
             font-weight: 600;
-            margin-left: 2px;
+            color: #8B0000;
+        }
+
+        .footnote-backref {
             text-decoration: none;
-        }
-
-        .sidebar-number {
             color: #8B0000;
-            font-weight: 600;
-            margin-right: 4px;
+            margin-left: 4px;
+            font-size: 0.75em;
         }
 
-        @media screen and (min-width: 1100px) {
-            .post-body {
-                position: relative;
-            }
-
-            .sidebar {
-                position: absolute;
-                left: calc(100% + 30px);
-                width: 240px;
-                margin: 0;
-                font-size: 14px;
-                line-height: 1.45;
-            }
+        .footnote-backref:hover {
+            text-decoration: underline;
         }
 
         .back-link {
@@ -279,12 +313,7 @@
                     \[
                     J_{ij} = -\frac{b}{N}J_0 + \tilde{J}_{ij},\quad \tilde{J}_{ij} \sim \mathcal{N}(0, g^2/N).
                     \]
-                    \(b > 0\) tunes the <i>tightness of balance</i><span class="sidebar-ref">[1]</span> (a stronger \(b\) means stronger recurrent inhibition), \(I(t)\) is a common input (e.g. an OU process with correlation time \(\tau_S\)), and \(\xi_i(t)\) is independent Gaussian noise such that \(\langle \xi_i(t) \xi_i(t') \rangle = \sigma^2 \tau \delta(t - t')\).
-
-                <div class="sidebar">
-                    <div class="sidebar-title"><span class="sidebar-number">[1]</span>Tightness of balance</div>
-                    Larger \(b\) means excitation and inhibition cancel more precisely in the mean. This "tight balance" confines chaos to high-dimensional fluctuations while the mean mode stays clean and fast.
-                </div>
+                    \(b > 0\) tunes the <i>tightness of balance</i><sup>1</sup> (a stronger \(b\) means stronger recurrent inhibition), \(I(t)\) is a common input (e.g. an OU process with correlation time \(\tau_S\)), and \(\xi_i(t)\) is independent Gaussian noise such that \(\langle \xi_i(t) \xi_i(t') \rangle = \sigma^2 \tau \delta(t - t')\).
 
                 We decompose the currents into a <i>population mean</i> and <i>fluctuations</i>:
                     \[
@@ -340,12 +369,7 @@
                 </div>
 
                 <p>
-                    To complete our understanding of this paper, it's worth highlighting a key result from <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010590">a complementary paper</a> done by Engelken et al. This PLOS paper provides code that shows the same non-stationary DMFT framework was used to compute the largest Lyapunov exponent<span class="sidebar-ref">[2]</span> \(\lambda_1\).
-
-                <div class="sidebar">
-                    <div class="sidebar-title"><span class="sidebar-number">[2]</span>Lyapunov exponents</div>
-                    The largest Lyapunov exponent \(\lambda_1\) measures how fast nearby trajectories diverge exponentially. Positive means chaos, negative means stability, zero marks the bifurcation boundary.
-                </div>
+                    To complete our understanding of this paper, it's worth highlighting a key result from <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010590">a complementary paper</a> done by Engelken et al. This PLOS paper provides code that shows the same non-stationary DMFT framework was used to compute the largest Lyapunov exponent<sup>2</sup> \(\lambda_1\).
                 </p>
 
                 <p>
@@ -429,12 +453,7 @@
                     (1) Simulate the OU-driven network at fixed \((g,b)\) while sweeping \(m\);<br>
                     (2) Build \(A_{\mathrm{avg}}\) from the time-averaged gain mask \(\bar D\);<br>
                     (3) Extract the eigenvalue of \(A_{\mathrm{avg}}\) with largest real part (the "outlier");<br>
-                    (4) Compute \(\lambda_1\) using the Benettin algorithm<span class="sidebar-ref">[3]</span> along the full time-dependent Jacobian.
-
-                <div class="sidebar">
-                    <div class="sidebar-title"><span class="sidebar-number">[3]</span>Benettin algorithm</div>
-                    The Benettin algorithm computes Lyapunov exponents by tracking orthonormalized perturbation vectors along the trajectory, avoiding exponential overflow that would occur with naive methods.
-                </div>
+                    (4) Compute \(\lambda_1\) using the Benettin algorithm<sup>3</sup> along the full time-dependent Jacobian.
                 </p>
 
                 <p>
@@ -462,12 +481,7 @@
                 </div>
 
                 <p>
-                    There is a clean reason to be suspicious about where the proxy fails. Stability in a driven system is governed by the time-ordered product of Jacobians, a non-commutative object. A single averaged matrix \(A_{\mathrm{avg}}\) cannot capture non-normal transient growth<span class="sidebar-ref">[4]</span>, nor can it see fast input regimes. This is why, in exploratory phase-slices at larger \(g\) and \(m\), the proxy can become positive while sparse \(\lambda_1\) checks remain negative.
-
-                <div class="sidebar">
-                    <div class="sidebar-title"><span class="sidebar-number">[4]</span>Non-normal growth</div>
-                    Non-normal matrices can amplify perturbations transiently even when all eigenvalues are stable. The time-ordered product of Jacobians is non-commutative, so eigenvalues of \(A_{\mathrm{avg}}\) miss this transient amplification.
-                </div>
+                    There is a clean reason to be suspicious about where the proxy fails. Stability in a driven system is governed by the time-ordered product of Jacobians, a non-commutative object. A single averaged matrix \(A_{\mathrm{avg}}\) cannot capture non-normal transient growth<sup>4</sup>, nor can it see fast input regimes. This is why, in exploratory phase-slices at larger \(g\) and \(m\), the proxy can become positive while sparse \(\lambda_1\) checks remain negative.
                 </p>
 
                 <p>
@@ -490,11 +504,68 @@
                     I'm quite satisfied with how far this project got, despite deeply overextending on my initial goals. I'm grateful to Rainer Engelken for his guidance throughout; the full technical report is available <a href="/assets/post4/low-rank-rnns.pdf">here</a>.
                 </p>
 
+                <hr class="footnotes-sep">
+                <section class="footnotes">
+                    <ol>
+                        <li>Larger \(b\) means excitation and inhibition cancel more precisely in the mean. This "tight balance" confines chaos to high-dimensional fluctuations while the mean mode stays clean and fast.</li>
+                        <li>The largest Lyapunov exponent \(\lambda_1\) measures how fast nearby trajectories diverge exponentially. Positive means chaos, negative means stability, zero marks the bifurcation boundary.</li>
+                        <li>The Benettin algorithm computes Lyapunov exponents by tracking orthonormalized perturbation vectors along the trajectory, avoiding exponential overflow that would occur with naive methods.</li>
+                        <li>Non-normal matrices can amplify perturbations transiently even when all eigenvalues are stable. The time-ordered product of Jacobians is non-commutative, so eigenvalues of \(A_{\mathrm{avg}}\) miss this transient amplification.</li>
+                    </ol>
+                </section>
+
                 <div class="back-link">
                     <a href="/blog/">← back to blog</a>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var body = document.querySelector('.post-body');
+            var footnotes = document.querySelector('.footnotes');
+            if (!body || !footnotes) return;
+
+            var sups = body.querySelectorAll('sup');
+            var items = footnotes.querySelectorAll('li');
+
+            sups.forEach(function(sup, i) {
+                var n = sup.textContent.trim();
+                if (!/^\d+$/.test(n)) return;
+
+                sup.id = 'fnref:' + n;
+
+                var link = document.createElement('a');
+                link.href = '#fn:' + n;
+                link.className = 'footnote-ref';
+                link.textContent = '[' + n + ']';
+
+                sup.textContent = '';
+                sup.appendChild(link);
+
+                var li = items[parseInt(n) - 1];
+                if (li) {
+                    var tooltip = document.createElement('div');
+                    tooltip.className = 'footnote-tooltip';
+                    tooltip.innerHTML = '<sup>' + n + '</sup> ' + li.innerHTML;
+                    sup.appendChild(tooltip);
+
+                    li.id = 'fn:' + n;
+                    var numSup = document.createElement('sup');
+                    numSup.textContent = n;
+                    var backLink = document.createElement('a');
+                    backLink.href = '#fnref:' + n;
+                    backLink.className = 'footnote-backref';
+                    backLink.textContent = '↩';
+
+                    var original = li.innerHTML;
+                    li.innerHTML = '';
+                    li.appendChild(numSup);
+                    li.insertAdjacentHTML('beforeend', ' ' + original + ' ');
+                    li.appendChild(backLink);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
