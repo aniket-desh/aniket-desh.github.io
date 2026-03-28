@@ -186,6 +186,31 @@
             }
         }
 
+        .section-title {
+            font-weight: 600;
+            font-size: 17px;
+            margin-bottom: 2px !important;
+        }
+
+        .section-title + p {
+            margin-top: 0;
+        }
+
+        ol.references {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #555;
+            padding-left: 1.5em;
+        }
+
+        ol.references li {
+            margin-bottom: 10px;
+        }
+
+        ol.references a {
+            color: darkred;
+        }
+
         .footnotes-sep {
             margin-top: 40px;
             border: none;
@@ -341,16 +366,13 @@
                     </ol>
                 </section>
 
-                <h3>references</h3>
-                <ul>
-                    <li><strong>Chen et al. (2025)</strong> – <em>Faster Mixing of the Jerrum–Sinclair Chain</em>.<br>Shows the mixing time is \(\widetilde O(\Delta^2 m)\) for the perfect-matching chain. <a href="https://arxiv.org/abs/2504.02740" target="_blank">arxiv.org</a></li>
-
-                    <li><strong>Guruswami (2016)</strong> – <em>Rapidly Mixing Markov Chains: A Comparison of Techniques</em>.<br>A helpful overview of canonical paths vs. fractional flows. <a href="https://arxiv.org/abs/1603.01512" target="_blank">arxiv.org</a></li>
-
-                    <li><strong>Diaconis & Stroock (1991)</strong> – <em>Geometric Bounds for Eigenvalues of Markov Chains.</em><br>Proved that spectral gap is bounded by \(1 / (\rho_f \cdot l_{max})\), tying congestion to path length. <a href="https://proceedings.neurips.cc/paper_files/paper/2022/file/a600cdf3a53f93bcb85cb37343a8d831-Paper-Conference.pdf" target="_blank">link</a></li>
-
-                    <li><strong>Jerrum & Sinclair (1989)</strong> – <em>Approximating the Permanent</em>.<br>Introduced the use of Markov chains for approximating the permanent of a matrix. <a href="https://dl.acm.org/doi/10.1145/74334.74335" target="_blank">link</a></li>
-                </ul>
+                <p class="section-title">References</p>
+                <ol class="references">
+                    <li><a href="https://arxiv.org/abs/2504.02740" target="_blank">Faster Mixing of the Jerrum–Sinclair Chain</a><br>Chen, Z., Liu, K. and Vuong, T. V. (2025).</li>
+                    <li><a href="https://arxiv.org/abs/1603.01512" target="_blank">Rapidly Mixing Markov Chains: A Comparison of Techniques</a><br>Guruswami, V. (2016).</li>
+                    <li><a href="https://proceedings.neurips.cc/paper_files/paper/2022/file/a600cdf3a53f93bcb85cb37343a8d831-Paper-Conference.pdf" target="_blank">Geometric Bounds for Eigenvalues of Markov Chains</a><br>Diaconis, P. and Stroock, D. (1991).</li>
+                    <li><a href="https://dl.acm.org/doi/10.1145/74334.74335" target="_blank">Approximating the Permanent</a><br>Jerrum, M. and Sinclair, A. (1989).</li>
+                </ol>
 
                 <div class="back-link">
                     <a href="/blog/">← back to blog</a>
