@@ -145,6 +145,40 @@
         .post-entry a.read-more:hover {
             color: darkred;
         }
+
+        .post-entry.hidden {
+            display: none;
+        }
+
+        .tag-filters {
+            margin-bottom: 25px;
+            margin-top: -10px;
+        }
+
+        .tag-btn {
+            font-family: inherit;
+            font-size: 14px;
+            font-style: italic;
+            background: none;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            padding: 3px 12px;
+            cursor: pointer;
+            color: #999;
+            transition: all 0.15s ease;
+            margin-right: 4px;
+        }
+
+        .tag-btn:hover {
+            background: #f5f5f5;
+            color: #555;
+        }
+
+        .tag-btn.active {
+            background: #333;
+            color: #fff;
+            border-color: #333;
+        }
     </style>
 </head>
 
@@ -168,36 +202,64 @@
         <div class="content">
             <p class="page-desc">connecting dots between mathematics, machines, and the mind.</p>
 
-            <!-- <div class="post-entry">
+            <div class="tag-filters">
+                <button class="tag-btn active" data-tag="all">all</button>
+                <button class="tag-btn" data-tag="mind">mind</button>
+                <button class="tag-btn" data-tag="matter">matter</button>
+            </div>
+
+            <!-- <div class="post-entry" data-tag="matter">
                 <h3>[iv] predicting quantum properties</h3>
                 <p>coming soon.</p>
                 <a href="/blog/predicting-quantum-properties/" class="read-more">read more →</a>
             </div> -->
 
-            <div class="post-entry">
-                <h3>[iv] attention seeking</h3>
+            <div class="post-entry" data-tag="matter">
+                <h3>V. Attention Seeking</h3>
                 <p>three independent derivations of softmax attention — from thermodynamics, associative memory, and kernel regression — and the variational principle that unites them.</p>
                 <a href="/blog/post-four/" class="read-more">read more →</a>
             </div>
 
-            <div class="post-entry">
-                <h3>[iii] a ghost in the machine</h3>
+            <div class="post-entry" data-tag="matter">
+                <h3>IV. A Ghost in the Machine</h3>
                 <p>uncovering how spectral outliers from low-rank structure rise above chaotic bulk dynamics in recurrent neural networks, and how these isolated eigenvalues can serve as early-warning signals for bifurcations in driven systems.</p>
                 <a href="/blog/a-ghost-in-the-machine/" class="read-more">read more →</a>
             </div>
 
-            <div class="post-entry">
-                <h3>[ii] the slow art of fast mixing</h3>
+            <div class="post-entry" data-tag="mind">
+                <h3>III. The Effective Reductionist</h3>
+                <p>developing a philosophical framework for emergence that takes higher-level patterns seriously without surrendering reductive grounding — effective field theory as a model for the mind.</p>
+                <a href="/blog/the-effective-reductionist/" class="read-more">read more →</a>
+            </div>
+
+            <div class="post-entry" data-tag="matter">
+                <h3>II. The Slow Art of Fast Mixing</h3>
                 <p> exploring theoretical justifications for rapid mixing in high-dimensional Markov chains.</p>
                 <a href="/blog/the-slow-art-of-fast-mixing/" class="read-more">read more →</a>
             </div>
 
-            <div class="post-entry">
-                <h3>[i] walking the quantum line</h3>
+            <div class="post-entry" data-tag="matter">
+                <h3>I. Walking the Quantum Line</h3>
                 <p>tracing the shared formalism between classical random walks and quantum evolution on graphs, revealing how diffusion and interference arise from a common linear backbone.</p>
                 <a href="/blog/walking-the-quantum-line/" class="read-more">read more →</a>
             </div>
         </div>
     </div>
+    <script>
+        document.querySelectorAll('.tag-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tag-btn').forEach(function(b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+                var tag = btn.getAttribute('data-tag');
+                document.querySelectorAll('.post-entry').forEach(function(entry) {
+                    if (tag === 'all' || entry.getAttribute('data-tag') === tag) {
+                        entry.classList.remove('hidden');
+                    } else {
+                        entry.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

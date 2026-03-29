@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <link rel="icon" href="/assets/penrose-logo.png" type="image/x-icon" />
+    <title>the effective reductionist — aniket deshpande</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&display=swap" rel="stylesheet">
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background: #f9e6e6;
+        }
+
+        ::-moz-selection {
+            background: #f9e6e6;
+        }
+
+        html {
+            overflow-x: hidden;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            width: 100%;
+            margin: 25px 0;
+            padding: 0;
+            background: #fff;
+            font-family: "Newsreader", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        a {
+            color: darkred;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: #8B0000;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        @media screen and (min-width: 600px) {
+            body {
+                margin: 50px 0 25px;
+            }
+            .container {
+                padding: 0 24px;
+            }
+        }
+
+        @media screen and (min-width: 800px) {
+            body {
+                margin: 120px 0 50px;
+            }
+            .container {
+                padding: 0 24px;
+            }
+        }
+
+        .bio {
+            max-width: none;
+        }
+
+        .bio__header {
+            margin-bottom: 20px;
+            font-weight: 590;
+            font-size: 23px;
+        }
+
+        .bio__header a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .bio__header a:hover {
+            text-decoration: none;
+        }
+
+        .bio__tabs {
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .bio__tabs a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .bio__tabs a:hover {
+            color: darkred;
+        }
+
+        .content {
+            width: 100%;
+            max-width: none;
+        }
+
+        .post-title {
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .post-date {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .post-body p {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-weight: 600;
+            font-size: 17px;
+            margin-bottom: 2px !important;
+        }
+
+        .section-title + p {
+            margin-top: 0;
+        }
+
+        sup {
+            position: relative;
+        }
+
+        .footnote-ref {
+            background: none;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-decoration: none;
+            color: #8B0000;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footnote-ref:hover {
+            text-decoration: none;
+            color: #8B0000;
+        }
+
+        .footnote-tooltip {
+            z-index: 10;
+            background-color: #fff;
+            visibility: hidden;
+            width: 36vw;
+            max-width: 350px;
+            padding: 14px 18px;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #333;
+            position: absolute;
+            top: calc(100% + 0.5em);
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+        }
+
+        @media screen and (min-width: 768px) {
+            sup .footnote-ref:hover + .footnote-tooltip {
+                visibility: visible;
+            }
+        }
+
+        ol.references {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #555;
+            padding-left: 1.5em;
+        }
+
+        ol.references li {
+            margin-bottom: 10px;
+        }
+
+        ol.references a {
+            color: darkred;
+        }
+
+        .footnotes-sep {
+            margin-top: 40px;
+            border: none;
+            border-top: 1px solid #ddd;
+        }
+
+        .footnotes {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .footnotes ol {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .footnotes li {
+            margin-bottom: 10px;
+        }
+
+        .footnotes li sup {
+            font-weight: 600;
+            color: #8B0000;
+        }
+
+        .footnote-backref {
+            text-decoration: none;
+            color: #8B0000;
+            margin-left: 4px;
+            font-size: 0.75em;
+        }
+
+        .footnote-backref:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            margin-top: 40px;
+            font-style: italic;
+        }
+
+        .back-link a {
+            color: gray;
+            text-decoration: none;
+        }
+
+        .back-link a:hover {
+            color: darkred;
+        }
+
+        /* --- Sidebar TOC --- */
+        .toc-sidebar {
+            display: none;
+        }
+
+        @media screen and (min-width: 1100px) {
+            .toc-sidebar {
+                display: block;
+                position: fixed;
+                left: calc((100vw - 680px) / 2 - 260px);
+                top: 140px;
+                width: 200px;
+                font-size: 13px;
+                line-height: 1.6;
+            }
+
+            .toc-sidebar a {
+                display: block;
+                text-decoration: none;
+                color: #ccc;
+                padding: 3px 0;
+                transition: color 0.2s ease;
+            }
+
+            .toc-sidebar a:hover {
+                color: #888;
+            }
+
+            .toc-sidebar a.active {
+                color: #333;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="toc-sidebar">
+        <a href="#section-1">I. The Nonpartisan</a>
+        <a href="#section-2">II. Jaynes, Landauer, and the Thin Wall</a>
+        <a href="#section-3">III. Liquidity, and Other Real Things</a>
+        <a href="#section-4">IV. Twin Truths</a>
+        <a href="#section-5">V. The Hard Test</a>
+        <a href="#section-6">VI. Mind the Gap</a>
+        <a href="#section-7">VII. Ouroboros</a>
+        <a href="#section-coda">Coda</a>
+        <a href="#section-refs">References</a>
+    </nav>
+
+    <div class="container">
+        <div class="bio">
+            <div class="bio__header">
+                <a href="/">the effective reductionist</a>
+            </div>
+            <div class="bio__tabs">
+                <a href="/about/">about</a> <span class="dot">·</span>
+                <a href="/research/">research</a> <span class="dot">·</span>
+                <a href="/teaching/">teaching</a> <span class="dot">·</span>
+                <a href="/notes/">notes</a> <span class="dot">·</span>
+                <a href="/blog/">blog</a> <span class="dot">·</span>
+                <a href="/code/">code</a> <span class="dot">·</span>
+                <a href="/cv/cv.pdf">vitae</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <p class="post-date">11.20.2025</p>
+
+            <div class="post-body">
+
+                <p> It did not take long for me to sunset my Substack. I'd prefer to keep my thoughts, technical and not, in one place. With that decision, I wanted to revamp my first post with a more comprehensive approach to the topic at hand. I've read <i>a lot</i> of new material regarding consciousness, emergence, reductionism, and the philosophy of mind, and I believe this is a crucial area for interdisciplinary dialogue.</p>
+
+                <p>
+                    My undergraduate education has been a mosaic, to say the least. I joined Illinois with an interest in operator algebras and quantum Shannon theory. I realized QIT could quickly leave me hyper-specialized and unemployed outside of academia (although I doubt my passion for the field will ever truly fade; it is incredibly elegant). The majority of my four years have been spent at the LPNA researching tensor computations and contractions. I fell in love with the workflow of applied mathematics research: days developing sophisticated theory buttressed by weeks of efficient algorithm design and experimentation.
+                </p>
+
+                <p>
+                    Recently, neuroscience has piqued my interest. Internally, I have been wondering if this has been my excuse to participate in machine learning research without "leaving" physics, but the potential answer to that question hasn't bothered me enough yet. What <i>has</i> bothered me is something else entirely. Involving myself in theoretical neuroscience, and more broadly the physics of learning, has surfaced a tension I was not expecting: the battleground of reductionism. The overarching goal of this field is to explain natural and artificial intelligence through the lens of physical theories. It becomes immediately obvious where the reductionist and holist ideologies clash, and it becomes equally obvious that the standard versions of both are inadequate.
+                </p>
+
+                <p>
+                    In what follows, I want to develop a position that does justice to this inadequacy. The arguments here have been refined through a period of sustained philosophical reading, and I present them not as settled conclusions but as a working framework for an aspiring physicist who takes emergence seriously without surrendering reduction.
+                </p>
+
+                <p class="section-title" id="section-1">I. The Nonpartisan</p>
+
+                <p>
+                    Reductionism, in its textbook form, is the conviction that all macroscopic physical behavior can be explained and derived from governing microscopic laws. The ultimate reductive base, on this view, is the Standard Model and particle physics. Holism debates the opposite: the whole system develops behavior that its parts cannot fully describe.
+                </p>
+
+                <p>
+                    In theoretical neuroscience, these ideologies collide with unusual force. Spiking neural networks often use models that are direct descendants of standard physical models. Integrate-and-fire neurons, the simplest possible model, are mathematically reduced to an RC circuit. But when many of these reduced components are connected into a large network, something happens that the circuit equation did not promise: synchronized firing of millions of IF neurons gives rise to brain rhythms, a property that only exists in a macroscopic model and cannot be located in any single neuron. The Hopfield network demonstrates similar behavior. The network's collective dynamics settle into states that represent memories. The memory is the network's emergent collective state, which is ontologically distinct from the state of any individual neuron.<sup>1</sup>
+                </p>
+
+                <p>
+                    So theoretical neuroscientists use reduction to define building blocks, but observe emergent mathematical behavior to understand the function of the whole and draw meaningful conclusions between human cognition and our universe's physical laws. For a while, I treated this as a pragmatic observation: I cannot choose a party, progress relies on this philosophical tug-of-war. But that framing, I have come to realize, is evasive. It treats the question as merely sociological, as if reductionism and holism are competing research strategies rather than claims about the structure of reality.<sup>5</sup> The question of whether emergence is a feature of <i>our descriptions</i> or of <i>reality itself</i> is not a question one can politely decline to answer. What follows is my attempt to answer it.
+                </p>
+
+                <p class="section-title" id="section-2">II. Jaynes, Landauer, and the Thin Wall</p>
+
+                <p>
+                    Before addressing emergence directly, I want to lay out a set of correspondences that have shaped how I think about reduction.
+                </p>
+
+                <p>
+                    In the Jaynesian reinterpretation of statistical mechanics, the Boltzmann distribution is not primarily a physical law. It is the <i>unique rational answer</i> to an inferential problem under constraint: given a set of microstates and an observed macroscopic average (say, mean energy), the maximum-entropy distribution is the one that introduces the least additional assumption.<sup>2</sup> On this reading, the partition function is not a physical object but an epistemological one. Statistical mechanics becomes a theory of inference, and the Boltzmann distribution becomes a statement about what any rational agent <i>should</i> believe about a system, given limited information.
+                </p>
+
+                <p>
+                    This is a powerful reframing. It dissolves the apparent mystery of why the same mathematical structures, partition functions, free energies, variational principles, keep appearing across physics, machine learning, and Bayesian inference. If statistical mechanics is fundamentally a calculus of belief under constraint, then its recurrence in learning theory is not mere analogy. Any system that distributes probability over discrete options by trading off expected compatibility against distributional uncertainty will arrive at the Gibbs measure. I have derived this independently in the context of softmax attention, associative memory, and kernel regression; the "coincidental" convergence reflects a shared problem statement.<sup>3</sup><sup>6</sup>
+                </p>
+
+                <p>
+                    But the Jaynesian picture, taken alone, is too clean. If statistical mechanics is <i>purely</i> epistemological, then the partition function is a bookkeeping device and thermodynamic quantities are summary statistics of our ignorance, nothing more. This is where Rolf Landauer's principle complicates matters. Landauer showed that erasing a single bit of information in any physical system dissipates at least \(k_B T \ln 2\) of energy as heat.<sup>7</sup> This seemingly contingent engineering limitation is, in fact, a consequence of the second law. Information erasure has an irreducible thermodynamic cost, which means that information processing is not merely <i>described by</i> physics but <i>subject to</i> physics. Computation is physical.
+                </p>
+
+                <p>
+                    Taken together, these two observations create a productive tension. Jaynes pulls toward epistemology: statistical mechanics as inference. Landauer pulls toward ontology: information as physically real. Neither alone is sufficient. And this tension, I think, is not a problem to be resolved but a feature of the landscape, one that bears directly on how we should think about emergence and reduction.
+                </p>
+
+                <p class="section-title" id="section-3">III. Liquidity, and Other Real Things</p>
+
+                <p>
+                    The philosophical literature distinguishes two kinds of emergence, and failing to separate them generates most of the confusion in the reductionism debate.
+                </p>
+
+                <p>
+                    Weak (or epistemic) emergence says: the macro-level behavior is unexpected, perhaps computationally intractable to derive from the micro-level description, but it is still <i>nothing over and above</i> those micro-level laws. The whole is surprising given the parts, but it is not ontologically additional. Strong (or ontological) emergence makes a far more radical claim: the macro-level has genuinely novel causal powers that are irreducible, even in principle, to the micro-level description. No complete specification of the lower level, combined with the lower-level laws, would suffice to predict or explain the higher-level phenomenon.
+                </p>
+
+                <p>
+                    For a while, I found the existence of critical thresholds, phase transitions, population-dependent effects, to be suggestive of something ontologically new. Brain rhythms emerge only above a certain number of IF neurons. Spontaneous magnetization appears in the Ising model only below a critical temperature. Does the existence of these thresholds prove that something <i>genuinely new</i> enters the ontological inventory at the macro scale?
+                </p>
+
+                <p>
+                    I think the answer is yes, but with a crucial qualification. And the qualification matters more than the affirmation.
+                </p>
+
+                <p>
+                    Consider the phase transition in water. An individual H\(_2\)O molecule is not liquid. Liquidity is not a property you can find anywhere in a single molecule's description, no matter how exhaustively you characterize it. Yet liquidity undeniably <i>exists</i>. It has causal consequences: it is what lets you swim, what lets you drown. Something ontologically real is present at the macro level that is absent at the micro level. And yet no new physics is invoked. Statistical mechanics, intermolecular forces, the thermodynamic limit: the same Hamiltonian accounts for everything. The mathematics does not change. The laws do not change. But new kinds of things come into existence.
+                </p>
+
+                <p>
+                    This observation demands a distinction that I have found useful: the difference between <i>novel ontology</i> and <i>novel nomology</i>. Novel ontology says new entities, properties, or kinds of things come into existence at the macro level. Novel nomology says new <i>laws</i> are needed to govern them. My claim is that you can have the first without the second. Compositional processes give rise to genuinely new kinds of things in the world, but they do so under the governance of the same fundamental laws. Brain rhythms are ontologically real. But the physics of coupled oscillators, derived from the same equations that describe individual neurons, is sufficient to account for them. Memories in a Hopfield network are ontologically real. But the statistical mechanics of the Ising model, operating at the level of spin interactions, generates them without supplementary axioms.
+                </p>
+
+                <p>
+                    This is what I mean by "effective reductionism." The word <i>effective</i> is not decorative. In physics, an effective field theory is one that captures the relevant dynamics at a particular energy scale by integrating out the degrees of freedom that operate at higher energies. The resulting theory is <i>autonomous</i> at its own scale: it has its own coupling constants, its own organizing principles, its own natural vocabulary. But it is <i>derivable in principle</i> from the more fundamental theory. The renormalization group provides the formal machinery for this derivation.<sup>8</sup> Effective field theory is neither naive reductionism ("nothing but quarks") nor holism ("the whole transcends its parts"). It is something more sophisticated: a precise account of how macro-level descriptions relate to micro-level ones, preserving explanatory autonomy without introducing ontological inflation.
+                </p>
+
+                <p>
+                    This is the framework I want to apply to emergence in general. Higher-level patterns are real. They are not illusions, not merely useful fictions, not convenient shorthands for computational creatures who cannot track \(10^{23}\) molecules. They have genuine explanatory and causal relevance. But they do not <i>add</i> to the fundamental ontology. They are real patterns <i>in</i> the lower-level substrate, to borrow Daniel Dennett's phrase, not additions on top of it.<sup>9</sup>
+                </p>
+
+                <p class="section-title" id="section-4">IV. Twin Truths</p>
+
+                <p>
+                    But I want to be precise about what this position entails, because there is a subtlety I initially missed.
+                </p>
+
+                <p>
+                    One might ask: if the mathematics doesn't change, if the micro-level specification plus the fundamental laws is sufficient to derive every macro-level phenomenon, then why insist that higher-level entities are ontologically <i>real</i> rather than merely <i>descriptively convenient</i>? The strict reductionist, someone in the mold of Jaegwon Kim,<sup>10</sup> would argue that what I am calling "ontological novelty" is really just <i>descriptive novelty</i>. I have identified a pattern that is salient and useful and causally relevant at a particular scale, but I have not discovered a new constituent of reality. I have discovered a new way of <i>carving up</i> the same reality.
+                </p>
+
+                <p>
+                    I initially tried to resolve this by arguing that whether something counts as real depends on what kind of question you are asking. The practical agent encounters liquidity as causally relevant, the physicist encounters molecular dynamics as explanatorily fundamental, and these are simply different perspectives satisfying different needs. But this move, I realized, relativizes ontology to inquiry. It makes what counts as real depend on who is asking and why, which is a form of pragmatism that sits in tension with the realist commitments that motivate reduction in the first place. The physicist's response to "who cares about quantum tunneling?" is not "well, I happen to have different needs." The physicist's response, <i>my</i> response, is something stronger: quantum tunneling is <i>what is actually happening</i>, whether you care about it or not. That is a realist claim.
+                </p>
+
+                <p>
+                    The resolution I find more satisfying is this: the molecular description and the macroscopic description are not rival perspectives serving different needs. They are two truths about the <i>same</i> reality, standing in a grounding relation. The macro-level description is real but derivative. The micro-level description is real and fundamental. Liquidity is a real pattern in molecular dynamics. Brain rhythms are real patterns in neural activity. They exist. But they are grounded in, and fully derivable from, the physics operating at the lower level. Some descriptions are more fundamental than others, not because they serve different interests, but because they stand closer to the base of the grounding hierarchy.
+                </p>
+
+                <p>
+                    This makes me a realist about higher-level patterns while remaining a reductionist about grounding. Emergence is real, not merely epistemic, not merely a confession of computational limitations. But it is weak in the nomological sense: no autonomous laws, no irreducible causal powers floating free of the physics.
+                </p>
+
+                <p class="section-title" id="section-5">V. The Hard Test</p>
+
+                <p>
+                    Everything I have said so far is relatively comfortable. Phase transitions, liquidity, brain rhythms, Hopfield memories: these are cases where the reductive story is clean and well-understood. The real test of the framework is consciousness.
+                </p>
+
+                <p>
+                    Does consciousness put unique pressure on this framework? If higher-level descriptions are always derivative, what justifies treating them as genuinely explanatory rather than merely predictively useful? What distinguishes a real pattern from a convenient shorthand? These are questions that feel manageable when the explanandum is magnetization. They become considerably harder when the explanandum is the felt quality of seeing red.
+                </p>
+
+                <p>
+                    My initial instinct is that consciousness should be no exception. If consciousness is a property of physics, which I believe, since everything is physics,<sup>11</sup> then it falls under the same framework: a real pattern in neural dynamics, ontologically genuine but nomologically governed by the same laws that operate at every other scale. The reason consciousness <i>seems</i> to put pressure on the framework is, I think, twofold. First, the sheer complexity of the system. The human brain operates at a scale and with a degree of recurrent connectivity that dwarfs any physical system we have successfully reduced. Second, and more interestingly, the circumstance of self-reference: my consciousness is actively discussing its own existence. The instrument of investigation <i>is</i> the phenomenon under investigation.
+                </p>
+
+                <p>
+                    This second point deserves more care than I initially gave it, and I will return to it. But first, the epistemic situation.
+                </p>
+
+                <p class="section-title" id="section-6">VI. Mind the Gap</p>
+
+                <p>
+                    There is a well-known argument, due to David Chalmers, that consciousness poses a problem qualitatively different from other cases of emergence. The argument runs as follows. Suppose I give you a complete neuronal simulation: every spike, every synapse, every neuromodulator, at arbitrary resolution. You could, in principle, derive every functional property of the system, every input-output relation, every behavioral disposition. But Chalmers' claim is that you could have all of this and still face a coherent question: <i>why is there something it is like to be this system?</i> Why does this particular pattern of neural activity come accompanied by the felt quality of seeing red, rather than processing the same information in the dark? This is the "hard problem,"<sup>12</sup> and it is not a complaint about complexity. A weather system is enormously complex, but nobody thinks there is a hard problem of hurricanes.
+                </p>
+
+                <p>
+                    I find myself drawn to a specific response. The apparent gap between neural description and felt experience is real, but it is <i>epistemic</i>, not ontological. We are in a situation analogous to physics before statistical mechanics. Pre-Boltzmann physicists experienced heat, measured it, used it. But they had no account of <i>why</i> molecular motion constitutes temperature. Then the kinetic theory provided the bridge, and the explanatory gap closed. My bet, and I acknowledge it as a bet, is that an analogous bridge will close the consciousness gap.
+                </p>
+
+                <p>
+                    But this bet has a known vulnerability that I want to be honest about. What made the temperature case work was the existence of a clean <i>functional characterization</i> of temperature available before reduction. Temperature is the thing that equilibrates between bodies in contact, that relates to pressure and volume through the gas laws, that causes mercury to expand. Boltzmann's achievement was showing that mean molecular kinetic energy <i>satisfies all those functional roles</i>. The reduction succeeded because both sides, the macro-level concept and the micro-level candidate, were characterized in third-personal, publicly observable terms.
+                </p>
+
+                <p>
+                    Consciousness resists this strategy. The explanandum includes an essentially first-personal dimension. It is not just that the brain processes wavelengths differentially; it is that seeing red <i>feels like something</i>. The worry is that no functional characterization fully captures that first-personal quality, which means there may be nothing for a future Boltzmann of consciousness to <i>reduce to</i> the neural description. The target of reduction is slippery in a way that temperature never was.
+                </p>
+
+                <p>
+                    There are two strategies available. The first, pursued by Dennett and the Churchlands, argues that the first-personal quality is itself a kind of functional property, that "what it is like" talk ultimately cashes out in terms of dispositions to report, discriminate, and react, all of which are third-personally characterizable. This would make consciousness reducible in exactly the way temperature was. The second strategy, more modest, argues that the current explanatory gap reflects the absence of the right <i>bridging concepts</i>.<sup>13</sup> We lack the theoretical vocabulary that would make the connection between neural processes and felt experience as transparent as the connection between kinetic energy and temperature. We are in a situation analogous to physics before entropy was formulated.
+                </p>
+
+                <p>
+                    I lean toward the second. It is a promissory note, and critics will rightly ask how I distinguish a promissory note from wishful thinking. My response is that the history of physics is littered with explanatory gaps that closed once the right conceptual framework appeared. Before the renormalization group, phase transitions were empirically well-documented but theoretically mysterious: how could a system with short-range interactions exhibit long-range order? The resolution required concepts, universality classes, fixed points, scaling dimensions, that did not exist in the vocabulary of pre-Wilsonian physics. The gap was not evidence of irreducibility. It was evidence of incomplete theory. I suspect consciousness is similar, though I hold this suspicion with appropriate uncertainty about its eventual vindication.
+                </p>
+
+                <p class="section-title" id="section-7">VII. Ouroboros</p>
+
+                <p>
+                    There is a final complication that I initially dismissed too quickly, and I want to close by taking it seriously.
+                </p>
+
+                <p>
+                    In every other case of scientific reduction I have discussed, the system being studied and the system doing the studying are <i>distinct</i>. The physicist is not made of the gas whose temperature she measures. The neuroscientist studying brain rhythms can, in principle, stand outside the system and observe it without the observation being constituted by the same process under investigation. But in the case of consciousness, this separation collapses. The neural activity that constitutes my experience of thinking about consciousness <i>is</i> the phenomenon I am trying to explain. The instrument of investigation is the phenomenon under investigation.
+                </p>
+
+                <p>
+                    This is not merely a practical difficulty. There are formal results, from G&ouml;del's incompleteness theorems, from computational complexity theory,<sup>14</sup><sup>15</sup> suggesting that self-referential systems face principled limitations on self-modeling. A sufficiently powerful formal system cannot prove its own consistency. A universal Turing machine cannot, in general, decide whether an arbitrary program will halt. Whether these formal results apply directly to empirical neuroscience is an open question, and I do not want to overstate the analogy. Brains are not formal systems in the logician's sense. But the structural point stands: there may be principled limitations on the degree to which a conscious system can model the very processes that constitute its consciousness.
+                </p>
+
+                <p>
+                    Consider what a complete reductive model of consciousness would require. The model would need to capture the neural dynamics that generate phenomenal experience. But the act of constructing and verifying such a model is itself a conscious process, which means the model must, in some sense, account for its own construction. This creates a recurrent loop: the explanandum includes the explaining. Whether this loop generates a genuine impossibility or merely a very difficult engineering problem is, I think, one of the deepest open questions in the philosophy of mind. I do not claim to have an answer.
+                </p>
+
+                <p>
+                    What I do claim is that this difficulty does not force me to abandon the framework I have been developing. Even if a conscious system cannot <i>fully</i> model itself, it does not follow that consciousness is not grounded in physics. It may simply follow that certain explanatory projects have an inherent incompleteness when pursued from the inside. The reductive grounding can be real without being fully accessible to the system that instantiates it.
+                </p>
+
+                <p class="section-title" id="section-coda">Coda</p>
+
+                <p>
+                    Let me return to where I started: the battleground. I entered theoretical neuroscience expecting a clean reductionist program, and I found instead a field that thrives on the tension between levels of description. What I have tried to articulate here is a position that takes that tension seriously without treating it as irresolvable.
+                </p>
+
+                <p>
+                    Reality has genuine structure at multiple scales. The patterns that appear at higher scales, liquidity, brain rhythms, perhaps consciousness, are real, not convenient fictions. But they are real patterns <i>in</i> the lower-level substrate, grounded in and derivable from the same fundamental laws. New kinds of things come into existence through composition and scaling. No new laws are needed to account for them. The reductionist and the holist are not rival parties to be diplomatically balanced. They are offering descriptions of the same reality at different levels of fundamentality, and some of those descriptions stand closer to the ground than others.
+                </p>
+
+                <p>
+                    I call myself an effective reductionist because, like an effective field theory, I believe the right vocabulary for each scale is <i>autonomous</i> but not <i>foundational</i>. Brain rhythms are best described in the language of coupled oscillators, not individual ion channels. But the coupled-oscillator description is grounded in, and derivable from, the ion-channel physics. The effectiveness lies in knowing which level to work at. The reductionism lies in knowing that the levels are not independent.
+                </p>
+
+                <p>
+                    Whether this framework survives the encounter with consciousness, whether the explanatory gap is genuinely epistemic and will close with the right bridging concepts, I do not yet know. But I believe the bet is well-placed. And I would rather hold an honest promissory note than a premature resolution.<sup>4</sup><sup>16</sup>
+                </p>
+
+                <hr class="footnotes-sep">
+                <section class="footnotes">
+                    <ol>
+                        <li>This example is worth pausing on. A single neuron in a Hopfield network has a state, +1 or &minus;1. The <i>memory</i> is a global fixed point of the energy landscape, a collective property of \(N\) coupled spins that cannot be decomposed into a sum of individual contributions without losing the very thing we are trying to describe.</li>
+                        <li>This is the core of Jaynes' 1957 papers, "Information Theory and Statistical Mechanics." The argument is that the maximum-entropy formalism is not a physical hypothesis but a method of inference: it produces the least biased distribution consistent with known constraints. The Boltzmann distribution follows as a theorem, not a postulate.</li>
+                        <li>I develop these convergences in detail in a separate post, "<a href="/blog/post-four/">Attention Seeking</a>," which derives softmax attention independently from free-energy minimization, modern Hopfield networks, sparse distributed memory, and Nadaraya-Watson regression.</li>
+                        <li>A note on the title. "Effective" is not meant as a synonym for "pragmatic" or "good enough." It is a deliberate allusion to effective field theory in physics. An effective theory captures the relevant dynamics at a given scale by integrating out degrees of freedom below that scale. It is autonomous in its own vocabulary, but derivable from the more fundamental theory. This is neither naive reductionism nor holism. It is a precise mathematical relationship between levels, and it is the relationship I believe holds across physics, neuroscience, and mind.</li>
+                        <li>The canonical articulation of this tension from within physics is P.W. Anderson's "More is Different" (1972), which argues that each level of complexity requires its own organizing principles. Anderson can be read as making either a modest methodological claim or a radical ontological one; the framework I develop here is partly an attempt to locate the right reading.</li>
+                        <li>Whether the convergence of these derivations reflects a shared problem statement about inference under constraint (the Jaynesian reading), a genuine computational structure in nature (the Landauer-inspired reading), or a deeper mathematical necessity about exponential families that is prior to both physics and computation, remains one of the open questions motivating my broader research program.</li>
+                        <li>Landauer's bound states that any logically irreversible operation, such as erasing a bit, must dissipate at least \(k_B T \ln 2\) of energy, where \(k_B\) is Boltzmann's constant and \(T\) is the temperature of the environment. The bound has been experimentally verified and connects information theory to thermodynamics in a way that is not merely formal.</li>
+                        <li>Not everyone reads the RG this way. Batterman, in <i>The Devil in the Details</i>, argues that universality and the renormalization group actually support an anti-reductionist position: the fact that macro-level behavior is insensitive to micro-level details means the macro-level has genuine explanatory autonomy that cannot be captured by the micro-level description alone. Butterfield offers a reductionist rejoinder. I side with Butterfield, but Batterman's challenge deserves engagement.</li>
+                        <li>Dennett's "Real Patterns" (1991) argues that a pattern is real if it allows for predictions that would be lost if the pattern were eliminated from our descriptions. On this criterion, liquidity is real because "the liquid will flow downhill" is a prediction you lose if you restrict yourself to molecular-level vocabulary. This is a deflationary but, I think, sufficient notion of ontological reality for higher-level entities.</li>
+                        <li>Kim's "causal exclusion" argument poses a genuine challenge to non-reductive physicalism: if every mental event has a sufficient physical cause, then the mental cause is either identical to the physical cause (reductive identity) or causally redundant (epiphenomenalism). My position avoids this dilemma by accepting the identity claim at the level of grounding while maintaining that the higher-level description picks out a real pattern. Whether this constitutes a genuine third option or collapses into Kim's reductionism under pressure is a question I have not fully resolved.</li>
+                        <li>This commitment is methodological naturalism treated as a well-justified working axiom rather than a proven conclusion. I hold it with awareness of its status. The history of science has consistently rewarded the assumption that phenomena have natural explanations, but this inductive track record does not constitute a deductive proof that no phenomenon ever will resist naturalistic explanation.</li>
+                        <li>I am inclined to treat the hard problem as partly a pseudo-problem generated by the circularity of our phenomenal vocabulary. Any articulation of the explanatory target of consciousness theory is drawn from the domain we are trying to explain. The word "feel" in "why does this feel like something?" already presupposes the phenomenal character that supposedly demands explanation. This does not dissolve the problem entirely, but it suggests that some of its apparent intractability is linguistic rather than metaphysical.</li>
+                        <li>Current naturalistic theories of consciousness that might provide such bridges include Global Workspace Theory (Baars, Dehaene), Integrated Information Theory (Tononi), predictive processing accounts (Seth, Friston), higher-order theories (Rosenthal), and attention schema theory (Graziano). Each offers a different candidate for the bridging concepts I am describing, and none has yet achieved the consensus that statistical mechanics enjoys.</li>
+                        <li>I want to be careful about the scope of this analogy. G&ouml;del's results concern formal systems of sufficient expressive power and say nothing directly about physical systems. The brain is not a formal system in the logician's sense; it is a dynamical system subject to noise, bounded resources, and thermodynamic constraints. But the structural insight, that self-referential systems face principled limitations on complete self-modeling, has analogues in computability theory (Rice's theorem, the halting problem) that are somewhat more directly applicable to physical computational systems.</li>
+                        <li>I am still working through the computational complexity theory results regarding self-reference and self-simulation. I have an idea for a future post exploring this thread more carefully: Turing machines, the halting problem, Rice's theorem, Kleene's recursion theorem, L&ouml;b's theorem, and a thought experiment regarding simulation on a hypothetical computer with infinite hardware capacity (unlimited compute).</li>
+                        <li>This essay represents one strand of a larger project connecting statistical mechanics, machine learning theory, and the philosophy of mind. The technical counterpart to the philosophical framework developed here appears in my work on tensor-theoretic interpretations of transformer architectures and the statistical mechanical foundations of attention mechanisms. The conviction that these fields share more than analogy, that they converge on the same mathematical objects because they are solving the same inferential problems, is both the motivation for this essay and the animating question of my research program.</li>
+                    </ol>
+                </section>
+
+                <p class="section-title" id="section-refs">References</p>
+                <ol class="references">
+                    <li><a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.106.620" target="_blank">Information Theory and Statistical Mechanics</a><br>Jaynes, E. T. (1957).</li>
+                    <li><a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.108.171" target="_blank">Information Theory and Statistical Mechanics. II</a><br>Jaynes, E. T. (1957).</li>
+                    <li><a href="https://doi.org/10.1147/rd.53.0183" target="_blank">Irreversibility and Heat Generation in the Computing Process</a><br>Landauer, R. (1961).</li>
+                    <li><a href="https://www.pnas.org/doi/10.1073/pnas.79.8.2554" target="_blank">Neural networks and physical systems with emergent collective computational abilities</a><br>Hopfield, J. J. (1982).</li>
+                    <li><a href="https://doi.org/10.1126/science.177.4047.393" target="_blank">More Is Different</a><br>Anderson, P. W. (1972).</li>
+                    <li><a href="https://doi.org/10.2307/2027085" target="_blank">Real Patterns</a><br>Dennett, D. C. (1991).</li>
+                    <li><a href="https://doi.org/10.1086/289741" target="_blank">Multiple Realization and the Metaphysics of Reduction</a><br>Kim, J. (1992).</li>
+                    <li><a href="https://doi.org/10.2307/2183914" target="_blank">What Is It Like to Be a Bat?</a><br>Nagel, T. (1974).</li>
+                    <li><a href="https://doi.org/10.1093/mind/fos135" target="_blank">Facing Up to the Problem of Consciousness</a><br>Chalmers, D. J. (1995).</li>
+                    <li><a href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.4.3174" target="_blank">Renormalization Group and Critical Phenomena. I. Renormalization Group and the Kadanoff Scaling Picture</a><br>Wilson, K. G. (1971).</li>
+                    <li>Neurophilosophy: Toward a Unified Science of the Mind-Brain<br>Churchland, P. S. (1986). MIT Press.</li>
+                    <li><a href="https://doi.org/10.1007/BF01700692" target="_blank">&Uuml;ber formal unentscheidbare S&auml;tze der Principia Mathematica und verwandter Systeme I</a><br>G&ouml;del, K. (1931).</li>
+                    <li>The Devil in the Details: Asymptotic Reasoning in Explanation, Reduction, and Emergence<br>Batterman, R. W. (2002). Oxford University Press.</li>
+                    <li><a href="https://doi.org/10.1093/bjps/axr015" target="_blank">Less is Different: Emergence and Reduction Reconciled</a><br>Butterfield, J. (2011).</li>
+                </ol>
+
+                <div class="back-link">
+                    <a href="/blog/">← back to blog</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var body = document.querySelector('.post-body');
+            var footnotes = document.querySelector('.footnotes');
+            if (!body || !footnotes) return;
+
+            var sups = body.querySelectorAll('sup');
+            var items = footnotes.querySelectorAll('li');
+
+            sups.forEach(function(sup, i) {
+                var n = sup.textContent.trim();
+                if (!/^\d+$/.test(n)) return;
+
+                sup.id = 'fnref:' + n;
+
+                var link = document.createElement('a');
+                link.href = '#fn:' + n;
+                link.className = 'footnote-ref';
+                link.textContent = '[' + n + ']';
+
+                sup.textContent = '';
+                sup.appendChild(link);
+
+                var li = items[parseInt(n) - 1];
+                if (li) {
+                    var tooltip = document.createElement('div');
+                    tooltip.className = 'footnote-tooltip';
+                    tooltip.innerHTML = '<sup>' + n + '</sup> ' + li.innerHTML;
+                    sup.appendChild(tooltip);
+
+                    li.id = 'fn:' + n;
+                    var numSup = document.createElement('sup');
+                    numSup.textContent = n;
+                    var backLink = document.createElement('a');
+                    backLink.href = '#fnref:' + n;
+                    backLink.className = 'footnote-backref';
+                    backLink.textContent = '↩';
+
+                    var original = li.innerHTML;
+                    li.innerHTML = '';
+                    li.appendChild(numSup);
+                    li.insertAdjacentHTML('beforeend', ' ' + original + ' ');
+                    li.appendChild(backLink);
+                }
+            });
+        });
+
+        // ---- TOC scroll tracking ----
+        (function() {
+            var tocLinks = document.querySelectorAll('.toc-sidebar a');
+            var sections = Array.from(tocLinks).map(function(a) {
+                return document.querySelector(a.getAttribute('href'));
+            });
+
+            function updateToc() {
+                var scrollY = window.scrollY + 120;
+                var active = null;
+                for (var i = sections.length - 1; i >= 0; i--) {
+                    if (sections[i] && sections[i].offsetTop <= scrollY) {
+                        active = i;
+                        break;
+                    }
+                }
+                tocLinks.forEach(function(link, idx) {
+                    link.classList.toggle('active', idx === active);
+                });
+            }
+
+            window.addEventListener('scroll', updateToc, { passive: true });
+            updateToc();
+        })();
+    </script>
+</body>
+</html>

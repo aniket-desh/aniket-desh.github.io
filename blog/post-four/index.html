@@ -26,6 +26,7 @@
         html {
             overflow-x: hidden;
             overflow-y: scroll;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -149,6 +150,39 @@
 
         ol.references a {
             color: darkred;
+        }
+
+        /* --- Sidebar TOC --- */
+        .toc-sidebar {
+            display: none;
+        }
+
+        @media screen and (min-width: 1100px) {
+            .toc-sidebar {
+                display: block;
+                position: fixed;
+                left: calc((100vw - 680px) / 2 - 260px);
+                top: 140px;
+                width: 200px;
+                font-size: 13px;
+                line-height: 1.6;
+            }
+
+            .toc-sidebar a {
+                display: block;
+                text-decoration: none;
+                color: #ccc;
+                padding: 3px 0;
+                transition: color 0.2s ease;
+            }
+
+            .toc-sidebar a:hover {
+                color: #888;
+            }
+
+            .toc-sidebar a.active {
+                color: #333;
+            }
         }
 
         .callout {
@@ -382,6 +416,13 @@
 </head>
 
 <body>
+    <nav class="toc-sidebar">
+        <a href="#section-1">I. Hedging Your Tokens</a>
+        <a href="#section-2">II. Do You Remember?</a>
+        <a href="#section-3">III. Kernels of Truth</a>
+        <a href="#section-refs">References</a>
+    </nav>
+
     <div class="container">
         <div class="bio">
             <div class="bio__header">
@@ -406,7 +447,7 @@
                 <p>
                     I am (finally) taking a course on statistical physics, and have found that the field connects a multitude of my research interests in an oddly<sup>1</sup> elegant way. In this post, I want to share some overlapping ideas between statistical mechanics, (softmax) self-attention, regression, and neuroscientific theories of memory. My hope is that, after reading this, one appreciates the lack of walls between these fields in the same way that I do.
                 </p>
-                <p class="section-title">I. Hedging Your Tokens</p>
+                <p class="section-title" id="section-1">I. Hedging Your Tokens</p>
                 <p>
                     Consider a physical system of \(N\) discrete states, with the \(j\)-th state carrying an energy \(E_j\). When this system is in thermal equilibrium with a heat bath of temperature \(T\), the probability of finding the system in state \(j\) is given by the Boltzmann distribution:
                     \[
@@ -501,7 +542,7 @@
                     </figcaption>
                 </figure>
 
-                <p class="section-title">II. Do You Remember?</p>
+                <p class="section-title" id="section-2">II. Do You Remember?</p>
                 <p>
                     So we have established that softmax attention is a Boltzmann distribution: the attention weights emerge from a free-energy minimization principle balancing concentration against hedging. This raises some deeper questions. What <i>kind</i> of computational system is this? What is the attention mechanism <i>actually</i> doing when it retrieves a weighted combination of stored values based on their compatibility with the query?
                 </p>
@@ -624,7 +665,7 @@
                         <b>Figure 4.</b> After Bricken &amp; Pehlevan (2021). Left: two Hamming balls of radius \(d\) centered on the query \(\xi\) and a pattern \(p\), separated by distance \(d_v\). The shaded overlap is the circle intersection \(\mathcal{I}\). Right: \(\log \mathcal{I}(d_v)\) (<span style="color:#458588">teal dots</span>) falls on a straight line — the fitted exponential (<span style="color:#cc241d">red dashed</span>) — confirming that the intersection is approximately \(e^{\beta \cos(q, k)}\). The approximation tightens as \(n\) increases (concentration of measure).
                     </figcaption>
                 </figure>
-                <p class="section-title">III. Kernels of Truth</p>
+                <p class="section-title" id="section-3">III. Kernels of Truth</p>
                 <p>
                     We have now arrived at softmax attention from two directions: as a Boltzmann distribution from free energy minimization, and as the retrieval rule of an associative memory. There is a third perspective, arguably the most elementary, that reaches the same formula from classical nonparametric statistics. This derivation, while first realized by Yu et al., follows a recent <a href="https://blog.tilderesearch.com/vignettes/regression" target="_blank">vignette</a> by Dhruv Pai at Tilde Research, and I present it here to close the triangle. The setting is regression. We have \(n\) input-output pairs \(x_i, y_i\) and aim to predict the output at a new query point \(x_0\). The simplest possible model is a constant predictor: \(\hat f(x_0) = \beta_0\), fit by minimizing
                     \[
@@ -677,7 +718,7 @@
                     </ol>
                 </section>
 
-                <p class="section-title">References</p>
+                <p class="section-title" id="section-refs">References</p>
                 <ol class="references">
                     <li><a href="https://arxiv.org/abs/1409.0473" target="_blank">Neural Machine Translation by Jointly Learning to Align and Translate</a><br>Bahdanau, D., Cho, K. and Bengio, Y. (2014).</li>
                     <li><a href="https://arxiv.org/abs/1706.03762" target="_blank">Attention is All You Need</a><br>Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, L. and Polosukhin, I. (2017).</li>
@@ -1408,6 +1449,30 @@
                 }
             });
         });
+        // ---- TOC scroll tracking ----
+        (function() {
+            var tocLinks = document.querySelectorAll('.toc-sidebar a');
+            var sections = Array.from(tocLinks).map(function(a) {
+                return document.querySelector(a.getAttribute('href'));
+            });
+
+            function updateToc() {
+                var scrollY = window.scrollY + 120;
+                var active = null;
+                for (var i = sections.length - 1; i >= 0; i--) {
+                    if (sections[i] && sections[i].offsetTop <= scrollY) {
+                        active = i;
+                        break;
+                    }
+                }
+                tocLinks.forEach(function(link, idx) {
+                    link.classList.toggle('active', idx === active);
+                });
+            }
+
+            window.addEventListener('scroll', updateToc, { passive: true });
+            updateToc();
+        })();
     </script>
 </body>
 </html>
