@@ -72,37 +72,22 @@
             }
         }
 
-        .bio {
-            max-width: none;
+        .back-arrow {
+            display: inline-block;
+            text-decoration: none;
+            color: #999;
+            font-size: 20px;
+            margin-bottom: 15px;
         }
 
-        .bio__header {
+        .back-arrow:hover {
+            color: darkred;
+        }
+
+        .post-header {
             margin-bottom: 20px;
             font-weight: 590;
             font-size: 23px;
-        }
-
-        .bio__header a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .bio__header a:hover {
-            text-decoration: none;
-        }
-
-        .bio__tabs {
-            margin-bottom: 20px;
-            font-style: italic;
-        }
-
-        .bio__tabs a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .bio__tabs a:hover {
-            color: darkred;
         }
 
         .content {
@@ -248,37 +233,13 @@
             text-decoration: underline;
         }
 
-        .back-link {
-            margin-top: 40px;
-            font-style: italic;
-        }
-
-        .back-link a {
-            text-decoration: none;
-        }
-
-        .back-link a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="bio">
-            <div class="bio__header">
-                <a href="/">the slow art of fast mixing</a>
-            </div>
-            <div class="bio__tabs">
-                <a href="/about/">about</a> <span class="dot">·</span>
-                <a href="/research/">research</a> <span class="dot">·</span>
-                <a href="/teaching/">teaching</a> <span class="dot">·</span>
-                <a href="/notes/">notes</a> <span class="dot">·</span>
-                <a href="/blog/">blog</a> <span class="dot">·</span>
-                <a href="/code/">code</a> <span class="dot">·</span>
-                <a href="/cv/cv.pdf">vitae</a>
-            </div>
-        </div>
+        <a href="/blog/" class="back-arrow">←</a>
+        <div class="post-header">the slow art of fast mixing</div>
 
         <div class="content">
             <p class="post-date">07.25.2025</p>
@@ -374,9 +335,6 @@
                     <li><a href="https://dl.acm.org/doi/10.1145/74334.74335" target="_blank">Approximating the Permanent</a><br>Jerrum, M. and Sinclair, A. (1989).</li>
                 </ol>
 
-                <div class="back-link">
-                    <a href="/blog/">← back to blog</a>
-                </div>
             </div>
         </div>
     </div>
