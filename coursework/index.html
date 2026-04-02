@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="/assets/penrose-logo.png" type="image/x-icon" />
+  <title>coursework — aniket deshpande</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    ::selection { background: #f9e6e6; }
+    ::-moz-selection { background: #f9e6e6; }
+    html { overflow-x: hidden; overflow-y: scroll; }
+
+    body {
+      width: 100%;
+      margin: 25px 0;
+      padding: 0;
+      background: #fff;
+      font-family: "Newsreader", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    a { color: darkred; text-decoration: underline; }
+    a:hover { color: #8B0000; }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    @media screen and (min-width: 600px) {
+      body { margin: 50px 0 25px; }
+    }
+    @media screen and (min-width: 800px) {
+      body { margin: 120px 0 50px; }
+    }
+
+    .bio__header {
+      margin-bottom: 20px;
+      font-weight: 590;
+      font-size: 23px;
+    }
+    .bio__header a { text-decoration: none; color: inherit; }
+    .bio__tabs { margin-bottom: 20px; font-style: italic; }
+    .bio__tabs a { text-decoration: none; color: inherit; }
+    .bio__tabs a:hover { color: darkred; }
+
+    .intro {
+      margin-bottom: 30px;
+      color: #555;
+    }
+
+    .summary {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+      font-size: 15px;
+      color: #666;
+    }
+    .summary span { white-space: nowrap; }
+    .summary strong { color: #333; font-weight: 600; }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      margin-bottom: 32px;
+      font-size: 14px;
+      color: #666;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .year-group { margin-bottom: 36px; }
+    .year-label {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #999;
+      margin-bottom: 12px;
+    }
+
+    .semesters {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media screen and (max-width: 600px) {
+      .semesters { grid-template-columns: 1fr; }
+    }
+
+    .semester {
+      border: 1px solid #e8e8e8;
+      border-radius: 6px;
+      padding: 14px 16px;
+      background: #fafafa;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .semester:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+    }
+    .semester.current {
+      border-color: #c9a0a0;
+      background: #fdf8f8;
+    }
+    .semester.upcoming {
+      border-style: dashed;
+      border-color: #ddd;
+      background: #fdfdfd;
+    }
+
+    .sem-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+    .sem-name {
+      font-weight: 600;
+      font-size: 15px;
+    }
+    .sem-credits {
+      font-size: 13px;
+      color: #999;
+    }
+    .sem-badge {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 1px 6px;
+      border-radius: 3px;
+      margin-left: 6px;
+    }
+    .badge-current {
+      background: #f3e0e0;
+      color: #8B0000;
+    }
+    .badge-upcoming {
+      background: #eee;
+      color: #888;
+    }
+
+    .course-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .course-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 14px;
+      line-height: 1.4;
+      position: relative;
+    }
+    .course-info {
+      position: relative;
+      cursor: default;
+    }
+    .course-info .tooltip {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 0;
+      width: 280px;
+      padding: 10px 12px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: #555;
+      z-index: 10;
+      pointer-events: none;
+    }
+    .course-info:hover .tooltip {
+      display: block;
+    }
+    .course-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+    .course-name { color: #333; }
+    .course-num {
+      color: #aaa;
+      font-size: 12px;
+      display: block;
+    }
+    .course-cr {
+      color: #bbb;
+      font-size: 12px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    /* Category colors */
+    .cat-physics { background: #4a7c8a; }
+    .cat-math { background: #8a6a4a; }
+    .cat-cs { background: #6a4a8a; }
+    .cat-spec { background: #8a4a5a; }
+    .cat-elective { background: #5a7a5a; }
+    .cat-gened { background: #aaa; }
+    .cat-other { background: #ccc; }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="bio">
+      <div class="bio__header">
+        <a href="/">coursework</a>
+      </div>
+      <div class="bio__tabs">
+        <a href="/about/">about</a> <span class="dot">&middot;</span>
+        <a href="/research/">research</a> <span class="dot">&middot;</span>
+        <a href="/notes/">notes</a> <span class="dot">&middot;</span>
+        <a href="/blog/">blog</a> <span class="dot">&middot;</span>
+        <a href="/cv/cv.pdf">vitae</a>
+      </div>
+    </div>
+
+    <p class="intro">
+      undergraduate coursework in physics, mathematics, and computer science at uiuc.
+    </p>
+
+    <div class="summary">
+      <span><strong>114</strong> total credits</span>
+      <span><strong>76</strong> completed</span>
+      <span><strong>38</strong> remaining</span>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot cat-physics"></div> physics</div>
+      <div class="legend-item"><div class="legend-dot cat-math"></div> math</div>
+      <div class="legend-item"><div class="legend-dot cat-cs"></div> cs</div>
+      <div class="legend-item"><div class="legend-dot cat-spec"></div> specialization</div>
+      <div class="legend-item"><div class="legend-dot cat-elective"></div> elective</div>
+      <div class="legend-item"><div class="legend-dot cat-gened"></div> gen-ed</div>
+    </div>
+
+    <!-- Freshman Year -->
+    <div class="year-group">
+      <div class="year-label">2023 &ndash; 2024 &ensp; freshman</div>
+      <div class="semesters">
+        <div class="semester">
+          <div class="sem-header">
+            <span class="sem-name">Fall 2023</span>
+            <span class="sem-credits">16 cr</span>
+          </div>
+          <ul class="course-list">
+            <li><div class="course-dot cat-physics"></div><div class="course-info"><span class="course-name">Engineering Orientation</span><span class="course-num">ENG 100</span><div class="tooltip">Introduction to the Grainger College of Engineering and respective departments, developing academic skills, leadership, and community through class discussions and group projects.</div></div><span class="course-cr">1</span></li>
+            <li><div class="course-dot cat-physics"></div><div class="course-info"><span class="course-name">University Physics: Mechanics</span><span class="course-num">PHYS 211</span><div class="tooltip">Calculus-based mechanics covering Newton's laws, work and energy, static properties and fluids, oscillations, transverse waves, systems of particles, and rotations.</div></div><span class="course-cr">4</span></li>
+            <li><div class="course-dot cat-physics"></div><div class="course-info"><span class="course-name">Physics Careers</span><span class="course-num">PHYS 110</span><div class="tooltip">Exploration of careers founded on physics undergraduate training, with an introduction to the department, faculty, research, and curricula through outside speaker presentations.</div></div><span class="course-cr">1</span></li>
+            <li><div class="course-dot cat-math"></div><div class="course-info"><span class="course-name">Differential Equations</span><span class="course-num">MATH 441</span><div class="tooltip">Rigorous treatment of ordinary differential equations including existence and uniqueness of solutions and the general theory of linear differential equations.</div></div><span class="course-cr">3</span></li>
+            <li><div class="course-dot cat-physics"></div><div class="course-info"><span class="course-name">General Chemistry I</span><span class="course-num">CHEM 102</span><div class="tooltip">Principles governing atomic structure, bonding, states of matter, stoichiometry, and chemical equilibrium for students with some prior knowledge of chemistry.</div></div><span class="course-cr">3</span></li>
+            <li><div class="course-dot cat-physics"></div><div class="course-info"><span class="course-name">General Chemistry I Lab</span><span class="course-num">CHEM 103</span><div class="tooltip">Laboratory studies to accompany CHEM 102.</div></div><span class="course-cr">1</span></li>
+            <li><div class="course-dot cat-cs"></div><div class="course-info"><span class="course-name">Introduction to CS I</span><span class="course-num">CS 124</span><div class="tooltip">Basic concepts in computing and fundamental techniques for solving computational problems, intended as a first course for CS majors and others with a deep interest in computing.</div></div><span class="course-cr">3</span></li>
+          </ul>
+        </div>
+
+        <div class="semester">
+          <div class="sem-header">
+            <span class="sem-name">Spring 2024</span>
+            <span class="sem-credits">18 cr</span>
+          </div>
+          <ul class="course-list">
+            <li><div class="course-dot cat-physics"></div><div class="course-info"><span class="course-name">University Physics: E&amp;M</span><span class="course-num">PHYS 212</span><div class="tooltip">Calculus-based treatment of Coulomb's law, electric fields, Gauss' law, electric potential, capacitance, circuits, magnetic forces and fields, Ampere's law, induction, electromagnetic waves, polarization, and geometrical optics.</div></div><span class="course-cr">4</span></li>
+            <li><div class="course-dot cat-physics"></div><div class="course-info"><span class="course-name">Relativity &amp; Math Methods</span><span class="course-num">PHYS 225</span><div class="tooltip">Theory of special relativity with applications to kinematics and dynamics, plus key mathematical methods including vector analysis, series expansions, matrices, Fourier analysis, partial differentiation, and simple differential equations.</div></div><span class="course-cr">2</span></li>
+            <li><div class="course-dot cat-math"></div><div class="course-info"><span class="course-name">Abstract Linear Algebra</span><span class="course-num">MATH 416</span><div class="tooltip">Rigorous proof-oriented linear algebra covering determinants, vector spaces over fields, linear transformations, inner product spaces, eigenvectors and eigenvalues, Hermitian matrices, and Jordan normal form.</div></div><span class="course-cr">3</span></li>
+            <li><div class="course-dot cat-cs"></div><div class="course-info"><span class="course-name">Introduction to CS II</span><span class="course-num">CS 128</span><div class="tooltip">Continuation of CS 124 with more advanced concepts in computing and techniques for solving computational problems.</div></div><span class="course-cr">3</span></li>
+            <li><div class="course-dot cat-cs"></div><div class="course-info"><span class="course-name">Discrete Mathematics</span><span class="course-num">MAT 206</span><div class="tooltip">Covers sets, relations, functions, basic counting techniques, recurrence relations, graphs and trees, and matrix algebra with an emphasis on algorithms.</div></div><span class="course-cr">3</span></li>
+            <li><div class="course-dot cat-gened"></div><div class="course-info"><span class="course-name">Nature &amp; American Culture</span><span class="course-num">RST 242</span><div class="tooltip">Cultural meanings associated with American natural landscapes, examining colonial, romantic, and conservation perspectives alongside revisionist themes of gender, cultural pluralism, and societal meanings of parks and protected areas.</div></div><span class="course-cr">3</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Sophomore Year -->
+    <div class="year-group">
+      <div class="year-label">2024 &ndash; 2025 &ensp; sophomore</div>
+      <div class="semesters">
+        <div class="semester">
+          <div class="sem-header">
+            <span class="sem-name">Fall 2024</span>
+            <span class="sem-credits">17 cr</span>
+          </div>
+          <ul class="course-list">
+            <li><div class="course-dot cat-cs"></div><div class="course-info"><span class="course-name">Data Structures</span><span class="course-num">CS 225</span><div class="tooltip">Data abstractions including elementary data structures (lists, stacks, queues, trees) and their implementation in an object-oriented language, with solutions to computational problems such as graph and tree search and elementary algorithm analysis.</div></div><span class="course-cr">4</span></li>
+            <li><div class="course-dot cat-math"></div><div class="course-info"><span class="course-name">Statistics &amp; Probability I</span><span class="course-num">STAT 400</span><div class="tooltip">Introduction to mathematical statistics developing probability as needed, including the calculus of probability, random variables, expectation, distribution functions, central limit theorem, point estimation, confidence intervals, and hypothesis testing.</div></div><span class="course-cr">4</span></li>
+            <li><div class="course-dot cat-physics"></div><div class="course-info"><span class="course-name">Classical Mechanics I</span><span class="course-num">PHYS 325</span><div class="tooltip">Kinematics and dynamics of classical systems including a review of Newtonian mechanics, three-dimensional motion, variable mass, conservation laws, damped and driven oscillations, gravitational potentials of extended objects, rotating frames, and Lagrangian and Hamiltonian mechanics.</div></div><span class="course-cr">3</span></li>
+            <li><div class="course-dot cat-spec"></div><div class="course-info"><span class="course-name">Quantum Info Processing</span><span class="course-num">ECE 498EC</span><div class="tooltip">Basic concepts and principles underlying quantum computing and communication, with equal emphasis on mathematical tools, quantum information processing, quantum communication, and nonlocality and entanglement theory.</div></div><span class="course-cr">3</span></li>
+            <li><div class="course-dot cat-gened"></div><div class="course-info"><span class="course-name">Global Dev. &amp; Environment</span><span class="course-num">GGIS 101</span><div class="tooltip">Geographical perspectives on environment and development with case studies from Africa, Asia, and Latin America, investigating the origins of the global South in relation to the global North and processes driving environmental, economic, and cultural change.</div></div><span class="course-cr">3</span></li>
+          </ul>
+        </div>
+
+        <div class="semester">
+          <div class="sem-header">
+            <span class="sem-name">Spring 2025</span>
+            <span class="sem-credits">12 cr</span>
+          </div>
+          <ul class="course-list">
+            <li><div class="course-dot cat-physics"></div><div class="course-info"><span class="course-name">Electromagnetic Fields I</span><span class="course-num">PHYS 435</span><div class="tooltip">Static electric and magnetic fields, their interactions with charge and current, and their transformation properties under special relativity, including macroscopic fields in material media.</div></div><span class="course-cr">3</span></li>
+            <li><div class="course-dot cat-physics"></div><div class="course-info"><span class="course-name">Classical Mechanics II</span><span class="course-num">PHYS 326</span><div class="tooltip">Continuation of PHYS 325 covering central force motion, collisions and scattering, rotational motion, coupled oscillations, continuous media, and fluid dynamics.</div></div><span class="course-cr">3</span></li>
+            <li><div class="course-dot cat-math"></div><div class="course-info"><span class="course-name">Real Variables</span><span class="course-num">MATH 447</span><div class="tooltip">Careful development of elementary real analysis for students intending to pursue graduate study, covering completeness of the reals, basic topological properties of n-dimensional space, convergence of sequences and series of functions, continuity, differentiation, and Riemann integration.</div></div><span class="course-cr">3</span></li>
+            <li><div class="course-dot cat-math"></div><div class="course-info"><span class="course-name">Random Processes</span><span class="course-num">MATH 466</span><div class="tooltip">Systematic treatment of discrete-time and continuous-time Markov chains and discrete-time martingales, including strong Markov properties, recurrence and transience, invariant distributions, convergence, ergodicity, forward and backward equations, and MCMC techniques.</div></div><span class="course-cr">3</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Junior Year -->
+    <div class="year-group">
+      <div class="year-label">2025 &ndash; 2026 &ensp; junior</div>
+      <div class="semesters">
+        <div class="semester">
+          <div class="sem-header">
+            <span class="sem-name">Fall 2025</span>
+            <span class="sem-credits">15 cr</span>
+          </div>
+          <ul class="course-list">
+            <li><div class="course-dot cat-spec"></div><div class="course-info"><span class="course-name">Deep Learning Theory</span><span class="course-num">CS 540</span><div class="tooltip">Theoretical foundations of neural networks including constructive and non-constructive approximation with one hidden layer, benefits of depth, optimization in the NTK regime, maximum margin optimization, and generalization bounds via Rademacher complexity, VC dimension, and covering numbers.</div></div><span class="course-cr">4</span></li>
+            <li><div class="course-dot cat-elective"></div><div class="course-info"><span class="course-name">Neural Dynamical Systems</span><span class="course-num">ECE 598RE</span><div class="tooltip">Graduate course exploring the interplay between dynamical systems theory and neural networks (artificial and biological), covering stability, attractors, bifurcations, chaos, Neural ODEs, training dynamics, and neural circuit models including rate-based and spiking networks.</div></div><span class="course-cr">4</span></li>
+            <li><div class="course-dot cat-elective"></div><div class="course-info"><span class="course-name">Deep Generative Models</span><span class="course-num">ECE 498RCU</span><div class="tooltip">Key advances in generative models including variational autoencoders, normalizing flows, GANs, diffusion models, neural differential equations, flow matching, and Schr&ouml;dinger bridges.</div></div><span class="course-cr">3</span></li>
+            <li><div class="course-dot cat-spec"></div><div class="course-info"><span class="course-name">Machine Learning</span><span class="course-num">CS 446</span><div class="tooltip">Principles and applications of machine learning covering discriminative and generative methods plus reinforcement learning: linear and logistic regression, SVMs, deep nets, structured methods, dimensionality reduction, k-means, Gaussian mixtures, EM, MDPs, and Q-learning.</div></div><span class="course-cr">3</span></li>
+            <li><div class="course-dot cat-other"></div><div class="course-info"><span class="course-name">Information Geometry</span><span class="course-num">STAT 390</span><div class="tooltip">Independent reading on Fischer information, statistical manifolds, neural coding, gradient learning, feature learning, and neural population models.</div></div><span class="course-cr">1</span></li>
+            <li><div class="course-dot cat-other"></div><div class="course-info"><span class="course-name">High-Dimensional Statistics</span><span class="course-num">ECE 598IS &middot; audit</span><div class="tooltip">Decision theory, information inequalities, Le Cam's and Fano's methods, random matrix theory, spectral estimators, stochastic block models, graph embeddings, Laplacian eigenmaps, Johnson-Lindenstrauss, and PCA.</div></div><span class="course-cr">0</span></li>
+          </ul>
+        </div>
+
+        <div class="semester current">
+          <div class="sem-header">
+            <span class="sem-name">Spring 2026 <span class="sem-badge badge-current">now</span></span>
+            <span class="sem-credits">14 cr</span>
+          </div>
+          <ul class="course-list">
+            <li><div class="course-dot cat-spec"></div><div class="course-info"><span class="course-name">Statistical Mechanics</span><span class="course-num">PHYS 427</span><div class="tooltip">Unified treatment of equilibrium thermodynamics, statistical mechanics, and kinetic theory of gases, discussing principles of heat and thermodynamics alongside statistical postulates and the microscopic approach of introductory quantum mechanics.</div></div><span class="course-cr">4</span></li>
+            <li><div class="course-dot cat-physics"></div><div class="course-info"><span class="course-name">Research Credit</span><span class="course-num">PHYS 497</span><div class="tooltip">Independent research credit.</div></div><span class="course-cr">3</span></li>
+            <li><div class="course-dot cat-physics"></div><div class="course-info"><span class="course-name">University Physics: Quantum</span><span class="course-num">PHYS 214</span><div class="tooltip">Calculus-based introduction to interference and diffraction, photons and matter waves, the Bohr atom, the uncertainty principle, and wave mechanics.</div></div><span class="course-cr">2</span></li>
+            <li><div class="course-dot cat-physics"></div><div class="course-info"><span class="course-name">University Physics: Thermal</span><span class="course-num">PHYS 213</span><div class="tooltip">First and second laws of thermodynamics including kinetic theory of gases, heat capacity, heat engines, introduction to entropy and statistical mechanics, and introduction to free energy and the Boltzmann factor.</div></div><span class="course-cr">2</span></li>
+            <li><div class="course-dot cat-gened"></div><div class="course-info"><span class="course-name">Indian Cinema</span><span class="course-num">CWL 207</span><div class="tooltip">Explores the relation between Indian society/culture and its cinematic representations, including cinema's resistance to dominant nationalist and patriarchal ideologies, its interactions with the postcolonial nation-state, and the impact of globalization on the industry.</div></div><span class="course-cr">3</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Senior Year -->
+    <div class="year-group">
+      <div class="year-label">2026 &ndash; 2027 &ensp; senior</div>
+      <div class="semesters">
+        <div class="semester upcoming">
+          <div class="sem-header">
+            <span class="sem-name">Fall 2026 <span class="sem-badge badge-upcoming">planned</span></span>
+            <span class="sem-credits">16 cr</span>
+          </div>
+          <ul class="course-list">
+            <li><div class="course-dot cat-physics"></div><div class="course-info"><span class="course-name">Quantum Mechanics I</span><span class="course-num">PHYS 486</span><div class="tooltip">Atomic phenomena integrated with an introduction to quantum theory: evidence for the atomic nature of matter, properties of the Schr&ouml;dinger equation, single-particle solutions in one dimension, the hydrogen atom, perturbation theory, external fields, and atomic spectroscopy.</div></div><span class="course-cr">4</span></li>
+            <li><div class="course-dot cat-spec"></div><div class="course-info"><span class="course-name">Computational Physics II</span><span class="course-num">PHYS 446</span><div class="tooltip">Immersive project-based course where students program from scratch, simulate, and understand the physics within multi-week projects spanning areas such as quantum computing, statistical mechanics, the renormalization group, machine learning, and topological insulators.</div></div><span class="course-cr">3</span></li>
+            <li><div class="course-dot cat-math"></div><div class="course-info"><span class="course-name">Partial Differential Equations</span><span class="course-num">MATH 442</span><div class="tooltip">Introduces partial differential equations emphasizing the wave, diffusion, and Laplace equations, covering fundamental solutions, transform methods, and separation of variables using orthogonal series for problems with boundary conditions.</div></div><span class="course-cr">3</span></li>
+            <li><div class="course-dot cat-gened"></div><div class="course-info"><span class="course-name">Modern Philosophy</span><span class="course-num">PHIL 206</span><div class="tooltip">History of philosophy from Descartes to Kant, concentrating on topics in metaphysics, ethics, and the theory of knowledge.</div></div><span class="course-cr">3</span></li>
+            <li><div class="course-dot cat-physics"></div><div class="course-info"><span class="course-name">Senior Thesis</span><span class="course-num">CS 499</span><div class="tooltip">Senior thesis with Edgar Solomonik.</div></div><span class="course-cr">3</span></li>
+          </ul>
+        </div>
+
+        <div class="semester upcoming">
+          <div class="sem-header">
+            <span class="sem-name">Spring 2027 <span class="sem-badge badge-upcoming">planned</span></span>
+            <span class="sem-credits">6 cr</span>
+          </div>
+          <ul class="course-list">
+            <li><div class="course-dot cat-gened"></div><div class="course-info"><span class="course-name">Deaf Communities</span><span class="course-num">SHS 222</span><div class="tooltip">Culture and language of Deaf people in the United States, covering the linguistics of American Sign Language, social unity for Deaf people, the educational system, and current issues affecting the Deaf community.</div></div><span class="course-cr">3</span></li>
+            <li><div class="course-dot cat-physics"></div><div class="course-info"><span class="course-name">Senior Thesis</span><span class="course-num">CS 499</span><div class="tooltip">Senior thesis with Edgar Solomonik.</div></div><span class="course-cr">3</span></li>
+          </ul>
+          <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #e8e8e8; font-size: 13px; color: #888;">
+            <a href="https://www.matsprogram.org/" style="font-size: 13px;">MATS</a> <span style="font-style: italic;">(tentative, if accepted)</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
