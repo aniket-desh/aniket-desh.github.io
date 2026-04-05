@@ -7,7 +7,7 @@
   <link rel="icon" href="/assets/penrose-logo.png" type="image/x-icon" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
   <title>aniket deshpande</title>
   <meta name="description" content="Undergraduate student in physics at the University of Illinois, Urbana-Champaign.">
   <style>
@@ -29,12 +29,11 @@
     }
 
     body {
-      width: 100%;
-      margin: 25px 0;
+      margin: 0;
       padding: 0;
       background: #fff;
-      font-family: "Newsreader", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
-      font-size: 16px;
+      font-family: "EB Garamond", Georgia, "Times New Roman", serif;
+      font-size: 17.6px;
       font-weight: 400;
       line-height: 1.5;
     }
@@ -49,27 +48,9 @@
     }
 
     .container {
-      max-width: 680px;
+      width: min(100% - 48px, 620px);
       margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    @media screen and (min-width: 600px) {
-      body {
-        margin: 50px 0 25px;
-      }
-      .container {
-        padding: 0 24px;
-      }
-    }
-
-    @media screen and (min-width: 800px) {
-      body {
-        margin: 120px 0 50px;
-      }
-      .container {
-        padding: 0 24px;
-      }
+      padding: 220px 0 88px;
     }
 
     .bio {
@@ -78,8 +59,8 @@
 
     .bio__header {
       margin-bottom: 20px;
-      font-weight: 590;
-      font-size: 23px;
+      font-weight: 400;
+      font-size: 25.3px;
     }
 
     .bio__header a {
@@ -141,7 +122,12 @@
       max-width: none;
     }
 
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 640px) {
+      .container {
+        width: min(100% - 32px, 620px);
+        padding: 94px 0 64px;
+      }
+
       .bio__photo {
         float: none;
         padding-left: 0;
@@ -152,24 +138,98 @@
     b, strong {
       font-weight: 600;
     }
+
+    .icon-row {
+      display: flex;
+      gap: 20px;
+      padding-top: 16px;
+      margin-top: 40px;
+    }
+
+    .icon-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      text-decoration: none;
+    }
+
+    .icon-link:hover {
+      color: darkred;
+    }
+
+    .icon-link svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* Minimal corner nav */
+    .corner-nav {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+      font-family: inherit;
+    }
+
+    .corner-nav .toggle {
+      font-size: 1.2rem;
+      color: #999;
+      cursor: default;
+      transition: transform 0.2s ease;
+      display: inline-block;
+      user-select: none;
+    }
+
+    .corner-nav:hover .toggle {
+      transform: rotate(90deg);
+      color: #333;
+    }
+
+    .corner-nav .dropdown {
+      display: none;
+      margin-top: 8px;
+      list-style: none;
+      padding: 0;
+      line-height: 1.8;
+    }
+
+    .corner-nav:hover .dropdown {
+      display: block;
+    }
+
+    .corner-nav .dropdown a {
+      text-decoration: none;
+      color: #666;
+      font-size: 0.95rem;
+      font-style: italic;
+    }
+
+    .corner-nav .dropdown a:hover {
+      color: darkred;
+    }
   </style>
 </head>
 
 <body>
+  <nav class="corner-nav">
+    <span class="toggle">&#x203a;</span>
+    <ul class="dropdown">
+      <li><a href="/">home</a></li>
+      <li><a href="/about/">about</a></li>
+      <li><a href="/research/">research</a></li>
+      <li><a href="/teaching/">teaching</a></li>
+      <li><a href="/notes/">notes</a></li>
+      <li><a href="/blog/">blog</a></li>
+      <li><a href="/code/">code</a></li>
+      <li><a href="/cv/cv.pdf">vitae</a></li>
+    </ul>
+  </nav>
+
   <div class="container">
-    <div class="bio">
-      <div class="bio__header">
-        <a href="/">aniket deshpande</a>
-      </div>
-      <div class="bio__tabs">
-        <a href="/about/">about</a> <span class="dot">·</span>
-        <a href="/research/">research</a> <span class="dot">·</span>
-        <a href="/teaching/">teaching</a> <span class="dot">·</span>
-        <a href="/notes/">notes</a> <span class="dot">·</span>
-        <a href="/blog/">blog</a> <span class="dot">·</span>
-        <a href="/code/">code</a> <span class="dot">·</span>
-        <a href="/cv/cv.pdf">vitae</a>
-      </div>
+    <div class="bio__header">
+      <a href="/">aniket deshpande</a>
     </div>
 
     <!-- <div class="bio__photo">
@@ -179,26 +239,35 @@
     <div class="content">
 
       <p>
-        I study physics at the University of Illinois. <br><br> My <a href="/research/">research</a> and <a href="/reading/">reading</a> interests are tensor networks, high-dimensional statistics, and language models. Broadly, I work on theory and algorithms for physics and information.
+        I study physics at the University of Illinois, Urbana-Champaign.  <br><br> My <a href="/research/">research</a> and <a href="/reading/">reading</a> interests are tensor networks, high-dimensional statistics, and language models. Broadly, I work on theory and algorithms for physics and information. <br><br> I maintain a <a href="/notes/">collection of course notes</a> and a <a href="/blog/">blog</a> where I write about physics, machine learning, and other topics. <br><br> Recently, I taught a <a href="/teaching/">workshop</a> on tensor computations in Julia.
         
         <!-- Here is a <a href="/graph-walk/">simulation</a> of graph random walks! -->
       </p>
 
       <p>
-        <b>updates</b><br>
+        Updates<br>
         [02.2026] - Working on mechanistic interpretability as a <a href="https://sparai.org/" target="_blank">SPAR</a> research fellow! <br>
         [02.2026] - Started my research internship at the <a href="https://www.matter.toronto.edu/" target="_blank">Matter Lab</a>! <br>
         [08.2025] - Presenting <a href="/research/tensor-contraction/index.html">some research</a> at <a href="https://qsimconference.org/" target="_blank">QSim 2025</a> at IBM, New York City!
       </p>
     </div>
 
-    <div class="socials">
-      <ul class="bio__social">
-        <li><a href="mailto:aniket4@illinois.edu" target="_blank">email / aniket4@illinois.edu</a></li>
-        <li><a href="https://github.com/aniket-desh" target="_blank">github / aniket-desh</a></li>
-        <li><a href="https://www.linkedin.com/in/aniket-desh/" target="_blank">linkedin / aniket-desh</a></li>
-        <li><a href="https://twitter.com/aniketdxsh" target="_blank">twitter / aniketdxsh</a></li>
-      </ul>
+    <div class="icon-row" aria-label="Social links">
+      <a class="icon-link" href="mailto:aniket4@illinois.edu" aria-label="Email">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.75 5.25h16.5v13.5H3.75V5.25Zm1.5 1.5v.29l6.75 4.86 6.75-4.86v-.29H5.25Zm13.5 10.5V9.58l-6.75 4.86-6.75-4.86v7.67h13.5Z"/></svg>
+      </a>
+      <a class="icon-link" href="https://github.com/aniket-desh" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5a10.5 10.5 0 0 0-3.32 20.46c.53.1.72-.23.72-.52v-1.82c-2.95.64-3.57-1.24-3.57-1.24-.48-1.2-1.18-1.52-1.18-1.52-.96-.66.07-.65.07-.65 1.07.08 1.64 1.1 1.64 1.1.94 1.63 2.48 1.16 3.08.89.1-.69.37-1.16.67-1.43-2.35-.27-4.83-1.17-4.83-5.22 0-1.15.41-2.09 1.08-2.82-.1-.27-.47-1.36.1-2.84 0 0 .89-.29 2.92 1.08a10.08 10.08 0 0 1 5.32 0c2.02-1.37 2.91-1.08 2.91-1.08.58 1.48.22 2.57.11 2.84.68.73 1.08 1.67 1.08 2.82 0 4.06-2.48 4.95-4.85 5.22.38.33.72.97.72 1.95v2.89c0 .29.19.63.73.52A10.5 10.5 0 0 0 12 1.5Z"/></svg>
+      </a>
+      <a class="icon-link" href="https://www.linkedin.com/in/aniket-desh/" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A1.48 1.48 0 1 0 5 6.46a1.48 1.48 0 0 0-.02-2.96ZM3.75 8.25h2.5v12h-2.5v-12Zm6 0h2.4v1.64h.03c.33-.63 1.15-1.93 3.2-1.93 3.42 0 4.05 2.11 4.05 4.85v7.44h-2.5v-6.6c0-1.58-.03-3.61-2.2-3.61-2.2 0-2.54 1.72-2.54 3.5v6.71h-2.44v-12Z"/></svg>
+      </a>
+      <a class="icon-link" href="https://twitter.com/aniketdxsh" aria-label="Twitter">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.75 5.95c-.71.32-1.48.53-2.29.63a3.99 3.99 0 0 0 1.75-2.2 7.93 7.93 0 0 1-2.52.96 3.96 3.96 0 0 0-6.75 3.61A11.23 11.23 0 0 1 3.13 4.6a3.95 3.95 0 0 0 1.22 5.29 3.9 3.9 0 0 1-1.79-.49v.05a3.96 3.96 0 0 0 3.18 3.88 3.97 3.97 0 0 1-1.78.07 3.97 3.97 0 0 0 3.7 2.75A7.95 7.95 0 0 1 2.25 18.8a11.22 11.22 0 0 0 6.08 1.78c7.3 0 11.3-6.05 11.3-11.3 0-.17 0-.34-.01-.51.78-.56 1.45-1.26 1.98-2.06Z"/></svg>
+      </a>
+      <a class="icon-link" href="/cv/cv.pdf" aria-label="CV">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6Zm7 1.5L19.5 8H14a1 1 0 0 1-1-1V3.5ZM8 13h8v1.5H8V13Zm0 3.5h8V18H8v-1.5Zm0-7h3V11H8V9.5Z"/></svg>
+      </a>
     </div>
 
     <div style="text-align: center; margin-top: 40px;">
