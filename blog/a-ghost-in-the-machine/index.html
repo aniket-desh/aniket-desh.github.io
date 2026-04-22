@@ -73,14 +73,30 @@
         }
 
         .post-header {
-            margin-bottom: 20px;
+            margin-bottom: 6px;
             font-weight: 400;
             font-size: 25.3px;
+            text-align: center;
         }
 
         .content {
             width: 100%;
             max-width: none;
+        }
+
+        .hero-image { margin: 0 0 24px; }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 620px;
+            height: auto;
+            display: block;
+        }
+
+        .hero-image figcaption {
+            color: #999;
+            font-size: 14px;
+            margin-top: 6px;
         }
 
         .post-title {
@@ -93,6 +109,12 @@
             color: #666;
             font-style: italic;
             margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .post-date--top {
+            margin-top: 0;
+            margin-bottom: 24px;
         }
 
         .post-body p {
@@ -293,10 +315,14 @@
   </nav>
     <div class="container">
         <a href="/blog/" class="back-arrow">←</a>
-        <div class="post-header">a ghost in the machine</div>
+        <div class="post-header">A Ghost in the Machine</div>
+        <p class="post-date post-date--top">12.28.2025</p>
+        <figure class="hero-image">
+            <img src="/assets/ghost.avif" alt="Hamlet and the Ghost by Frederick James Shields">
+            <figcaption><i>Hamlet and the Ghost</i>, Frederick James Shields</figcaption>
+        </figure>
 
         <div class="content">
-            <p class="post-date">12.28.2025</p>
 
             <div class="post-body">
                 <p>

@@ -26,6 +26,7 @@
         html {
             overflow-x: hidden;
             overflow-y: scroll;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -73,9 +74,25 @@
         }
 
         .post-header {
-            margin-bottom: 20px;
+            margin-bottom: 6px;
             font-weight: 400;
             font-size: 25.3px;
+            text-align: center;
+        }
+
+        .hero-image { margin: 0 0 24px; }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 620px;
+            height: auto;
+            display: block;
+        }
+
+        .hero-image figcaption {
+            color: #999;
+            font-size: 14px;
+            margin-top: 6px;
         }
 
         .content {
@@ -93,6 +110,12 @@
             color: #666;
             font-style: italic;
             margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .post-date--top {
+            margin-top: 0;
+            margin-bottom: 24px;
         }
 
         .post-body p {
@@ -162,11 +185,51 @@
         .section-title {
             font-weight: 600;
             font-size: 17px;
-            margin-bottom: 2px !important;
+            margin: 35px 0 2px 0 !important;
         }
 
         .section-title + p {
             margin-top: 0;
+        }
+
+        /* Theorem-style environments */
+        .thm, .def, .lem {
+            margin: 20px 0;
+            padding: 12px 18px;
+            background: #f8f8f8;
+            border-left: 3px solid #ccc;
+            border-radius: 2px;
+            font-size: 17px;
+            line-height: 1.55;
+        }
+
+        .thm-label, .def-label, .lem-label {
+            font-weight: 600;
+            font-style: italic;
+            margin-right: 0.3em;
+        }
+
+        .proof {
+            margin: 15px 0 20px 0;
+        }
+
+        .proof-label {
+            font-style: italic;
+            font-weight: 600;
+            margin-right: 0.3em;
+        }
+
+        .qed {
+            margin-left: 4px;
+        }
+
+        .callout {
+            text-align: center;
+            margin: 25px 0;
+            background-color: #f8f8f8;
+            padding: 15px;
+            border-radius: 4px;
+            font-style: italic;
         }
 
         ol.references {
@@ -219,6 +282,39 @@
 
         .footnote-backref:hover {
             text-decoration: underline;
+        }
+
+        /* Sidebar TOC */
+        .toc-sidebar {
+            display: none;
+        }
+
+        @media screen and (min-width: 1100px) {
+            .toc-sidebar {
+                display: block;
+                position: fixed;
+                left: calc((100vw - 680px) / 2 - 260px);
+                top: 350px;
+                width: 220px;
+                font-size: 13px;
+                line-height: 1.6;
+            }
+
+            .toc-sidebar a {
+                display: block;
+                text-decoration: none;
+                color: #ccc;
+                padding: 3px 0;
+                transition: color 0.2s ease;
+            }
+
+            .toc-sidebar a:hover {
+                color: #888;
+            }
+
+            .toc-sidebar a.active {
+                color: #333;
+            }
         }
 
         /* Minimal corner nav */
@@ -283,102 +379,267 @@
       <li><a href="/cv/cv.pdf">vitae</a></li>
     </ul>
   </nav>
+
+  <nav class="toc-sidebar">
+      <a href="#section-1">I. A Chain of Events</a>
+      <a href="#section-2">II. The Imaginary-Time Trick</a>
+      <a href="#section-3">III. Canonical Paths</a>
+      <a href="#section-4">IV. Fractional Flows</a>
+      <a href="#section-5">V. Diaconis&ndash;Stroock via Poincar&eacute;</a>
+      <a href="#section-6">VI. Thirty-Six Years Later</a>
+      <a href="#section-refs">References</a>
+  </nav>
+
     <div class="container">
         <a href="/blog/" class="back-arrow">←</a>
-        <div class="post-header">the slow art of fast mixing</div>
+        <div class="post-header">The Slow Art of Fast Mixing</div>
+        <p class="post-date post-date--top">07.25.2025</p>
+        <figure class="hero-image">
+            <img src="/assets/metropolis.jpg" alt="Nicholas Metropolis (right) with James Richardson at Los Alamos National Laboratory">
+            <figcaption>Nicholas Metropolis (right, with James Richardson) at Los Alamos National Laboratory.</figcaption>
+        </figure>
 
         <div class="content">
-            <p class="post-date">07.25.2025</p>
 
             <div class="post-body">
                 <p>
-                    In my studies of quantum information and learning theory, I find that a particular computational tool has become the center of rigorous mathematical research: sampling. This post walks through the rich theory of MCMC sampling and the results that allow Monte Carlo simulations to be numerical necessities in many fields.
+                    In my studies of quantum information and learning theory, I keep landing on the same computational hinge: sampling. Exact inference on graphical models is \(\mathsf{\#P}\)-hard. Partition functions of quantum systems are intractable for the same reason. What remains, what we do daily in practice, is run a Markov chain and hope. The hope is well-founded; Markov Chain Monte Carlo has been a numerical workhorse for three-quarters of a century. But a sample is only as good as the chain that draws it, and whether a chain is good enough is a surprisingly delicate question.
+                </p>
+                <p>
+                    This post traces that question from its origin in early 20th-century Russia to a breakthrough posted to the arXiv this past April. The arc covers a hundred and nineteen years, two world wars, and half a dozen theoretical frameworks, yet the central idea has hardly changed: given a chain on a large state space, how do we <i>prove</i> it converges fast enough to be useful?
+                </p>
+
+                <p class="section-title" id="section-1">I. A Chain of Events</p>
+                <p>
+                    In 1913, Andrey Markov wanted to settle an argument. His colleague Pavel Nekrasov had been insisting, with nationalist and theological flavor, that the law of large numbers required independent events, and that this dependence-on-independence was somehow proof of human free will. Markov disagreed, and he disagreed in the way mathematicians do: with a counterexample. He took the first 20,000 letters of Pushkin's <i>Eugene Onegin</i>, classified each as a vowel or a consonant, and computed the empirical transition frequencies. The sequence was obviously dependent, yet the frequencies obeyed a law of large numbers just fine. The Markov chain was born as a combinatorial retort to a philosophical dispute about Russian poetry.
+                </p>
+                <p>
+                    Thirty years later, the chain had migrated to Los Alamos. Stanislaw Ulam, convalescing at home in 1946, was playing solitaire and wondered what fraction of deals were winnable. The combinatorics were hopeless, but he realized one could simply <i>simulate</i>: play many random hands and count. Ulam mentioned the idea to John von Neumann, who saw immediately that neutron transport for the hydrogen bomb, the core technical problem facing the lab, was the same kind of thing. Nicholas Metropolis<sup>1</sup> named the method after Ulam's gambling uncle in Monaco. By 1953, Metropolis, Rosenbluth, Rosenbluth, Teller, and Teller had written down the algorithm that now bears his name: a recipe for sampling the Boltzmann distribution of any classical system by running a chain with a carefully chosen acceptance rule.
+                </p>
+                <p>
+                    What neither Markov nor Metropolis had was a theory of <i>how fast</i> these chains converge. If the chain takes exponentially long to forget its starting state, the empirical averages you compute are biased, and the bias does not vanish in the Monte Carlo variance; more samples will not save you. The question, then, is: how short must the run be before the empirical distribution is close enough to the target? That is the mixing-time question, and it is what we'll spend the rest of the post on.
+                </p>
+
+                <p class="section-title" id="section-2">II. The Imaginary-Time Trick</p>
+                <p>
+                    The modern setting I care about most is Path-Integral Monte Carlo (PIMC): the dominant method for simulating thermal states of stoquastic quantum systems. The program is to transform a quantum partition function into a classical Gibbs distribution by introducing an imaginary-time dimension, then sample from that distribution by Markov chain. Consider the one-dimensional transverse-field Ising model (TFIM) with open boundary conditions,
+                    \[
+                    H = -J\sum_{i=1}^{n-1} Z_i Z_{i+1} - h\sum_{i=1}^{n} X_i, \qquad J, h > 0,
+                    \]
+                    and suppose we want to estimate \(Z = \mathrm{tr}(e^{-\beta H})\). Simulating a generic quantum Hamiltonian on a classical computer is hard for the reasons you'd expect, but the TFIM has a redeeming property that makes it tractable: it is <i>stoquastic</i>.
+                </p>
+
+                <div class="def">
+                    <span class="def-label">Definition (stoquastic).</span>
+                    A Hamiltonian is stoquastic in a given basis if all of its off-diagonal matrix elements are real and non-positive.
+                </div>
+
+                <p>
+                    In the computational (\(Z\)) basis, \(Z_i Z_{i+1}\) is diagonal, and \(X_i\) has matrix elements \(\langle x \mid X_i \mid y\rangle = \delta_{x_{\neq i}, y_{\neq i}}\, \mathbb{1}[x_i \neq y_i]\), which are strictly non-negative. Because the transverse field carries a minus sign, the off-diagonal entries of \(H\) are \(-h \leq 0\), and the TFIM qualifies. Stoquasticity matters because it kills the sign problem<sup>2</sup>: decompose \(H = D + V\) with \(D\) diagonal and \(V\) off-diagonal. Since \(-V\) has non-negative entries, every term in the Taylor series \(e^{-\beta V/N} = \sum_{k \geq 0} (-\beta V/N)^k / k!\) is entrywise non-negative, and so is the Trotter product
+                    \[
+                    e^{-\beta H} = \lim_{N \to \infty} \left( e^{-\beta D/N}\, e^{-\beta V/N} \right)^N.
+                    \]
+                    The left-hand side therefore has non-negative entries in every position, which is what lets us interpret \(\langle x \mid e^{-\beta H} \mid y\rangle\) as an unnormalized probability.
+                </p>
+                <p>
+                    Insert resolutions of the identity between the Trotter factors and take the trace:
+                    \[
+                    Z = \sum_{x^{(0)}, \ldots, x^{(N-1)}} \prod_{k=0}^{N-1} \langle x^{(k)} \mid e^{-\Delta\tau D} e^{-\Delta\tau V} \mid x^{(k+1)} \rangle,
+                    \]
+                    with \(x^{(N)} = x^{(0)}\) and \(\Delta\tau = \beta/N\). The diagonal piece contributes \(\exp\left(J\Delta\tau \sum_{i} s_i^{(k)} s_{i+1}^{(k)}\right)\) per Trotter slice, writing \(s_i^{(k)} = \pm 1\) for the spin value. The transverse piece factorizes across sites, and using \(e^{h\Delta\tau X} = \cosh(h\Delta\tau)\, I + \sinh(h\Delta\tau)\, X\), a short calculation yields
+                    \[
+                    \langle s \mid e^{h\Delta\tau X} \mid s'\rangle = A \exp(\tilde{J} s s'), \qquad \tilde{J} = \tfrac{1}{2}\log\coth(h\Delta\tau),
+                    \]
+                    with \(A = \sqrt{\tfrac{1}{2}\sinh(2h\Delta\tau)}\). Putting everything together,
+                    \[
+                    Z = A^{nN} \sum_{\{s_i^{(k)}\}} \exp\!\left( J\Delta\tau \sum_{i, k} s_i^{(k)} s_{i+1}^{(k)} \;+\; \tilde{J} \sum_{i, k} s_i^{(k)} s_i^{(k+1)} \right).
+                    \]
+                    This is the partition function of a <i>classical</i> anisotropic 2D Ising model on an \(n \times N\) torus, with spatial coupling \(J\Delta\tau\) and imaginary-time coupling \(\tilde{J}\). The quantum system has become a classical one in space-time, and the Gibbs distribution of this lattice is what PIMC samples from via Glauber dynamics, heat-bath, or cluster updates.
+                </p>
+                <p>
+                    The Trotter error is \(O(\Delta\tau^2)\) per step, so the total error in \(Z\) is \(O(\beta^2/N)\), controllable by taking \(N\) polynomial in \(\beta\) and \(1/\epsilon\). What remains is exactly the question that has been sitting behind the algorithm since 1953: how long does the Glauber chain on this lattice take to mix?
+                </p>
+
+                <p class="section-title" id="section-3">III. Canonical Paths</p>
+                <p>
+                    To prove a chain mixes rapidly, one needs a geometric handle on the state space. The canonical-path method, introduced by Jerrum and Sinclair in 1989, gives us one. Let \(P\) be a reversible chain with stationary distribution \(\pi\) on a state space \(\Omega\). For each ordered pair \((x, y) \in \Omega \times \Omega\), designate a path \(\gamma_{x, y}\) from \(x\) to \(y\) along edges of the transition graph. Collect these into a canonical-path system \(\Gamma = \{\gamma_{x,y}\}\).
+                </p>
+
+                <div class="def">
+                    <span class="def-label">Definition (edge congestion).</span>
+                    The edge congestion of a canonical-path system \(\Gamma\) is
+                    \[
+                    \rho = \max_{e} \frac{1}{Q(e)} \sum_{(x, y) :\, e \in \gamma_{x, y}} \pi(x)\pi(y),
+                    \]
+                    where \(Q(e) = \pi(u) P(u, v)\) for \(e = (u \to v)\) is the <i>ergodic flow</i> through \(e\), that is, the stationary probability that the chain crosses \(e\) in a single step.
+                </div>
+
+                <p>
+                    Think of \(\rho\) as a worst-case load: for each pair of states, we treat \(\pi(x)\pi(y)\) as the demand to be routed from \(x\) to \(y\), and \(\rho\) is the maximum ratio of total demand on any edge to that edge's capacity \(Q(e)\). A small \(\rho\) means no edge is a bottleneck. Jerrum and Sinclair's insight was that this combinatorial object controls the chain's conductance.
+                </p>
+
+                <div class="thm">
+                    <span class="thm-label">Theorem (Jerrum&ndash;Sinclair, 1989).</span>
+                    For any canonical-path system with congestion \(\rho\),
+                    \[
+                    \Phi \geq \frac{1}{2\rho},
+                    \]
+                    where \(\Phi\) is the <i>conductance</i><sup>3</sup> of the chain.
+                </div>
+
+                <div class="proof">
+                    <span class="proof-label">Proof.</span>
+                    Fix any \(S \subseteq \Omega\) with \(\pi(S) \leq 1/2\). For every pair \((x, y) \in S \times S^c\), the canonical path \(\gamma_{x, y}\) starts in \(S\) and ends in \(S^c\), so it crosses at least one boundary edge \(e \in \partial S := \{(u, v) : u \in S,\, v \in S^c\}\). Sum the pair weights and decompose by which boundary edge they cross:
+                    \[
+                    \sum_{x \in S,\, y \in S^c} \pi(x)\pi(y) \;\leq\; \sum_{e \in \partial S}\ \sum_{(x, y) :\, e \in \gamma_{x, y}} \pi(x)\pi(y) \;\leq\; \sum_{e \in \partial S} \rho \cdot Q(e) \;=\; \rho \cdot Q(S, S^c).
+                    \]
+                    Since \(\pi(S^c) \geq 1/2\), the left side is at least \(\pi(S)/2\), and rearranging gives \(Q(S, S^c)/\pi(S) \geq 1/(2\rho)\). Taking the minimum over \(S\) is the claim. <span class="qed">\(\blacksquare\)</span>
+                </div>
+
+                <p>
+                    The chain-theoretic payoff comes through Cheeger's inequality for Markov chains, \(\lambda_1 \geq \Phi^2/2\), which converts conductance into a spectral gap<sup>4</sup>. The two bounds compose to
+                    \[
+                    \lambda_1 \geq \frac{1}{8 \rho^2},
+                    \]
+                    which in turn gives a mixing-time bound<sup>5</sup> (in total variation<sup>6</sup>) of
+                    \[
+                    \tau(\epsilon) \leq \frac{2}{\Phi^2}\left( \log \frac{1}{\pi_{\min}} + \log \frac{1}{\epsilon} \right),
+                    \]
+                    where \(\pi_{\min} = \min_x \pi(x)\) is the least stationary mass. This is the result that let Jerrum and Sinclair produce the first FPRAS<sup>7</sup> for the permanent of a non-negative matrix, a problem that had stood open for nearly two decades.
+                </p>
+                <p>
+                    To see canonical paths work, take the lazy random walk on the Boolean hypercube \(\Omega = \{0, 1\}^n\): with probability \(1/2\) stay in place, with probability \(1/(2n)\) flip a uniformly chosen coordinate. The stationary distribution is uniform, and each edge \(e = (u, u \oplus e_i)\) has ergodic flow \(Q(e) = 1/(n \cdot 2^{n+1})\). For each pair \((x, y)\), define \(\gamma_{x, y}\) by flipping the differing bits in the order \(i = 1, 2, \ldots, n\). Count the pairs routing through a fixed edge \(e = (u, u \oplus e_i)\): these are exactly the pairs with \(u\) matching \(y\) in positions \(1, \ldots, i-1\) and matching \(x\) in positions \(i+1, \ldots, n\), giving \(2^{n-1}\) pairs, each contributing weight \(2^{-2n}\). The congestion at \(e\) is
+                    \[
+                    \rho = \frac{2^{n-1} \cdot 2^{-2n}}{1/(n \cdot 2^{n+1})} = n,
+                    \]
+                    so \(\lambda_1 \geq 1/(8n^2)\) and the mixing time is \(O(n^4 + n^3 \log(1/\epsilon))\). The true answer is \(O(n \log n)\), so the bound is off by two factors of \(n\). Even so, the machinery is correct, and it is almost embarrassingly general.
+                </p>
+
+                <p class="section-title" id="section-4">IV. Fractional Flows</p>
+                <p>
+                    A single deterministic path routes all demand between \(x\) and \(y\) through one route. If that route happens to touch a bottleneck edge, the pair's entire \(\pi(x)\pi(y)\) weight lands there, and \(\rho\) blows up. The remedy is to hedge: spread each pair's demand over many paths.
+                </p>
+
+                <div class="def">
+                    <span class="def-label">Definition (fractional flow).</span>
+                    A fractional flow is an assignment \(f_{x, y}\) of non-negative weight to paths from \(x\) to \(y\) satisfying
+                    \[
+                    \sum_{\gamma} f_{x, y}(\gamma) = \pi(x)\pi(y).
+                    \]
+                    The fractional congestion is
+                    \[
+                    \rho_f = \max_e \frac{1}{Q(e)} \sum_{x, y}\, \sum_{\gamma \ni e} f_{x, y}(\gamma).
+                    \]
+                </div>
+
+                <p>
+                    Sinclair (1992) showed the Jerrum&ndash;Sinclair conductance bound generalizes verbatim: \(\Phi \geq 1/(2\rho_f)\), and \(\rho_f\) may replace \(\rho\) in every downstream bound. The question is where this actually helps. Not on the hypercube. The symmetry is already strong enough that spreading each pair's flow uniformly over permutations of bit-flips gives \(\rho_f = \Theta(n)\), the same order as a single path. The canonical success story is elsewhere: <i>perfect matchings</i>. To route between two near-perfect matchings \(M\) and \(M'\), Jerrum and Sinclair consider the symmetric difference \(M \triangle M'\) (a union of alternating paths and cycles) and "unwind" it edge by edge. A single deterministic unwinding order concentrates flow badly through a few hub configurations; averaging over valid orderings (the fractional flow) brings the congestion down from exponential in \(n\) to polynomial. This is the move that made the FPRAS for the permanent possible, and it is where fractional flows earn their keep.
+                </p>
+
+                <p class="section-title" id="section-5">V. Diaconis&ndash;Stroock via Poincar&eacute;</p>
+                <p>
+                    Routing a canonical-path bound through Cheeger loses a factor of \(\rho\): we pick up one \(\rho\) to bound conductance and square it at the spectral step, even though the path structure only depends on \(\rho\) linearly. Diaconis and Stroock (1991) showed that going directly through a Poincar&eacute; inequality, skipping conductance entirely, recovers the lost factor.
+                </p>
+                <p>
+                    Recall that the <i>Dirichlet form</i> of a reversible chain is
+                    \[
+                    \mathcal{E}(f, f) = \tfrac{1}{2}\sum_{x, y} \pi(x) P(x, y) (f(x) - f(y))^2 = \sum_{e = \{u, v\}} Q(e) (f(u) - f(v))^2,
+                    \]
+                    where the second sum is over undirected edges. The variance under \(\pi\) has the symmetric expression
+                    \[
+                    \mathrm{Var}_\pi(f) = \tfrac{1}{2}\sum_{x, y} \pi(x)\pi(y)(f(x) - f(y))^2,
+                    \]
+                    and the spectral gap is the optimal Poincar&eacute; constant,
+                    \[
+                    \lambda_1 = \inf_{f \text{ non-constant}} \frac{\mathcal{E}(f, f)}{\mathrm{Var}_\pi(f)}.
+                    \]
+                </p>
+
+                <div class="thm">
+                    <span class="thm-label">Theorem (Diaconis&ndash;Stroock, 1991).</span>
+                    Let \(\ell_{\max} = \max_{x, y} |\gamma_{x, y}|\) be the maximum canonical-path length. Then
+                    \[
+                    \lambda_1 \geq \frac{1}{\rho\, \ell_{\max}}.
+                    \]
+                </div>
+
+                <div class="proof">
+                    <span class="proof-label">Proof.</span>
+                    For any \(x, y\), write \(f(x) - f(y)\) as a telescoping sum along \(\gamma_{x, y} = (x = v_0, v_1, \ldots, v_\ell = y)\):
+                    \[
+                    f(x) - f(y) = \sum_{k = 1}^{\ell} (f(v_{k-1}) - f(v_k)) =: \sum_{e \in \gamma_{x, y}} \nabla_e f.
+                    \]
+                    Cauchy&ndash;Schwarz gives
+                    \[
+                    (f(x) - f(y))^2 \leq |\gamma_{x, y}| \sum_{e \in \gamma_{x, y}} (\nabla_e f)^2 \leq \ell_{\max} \sum_{e \in \gamma_{x, y}} (\nabla_e f)^2.
+                    \]
+                    Substituting into the variance identity and swapping the order of summation,
+                    \[
+                    \mathrm{Var}_\pi(f) \leq \tfrac{\ell_{\max}}{2} \sum_e (\nabla_e f)^2 \sum_{(x, y) :\, e \in \gamma_{x, y}} \pi(x)\pi(y) \leq \rho\, \ell_{\max} \cdot \mathcal{E}(f, f),
+                    \]
+                    using \(\sum_{(x,y)} \pi(x)\pi(y) \leq \rho Q(e)\) on the inner sum. Rearranging is the claim. <span class="qed">\(\blacksquare\)</span>
+                </div>
+
+                <p>
+                    Compared with the route \(\rho \Rightarrow \Phi \Rightarrow \lambda_1\), which gives \(\lambda_1 \geq 1/(8\rho^2)\), the Diaconis&ndash;Stroock bound is stronger whenever \(\ell_{\max} \ll \rho\), precisely the regime where demand is spread along short paths. The fractional version replaces \(\rho\) with \(\rho_f\), with a weighted accounting of path lengths (see Sinclair 1992 for the definitive statement). Given my prior interest<sup>8</sup> in Poincar&eacute; constants for mixing, this is a satisfying place to land: the canonical-path framework, stripped of the Cheeger detour, is a Poincar&eacute; inequality in disguise.
+                </p>
+                <p>
+                    Canonical paths are not the only tool, and it's worth naming two neighbors in the toolbox. <i>Cheeger's inequality</i>, \(\Phi^2/2 \leq \lambda_1 \leq 2\Phi\), is the isoperimetric-to-spectral translation that underlies all of the machinery above; the upper bound is an easy Rayleigh-quotient calculation, while the lower bound (Lawler&ndash;Sokal, 1988) proceeds by a level-set decomposition of test functions. <i>Path coupling</i>, due to Bubley and Dyer (1997), is a conceptually different technique that bounds mixing time directly by constructing a contracting coupling of two copies of the chain along adjacent pairs in a well-chosen metric. For Glauber dynamics on the Ising model at high temperature, path coupling gives \(O(n \log n)\) mixing in a few lines, while canonical paths require real work. Both techniques live in the toolbox because they dominate each other in different regimes.
+                </p>
+
+                <p class="section-title" id="section-6">VI. Thirty-Six Years Later</p>
+                <p>
+                    For three and a half decades, the Jerrum&ndash;Sinclair mixing bound for the perfect-matching chain stood essentially unchanged. Sinclair's 1992 paper sharpened the constants and introduced fractional flows in their modern form; subsequent work handled restricted regimes (e.g., the monomer-dimer model at high temperature). But the dependence on graph size, \(\widetilde{O}(n^2 m)\) for an \(n\)-vertex, \(m\)-edge graph, did not move.
+                </p>
+                <p>
+                    In April 2025, Chen, Feng, Ju, Miao, Yin, and Zhang posted a new bound. For the Jerrum&ndash;Sinclair chain on matchings of any graph with \(n\) vertices, \(m\) edges, maximum degree \(\Delta\), and constant edge weight \(\lambda > 0\),
+                    \[
+                    \tau(\epsilon) = \widetilde{O}(\Delta^2 m).
+                    \]
+                    For bounded-degree graphs, \(\Delta = O(1)\), so this is an \(n^2\) speedup over the 1989 bound, and the first substantive progress in thirty-six years.
+                </p>
+                <p>
+                    The technical move is a hybrid of the classical path machinery with <i>local-to-global</i> spectral methods from the theory of high-dimensional expanders (HDX). The HDX framework, developed by Kaufman&ndash;Mass, Alev&ndash;Lau, and Anari&ndash;Liu&ndash;Oveis Gharan over the past decade, views the state space of a combinatorial problem as the top-dimensional faces of a simplicial complex, and bounds the spectral gap of the "global" walk on the complex by spectral gaps of <i>local walks</i> on links (sub-complexes obtained by conditioning on a subset of coordinates). Concretely, if every link has spectral gap at least \(1 - \delta\), the global walk on a \(k\)-dimensional complex has gap at least \((1 - k\delta)/k\) under suitable conditions. For matchings, the complex has partial matchings as faces, and links correspond to conditioning on some edges being included.
+                </p>
+                <p>
+                    Chen et al.'s contribution is to combine the canonical-path flow construction with local-to-global analysis, with refinements on both sides. The intuition is that paths give a global handle on how demand routes through the state space, while local-to-global lifts local mixing into a global gap. Local mixing is easier to bound, since links are small and structured. The mashup extracts the \(n^2/\Delta^2\) of slack the 1989 framework had left on the table, and the machinery it requires (HDX) did not exist when the slack was introduced.
                 </p>
 
                 <p>
-                    In quantum information, Path-Integral Monte Carlo (PIMC) is a primary method for simulating thermal states of stoquastic quantum systems. PIMC transforms a quantum partition function into a classical Gibbs distribution by introducing an "imaginary-time" dimension, then applies Markov Chain Monte Carlo to sample from that distribution. Recently, these Markov chains were proven to mix <i>rapidly</i>, using the canonical path method. This rigorously justifies the use of PIMC in partition function estimation.
+                    This is the slow in the slow art of fast mixing. The Jerrum&ndash;Sinclair framework is from 1989; Diaconis&ndash;Stroock's Poincar&eacute; refinement from 1991; Sinclair's fractional flows from 1992; Bubley&ndash;Dyer path coupling from 1997; Anari&ndash;Liu&ndash;Oveis Gharan's HDX breakthrough for matroid polytopes from 2018; Chen&ndash;Feng&ndash;Ju&ndash;Miao&ndash;Yin&ndash;Zhang from last April. Each step tightens one part of the proof, and each tightening takes years to find. Not because anyone is slow, but because the space of proof ideas is as large as the state space of matchings, and good paths through it are rare.
                 </p>
-
                 <p>
-                    Suppose we hope to estimate the partition function of a \(1\)D stoquastic Hamiltonian
-                    \[
-                    H = \sum_{i=1}^{n-1}Z_{i}Z_{i+1} + \sum_{i=1}^{n}h_iX_i
-                    \]
-                    With a Suzuki-Trotter decomposition, this quantum system becomes a classical one in \(n \times \beta\) space-time, with a Gibbs distribution over paths \(x \in \{0, 1 \}^{n\beta}\). Sampling from this distribution using MCMC requires Glauber dynamics. However, our estimates can be wildly inaccurate unless we prove mixing time<sup>1</sup> to be <i>small</i>.
-                </p>
-
-                <p>
-                    In learning theory, specifically in probabilistic inference on graphical models, sampling-based algorithms (e.g. Gibbs sampling, importance sampling) are essential to approximating joint distributions when exact inference is intractable. Consider a Markov random field over binary variables \(X_1, \ldots, X_n\) with pairwise interactions:
-                    \[
-                    P(x) \propto \exp \left( \sum_{(i, j) \in E} \theta_{ij} x_i x_j + \sum_{i}\theta_i x_i \right)
-                    \]
-                    and we want to compute marginal probabilities \(P(X_i = 1)\). Exact inference is \(\mathsf{\# P}\)-hard, so we use Gibbs sampling. But how long does this take to converge<sup>2</sup> to the true distribution?
-
-                Once again, this depends on how fast the Markov chain mixes. Both of these examples illustrate that sampling is not just a numerical tool, but a computational lifeline in dire need of some theoretical justifications: <i>do these chains converge fast enough for meaningful inference?</i>
-                </p>
-
-                <p>
-                    Canonical paths are a powerful combinatorial framework for proving rapid mixing in high-dimensional Markov chains. Let us define a set of paths \( \Gamma = \{ \gamma_{x, y} \}_{x, y \in \Omega} \) for each pair of distinct states in the state space \( \Omega \). The <i>edge congestion</i> is defined as
-                    \[
-                    \rho = \max_{e \in E} \frac{1}{Q(e)} \sum_{(x, y) : e \in \gamma_{x, y}} \pi(x)\pi(y)
-                    \]
-                    where \( Q(e) = \pi(u) P(u, v)\) is the ergodic flow through edge \(e_{u \to v}\).
-
-                In 1989, Jerrum and Sinclair showed that one can lower-bound the <i>conductance</i><sup>3</sup> \(\Phi\) and <i>spectral gap</i><sup>4</sup> \(\lambda_1\) with
-                    \[
-                    \Phi \geq \frac{1}{2\rho},\quad \lambda_1 \geq \frac{1}{2\rho^2}
-                    \]
-                yielding a mixing-time bound (in total variation) of
-                    \[
-                    \tau(\epsilon) \leq \frac{2}{\Phi^2} \left(\ln \frac{1}{\pi_{min}} + \ln \frac{1}{\epsilon} \right).
-                    \]
-                </p>
-
-                <p>
-                    This foundational result was the justification for their FPRAS<sup>5</sup> algorithm for approximating the permanent of a matrix, and has since been generalized. However, canonical paths designate a single path to each pair of states potentially causing large congestion. So, we introduce <i>fractional flows</i>, a probability distribution over paths for each pair. Let \( f_{x, y}(\gamma)\) be the amount of flow along path \(\gamma\) from \(x\) to \(y\), subject to the constraint:
-                    \[
-                    \sum_{\gamma \in \Gamma} f_{x, y}(\gamma) = \pi(x) \pi(y).
-                    \]
-
-                The total load on an edge \(e\) and fractional congestion are defined as
-                    \[
-                    F(e) = \sum_{x, y}\sum_{\gamma \ni e} f_{x, y}(\gamma),\quad \rho_f = \max_{e \in E} \frac{F(e)}{Q(e)}.
-                    \]
-                </p>
-
-                <p>
-                    A vital insight in modern canonical path theory is that rapid mixing is still ensured when \(\rho_f\) is small. Fractional flows even often yield <i>smaller</i> congestion bounds than deterministic path assignments. Note that <i>path length matters.</i> Diaconis and Stroock showed that with a maximum path length \(l_{max} = \max_{x, y} \left| \gamma_{x, y} \right|\), the spectral gap satisfies the bound
-                    \[
-                    \lambda_1 \geq \frac{1}{\rho_f l_{max}}
-                    \]
-                    This bound tightens mixing time estimates by involving both congestion and how long it takes information to propogate through the graph structure. With long but sparse paths, it can be much stronger than the \(\rho^2\) bound.
-                </p>
-
-                <p>
-                    In 2025, Chen et al. heavily improved on the Jerrum-Sinclair result by redefining the analysis for the perfect matching chain. For a graph with \(n\) vertices, \(m\) edges, and maximum degree \(\Delta\), they showed that the mixing time satisfies
-                    \[
-                    \tau(\epsilon) = \widetilde{\mathcal{O}} \left(\Delta^2 m + \Delta^2 \log\left(1/\epsilon\right) \right).
-                    \]
-                    In summary, the journey from Jerrum & Sinclair's classical framework to the modern refinement by Chen et al. illustrates the mathematical richness of sampling theory. For problems in quantum simulation and learning algorithms, where sampling is vital, this theory is mathematical assurance that Monte Carlo isn't just plausible, it's provably fast.
+                    For the physicist running PIMC on the transverse-field Ising chain, the practical upshot is concrete. The classical Gibbs distribution on the imaginary-time lattice mixes in polynomial time, and the quantum partition function is estimable to additive error \(\epsilon\) in time polynomial in \(n\), \(\beta\), and \(1/\epsilon\). The chain we run is not the matching chain, but the method by which we prove it fast (pair demands, canonical paths, congestion, a Poincar&eacute; inequality) is the method Jerrum and Sinclair laid down in 1989. Monte Carlo isn't just plausible for these systems; it's provably fast, and the proof is older than most of its users.
                 </p>
 
                 <hr class="footnotes-sep">
                 <section class="footnotes">
                     <ol>
-                        <li>The mixing time is defined as \[\tau(\epsilon) = \min\{t : \|\mu_t - \pi\|_{TV} \leq \epsilon\}\] where \(\mu_t\) is the distribution after \(t\) steps and \(\pi\) is the stationary distribution. It measures how many steps are needed to get \(\epsilon\)-close in total variation distance.</li>
-                        <li>Total variation distance \(\|\mu - \pi\|_{TV} = \frac{1}{2}\sum_x |\mu(x) - \pi(x)|\) measures how far a distribution \(\mu\) is from the stationary distribution \(\pi\). It's the natural metric for convergence: at most 1, and 0 only when distributions are identical.</li>
-                        <li>Conductance \(\Phi\) measures the bottleneck probability flow: how easily probability mass can move between large sets. Larger \(\Phi\) means fewer bottlenecks and faster mixing.</li>
-                        <li>The spectral gap \(\lambda_1 = 1 - |\lambda_2|\) measures the separation between the largest and second-largest eigenvalue of the transition matrix. Larger gap means exponentially faster convergence.</li>
-                        <li>A Fully Polynomial Randomized Approximation Scheme is a randomized algorithm that computes a \((1 \pm \epsilon)\)-approximation in time polynomial in both the input size and \(1/\epsilon\).</li>
+                        <li>Metropolis stayed at Los Alamos for most of his career, and the photo at the top of this post is from his time there. The Metropolis algorithm was, by his own account, mostly the Rosenbluths' and Tellers' work, but the name stuck.</li>
+                        <li>The sign problem is the obstruction to classical Monte Carlo simulation of generic quantum systems: matrix elements \(\langle x \mid e^{-\beta H} \mid y\rangle\) can be negative or complex, and interpreting them as probabilities requires averaging over cancelling signs, which destroys the statistical signal exponentially in \(\beta n\). Stoquasticity is the property that rules this out.</li>
+                        <li>Conductance measures the bottleneck probability flow. Formally, \(\Phi = \min_{S :\, \pi(S) \leq 1/2}\, Q(S, S^c)/\pi(S)\), where \(Q(S, S^c) = \sum_{u \in S,\, v \in S^c} \pi(u) P(u, v)\) is the total ergodic flow across the boundary. Larger \(\Phi\) means fewer bottlenecks and faster mixing.</li>
+                        <li>The spectral gap \(\lambda_1 = 1 - |\lambda_2|\) is the separation between the largest and second-largest eigenvalues of the (symmetrized) transition matrix. Larger gap, exponentially faster convergence.</li>
+                        <li>The mixing time is \(\tau(\epsilon) = \min\{t : \|\mu_t - \pi\|_{\mathrm{TV}} \leq \epsilon\}\), where \(\mu_t\) is the distribution after \(t\) steps. It is the number of steps needed to get \(\epsilon\)-close to stationarity in total variation.</li>
+                        <li>Total variation distance \(\|\mu - \pi\|_{\mathrm{TV}} = \tfrac{1}{2}\sum_x |\mu(x) - \pi(x)|\) is the natural metric for convergence: at most \(1\), and \(0\) iff the distributions coincide.</li>
+                        <li>A Fully Polynomial Randomized Approximation Scheme: a randomized algorithm that returns a \((1 \pm \epsilon)\)-approximation in time polynomial in the input size and \(1/\epsilon\).</li>
+                        <li>A strictly stronger object than \(\lambda_1\) is the log-Sobolev constant \(\alpha_{\mathrm{LS}}\), which controls hypercontractive bounds and gives mixing time \(\alpha_{\mathrm{LS}}^{-1} \log\log(1/\pi_{\min})\) rather than \(\lambda_1^{-1} \log(1/\pi_{\min})\). The \(\log(1/\pi_{\min})\) in our mixing bound is exactly the factor log-Sobolev saves. It is harder to establish, but for Glauber dynamics in many regimes it is the sharper tool.</li>
                     </ol>
                 </section>
 
-                <p class="section-title">References</p>
+                <p class="section-title" id="section-refs">References</p>
                 <ol class="references">
-                    <li><a href="https://arxiv.org/abs/2504.02740" target="_blank">Faster Mixing of the Jerrum–Sinclair Chain</a><br>Chen, Z., Liu, K. and Vuong, T. V. (2025).</li>
-                    <li><a href="https://arxiv.org/abs/1603.01512" target="_blank">Rapidly Mixing Markov Chains: A Comparison of Techniques</a><br>Guruswami, V. (2016).</li>
-                    <li><a href="https://proceedings.neurips.cc/paper_files/paper/2022/file/a600cdf3a53f93bcb85cb37343a8d831-Paper-Conference.pdf" target="_blank">Geometric Bounds for Eigenvalues of Markov Chains</a><br>Diaconis, P. and Stroock, D. (1991).</li>
+                    <li><a href="https://arxiv.org/abs/2504.02740" target="_blank">Faster Mixing of the Jerrum&ndash;Sinclair Chain</a><br>Chen, Z., Feng, W., Ju, Y., Miao, C., Yin, Y. and Zhang, X. (2025).</li>
                     <li><a href="https://dl.acm.org/doi/10.1145/74334.74335" target="_blank">Approximating the Permanent</a><br>Jerrum, M. and Sinclair, A. (1989).</li>
+                    <li><a href="https://doi.org/10.1017/S0963548300000195" target="_blank">Improved Bounds for Mixing Rates of Markov Chains and Multicommodity Flow</a><br>Sinclair, A. (1992).</li>
+                    <li><a href="https://doi.org/10.1214/aoap/1177005980" target="_blank">Geometric Bounds for Eigenvalues of Markov Chains</a><br>Diaconis, P. and Stroock, D. (1991).</li>
+                    <li><a href="https://doi.org/10.1063/1.1699114" target="_blank">Equation of State Calculations by Fast Computing Machines</a><br>Metropolis, N., Rosenbluth, A. W., Rosenbluth, M. N., Teller, A. H. and Teller, E. (1953).</li>
+                    <li><a href="https://bookstore.ams.org/mbk-107" target="_blank">Markov Chains and Mixing Times (2nd ed.)</a><br>Levin, D. A., Peres, Y. and Wilmer, E. L. (2017).</li>
+                    <li><a href="https://doi.org/10.1109/SFCS.1997.646111" target="_blank">Path Coupling: A Technique for Proving Rapid Mixing in Markov Chains</a><br>Bubley, R. and Dyer, M. (1997).</li>
+                    <li><a href="https://doi.org/10.1090/S0002-9947-1988-0930082-9" target="_blank">Bounds on the \(L^2\) Spectrum for Markov Chains and Markov Processes</a><br>Lawler, G. F. and Sokal, A. D. (1988).</li>
+                    <li><a href="https://arxiv.org/abs/0806.1746" target="_blank">Complexity of Stoquastic Frustration-Free Hamiltonians</a><br>Bravyi, S. and Terhal, B. (2009).</li>
+                    <li><a href="https://arxiv.org/abs/1612.05602" target="_blank">Polynomial-Time Classical Simulation of Quantum Ferromagnets</a><br>Bravyi, S. and Gosset, D. (2017).</li>
+                    <li><a href="https://arxiv.org/abs/1811.01816" target="_blank">Log-Concave Polynomials II: High-Dimensional Walks and an FPRAS for Counting Bases of a Matroid</a><br>Anari, N., Liu, K., Oveis Gharan, S. and Vinzant, C. (2019).</li>
+                    <li><a href="https://arxiv.org/abs/1603.01512" target="_blank">Rapidly Mixing Markov Chains: A Comparison of Techniques</a><br>Guruswami, V. (2016).</li>
                 </ol>
 
             </div>
@@ -429,6 +690,27 @@
                     li.appendChild(backLink);
                 }
             });
+
+            // TOC active-section highlighting
+            var tocLinks = document.querySelectorAll('.toc-sidebar a');
+            var sections = Array.from(tocLinks).map(function(a) {
+                var id = a.getAttribute('href').slice(1);
+                return document.getElementById(id);
+            });
+
+            function onScroll() {
+                var scrollY = window.scrollY + 200;
+                var activeIdx = 0;
+                for (var i = 0; i < sections.length; i++) {
+                    if (sections[i] && sections[i].offsetTop <= scrollY) activeIdx = i;
+                }
+                tocLinks.forEach(function(a, i) {
+                    if (i === activeIdx) a.classList.add('active');
+                    else a.classList.remove('active');
+                });
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
         });
     </script>
 </body>

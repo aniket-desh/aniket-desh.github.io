@@ -74,9 +74,10 @@
         }
 
         .post-header {
-            margin-bottom: 20px;
+            margin-bottom: 6px;
             font-weight: 400;
             font-size: 25.3px;
+            text-align: center;
         }
 
         .content {
@@ -94,6 +95,12 @@
             color: #666;
             font-style: italic;
             margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .post-date--top {
+            margin-top: 0;
+            margin-bottom: 24px;
         }
 
         .post-body p {
@@ -135,7 +142,7 @@
                 display: block;
                 position: fixed;
                 left: calc((100vw - 680px) / 2 - 260px);
-                top: 140px;
+                top: 350px;
                 width: 200px;
                 font-size: 13px;
                 line-height: 1.6;
@@ -156,6 +163,21 @@
             .toc-sidebar a.active {
                 color: #333;
             }
+        }
+
+        .hero-image { margin: 0 0 24px; }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 620px;
+            height: auto;
+            display: block;
+        }
+
+        .hero-image figcaption {
+            color: #999;
+            font-size: 14px;
+            margin-top: 6px;
         }
 
         .callout {
@@ -444,10 +466,14 @@
 
     <div class="container">
         <a href="/blog/" class="back-arrow">←</a>
-        <div class="post-header">attention seeking</div>
+        <div class="post-header">Attention Seeking</div>
+        <p class="post-date post-date--top">03.27.2026</p>
+        <figure class="hero-image">
+            <img src="/assets/pollok-autumn-rhythm.jpg" alt="Autumn Rhythm (Number 30) by Jackson Pollock">
+            <figcaption><i>Autumn Rhythm (Number 30)</i>, Jackson Pollock</figcaption>
+        </figure>
 
         <div class="content">
-            <p class="post-date">03.27.2026</p>
 
             <div class="post-body">
 
