@@ -40,6 +40,7 @@
         html {
             overflow-x: hidden;
             overflow-y: scroll;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -74,37 +75,24 @@
             }
         }
 
-        .bio {
-            max-width: none;
+        .back-arrow {
+            display: inline-block;
+            text-decoration: none;
+            color: #999;
+            font-size: 20px;
+            margin-bottom: 15px;
         }
 
-        .bio__header {
-            margin-bottom: 20px;
+        .back-arrow:hover {
+            color: darkred;
+        }
+
+        .post-header {
+            margin-bottom: 6px;
             font-weight: 400;
             font-size: 25.3px;
-        }
-
-        .bio__header a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .bio__header a:hover {
-            text-decoration: none;
-        }
-
-        .bio__tabs {
-            margin-bottom: 20px;
-            font-style: italic;
-        }
-
-        .bio__tabs a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .bio__tabs a:hover {
-            color: darkred;
+            text-align: center;
+            line-height: 1.25;
         }
 
         .content {
@@ -116,31 +104,111 @@
             color: #666;
             font-style: italic;
             margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .post-date--top {
+            margin-top: 0;
+            margin-bottom: 24px;
+        }
+
+        .post-note {
+            color: #8B0000;
+            font-style: italic;
+            text-align: center;
+            margin-top: -8px;
+            margin-bottom: 30px;
+            font-size: 15px;
         }
 
         .post-body p {
             margin-bottom: 20px;
         }
 
-        .back-link {
-            margin-top: 40px;
+        .post-body h3 {
+            font-weight: 700;
+            font-size: 20px;
+            margin: 25px 0 10px 0;
+        }
+
+        .section-title {
+            font-weight: 600;
+            font-size: 17px;
+            margin: 35px 0 2px 0 !important;
+        }
+
+        .section-title + p {
+            margin-top: 0;
+        }
+
+        /* Theorem-style environments */
+        .thm, .def, .lem {
+            margin: 20px 0;
+            padding: 12px 18px;
+            background: #f8f8f8;
+            border-left: 3px solid #ccc;
+            border-radius: 2px;
+            font-size: 17px;
+            line-height: 1.55;
+        }
+
+        .thm-label, .def-label, .lem-label {
+            font-weight: 600;
+            margin-right: 0.3em;
+        }
+
+        .proof {
+            margin: 15px 0 20px 0;
+        }
+
+        .proof-label {
             font-style: italic;
+            font-weight: 600;
+            margin-right: 0.3em;
         }
 
-        .back-link a {
-            text-decoration: none;
-            color: #666;
+        .qed {
+            margin-left: 4px;
         }
 
-        .back-link a:hover {
-            color: darkred;
+        /* Pseudocode block */
+        .ps-root {
+            margin: 25px 0;
         }
 
-        .note {
-            font-style: italic;
-            color: darkred;
-            margin-bottom: 20px;
+        /* Sidebar TOC */
+        .toc-sidebar {
+            display: none;
         }
+
+        @media screen and (min-width: 1100px) {
+            .toc-sidebar {
+                display: block;
+                position: fixed;
+                left: calc((100vw - 680px) / 2 - 260px);
+                top: 350px;
+                width: 220px;
+                font-size: 13px;
+                line-height: 1.6;
+            }
+
+            .toc-sidebar a {
+                display: block;
+                text-decoration: none;
+                color: #ccc;
+                padding: 3px 0;
+                transition: color 0.2s ease;
+            }
+
+            .toc-sidebar a:hover {
+                color: #888;
+            }
+
+            .toc-sidebar a.active {
+                color: #333;
+            }
+        }
+
         /* Minimal corner nav */
         .corner-nav {
             position: fixed;
@@ -203,103 +271,61 @@
             <li><a href="/cv/cv.pdf">vitae</a></li>
         </ul>
     </nav>
+
+    <!--
+    <nav class="toc-sidebar">
+        <a href="#section-1">I. Tensor Networks and Amplitudes</a>
+        <a href="#section-2">II. Annealed Importance Sampling</a>
+        <a href="#section-3">III. Glauber Dynamics</a>
+        <a href="#section-4">IV. Test Networks</a>
+        <a href="#section-5">V. Benchmark and Results</a>
+    </nav>
+    -->
+
+
     <div class="container">
-        <div class="bio__header" style="white-space: nowrap;">
-            <a href="/">approximating tensor contractions with annealed importance sampling</a>
-        </div>
+        <a href="/research/" class="back-arrow">←</a>
+        <div class="post-header">Approximating Tensor Contractions <br>with Annealed Importance Sampling</div>
+        <p class="post-date post-date--top">in progress &middot; poster at QSim 2025</p>
+        <p class="post-note">this write-up is meant to inform readers of our approach.</p>
 
         <div class="content">
-            <p class="post-date">&larr; <a href="/research/" style="color: #666; text-decoration: none;">back to research</a></p>
-
             <div class="post-body">
-                <p class="note">
-                    this work is in progress. this write-up is meant to inform readers of our approach.
-                </p>
 
+                <!-- <p class="section-title" id="section-1">I. Tensor Networks and Amplitudes</p> -->
                 <p>
-                    Tensors are ubiquitous in modern information processing. In classical information, tensors represent high-dimensional data structures like images, videos, and text. In quantum computing, tensors encode quantum states and operations, enabling efficient simulation of quantum circuits.
+                    Tensors are ubiquitous in modern information processing. In classical information, they represent high-dimensional data structures like images, videos, and text. In quantum computing, they encode quantum states and operations, enabling efficient simulation of quantum circuits.
                 </p>
-
                 <p>
-                    For example, a quantum circuit, represented by a set of unitaries \( \text{ }\mathcal{U} = \{U_1, U_2, \ldots, U_m\} \), has the probability of measuring a particular bitstring \( x = (x_1, x_2, \ldots, x_n) \) given by the contraction
+                    For example, a quantum circuit, represented by a set of unitaries \( \mathcal{U} = \{U_1, U_2, \ldots, U_m\} \), has the probability of measuring a particular bitstring \( x = (x_1, x_2, \ldots, x_n) \) given by the contraction
                     \[
-                        \mathrm{Pr}(x) = \left| \langle x | U_m \cdots U_2 U_1 | 0^{\otimes n} \rangle \right|^2
+                        \mathrm{Pr}(x) = \left| \langle x | U_m \cdots U_2 U_1 | 0^{\otimes n} \rangle \right|^2,
                     \]
-                    where \( |0^{\otimes n} \rangle \) is the initial state of the circuit. This amplitude corresponds to a tensor network contraction, where each gate \( U_i \in \mathcal{U}\) is represented as a low-rank tensor, with the circuit structure defining the connectivity. The contraction sums over all intermediate qubit states at each layer
+                    where \( |0^{\otimes n} \rangle \) is the initial state of the circuit. This amplitude corresponds to a tensor network contraction, where each gate \( U_i \in \mathcal{U}\) is represented as a low-rank tensor, with the circuit structure defining the connectivity. The contraction sums over all intermediate qubit states at each layer,
                     \[
-                        \langle x | U_m \cdots U_2 U_1 | 0^{\otimes n} \rangle = \sum_{\text{internal indices}}\prod_{v \in \mathcal{V}} T_v[\text{indices}]
+                        \langle x | U_m \cdots U_2 U_1 | 0^{\otimes n} \rangle = \sum_{\text{internal indices}}\prod_{v \in \mathcal{V}} T_v[\text{indices}].
                     \]
                     Evaluating this quantity is \(\mathsf{\#P}\)-hard in general, as it requires summing over an exponential number of intermediate states. However, many practical applications only require approximate estimates of these contractions, which can be achieved using Monte Carlo methods.
                 </p>
 
+                <!-- <p class="section-title" id="section-2">II. Annealed Importance Sampling</p> -->
                 <p>
                     Annealed importance sampling (AIS), introduced by Radford Neal in 2001, is a powerful altered Markov Chain Monte Carlo method for estimating partition functions or marginal likelihoods of high-dimensional, multimodal distributions. Suppose we want to estimate the normalization constant \(Z\) of a target distribution
                     \[
-                        \pi_K (x) = \frac{\psi(x)^1}{Z}
+                        \pi_K (x) = \frac{\psi(x)^1}{Z},
                     \]
                     which is intractable. AIS interpolates between a simple proposal distribution \(\pi_0(x)\) and the target distribution \(\pi_K(x)\) by introducing a sequence of intermediate distributions
                     \[
-                        \pi_k(x) \propto \psi(x)^{\beta_k},\quad \beta_0 = 0 < \beta_1 < \cdots < \beta_K = 1
+                        \pi_k(x) \propto \psi(x)^{\beta_k},\quad \beta_0 = 0 < \beta_1 < \cdots < \beta_K = 1.
                     \]
-                    By gradually "annealing" through these distributions using MCMC moves that leave \(\pi_k \) invariant, AIS constructs a sequence of states \(\mathbf{x}^{(0)}, \mathbf{x}^{(1)}, \ldots, \mathbf{x}^{(K)}\) and corresponding weights. The overall AIS estimator is, in fact, unbiased even for a finite number of steps. At every step \(k\), we sample \(N\) independent chains, each initialized from \(\pi_0\). After \(K\) steps, we average the product of weights across all chains to obtain an estimate of the normalization constant:
+                    By gradually <i>annealing</i> through these distributions using MCMC moves that leave \(\pi_k \) invariant, AIS constructs a sequence of states \(\mathbf{x}^{(0)}, \mathbf{x}^{(1)}, \ldots, \mathbf{x}^{(K)}\) and corresponding weights. The overall AIS estimator is, in fact, unbiased even for a finite number of steps. At every step \(k\), we sample \(N\) independent chains, each initialized from \(\pi_0\). After \(K\) steps, we average the product of weights across all chains to obtain an estimate of the normalization constant,
                     \[
-                        \hat Z = Z_0 \cdot \frac{1}{N} \sum_{i=1}^N \prod_{k=1}^K \psi\left(\mathbf{x}_i^{(k-1)}\right)^{\beta_k - \beta_{k-1}}
+                        \hat Z = Z_0 \cdot \frac{1}{N} \sum_{i=1}^N \prod_{k=1}^K \psi\left(\mathbf{x}_i^{(k-1)}\right)^{\beta_k - \beta_{k-1}},
                     \]
-                    where each ratio is computed as the expectation under the intermediate distribution \(\pi_{\beta_{k-1}} \).
+                    where each ratio is computed as the expectation under the intermediate distribution \(\pi_{\beta_{k-1}}\),
                     \[
-                        \frac{Z_{\beta_k}}{Z_{\beta_{k-1}}} = \mathbb{E}_{\mathbf{x} \sim \pi_{\beta_{k-1}}} \left[ \psi \left(\mathbf{x}\right)^{\beta_k - \beta_{k-1}}\right]
+                        \frac{Z_{\beta_k}}{Z_{\beta_{k-1}}} = \mathbb{E}_{\mathbf{x} \sim \pi_{\beta_{k-1}}} \left[ \psi \left(\mathbf{x}\right)^{\beta_k - \beta_{k-1}}\right].
                     \]
-                </p>
-
-                <p>
-                    In our implementation, the Markov chain at each annealing step is evolved using 
-                    <em>Glauber dynamics</em>, which performs single-site updates conditioned on the 
-                    rest of the configuration. For a randomly chosen edge index \( e \) in the tensor 
-                    network graph, we resample its value from the conditional distribution
-                    \[
-                        x_e \sim \pi_{\beta_k}(x_e \mid x_{\setminus e}) \;\propto\;
-                        \prod_{\substack{v \in \mathcal{V} \\ e \text{ incident to } v}}
-                            T_v[\ldots, x_e, \ldots]^{\beta_k}.
-                    \]
-                    This local update rule preserves \(\pi_{\beta_k}\) as the stationary distribution, 
-                    enabling the Markov chain to gradually adapt to sharper distributions as 
-                    \(\beta_k \to 1\).
-                </p>
-
-                <p>
-                    Our test networks include \( 2 \times 2 \) and \( 3 \times 3 \) lattice networks. Each rank-\(n\), \(n\)-dimensional tensor is defined as <i>diagonally-dominant</i>.
-                    \[
-                        T_v = \left(1 - \epsilon \right)D + \left( \frac{\epsilon}{d^n} \right)N
-                    \]
-                    where
-                    \[
-                        D(i_1 i_2 \ldots i_n) = \begin{cases}
-                            1 & \text{if } i_1 = i_2 = \cdots = i_n, \\
-                            0 & \text{otherwise}
-                        \end{cases}
-                        \quad\text{and}\quad N(i_1 i_2 \ldots i_n) = 1
-                    \]
-                    and \( \epsilon \in [0, 1]\) is a noise parameter. This structure closely mimics components of quantum circuits (e.g., \(T\), CZ, and phase gates) and creates a challenging, high-concentration probability landscape for MCMC.
-                </p>
-
-                <p>
-                    We benchmark AIS against naive uniform sampling by tracking the geometric 
-                    mean relative error (GMRE) of each ratio estimate \(Z_{\beta_k} / Z_{\beta_{k-1}}\) 
-                    across annealing steps and trials. Results show that while both methods perform 
-                    comparably when \(\beta_k \approx 0\) (nearly uniform distribution), AIS 
-                    significantly outperforms uniform sampling as the target distribution sharpens. 
-                    This improvement arises from AIS's ability to locally mix towards the 
-                    high-probability configurations, maintaining accuracy even in concentrated regimes.
-                </p>
-
-                <p>
-                    Overall, this project demonstrates that AIS with Glauber dynamics provides a 
-                    scalable and accurate tool for approximating tensor network contractions in 
-                    structured, high-dimensional settings relevant to quantum simulation.
-                </p>
-
-                <p>
-                    We presented a poster on this work at QSim 2025, find it <a href="../../assets/qsimposter.pdf" style="text-decoration:none; color:darkred;">here</a>.
                 </p>
 
                 <pre id="ais-alg">
@@ -316,6 +342,51 @@
                     \State \(\hat Z \gets Z_0 \cdot \frac{1}{N} \sum_{i=1}^N \prod_{k=1}^K w_k^{(i)}\)
                     \end{algorithm}
                 </pre>
+
+                <!-- <p class="section-title" id="section-3">III. Glauber Dynamics</p> -->
+                <p>
+                    In our implementation, the Markov chain at each annealing step is evolved using <i>Glauber dynamics</i>, which performs single-site updates conditioned on the rest of the configuration. For a randomly chosen edge index \( e \) in the tensor network graph, we resample its value from the conditional distribution
+                    \[
+                        x_e \sim \pi_{\beta_k}(x_e \mid x_{\setminus e}) \;\propto\;
+                        \prod_{\substack{v \in \mathcal{V} \\ e \text{ incident to } v}}
+                            T_v[\ldots, x_e, \ldots]^{\beta_k}.
+                    \]
+                    This local update rule preserves \(\pi_{\beta_k}\) as the stationary distribution, enabling the Markov chain to gradually adapt to sharper distributions as \(\beta_k \to 1\).
+                </p>
+
+                <!-- <p class="section-title" id="section-4">IV. Test Networks</p> -->
+                <p>
+                    Our test networks include \( 2 \times 2 \) and \( 3 \times 3 \) lattice networks. Each rank-\(n\), \(n\)-dimensional tensor is defined as <i>diagonally-dominant</i>.
+                </p>
+
+                <div class="def">
+                    <span class="def-label">Definition (diagonally-dominant tensor).</span>
+                    A rank-\(n\), \(d\)-dimensional tensor \(T_v\) is diagonally-dominant if
+                    \[
+                        T_v = (1 - \epsilon) D + \frac{\epsilon}{d^n}\, N,
+                    \]
+                    where
+                    \[
+                        D(i_1 i_2 \ldots i_n) = \begin{cases}
+                            1 & \text{if } i_1 = i_2 = \cdots = i_n, \\
+                            0 & \text{otherwise,}
+                        \end{cases}
+                        \qquad N(i_1 i_2 \ldots i_n) = 1,
+                    \]
+                    and \(\epsilon \in [0, 1]\) is a noise parameter.
+                </div>
+
+                <p>
+                    This structure closely mimics components of quantum circuits (e.g., \(T\), CZ, and phase gates) and creates a challenging, high-concentration probability landscape for MCMC.
+                </p>
+
+                <!-- <p class="section-title" id="section-5">V. Benchmark and Results</p> -->
+                <p>
+                    We benchmark AIS against naive uniform sampling by tracking the geometric mean relative error (GMRE) of each ratio estimate \(Z_{\beta_k} / Z_{\beta_{k-1}}\) across annealing steps and trials. Results show that while both methods perform comparably when \(\beta_k \approx 0\) (nearly uniform distribution), AIS significantly outperforms uniform sampling as the target distribution sharpens. This improvement arises from AIS's ability to locally mix towards the high-probability configurations, maintaining accuracy even in concentrated regimes.
+                </p>
+                <p>
+                    The largest open issue with this approach is the <a href="https://arxiv.org/pdf/1906.02309">sign problem</a>. We presented a poster on this work at QSim 2025; the poster is available <a href="../../assets/qsimposter.pdf">here</a>.
+                </p>
 
                 <script>
                 window.addEventListener('DOMContentLoaded', () => {
@@ -336,5 +407,28 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var tocLinks = document.querySelectorAll('.toc-sidebar a');
+            var sections = Array.from(tocLinks).map(function(a) {
+                var id = a.getAttribute('href').slice(1);
+                return document.getElementById(id);
+            });
+
+            function onScroll() {
+                var scrollY = window.scrollY + 200;
+                var activeIdx = 0;
+                for (var i = 0; i < sections.length; i++) {
+                    if (sections[i] && sections[i].offsetTop <= scrollY) activeIdx = i;
+                }
+                tocLinks.forEach(function(a, i) {
+                    if (i === activeIdx) a.classList.add('active');
+                    else a.classList.remove('active');
+                });
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+        });
+    </script>
 </body>
 </html>
