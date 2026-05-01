@@ -1,39 +1,359 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="/assets/penrose-logo.png" type="image/x-icon" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/css/style.css">
-        <title>aniket deshpande</title>
-        <style>
-            .bottom-nav ul li a {
-                display: inline-block;
-                transition: transform 0.15s ease;
-                font-size: 1.3rem;
-            }
-            .bottom-nav ul li a:hover {
-                transform: skewX(-8deg);
-                font-style: normal;
-            }
-        </style>
-    </head>
-<body class="landing">
-    <div class="landing-content">
-        <img src="/assets/archimedes.jpg" alt="logo" class="logo-image" style="margin-left: 0rem; position: relative; top: 5rem; transform: scale(1.1);">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+  <link rel="icon" href="/assets/penrose-logo.png" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <title>aniket deshpande</title>
+  <meta name="description" content="Undergraduate student in physics at the University of Illinois, Urbana-Champaign.">
+  <style>
+    * { box-sizing: border-box; }
+    ::selection { background: #f9e6e6; }
+    ::-moz-selection { background: #f9e6e6; }
 
-        <nav class="bottom-nav" style="margin-top: 10rem;">
-            <ul>
-                <li><a href="/about/">about</a></li>
-                <!-- <li><a href="/teaching/">teaching</a></li> -->
-                <li><a href="/notes/">notes</a></li>
-                <li><a href="/blog/">blog</a></li>
-                <li><a href="/cv/cv.pdf">vitae</a></li>
-            </ul>
-        </nav>
+    html {
+      overflow-x: hidden;
+      overflow-y: scroll;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      font-family: "EB Garamond", Georgia, "Times New Roman", serif;
+      font-size: 17.6px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #111;
+    }
+
+    a {
+      color: darkred;
+      text-decoration: underline;
+    }
+    a:hover { color: #8B0000; }
+
+    .container {
+      width: min(100% - 48px, 620px);
+      margin: 0 auto;
+      padding: 120px 0 88px;
+    }
+
+    @media screen and (max-width: 640px) {
+      .container {
+        width: min(100% - 32px, 620px);
+        padding: 64px 0 64px;
+      }
+    }
+
+    .header-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+    .bio__header {
+      font-weight: 400;
+      font-size: 25.3px;
+    }
+    .bio__header a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .header-icons {
+      display: flex;
+      gap: 18px;
+    }
+    .header-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      text-decoration: none;
+    }
+    .header-icons a:hover { color: darkred; }
+    .header-icons svg {
+      width: 17px;
+      height: 17px;
+      fill: currentColor;
+    }
+
+    /* Section headings */
+    section {
+      margin-top: 28px;
+      scroll-margin-top: 24px;
+    }
+
+    section > h2 {
+      font-weight: 600;
+      font-size: 19px;
+      margin: 0 0 14px 0;
+      letter-spacing: 0.02em;
+      text-transform: lowercase;
+    }
+
+    section h3 {
+      font-weight: 600;
+      font-size: 18px;
+      margin: 22px 0 8px 0;
+    }
+
+    section h4 {
+      font-weight: 600;
+      font-size: 16px;
+      margin: 18px 0 4px 0;
+    }
+
+    p { margin: 0 0 14px 0; }
+    b, strong { font-weight: 600; }
+
+    ul {
+      margin: 0 0 16px 0;
+      padding-left: 0;
+      list-style: none;
+    }
+    ul li { margin-bottom: 12px; }
+
+    ul.bulleted {
+      padding-left: 20px;
+      list-style: disc;
+    }
+    ul.bulleted li { margin-bottom: 4px; }
+
+    /* Research project blocks */
+    .lab-title {
+      font-size: 17px;
+      margin: 18px 0 4px 0;
+    }
+    .project-section {
+      margin: 14px 0 8px 0;
+    }
+    .project-section h3 {
+      font-weight: 600;
+      font-size: 17px;
+      margin: 0 0 6px 0;
+    }
+    .project-section p { margin: 0 0 10px 0; }
+
+    .projects-toggle {
+      color: gray;
+      cursor: pointer;
+      font-size: 16px;
+      user-select: none;
+      display: inline;
+    }
+    .projects-toggle:hover { color: darkred; }
+
+    .projects-dropdown {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.35s ease;
+    }
+    .projects-dropdown.open { max-height: 1600px; }
+
+    /* Teaching */
+    .teaching-entry { margin-bottom: 18px; }
+    .teaching-entry h3 {
+      font-weight: 600;
+      font-size: 17px;
+      margin: 0 0 4px 0;
+    }
+    .teaching-entry p {
+      margin: 0;
+      font-style: italic;
+    }
+
+    /* Updates */
+    .updates p { margin: 0; }
+    .updates .update-line { margin-bottom: 4px; }
+
+    /* Icon row */
+    .icon-row {
+      display: flex;
+      gap: 20px;
+      padding-top: 16px;
+      margin-top: 32px;
+    }
+    .icon-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      text-decoration: none;
+    }
+    .icon-link:hover { color: darkred; }
+    .icon-link svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* Side TOC nav */
+    .side-toc {
+      position: fixed;
+      top: 50%;
+      left: 24px;
+      transform: translateY(-50%);
+      z-index: 100;
+      font-family: inherit;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+    .side-toc ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .side-toc li { margin-bottom: 0; }
+    .side-toc a {
+      text-decoration: none;
+      color: #bbb;
+      font-style: italic;
+      transition: color 0.15s ease;
+      display: inline-block;
+    }
+    .side-toc a:hover,
+    .side-toc a.active {
+      color: darkred;
+    }
+
+    @media screen and (max-width: 980px) {
+      .side-toc { display: none; }
+    }
+
+    /* Footer */
+    footer.page-foot {
+      margin-top: 64px;
+      text-align: center;
+    }
+    footer.page-foot img {
+      width: 60px;
+      height: auto;
+      opacity: 0.85;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="side-toc" aria-label="Sections">
+    <ul>
+      <li><a href="#top">about</a></li>
+      <li><a href="#updates">updates</a></li>
+      <li><a href="#teaching">teaching</a></li>
+      <li><a href="#notes">notes</a></li>
+      <li><a href="/blog/">blog &rsaquo;</a></li>
+    </ul>
+  </nav>
+
+  <div class="container" id="top">
+    <div class="header-row">
+      <div class="bio__header">aniket deshpande</div>
+      <div class="header-icons" aria-label="Social links">
+      <a href="mailto:aniket4@illinois.edu" aria-label="Email">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.75 5.25h16.5v13.5H3.75V5.25Zm1.5 1.5v.29l6.75 4.86 6.75-4.86v-.29H5.25Zm13.5 10.5V9.58l-6.75 4.86-6.75-4.86v7.67h13.5Z"/></svg>
+      </a>
+      <a href="https://github.com/aniket-desh" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5a10.5 10.5 0 0 0-3.32 20.46c.53.1.72-.23.72-.52v-1.82c-2.95.64-3.57-1.24-3.57-1.24-.48-1.2-1.18-1.52-1.18-1.52-.96-.66.07-.65.07-.65 1.07.08 1.64 1.1 1.64 1.1.94 1.63 2.48 1.16 3.08.89.1-.69.37-1.16.67-1.43-2.35-.27-4.83-1.17-4.83-5.22 0-1.15.41-2.09 1.08-2.82-.1-.27-.47-1.36.1-2.84 0 0 .89-.29 2.92 1.08a10.08 10.08 0 0 1 5.32 0c2.02-1.37 2.91-1.08 2.91-1.08.58 1.48.22 2.57.11 2.84.68.73 1.08 1.67 1.08 2.82 0 4.06-2.48 4.95-4.85 5.22.38.33.72.97.72 1.95v2.89c0 .29.19.63.73.52A10.5 10.5 0 0 0 12 1.5Z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/aniket-desh/" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A1.48 1.48 0 1 0 5 6.46a1.48 1.48 0 0 0-.02-2.96ZM3.75 8.25h2.5v12h-2.5v-12Zm6 0h2.4v1.64h.03c.33-.63 1.15-1.93 3.2-1.93 3.42 0 4.05 2.11 4.05 4.85v7.44h-2.5v-6.6c0-1.58-.03-3.61-2.2-3.61-2.2 0-2.54 1.72-2.54 3.5v6.71h-2.44v-12Z"/></svg>
+      </a>
+      <a href="https://twitter.com/aniketdxsh" aria-label="X">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="/cv/cv.pdf" aria-label="CV">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6Zm7 1.5L19.5 8H14a1 1 0 0 1-1-1V3.5ZM8 13h8v1.5H8V13Zm0 3.5h8V18H8v-1.5Zm0-7h3V11H8V9.5Z"/></svg>
+      </a>
+      </div>
     </div>
+
+    <section id="about" style="margin-top: 8px;">
+      <p>
+        I study physics at the University of Illinois, Urbana-Champaign. My research and reading interests are tensor networks and language model interpretability. Broadly, I work on theory and algorithms for machine learning inspired by physics.
+      </p>
+      <p>
+        On this page I keep a running view of what I'm working on, what I'm teaching, and what I'm reading. I also maintain a <a href="/blog/">blog</a> with longer-form thoughts. 
+      </p>
+    </section>
+
+    <section id="updates" class="updates" style="margin-top: 24px;">
+      <p class="update-line">[06.2026] &mdash; Joining the <a href="https://amcr.lbl.gov/departments/applied-mathematics-department/ssg/">Scalable Solvers Group</a> at Lawrence Berkeley Lab this summer.</p>
+      <p class="update-line">[02.2026] &mdash; Working on mechanistic interpretability as a <a href="https://sparai.org/" target="_blank">SPAR</a> research fellow.</p>
+      <p class="update-line">[02.2026] &mdash; Started my research internship at the <a href="https://www.matter.toronto.edu/" target="_blank">Matter Lab</a>.</p>
+      <p class="update-line">[08.2025] &mdash; Presented <a href="/research/tensor-contraction/index.html">some research</a> at <a href="https://qsimconference.org/" target="_blank">QSim 2025</a> at IBM, New York City.</p>
+    </section>
+
+    <section id="teaching">
+      <h2>teaching</h2>
+      <!-- <p>materials I'll gather as I teach more workshops, courses, and reading groups.</p> -->
+      <div class="teaching-entry">
+        <h3>[11.2025] Tensor Computations in Julia, SIAM @ UIUC</h3>
+        <p>a 90 minute workshop covering tensor contractions, matrix product states, and tensor network diagrams implemented in Julia. materials available on <a href="https://github.com/aniket-desh/tensors-uiuc-siam-worshop-2025" target="_blank">GitHub</a>.</p>
+      </div>
+    </section>
+
+    <section id="notes">
+      <h2>writing</h2>
+      <ul>
+        <li>
+          <a href="/assets/post4/low-rank-rnns.pdf"><i>Towards a Non-Stationary Dynamic Mean Field Theory for Low-Rank RNNs</i></a><br>
+          testing if a low-rank Jacobian outlier proxy predicts stability in driven networks
+        </li>
+      </ul>
+
+      <h2>lecture notes</h2>
+      <ul>
+        <li>
+          <a href="/notes/ig.pdf"><i>Information Geometry For Neuroscience</i></a><br>
+          fischer information, statistical manifolds, neural coding, gradient learning, feature learning, neural population models
+        </li>
+        <li>
+          <a href="/wip/"><i>ECE 598IS: High-Dimensional Statistics [wip]</i></a><br>
+          decision theory, information inequalities, le cam's and fano's methods, random matrix theory, spectral estimators, stochastic block models, graph embeddings, laplacian eigenmaps, johnson-lindenstrauss, pca
+        </li>
+        <li>
+          <a href="/wip/"><i>CS 540: Deep Learning Theory [wip]</i></a><br>
+          approximations, optimizations, ntk regime, rademacher complexity, clarke differentials, gradient flows, margins, generalization
+        </li>
+        <li>
+          <a href="/notes/595rqt.pdf"><i>MATH 595: Representation Theory & Quantum Information</i></a><br>
+          schur-weyl duality, werner states, covariant channels, de finetti theorems, quantum types, spectrum estimation, cloning, source compression
+        </li>
+        <li>
+          <a href="/notes/466.pdf"><i>MATH 466: Applied Random Processes</i></a><br>
+          discrete/continuous-time markov chains, recurrence, invariant distributions, kolmogorov equations, martingales, brownian motion, queueing, mcmc, population models
+        </li>
+        <li>
+          <a href="/notes/447.pdf"><i>MATH 447: Real Variables</i></a><br>
+          metric spaces, compactness, connectedness, uniform continuity, \(C(K)\) completeness, dini's theorem, differentiation, integration, fundamental theorem, power series
+        </li>
+      </ul>
+    </section>
+
+    <footer class="page-foot">
+      <img src="/assets/penrose-logo.png" alt="penrose logo">
+    </footer>
+  </div>
+
+  <script>
+    // Highlight active TOC entry while scrolling.
+    const links = document.querySelectorAll('.side-toc a[href^="#"]');
+    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const onScroll = () => {
+      const y = window.scrollY + 80;
+      let active = sections[0];
+      for (const s of sections) { if (s.offsetTop <= y) active = s; }
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + active.id));
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  </script>
 </body>
 </html>

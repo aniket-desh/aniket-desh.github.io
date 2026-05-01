@@ -50,13 +50,13 @@
         .container {
             width: min(100% - 48px, 620px);
             margin: 0 auto;
-            padding: 220px 0 88px;
+            padding: 120px 0 88px;
         }
 
         @media screen and (max-width: 640px) {
             .container {
                 width: min(100% - 32px, 620px);
-                padding: 94px 0 64px;
+                padding: 64px 0 64px;
             }
         }
 
@@ -167,68 +167,27 @@
             color: #fff;
             border-color: #333;
         }
-        /* Minimal corner nav */
-        .corner-nav {
+        /* Home link */
+        .home-link {
             position: fixed;
-            top: 20px;
-            left: 20px;
+            top: 24px;
+            left: 24px;
             z-index: 100;
             font-family: inherit;
-        }
-
-        .corner-nav .toggle {
-            font-size: 1.2rem;
-            color: #999;
-            cursor: default;
-            transition: transform 0.2s ease;
-            display: inline-block;
-            user-select: none;
-        }
-
-        .corner-nav:hover .toggle {
-            transform: rotate(90deg);
-            color: #333;
-        }
-
-        .corner-nav .dropdown {
-            display: none;
-            margin-top: 8px;
-            list-style: none;
-            padding: 0;
-            line-height: 1.8;
-        }
-
-        .corner-nav:hover .dropdown {
-            display: block;
-        }
-
-        .corner-nav .dropdown a {
-            text-decoration: none;
-            color: #666;
-            font-size: 0.95rem;
+            font-size: 14px;
             font-style: italic;
+            color: #999;
+            text-decoration: none;
         }
 
-        .corner-nav .dropdown a:hover {
+        .home-link:hover {
             color: darkred;
         }
     </style>
 </head>
 
 <body>
-    <nav class="corner-nav">
-        <span class="toggle">&#x203a;</span>
-        <ul class="dropdown">
-            <li><a href="/">home</a></li>
-            <li><a href="/about/">about</a></li>
-            <li><a href="/research/">research</a></li>
-            <li><a href="/teaching/">teaching</a></li>
-            <li><a href="/notes/">notes</a></li>
-            <li><a href="/blog/">blog</a></li>
-            <li><a href="/code/">code</a></li>
-            <li><a href="/cv/cv.pdf">vitae</a></li>
-        </ul>
-    </nav>
+    <a class="home-link" href="/">&larr; home</a>
     <div class="container">
         <div class="bio__header">
             <a href="/">not so sparse</a>
@@ -249,10 +208,16 @@
                 <a href="/blog/predicting-quantum-properties/" class="read-more">read more →</a>
             </div> -->
 
+            <div class="post-entry" data-tag="mind">
+                <h3>VI. The Age of Sail</h3>
+                <p>If you do everything, you'll win.</p>
+                <a href="/blog/the-age-of-sail/" class="read-more">read more →</a>
+            </div>
+
             <div class="post-entry" data-tag="matter">
                 <h3>V. Attention Seeking</h3>
                 <p>three independent derivations of attention and the variational principle that unites them.</p>
-                <a href="/blog/post-four/" class="read-more">read more →</a>
+                <a href="/blog/attention-seeking/" class="read-more">read more →</a>
             </div>
 
             <div class="post-entry" data-tag="matter">

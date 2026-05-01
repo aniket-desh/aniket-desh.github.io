@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <link rel="icon" href="/assets/penrose-logo.png" type="image/x-icon" />
+    <title>placeholder title — aniket deshpande</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
+    <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * { box-sizing: border-box; }
+        ::selection { background: #f9e6e6; }
+        ::-moz-selection { background: #f9e6e6; }
+
+        html {
+            overflow-x: hidden;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #fff;
+            font-family: "EB Garamond", Georgia, "Times New Roman", serif;
+            font-size: 17.6px;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        a { color: darkred; text-decoration: underline; }
+        a:hover { color: #8B0000; }
+
+        .container {
+            width: min(100% - 48px, 620px);
+            margin: 0 auto;
+            padding: 120px 0 88px;
+        }
+
+        @media screen and (max-width: 640px) {
+            .container {
+                width: min(100% - 32px, 620px);
+                padding: 64px 0 64px;
+            }
+        }
+
+        .back-arrow {
+            display: inline-block;
+            text-decoration: none;
+            color: #999;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .back-arrow:hover { color: darkred; }
+
+        .post-header {
+            margin-bottom: 6px;
+            font-weight: 400;
+            font-size: 25.3px;
+            text-align: center;
+        }
+
+        .content { width: 100%; max-width: none; }
+
+        .hero-image { margin: 0 0 24px; }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 620px;
+            height: auto;
+            display: block;
+        }
+
+        .hero-image figcaption {
+            color: #999;
+            font-size: 14px;
+            margin-top: 6px;
+        }
+
+        .post-title {
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .post-date {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .post-date--top {
+            margin-top: 0;
+            margin-bottom: 24px;
+        }
+
+        .post-body p { margin-bottom: 20px; }
+
+        .section-title {
+            font-weight: 600;
+            font-size: 17px;
+            margin-bottom: 2px !important;
+        }
+
+        .section-title + p { margin-top: 0; }
+
+        /* --- Sidebar TOC --- */
+        .toc-sidebar { display: none; }
+
+        @media screen and (min-width: 1100px) {
+            .toc-sidebar {
+                display: block;
+                position: fixed;
+                left: calc((100vw - 680px) / 2 - 260px);
+                top: 350px;
+                width: 200px;
+                font-size: 13px;
+                line-height: 1.6;
+            }
+
+            .toc-sidebar a {
+                display: block;
+                text-decoration: none;
+                color: #ccc;
+                padding: 3px 0;
+                transition: color 0.2s ease;
+            }
+
+            .toc-sidebar a:hover { color: #888; }
+
+            .toc-sidebar a.active { color: #333; }
+        }
+
+        /* Minimal corner nav */
+        .corner-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            font-family: inherit;
+        }
+
+        .corner-nav .toggle {
+            font-size: 1.2rem;
+            color: #999;
+            cursor: default;
+            transition: transform 0.2s ease;
+            display: inline-block;
+            user-select: none;
+        }
+
+        .corner-nav:hover .toggle {
+            transform: rotate(90deg);
+            color: #333;
+        }
+
+        .corner-nav .dropdown {
+            display: none;
+            margin-top: 8px;
+            list-style: none;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        .corner-nav:hover .dropdown { display: block; }
+
+        .corner-nav .dropdown a {
+            text-decoration: none;
+            color: #666;
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+
+        .corner-nav .dropdown a:hover { color: darkred; }
+    </style>
+</head>
+
+<body>
+    <a class="home-link" href="/">&larr; home</a>
+    <nav class="toc-sidebar">
+        <a href="#section-1">I. Placeholder</a>
+        <a href="#section-2">II. Placeholder</a>
+        <a href="#section-3">III. Placeholder</a>
+        <a href="#section-4">IV. Placeholder</a>
+        <a href="#section-5">V. Placeholder</a>
+    </nav>
+
+    <div class="container">
+        <a href="/blog/" class="back-arrow">←</a>
+        <div class="post-header">The Age of Sail</div>
+        <p class="post-date post-date--top">04.13.2026</p>
+        <figure class="hero-image">
+            <img src="/assets/sweden.jpg" alt="Fartyg i storm vid klippig kust by Jan Porcellis">
+            <figcaption><i>Fartyg i storm vid klippig kust</i>, Jan Porcellis</figcaption>
+        </figure>
+
+        <div class="content">
+            <div class="post-body">
+                <p>I have become a somewhat obsessive planner of my immediate future. Regardless of how many ideas I can jot down, projects I can plan, and goals I can prioritize, there is an (obvious) intractable problem with all of this: <i>what is actually going to happen?</i> My response to this has been to continue to frantically plan and attempt to predict the future. In this post, I will continue to do exactly that, while also reflecting on the shortcomings of my predictive abilities. To explore this a bit further, I'd like to draw a slightly dramatic analogy to the longitude problem.</p>
+
+                <p>Before John Harrison's marine chronometer in 1761, sailors could determine their latitude trivially by measuring the angle of the sun at noon. Longitude, however, was essentially unsolvable at sea. The British Parliament offered £20,000 (millions in today's currency) for a practical solution, because ships were dying from the inability to locate themselves east-west. In the Scilly naval disaster of 1707, an entire fleet miscalculated their longitude approaching England and nearly two thousand sailors drowned within sight of home. These were not incompetent navigators. They had the best charts, the best dead reckoning, the best lunar tables available. They planned meticulously. The problem was that certain variables were <i>in principle</i> unmeasurable with existing instruments.</p>
+
+                <p>The planning was essential it go from zero to one: without it they would never have left port. But the prediction was intractable given the tools they had. And the solution, when it came, was not a better plan. It was a better instrument.</p>
+
+                <p>I think about this when I look at the next eighteen months of my life. The course is charted: PhD applications, publication targets, research directions, fellowship sequences. I can provision carefully. My longitude, however, remains largely unmeasurable: which advisor will click, which paper will land, which community will open a door I didn't know existed. The honest answer is that I cannot measure them yet. What I <i>can</i> do is build better instruments: sharper research taste, deeper mathematical maturity, stronger community embedding. This post is an attempt to lay out both sides of that ledger, what I can and cannot measure, with as much precision as current instruments allow.</p>
+
+                <p class="section-title" id="section-1">I. From Champaign</p>
+                <p>I described in a <a href="/blog/the-effective-reductionist/index.html">previous post</a> that my education at the University of Illinois has been a "mosaic". I began with a hardcore focus on the beautiful field of quantum information: a few axioms about Hilbert spaces from functional analysis generate an entire novel paradigm of communication, computation, and information processing. However, I also flagged the hyperspecialization of the field, especially the theory, might result in. More practically, I was worried about what jobs I could get in quantum information theory.<sup>1</sup>I also realized that quantum computation as a field is <i>very</i> unsatisfying in its current state. The theory and algorithms are incredibly deeply studied, but experimental iteration is very slow and expensive. I wanted to involve myself in a field with fast iteration cycles, open theoretical problems, and nontrivial connections to physics.<sup>2</sup></p>
+                <p>
+                In that post, I also shared a new interest in neuroscience, and its connections to machine learning research. I took a graduate research course in theoretical neuroscience<sup>3</sup> and read some seminal papers in the field. Two recent-ish works by <a href="https://www.trentonbricken.com/"> Trenton Bricken</a>, <a href="https://arxiv.org/abs/2111.05498"><i>Attention Approximates Sparse Distributed Memory</i></a> and <a href="https://arxiv.org/abs/2303.11934"><i>Sparse Distributed Memory is a Continual Learner</i></a>, especially the former, were particularly influential in chiseling my interests towards theoretical interpretations of deep learning. I continued to follow Bricken's work and quickly discovered the field of mechanistic interpretability (mech interp). Mech interp, often described as a "neuroscience of neural networks", aims to reverse engineer the algorithms and representations learned by deep neural networks, specifically large language models. I was immediately hooked by the field's blend of theoretical and empirical work, its open problems, and its connections to neuroscience. I have been following the field closely ever since, and was looking for a way to connect it to my own research.
+                </p>
+                <p>
+                    The Illinois Physics Department allows their undergraduate students to create their own "specialization", a subset of courses with a common academic interest. After iterating through three different sets of courses, I will graduate with a specialization in the "physics of computation" which focused on the intersection of physics, computer science, and information theory. 
+                </p>
+
+                <p class="section-title" id="section-2">II. Placeholder</p>
+                <p>Placeholder body text.</p>
+
+                <p class="section-title" id="section-3">III. Placeholder</p>
+                <p>Placeholder body text.</p>
+
+                <p class="section-title" id="section-4">IV. Placeholder</p>
+                <p>Placeholder body text.</p>
+
+                <p class="section-title" id="section-5">V. Placeholder</p>
+                <p>Placeholder  text.</p>
+
+                <hr class="footnotes-sep">
+                <section class="footnotes">
+                    <ol>
+                        <li> In the first three semesters of my undergrad, I was much less willing to consider academia as a viable career path. I was also more committed to the <i>quantum</i> side and not the <i>information</i> side, making me apprehensive about the job market in the field.</li>
+                        <li>Alfred Yao, senior staff scientist at Google Deepmind, has a wonderful <a href="https://alfredyao.github.io/posts/2025-10-06.html">blog post</a> on his transition from theoretical physics to AI research.</li>
+                        <li>"Dynamical Systems & Neural Networks" instructed by Rainer Engelken at UIUC! You can find my final research report for the course <a href="/assets/post4/low-rank-rnns.pdf">here</a>.</li>
+                    </ol>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -51,13 +51,13 @@
         .container {
             width: min(100% - 48px, 620px);
             margin: 0 auto;
-            padding: 220px 0 88px;
+            padding: 120px 0 88px;
         }
 
         @media screen and (max-width: 640px) {
             .container {
                 width: min(100% - 32px, 620px);
-                padding: 94px 0 64px;
+                padding: 64px 0 64px;
             }
         }
 
@@ -309,19 +309,7 @@
 </head>
 
 <body>
-  <nav class="corner-nav">
-    <span class="toggle">&#x203a;</span>
-    <ul class="dropdown">
-      <li><a href="/">home</a></li>
-      <li><a href="/about/">about</a></li>
-      <li><a href="/research/">research</a></li>
-      <li><a href="/teaching/">teaching</a></li>
-      <li><a href="/notes/">notes</a></li>
-      <li><a href="/blog/">blog</a></li>
-      <li><a href="/code/">code</a></li>
-      <li><a href="/cv/cv.pdf">vitae</a></li>
-    </ul>
-  </nav>
+  <a class="home-link" href="/">&larr; home</a>
     <nav class="toc-sidebar">
         <a href="#section-1">I. The Nonpartisan</a>
         <a href="#section-2">II. Jaynes, Landauer, and the Thin Wall</a>
@@ -542,7 +530,7 @@
                         <li data-fn="leucippus">Traditionally credited for founding atomism with his student Democritus, Leucippus' theories were fundamental to the later school of reductionism.</li>
                         <li data-fn="fn1">This example is worth pausing on. A single neuron in a Hopfield network has a state, +1 or &minus;1. The <i>memory</i> is a global fixed point of the energy landscape, a collective property of \(N\) coupled spins that cannot be decomposed into a sum of individual contributions without losing the very thing we are trying to describe.</li>
                         <li data-fn="fn2">This is the core of Jaynes' 1957 papers, "Information Theory and Statistical Mechanics." The argument is that the maximum-entropy formalism is not a physical hypothesis but a method of inference: it produces the least biased distribution consistent with known constraints. The Boltzmann distribution follows as a theorem, not a postulate.</li>
-                        <li data-fn="fn3">I develop these convergences in detail in a separate post, "<a href="/blog/post-four/">Attention Seeking</a>," which derives softmax attention independently from free-energy minimization, modern Hopfield networks, sparse distributed memory, and Nadaraya-Watson regression.</li>
+                        <li data-fn="fn3">I develop these convergences in detail in a separate post, "<a href="/blog/attention-seeking/">Attention Seeking</a>," which derives softmax attention independently from free-energy minimization, modern Hopfield networks, sparse distributed memory, and Nadaraya-Watson regression.</li>
                         <li data-fn="fn4">A note on the title. "Effective" is not meant as a synonym for "pragmatic" or "good enough." It is a deliberate allusion to effective field theory in physics. An effective theory captures the relevant dynamics at a given scale by integrating out degrees of freedom below that scale. It is autonomous in its own vocabulary, but derivable from the more fundamental theory. This is neither naive reductionism nor holism. It is a precise mathematical relationship between levels, and it is the relationship I believe holds across physics, neuroscience, and mind.</li>
                         <li data-fn="fn5">The canonical articulation of this tension from within physics is P.W. Anderson's "More is Different" (1972), which argues that each level of complexity requires its own organizing principles. Anderson can be read as making either a modest methodological claim or a radical ontological one; the framework I develop here is partly an attempt to locate the right reading.</li>
                         <li data-fn="fn6">Whether the convergence of these derivations reflects a shared problem statement about inference under constraint (the Jaynesian reading), a genuine computational structure in nature (the Landauer-inspired reading), or a deeper mathematical necessity about exponential families that is prior to both physics and computation, remains one of the open questions motivating my broader research program.</li>
