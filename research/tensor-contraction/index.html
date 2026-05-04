@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <link rel="icon" href="/assets/penrose-logo.png" type="image/x-icon" />
+    <link rel="icon" href="/assets/otimes.png" type="image/x-icon" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
@@ -65,34 +65,42 @@
         .container {
             width: min(100% - 48px, 620px);
             margin: 0 auto;
-            padding: 220px 0 88px;
+            padding: 120px 0 88px;
         }
 
         @media screen and (max-width: 640px) {
             .container {
                 width: min(100% - 32px, 620px);
-                padding: 94px 0 64px;
+                padding: 64px 0 64px;
             }
         }
 
-        .back-arrow {
-            display: inline-block;
-            text-decoration: none;
-            color: #999;
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
-
-        .back-arrow:hover {
-            color: darkred;
+        .post-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 18px;
+            margin-bottom: 6px;
         }
 
         .post-header {
-            margin-bottom: 6px;
             font-weight: 400;
             font-size: 25.3px;
             text-align: center;
             line-height: 1.25;
+            flex: 1;
+        }
+
+        .home-otimes {
+            color: darkred;
+            text-decoration: none;
+            font-size: 22px;
+            line-height: 1.25;
+            flex-shrink: 0;
+        }
+
+        .home-otimes:hover {
+            color: #8B0000;
         }
 
         .content {
@@ -213,8 +221,6 @@
 </head>
 
 <body>
-    <a class="home-link" href="/">&larr; home</a>
-
     <!--
     <nav class="toc-sidebar">
         <a href="#section-1">I. Tensor Networks and Amplitudes</a>
@@ -227,8 +233,10 @@
 
 
     <div class="container">
-        <a href="/" class="back-arrow">←</a>
-        <div class="post-header">Approximating Tensor Contractions <br>with Annealed Importance Sampling</div>
+        <div class="post-header-row">
+            <div class="post-header">Approximating Tensor Contractions <br>with Annealed Importance Sampling</div>
+            <a href="/" class="home-otimes" aria-label="home">&otimes;</a>
+        </div>
         <p class="post-date post-date--top">in progress &middot; poster at QSim 2025</p>
         <p class="post-note">this write-up is meant to inform readers of our approach.</p>
 
