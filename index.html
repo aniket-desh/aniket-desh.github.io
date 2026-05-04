@@ -204,39 +204,6 @@
       fill: currentColor;
     }
 
-    /* Side TOC nav */
-    .side-toc {
-      position: fixed;
-      top: 50%;
-      left: 24px;
-      transform: translateY(-50%);
-      z-index: 100;
-      font-family: inherit;
-      font-size: 13px;
-      line-height: 1.8;
-    }
-    .side-toc ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-    .side-toc li { margin-bottom: 0; }
-    .side-toc a {
-      text-decoration: none;
-      color: #bbb;
-      font-style: italic;
-      transition: color 0.15s ease;
-      display: inline-block;
-    }
-    .side-toc a:hover,
-    .side-toc a.active {
-      color: darkred;
-    }
-
-    @media screen and (max-width: 980px) {
-      .side-toc { display: none; }
-    }
-
     /* Footer */
     footer.page-foot {
       margin-top: 64px;
@@ -251,16 +218,6 @@
 </head>
 
 <body>
-  <nav class="side-toc" aria-label="Sections">
-    <ul>
-      <li><a href="#top">about</a></li>
-      <li><a href="#updates">updates</a></li>
-      <li><a href="#teaching">teaching</a></li>
-      <li><a href="#notes">notes</a></li>
-      <li><a href="/blog/">blog &rsaquo;</a></li>
-    </ul>
-  </nav>
-
   <div class="container" id="top">
     <div class="header-row">
       <div class="bio__header">aniket deshpande</div>
@@ -357,18 +314,5 @@
     </footer>
   </div>
 
-  <script>
-    // Highlight active TOC entry while scrolling.
-    const links = document.querySelectorAll('.side-toc a[href^="#"]');
-    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
-    const onScroll = () => {
-      const y = window.scrollY + 80;
-      let active = sections[0];
-      for (const s of sections) { if (s.offsetTop <= y) active = s; }
-      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + active.id));
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  </script>
 </body>
 </html>
