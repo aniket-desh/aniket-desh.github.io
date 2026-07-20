@@ -3,541 +3,829 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <link rel="icon" href="/assets/penrose.png" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="How low-rank spectral outliers survive nonlinear averaging in driven recurrent networks—and why stability still belongs to the time-ordered tangent flow.">
+    <link rel="icon" href="/assets/penrose.png" type="image/x-icon">
     <title>a ghost in the machine — aniket deshpande</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
-  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+            options: { enableMenu: false }
+        };
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
-        * {
-            box-sizing: border-box;
+        :root {
+            --polar-1: #2e3440;
+            --polar-2: #3b4252;
+            --polar-3: #434c5e;
+            --polar-4: #4c566a;
+            --snow-1: #d8dee9;
+            --snow-2: #e5e9f0;
+            --snow-3: #eceff4;
+            --frost-1: #8fbcbb;
+            --frost-2: #88c0d0;
+            --frost-3: #81a1c1;
+            --frost-4: #5e81ac;
+            --red: #bf616a;
+            --orange: #d08770;
+            --yellow: #ebcb8b;
+            --green: #a3be8c;
+            --purple: #b48ead;
         }
 
-        ::selection {
-            background: #f9e6e6;
-        }
+        * { box-sizing: border-box; }
 
-        ::-moz-selection {
-            background: #f9e6e6;
-        }
+        ::selection { background: var(--snow-1); }
+        ::-moz-selection { background: var(--snow-1); }
 
         html {
             overflow-x: hidden;
             overflow-y: scroll;
+            scroll-behavior: smooth;
         }
 
         body {
             margin: 0;
-            padding: 0;
             background: #fff;
+            color: var(--polar-1);
             font-family: "EB Garamond", Georgia, "Times New Roman", serif;
             font-size: 17.6px;
             font-weight: 400;
-            line-height: 1.5;
+            line-height: 1.55;
         }
 
         a {
-            color: #434c5e;
-            text-decoration: underline;
+            color: var(--polar-3);
+            text-decoration-color: var(--frost-3);
+            text-underline-offset: 2px;
         }
 
-        a:hover {
-            color: #434c5e;
-        }
+        a:hover { color: var(--frost-4); }
 
         .container {
-            width: min(100% - 48px, 620px);
+            width: min(100% - 48px, 660px);
             margin: 0 auto;
             padding: 120px 0 88px;
         }
 
-        @media screen and (max-width: 640px) {
-            .container {
-                width: min(100% - 32px, 620px);
-                padding: 64px 0 64px;
-            }
-        }
-
         .back-arrow {
             display: inline-block;
-            text-decoration: none;
-            color: #999;
-            font-size: 20px;
             margin-bottom: 15px;
+            color: var(--polar-4);
+            font-size: 20px;
+            text-decoration: none;
         }
 
-        .back-arrow:hover {
-            color: #434c5e;
-        }
+        .back-arrow:hover { color: var(--frost-4); }
 
         .post-header {
-            margin-bottom: 6px;
-            font-weight: 400;
             font-size: 25.3px;
+            font-weight: 500;
             text-align: center;
-        }
-
-        .content {
-            width: 100%;
-            max-width: none;
-        }
-
-        .hero-image { margin: 0 0 24px; }
-
-        .hero-image img {
-            width: 100%;
-            max-width: 620px;
-            height: auto;
-            display: block;
-        }
-
-        .hero-image figcaption {
-            color: #999;
-            font-size: 14px;
-            margin-top: 6px;
-        }
-
-        .post-title {
-            font-weight: 700;
-            font-size: 20px;
-            margin-bottom: 5px;
         }
 
         .post-date {
-            color: #666;
+            margin: 0 0 24px;
+            color: var(--polar-4);
             font-style: italic;
-            margin-bottom: 20px;
             text-align: center;
         }
 
-        .post-date--top {
-            margin-top: 0;
-            margin-bottom: 24px;
+        .hero-image { margin: 0 0 30px; }
+
+        .hero-image img {
+            display: block;
+            width: 100%;
+            height: auto;
         }
 
-        .post-body p {
-            margin-bottom: 20px;
+        .hero-image figcaption {
+            margin-top: 6px;
+            color: var(--polar-4);
+            font-size: 14px;
+        }
+
+        .post-body p { margin: 0 0 20px; }
+
+        .section-title {
+            margin: 52px 0 20px !important;
+            font-size: 20px;
+            font-weight: 600;
+            scroll-margin-top: 24px;
         }
 
         .callout {
-            text-align: center;
-            margin: 25px 0;
-            background-color: #f8f8f8;
-            padding: 15px;
-            border-radius: 4px;
-            font-style: italic;
+            margin: 30px 0;
+            padding: 16px 19px;
+            border-left: 3px solid var(--frost-4);
+            background: var(--snow-3);
+            color: var(--polar-2);
+            font-size: 18px;
         }
 
         figure {
-            margin: 25px 0;
+            margin: 32px 0;
             text-align: center;
         }
 
-        figure img {
+        figure img,
+        figure video {
+            display: block;
             max-width: 100%;
             height: auto;
-            border-radius: 4px;
-        }
-
-        figure.two-column > div {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            align-items: flex-start;
-        }
-
-        figure.two-column img {
-            max-width: 48%;
-            flex: 1;
-        }
-
-        @media (max-width: 768px) {
-            figure.two-column > div {
-                flex-direction: column;
-            }
-            figure.two-column img {
-                max-width: 100%;
-            }
+            margin: 0 auto;
         }
 
         figcaption {
-            font-size: 16px;
-            color: #666;
-            margin-top: 10px;
-            line-height: 1.4;
-            font-style: italic;
-        }
-
-        sup {
-            position: relative;
-        }
-
-        .footnote-ref {
-            background: none;
-            font-size: 0.75em;
-            font-weight: 600;
-            text-decoration: none;
-            color: #434c5e;
-            position: relative;
-            z-index: 1;
-        }
-
-        .footnote-ref:hover {
-            text-decoration: none;
-            color: #434c5e;
-        }
-
-        .footnote-tooltip {
-            z-index: 10;
-            background-color: #fff;
-            visibility: hidden;
-            width: 36vw;
-            max-width: 350px;
-            padding: 14px 18px;
+            margin-top: 11px;
+            color: var(--polar-4);
             font-size: 15px;
-            font-weight: 400;
-            line-height: 1.5;
-            color: #333;
-            position: absolute;
-            top: calc(100% + 0.5em);
-            left: 50%;
-            transform: translateX(-50%);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-            border-radius: 4px;
+            font-style: normal;
+            line-height: 1.45;
+            text-align: left;
         }
 
-        @media screen and (min-width: 768px) {
-            sup .footnote-ref:hover + .footnote-tooltip {
-                visibility: visible;
-            }
-        }
-
-        .footnotes-sep {
-            margin-top: 40px;
-            border: none;
-            border-top: 1px solid #ddd;
-        }
-
-        .footnotes {
-            font-size: 14px;
-            color: #555;
-            line-height: 1.5;
-        }
-
-        .footnotes ol {
-            padding-left: 0;
-            list-style: none;
-        }
-
-        .footnotes li {
-            margin-bottom: 10px;
-        }
-
-        .footnotes li sup {
+        .figure-number {
+            color: var(--polar-2);
             font-weight: 600;
-            color: #434c5e;
         }
 
-        .footnote-backref {
-            text-decoration: none;
-            color: #434c5e;
-            margin-left: 4px;
-            font-size: 0.75em;
+        .wide-figure {
+            position: relative;
+            width: min(960px, calc(100vw - 40px));
+            margin: 38px 0 38px 50%;
+            transform: translateX(-50%);
         }
 
-        .footnote-backref:hover {
-            text-decoration: underline;
+        .wide-figure figcaption {
+            width: min(760px, 100% - 24px);
+            margin-right: auto;
+            margin-left: auto;
         }
 
-</style>
+        .animation-shell {
+            overflow: hidden;
+            border: 1px solid var(--snow-1);
+            background: #fff;
+            box-shadow: 0 8px 24px rgba(46, 52, 64, 0.07);
+        }
+
+        .animation-shell video {
+            width: 100%;
+            background: #fff;
+        }
+
+        .animation-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-height: 42px;
+            padding: 7px 10px;
+            border-top: 1px solid var(--snow-1);
+            color: var(--polar-4);
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .animation-button {
+            display: inline-grid;
+            width: 30px;
+            height: 30px;
+            flex: 0 0 30px;
+            place-items: center;
+            border: 0;
+            border-radius: 4px;
+            background: transparent;
+            color: var(--polar-2);
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .animation-button:hover { background: var(--snow-3); }
+
+        .animation-button:focus-visible {
+            outline: 2px solid var(--frost-2);
+            outline-offset: 2px;
+        }
+
+        .animation-button svg {
+            display: block;
+            width: 15px;
+            height: 15px;
+            fill: currentColor;
+        }
+
+        [hidden] { display: none !important; }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .concept-figure {
+            padding: 22px;
+            border: 1px solid var(--snow-1);
+            background: #fff;
+            box-shadow: 0 8px 24px rgba(46, 52, 64, 0.06);
+        }
+
+        .ladder-source,
+        .ladder-step {
+            border: 1px solid var(--snow-1);
+            border-radius: 6px;
+            background: #fff;
+        }
+
+        .ladder-source {
+            width: min(520px, 100%);
+            margin: 0 auto;
+            padding: 16px 20px;
+            border-top: 4px solid var(--frost-4);
+        }
+
+        .ladder-source strong,
+        .ladder-step strong {
+            display: block;
+            color: var(--polar-1);
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .ladder-source span,
+        .ladder-step span {
+            display: block;
+            margin-top: 3px;
+            color: var(--polar-4);
+            font-size: 14px;
+            line-height: 1.35;
+        }
+
+        .ladder-static {
+            display: inline-block !important;
+            margin-top: 10px !important;
+            padding: 3px 9px;
+            border: 1px solid var(--frost-3);
+            border-radius: 999px;
+            color: var(--polar-3) !important;
+        }
+
+        .ladder-branch-label {
+            margin: 12px 0 8px;
+            color: var(--polar-4);
+            font-size: 13px;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        .ladder-paths {
+            display: grid;
+            grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        .ladder-path {
+            padding: 16px;
+            border: 1px solid var(--snow-1);
+            border-radius: 8px;
+            background: var(--snow-3);
+        }
+
+        .ladder-path--average { border-top: 4px solid var(--orange); }
+        .ladder-path--ordered { border-top: 4px solid var(--polar-2); }
+
+        .ladder-route-title {
+            margin: 0 0 12px;
+            color: var(--polar-2);
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .ladder-step { padding: 12px 14px; }
+
+        .ladder-arrow {
+            padding: 6px 0;
+            color: var(--polar-4);
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .ladder-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .ladder-chip {
+            padding: 8px;
+            border: 1px solid var(--snow-1);
+            border-radius: 4px;
+            background: #fff;
+            color: var(--polar-3);
+            font-size: 13px;
+            line-height: 1.3;
+        }
+
+        .ladder-chip--blue { border-left: 4px solid var(--frost-4); }
+        .ladder-chip--green { border-left: 4px solid var(--green); }
+        .ladder-chip--orange { border-left: 4px solid var(--orange); }
+        .ladder-chip--dark { border-left: 4px solid var(--polar-2); }
+
+        mjx-container[display="true"] {
+            max-width: 100%;
+            margin: 1.15em 0 !important;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 3px 0;
+        }
+
+        .references {
+            padding-left: 1.35em;
+            color: var(--polar-4);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .references li { margin-bottom: 9px; }
+
+        .toc-sidebar { display: none; }
+
+        @media screen and (min-width: 1500px) {
+            .toc-sidebar {
+                position: fixed;
+                top: 335px;
+                left: calc((100vw - 660px) / 2 - 350px);
+                display: block;
+                width: 200px;
+                font-size: 13px;
+                line-height: 1.45;
+            }
+
+            .toc-sidebar a {
+                display: block;
+                padding: 4px 0;
+                color: var(--snow-1);
+                text-decoration: none;
+                transition: color 0.15s ease;
+            }
+
+            .toc-sidebar a:hover { color: var(--polar-4); }
+            .toc-sidebar a.active { color: var(--polar-1); }
+        }
+
+        @media screen and (max-width: 720px) {
+            .container {
+                width: min(100% - 32px, 660px);
+                padding: 64px 0;
+            }
+
+            .wide-figure {
+                width: calc(100vw - 20px);
+            }
+
+            .concept-figure { padding: 12px; }
+
+            .ladder-paths {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+        }
+
+        @media screen and (max-width: 430px) {
+            body { font-size: 17px; }
+            .ladder-metrics { grid-template-columns: 1fr; }
+            .section-title { margin-top: 44px !important; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container">
-        <a href="/blog/" class="back-arrow">←</a>
-        <div class="post-header">A Ghost in the Machine</div>
-        <p class="post-date post-date--top">12.28.2025</p>
-        <figure class="hero-image">
-            <img src="/assets/ghost.avif" alt="Hamlet and the Ghost by Frederick James Shields">
-            <figcaption><i>Hamlet and the Ghost</i>, Frederick James Shields</figcaption>
-        </figure>
+    <nav class="toc-sidebar" aria-label="Post sections">
+        <a href="#section-1">I. When Structure Leaves the Bulk</a>
+        <a href="#section-2">II. When the Network Moves</a>
+        <a href="#section-3">III. A Cheap Outlier</a>
+        <a href="#section-4">IV. The Scalar Shortcut</a>
+        <a href="#section-5">V. What Averaging Forgets</a>
+        <a href="#section-6">VI. What the Ghost Can Tell Us</a>
+        <a href="#section-references">References</a>
+    </nav>
 
-        <div class="content">
+    <main class="container">
+        <a href="/blog/" class="back-arrow" aria-label="Back to the blog">←</a>
+        <header>
+            <div class="post-header">A Ghost in the Machine</div>
+            <p class="post-date">12.28.2025</p>
+            <figure class="hero-image">
+                <img src="/assets/ghost.avif" alt="Hamlet facing the ghost of his father in an illustration by Frederick James Shields">
+                <figcaption><i>Hamlet and the Ghost</i>, Frederick James Shields.</figcaption>
+            </figure>
+        </header>
 
-            <div class="post-body">
-                <p>
-                    This post outlines a project I completed for a <a href="https://courses.grainger.illinois.edu/ECE598RE/fa2025/">graduate course</a> on dynamical systems, neural networks, and theoretical neuroscience. I explore how low-rank structure hidden in high-dimensional random connectivity gives rise to <i>spectral outliers:</i> isolated eigenvalues that dominate the macroscopic behavior of otherwise chaotic networks, and how these outliers can serve as early-warning signals for bifurcations in driven recurrent networks. The investigation blends random matrix theory, dynamical mean-field theory, and spectral analysis to make a conceptual ghost quantitative.
-                </p>
+        <article class="post-body">
+            <p>
+                The pixels of a recurrent weight matrix do not usually tell a story. At initialization they look like static, and after training they often still look like static, except for a few regularities that appear only after the neurons have been put in a useful order. The spectrum can be less coy. In the animation below, a separately trained recurrent network reorganizes until a small number of eigenvalues distinguish themselves from the cloud, while the average connection within the current clusters drifts away from the average connection between them.
+            </p>
 
-                <p>
-                    It's natural to now step back and ask: <i>what do we already know about chaotic RNNs? How does structure change the story?</i>
-                </p>
-
-                <p>
-                    The most relevant recent work here is by Rainer Engelken and collaborators. Their <a href="https://proceedings.neurips.cc/paper_files/paper/2022/hash/e6f29fb27bb400f89f5584c175005679-Abstract-Conference.html">NeurIPS 2022</a> paper developed what they call a non-stationary dynamic mean-field theory (DMFT). Classical DMFT provides us with a way to describe the statistics of large random networks at stationary, but once the network is driven by time-varying inputs, the stationar assumption breaks. Engelken et al. derived a <i>time-resolved closure</i>: equations for the population mean activity, the two-time correlation function of fluctuations, and an auxiliary kernel that makes the system self-consistent. Practically, the framework gives us a tractable way to predict the network's response spectrum, its largest Lyapunov exponent, and even the information-theoretic capacity of the population to transmit signals.
-                </p>
-
-                <p>
-                    We study a continuous-time rate network with \(N\) units. Each unit carries a synaptic current \(h_i(t)\) and fires at rate \(\phi(h_i)\), with \(\phi(x) = \max(0, x)\) (ReLU). The dynamics are given by the differential equation
-                    \[
-                    \tau \frac{d h_i}{dt} = -h_i + \sum_{j=1}^N J_{ij} \phi(h_j) + b I(t) + \xi_i(t).
-                    \]
-                    Here, \(\tau > 0\) is a membrane/leak timescale, \(J \in \mathbb{R}^{N \times N}\) is a connectivity matrix with balanced mean and random heterogeneity:
-                    \[
-                    J_{ij} = -\frac{b}{N}J_0 + \tilde{J}_{ij},\quad \tilde{J}_{ij} \sim \mathcal{N}(0, g^2/N).
-                    \]
-                    \(b > 0\) tunes the <i>tightness of balance</i><sup>1</sup> (a stronger \(b\) means stronger recurrent inhibition), \(I(t)\) is a common input (e.g. an OU process with correlation time \(\tau_S\)), and \(\xi_i(t)\) is independent Gaussian noise such that \(\langle \xi_i(t) \xi_i(t') \rangle = \sigma^2 \tau \delta(t - t')\).
-
-                We decompose the currents into a <i>population mean</i> and <i>fluctuations</i>:
-                    \[
-                    h_i(t) = m(t) + \tilde{h}_i(t),\quad m(t) = \frac{1}{N} \sum_{i=1}^N h_i(t),\quad \langle \tilde{h}_i(t) \rangle = 0.
-                    \]
-                    Substituting this into the dynamics and using the mean of \(J\) yields two coupled equations 
-                    \begin{align}
-                        \tau \frac{d m}{dt} &= -m -b J_0 \nu(t) + b I(t) \\
-                        \tau \frac{d \tilde{h}_i}{dt} &= -\tilde{h}_i + \sum_{j=1}^N \tilde{J}_{ij} \phi \left(m(t) + \tilde{h}_{ij}(t)\right) + \tilde{\xi}_i(t)
-                    \end{align}
-                    with the population rate \(\nu(t) = \frac{1}{N} \sum_{i=1}^N \phi\left(m(t) + \tilde{h}_i(t)\right)\). 
-                    Solving the first equation for \(\nu\) gives the <i>balance equation</i>
-                    \[
-                    \nu(t) = \frac{1}{J_0}I(t) - \frac{1}{b J_0} \left(\tau \frac{d m}{dt} + m\right).
-                    \]
-                    In the tight-balance limit \(b \to \infty\), \(\nu(t)\approx I(t)/J_0\) (linear tracking) and the mean mode acquires an effective timescale \(\tau_{\mathrm{eff}} = \tau/b\). This leads to the first core result.
-                </p>
-                    
-                <div class="callout">
-                    "Balance speeds up the population mean by a factor of \(b\)."
-                </div>
-                    
-                <p>
-                    So far, we've seen the spectral fingerprint: the rank-one mean term adds a single eigenvalue at \(-b\), while the random bulk remains a circular cloud of radius \(g\). This lone outlier is the ghost steering the mean activity. 
-                    But spectra are only the beginning. The NeurIPS paper showed how this outlier governs the <i>dynamical timescale</i>  of the mean. Take a step input and watch the population mean \(m(t)\) relax. The prediction from the balance equation is relatively simple:
-                    \[
-                    \tau_{\mathrm{eff}} = \frac{\tau}{b}.
-                    \]
-                    As \(b\) increases, the mean mode tracks input \(b\)-times faster. In simulations, fitting the exponential decay of \(m(t)\) confirms that the timescale drops as \(1/b\). 
-                </p>
-
-                <p>
-                    Faster mean dynamics suggest wider bandwidth for signal encoding. The DMFT closure makes this intuition quantitative. By treading residuals \(\tilde{h}(t)\) as a Gaussian process with covariance \(c(t, s)\), one can compute the input-output <i>coherence</i>
-                    \[
-                    C_{I\nu}(f) = \frac{\left| S_{I\nu}(f)\right|^2}{S_{II}(f) S_{\nu\nu}(f)},
-                    \]
-                    Here, \(S_{I\nu}\) is the cross-spectrum of the input and output, and \(S_{II}\), \(S_{\nu\nu}\) are their respective autospectra. The result is that higher balance values keep coherence close to one across higher frequencies, reflecting faster tracking and higher effective bandwidth.
-                </p>
-
-                <p>
-                    Integrating this coherence function gives us a Gaussian-channel lower bound on the <i>mutual information</i> between the input and output signals.
-                    \[
-                    R_{\mathrm{lb}} = -\int\, df \log_2\left(1 - C_{I\nu}(f)\right).
-                    \]
-                </p>
-
-                <p>
-                    This is the one of the headline results of the paper, and our second core finding.
-                </p>
-                    
-                <div class="callout">
-                    "The information rate grows nearly linearly with balance until it saturates at the bandwidth limit imposed by the input itself."
-                </div>
-
-                <p>
-                    To complete our understanding of this paper, it's worth highlighting a key result from <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010590">a complementary paper</a> done by Engelken et al. This PLOS paper provides code that shows the same non-stationary DMFT framework was used to compute the largest Lyapunov exponent<sup>2</sup> \(\lambda_1\).
-                </p>
-
-                <p>
-                    The surprising finding was that common input is poor at surpressing chaos. Because of balance, the common drive enters the mean equation and is canceled by recurrent inhibition. As a result, \(\lambda_1\) only turns negative at very large input amplitudes. Independent input, on the other hand, enters the fluctuation channel directly and is not canceled, so even small amplitudes can suppress chaos.
-                </p>
-                    
-                <p>
-                    This closes the loop on what we know. Balance plants a real outlier eigenvalue at \(-b\), accelerates the mean mode, broadens encoding bandwidth, and shapes how chaos can be tamed. But the story doesn't end with theory. The natural next question is experimental: <i>can we go beyond balance and use low-rank structure to predict when a driven network crosses the stability boundary?</i>
-                </p>
-
-                <p>
-                    Before doing anything new, I wanted to make sure the machinery is real. That means reproducing the baseline spectral and DMFT fingerprints under driven chaos. There are three checks:
-                    <br><br>
-                    (i) Trajectories behave as expected as \(g\) increases: fluctuations grow, but remain bounded under strong balance.<br>
-                    (ii) Non-stationary DMFT qualitatively matches the time-resolved mean \(m(t)\) and variance \(c(t,t)\).<br>
-                    (iii) The spectrum of \(J\) is exactly what it should be: a Ginibre disk of radius \(\approx g\) plus the real outlier at \(-b\).
-                </p>
-
-                <figure>
-                    <img src="/assets/post4/fig1-trajectories.png" alt="raw currents h_i(t) and population mean m(t) in low-g vs high-g regimes under OU drive">
-                    <figcaption>
-                        <b>Figure 1.</b> Raw trajectories \(h_i(t)\) (a few neurons) overlaid with the population mean \(m(t)\), comparing a low-g and high-g regime under OU drive.
-                    </figcaption>
-                </figure>
-
-                <figure>
-                    <img src="/assets/post4/fig2-ns-dmft.png" alt="non-stationary DMFT vs simulation: mean m(t) and variance c(t,t)">
-                    <figcaption>
-                        <b>Figure 2.</b> Non-stationary DMFT (time-resolved closure) vs network simulation: the population mean \(m(t)\) and variance \(c(t,t)\) track qualitatively, which is all we need before asking spectral questions.
-                    </figcaption>
-                </figure>
-
-                <p>
-                    The spectral check is the one I care about most, because everything that follows is an outlier story. If balance is doing what it claims, then \(J\) should look like: circular bulk + one real spike at \(-b\). And that's what we see.
-                </p>
-
-                <figure class="two-column">
-                    <div>
-                        <img src="/assets/post4/fig3a.png" alt="spectrum of J: Ginibre bulk with outlier at -b">
-                        <img src="/assets/post4/fig3b.png" alt="largest Lyapunov exponent as function of g">
+            <figure class="wide-figure" id="training-animation">
+                <div class="animation-shell">
+                    <video id="training-video" autoplay muted loop playsinline preload="metadata" poster="/assets/post4/training-modes-nord-poster.png" aria-describedby="training-animation-caption">
+                        <source src="/assets/post4/training-modes-nord.mp4" type="video/mp4">
+                    </video>
+                    <div class="animation-controls">
+                        <button class="animation-button" id="training-toggle" type="button" aria-controls="training-video" aria-label="Pause training animation">
+                            <svg id="training-pause-icon" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="2" width="3.5" height="12" rx="0.7"></rect><rect x="9.5" y="2" width="3.5" height="12" rx="0.7"></rect></svg>
+                            <svg id="training-play-icon" viewBox="0 0 16 16" aria-hidden="true" hidden><path d="M4 2.4v11.2c0 .7.8 1.1 1.4.7l8.1-5.6c.5-.3.5-1.1 0-1.4L5.4 1.7C4.8 1.3 4 1.7 4 2.4Z"></path></svg>
+                            <span class="sr-only" id="training-toggle-label">Pause animation</span>
+                        </button>
+                        <span id="training-motion-note">The movie loops through saved training checkpoints.</span>
                     </div>
-                    <figcaption>
-                        <b>Figure 3.</b> (Left) Spectrum of \(J\): Ginibre bulk of radius \(\approx g\) plus the balanced outlier at \(-b\). (Right) Largest Lyapunov exponent \(\lambda_1(g)\) under OU drive, approaching the transition as \(g\) increases (but staying negative here).
-                    </figcaption>
-                </figure>
-
-                <p>
-                    This already hints at something subtle. We often talk as if "the transition to chaos" is a crisp curve in parameter space. But at finite \(N\) and finite simulation horizon, the world is softer: \(\lambda_1\) trends toward zero without crossing. That softness matters once we start using spectral proxies.
-                </p>
-
-                <p>
-                    Stability under drive lives in the linearization along the trajectory. To move from connectivity outliers to Jacobian outliers, linearize the dynamics:
-                    \[
-                    A(t) = -I + J D(t), \qquad D(t) = \mathrm{diag}\!\left(\phi'(h(t))\right),
-                    \]
-                    where \(D(t)\) is the <i>gain mask</i> that encodes which neurons are active at time \(t\) under ReLU.
-                </p>
-
-                <p>
-                    If the drive is slow enough, a natural (dangerous) idea is to average:
-                    \[
-                    A_{\mathrm{avg}} = -I + J \bar D, \qquad \bar D \approx \mathbb{E}_t[D(t)].
-                    \]
-                    This is not a theorem. It's a controlled hallucination: "pretend the driven Jacobian is approximately stationary." But it's the right hallucination if you want an outlier story.
-                </p>
-
-                <div class="callout">
-                    "In a non-autonomous network, the outlier you want is not in \(J\). It's in the <i>filtered</i> matrix \(J\bar D\)."
                 </div>
+                <figcaption id="training-animation-caption">
+                    <span class="figure-number">Figure 1.</span> A separate two-stimulus network from the <a href="https://github.com/RainerEngelken/NeurIPS2022" target="_blank" rel="noopener">Engelken project</a>. The source script reclusters the neurons at every saved epoch and reorders the matrix using that frame's assignment. The center panel compares the eigenvalues of \(J-I\) with their pre-training locations; the right panel follows mean within-cluster, between-cluster, and global weights. This Nord restyling preserves the source frames. It motivates the question below, but it is not an experiment on the controlled rank-one model, and \(J-I\) is not the nonlinear tangent Jacobian.
+                </figcaption>
+            </figure>
 
-                <p>
-                    Now we move to a rank-one experiment with a surprisingly useful proxy. Adding a rank-one perturbation,
-                    \[
-                    J = gW - \frac{b}{N}\mathbf{1}\mathbf{1}^\top + m\,u v^\top,
-                    \]
-                    with \(u,v\) random unit vectors chosen orthogonal to \(\mathbf{1}\) (so we don't just re-inject another mean mode). The knob is \(m\), the low-rank strength.
-                </p>
+            <p>
+                There is a simple idealization in which the block means and the emerging spectral modes become two views of the same object. Let \(q=N^{-1/2}(1,\ldots,1)\) be the global direction, and let \(u=N^{-1/2}(1,\ldots,1,-1,\ldots,-1)\) contrast two equal clusters. If \(\bar J_{\mathrm{same}}\) and \(\bar J_{\mathrm{different}}\) are the mean within- and between-cluster connections, then the block-constant part of the matrix is
+                \[
+                J_{\mathrm{block}}
+                =\frac{N}{2}\left(\bar J_{\mathrm{same}}+\bar J_{\mathrm{different}}\right)qq^\top
+                +\frac{N}{2}\left(\bar J_{\mathrm{same}}-\bar J_{\mathrm{different}}\right)uu^\top.
+                \]
+                The sum of the block means sets a global population mode, while their difference sets a cluster-contrast mode. This rank-two picture is only an equal-cluster approximation—the trained matrix has a dense residual, unequal groups, and no fixed eigenvector labels—but it explains why faint block structure and isolated eigenvalues might appear together.
+            </p>
 
-                <p>
-                    The experiment loop is:<br>
-                    (1) Simulate the OU-driven network at fixed \((g,b)\) while sweeping \(m\);<br>
-                    (2) Build \(A_{\mathrm{avg}}\) from the time-averaged gain mask \(\bar D\);<br>
-                    (3) Extract the eigenvalue of \(A_{\mathrm{avg}}\) with largest real part (the "outlier");<br>
-                    (4) Compute \(\lambda_1\) using the Benettin algorithm<sup>3</sup> along the full time-dependent Jacobian.
-                </p>
+            <p>
+                Rainer Engelken sent me this movie after a conversation about the outliers that emerge during training. An isolated eigenvalue compresses a high-dimensional change into a single coordinate, which made the movie invite an obvious question: if training can pull one mode away from a random spectral bulk, does that mode tell us when the driven dynamics are about to change? The experiments below are a deliberately smaller stress test. They use a random bulk, a global balance mode, and one generic mean-orthogonal aligned mode, rather than the movie's binary cluster contrast. They also push that mode toward positive instability, whereas the learned modes in the movie move toward stronger inhibition.
+            </p>
 
-                <p>
-                    Importantly, for rank-one structure, there's a scalar proxy for the low-rank outlier:
-                    \[
-                    \hat\lambda_{\mathrm{out}}(m) \;\approx\; m\,\bar\alpha - 1,
-                    \qquad \bar\alpha = v^\top (\bar D u).
-                    \]
-                    This is the smallest possible "low-dimensional stability indicator": one number extracted from \(\bar D\). If \(\hat\lambda_{\mathrm{out}}\) tracks \(\lambda_1\), then we've learned something structural: the low-rank mode is steering the boundary.
-                </p>
+            <p>
+                The difficulty is hidden in the phrase <i>the network's spectrum</i>. A driven nonlinear recurrent network offers several spectra, and they answer different questions. The eigenvalues of its connectivity describe a static operator. The eigenvalues of an averaged Jacobian describe a trajectory after its changing gain mask has been compressed into one mean. A scalar outlier compresses that averaged spectrum again. Stability, meanwhile, belongs to the ordered sequence of Jacobians encountered along the trajectory. Low-rank structure can survive all the way through the average without the stability problem collapsing to that structure.
+            </p>
 
-                <figure>
-                    <img src="/assets/post4/fig4-low_rank_outlier.png" alt="spectrum of A_avg as m increases; proxy vs empirical outlier real part; LLE vs m">
-                    <figcaption>
-                        <b>Figure 4.</b> Low-rank outlier proxy vs largest Lyapunov exponent. (a) Spectrum of \(A_{\mathrm{avg}}\) as \(m\) increases: a single real outlier drifts right. (b) Proxy \(m(v^\top \bar D u)-1\) compared to the empirical \(\Re \lambda_{\mathrm{out}}(A_{\mathrm{avg}})\). (c) \(\lambda_1(m)\) from Benettin along the full time-dependent Jacobian.
-                    </figcaption>
-                </figure>
-
-                <p>
-                    I was satisified to see that the curves <i>move together</i>. As \(m\) increases, the outlier of \(A_{\mathrm{avg}}\) slides right; the scalar proxy slides with it; and \(\lambda_1(m)\) trends toward zero. In the parameter range I explored, everything stayed stable (no actual crossing), but the alignment is the central sanity check. The low-rank mode appears to be the first macroscopic "handle" on stability, even under drive.
-                </p>
-
-                <div class="callout">
-                    "\(\lambda_1\) is the verdict. The outlier proxy is an early-warning signal."
+            <figure class="wide-figure concept-figure" id="diagnostic-ladder" aria-labelledby="ladder-caption">
+                <div class="ladder-source">
+                    <strong>Connectivity \(J\) and trajectory \(h(t)\)</strong>
+                    <span>The trajectory creates a changing ReLU gain mask \(D(t)\), hence \(A(t)=-I+JD(t)\).</span>
+                    <span class="ladder-static">Static check: \(z_{\mathrm{spike}}=\rho\alpha\)</span>
                 </div>
+                <div class="ladder-paths">
+                    <section class="ladder-path ladder-path--average">
+                        <p class="ladder-route-title">Average the gates; discard their order</p>
+                        <div class="ladder-step">
+                            <strong>\(A_{\mathrm{avg}}=-I+J\bar D\)</strong>
+                            <span>Retains the full per-neuron mean gain profile.</span>
+                        </div>
+                        <div class="ladder-arrow" aria-hidden="true">↓</div>
+                        <div class="ladder-metrics">
+                            <div class="ladder-chip ladder-chip--blue">structured scalar<br>\(\hat z_{\mathrm{scalar}}\)</div>
+                            <div class="ladder-chip ladder-chip--green">mean-gain baseline<br>\(\hat z_{\mathrm{mean}}\)</div>
+                            <div class="ladder-chip ladder-chip--orange">tracked averaged outlier<br>\(z_{\mathrm{avg}}\)</div>
+                            <div class="ladder-chip ladder-chip--dark">full right edge<br>\(s(A_{\mathrm{avg}})\)</div>
+                        </div>
+                    </section>
+                    <section class="ladder-path ladder-path--ordered">
+                        <p class="ladder-route-title">Keep the ordered Jacobian products</p>
+                        <div class="ladder-step">
+                            <strong>\(\mathcal T\exp\!\int A(t)\,dt\)</strong>
+                            <span>Retains when each gain mask acted, not only how often.</span>
+                        </div>
+                        <div class="ladder-arrow" aria-hidden="true">↓</div>
+                        <div class="ladder-step">
+                            <strong>finite-time \(\lambda_1\)</strong>
+                            <span>The expensive stability estimate used as the dynamical reference.</span>
+                        </div>
+                    </section>
+                </div>
+                <figcaption id="ladder-caption">
+                    <span class="figure-number">Figure 2.</span> Two branches from the same instantaneous Jacobian sequence. Averaging produces useful static summaries, but the Lyapunov estimate follows the ordered tangent flow. The figure is a hierarchy of questions, not a claim that one branch can be reconstructed from the other.
+                </figcaption>
+            </figure>
 
-                <p>
-                    There is a clean reason to be suspicious about where the proxy fails. Stability in a driven system is governed by the time-ordered product of Jacobians, a non-commutative object. A single averaged matrix \(A_{\mathrm{avg}}\) cannot capture non-normal transient growth<sup>4</sup>, nor can it see fast input regimes. This is why, in exploratory phase-slices at larger \(g\) and \(m\), the proxy can become positive while sparse \(\lambda_1\) checks remain negative.
-                </p>
+            <p>
+                The rest of the post follows this diagram from left to right. The first step is clean finite-rank random-matrix theory. The second produces two cheap scalar approximations, one structured and one global. The full averaged spectrum then recovers much of what those scalars discard. The final time-ordered step explains why even that stronger agreement remains a diagnostic rather than a stability theorem.
+            </p>
 
-                <p>
-                    While the proxy is not a perfect predictor, it does capture where the quasi-stationary picture breaks.
-                </p>
+            <p class="section-title" id="section-1">I. When Structure Leaves the Bulk</p>
 
-                <p>
-                    The honest endgame is a full low-rank, non-stationary DMFT: a time-resolved closure not just for the mean \(m(t)\) and covariance \(c(t,s)\), but also for the <i>overlap variables</i> \(\kappa(t)\) that carry low-rank structure. At rank \(R\), these overlaps live in \(\mathbb{R}^R\), and they are the natural "order parameters" of the structured mode.
-                </p>
+            <p>
+                Consider a continuous-time recurrent rate network with currents \(h_i(t)\),
+                \[
+                \tau\frac{dh_i}{dt}
+                =-h_i+\sum_{j=1}^N J_{ij}\phi(h_j)+bI(t),
+                \]
+                where \(\phi(x)=\max(0,x)\) and \(I(t)\) is a common Ornstein–Uhlenbeck drive. The reported experiments set independent additive noise to zero and use \(\tau=1\). Their connectivity is
+                \[
+                J=gW-bqq^\top+\rho uv^\top,
+                \qquad q=\frac{1}{\sqrt N}\mathbf 1,
+                \]
+                with \(W_{ij}\sim\mathcal N(0,1/N)\). Each term gives the matrix a different geometry. The random matrix \(gW\) produces a circular eigenvalue bulk of radius approximately \(g\); the mean term contributes a real balance outlier near \(-b\); and the last term inserts a structured direction with strength \(\rho\), right vector \(u\), left vector \(v\), and alignment
+                \[
+                \alpha=v^\top u.
+                \]
+            </p>
 
-                <p>
-                    Once you have \((m,c,\kappa)\), the stability question becomes low-dimensional again: linearize the overlap update map and track when the maximal real part crosses zero. That would turn the ghost into a genuine stability boundary, not a heuristic.
-                </p>
+            <p>
+                The balance outlier is a useful precedent. In a tightly balanced network, recurrent inhibition cancels most of the common input in the population mean, leaving a fast mean mode whose characteristic timescale shrinks with \(b\). An eigenvalue near \(-b\) then has a fairly direct dynamical interpretation. It is tempting to expect the added low-rank outlier to provide the same kind of handle, but that expectation is justified first for the matrix, not yet for the driven network.
+            </p>
 
-                <p>
-                    Some concrete next steps would be to solve the low-rank NS-DMFT equations numerically, including overlaps, instead of relying on trajectory averages. Then, map the \((g,m)\) plane at larger \(N\) and longer horizons until \(\lambda_1\) actually crosses zero. Beyond rank-one, \(R>1\) structure introduces multiple outliers, and the question becomes <i>which</i> one controls the bifurcation. Finally, stress test the assumptions: rapid drive, large \(g\), non-normality, different nonlinearities.
-                </p>
+            <p>
+                For the static connectivity, the calculation is clean. Write a finite-rank perturbation as \(S=UMV^\top\). The matrix determinant lemma gives
+                \[
+                \det\!\left(zI-(gW+S)\right)
+                =\det(zI-gW)
+                \det\!\left(I-MV^\top(zI-gW)^{-1}U\right).
+                \]
+                Outside the random bulk, the projected resolvent has leading term \(z^{-1}V^\top U\), so a detached rank-one candidate lies at
+                \[
+                z_{\mathrm{spike}}=\rho\alpha.
+                \]
+                The sign matters: a positive aligned spike produces an outlier on the positive real axis, while the balance mode lies at \(-b\) because its signed amplitude is negative. The formula also comes with a geometric boundary. When \(|\rho\alpha|\leq g\), the candidate lies in the Ginibre disk and should not be described as a detached outlier.
+            </p>
 
-                <p>
-                    I'm quite satisfied with how far this project got, despite deeply overextending on my initial goals. I'm grateful to Rainer Engelken for his guidance throughout; the full technical report is available <a href="/assets/post4/low-rank-rnns.pdf">here</a>.
-                </p>
+            <figure class="wide-figure" id="static-outlier-figure">
+                <picture>
+                    <source media="(max-width: 720px)" srcset="/assets/post4/static-outlier-nord-mobile.png">
+                    <img src="/assets/post4/static-outlier-nord.png" alt="Predicted signed low-rank eigenvalue versus the empirically tracked eigenvalue, with detached points distinguished from points inside the random bulk">
+                </picture>
+                <figcaption>
+                    <span class="figure-number">Figure 3.</span> Static calibration for \(J=gW-bqq^\top+\rho uv^\top\), using \(N=600\), \(g=1\), \(b=5\), eight random seeds, signed values of \(\rho\), and five alignments \(\alpha=v^\top u\). Filled markers satisfy \(|\rho\alpha|>g\); open markers lie inside the random bulk, where overlap tracking selects a bulk eigenvalue rather than an isolated mode. Across the 320 strictly detached samples, the signed prediction has RMSE \(0.0828\).
+                </figcaption>
+            </figure>
 
-                <hr class="footnotes-sep">
-                <section class="footnotes">
-                    <ol>
-                        <li>Larger \(b\) means excitation and inhibition cancel more precisely in the mean. This "tight balance" confines chaos to high-dimensional fluctuations while the mean mode stays clean and fast.</li>
-                        <li>The largest Lyapunov exponent \(\lambda_1\) measures how fast nearby trajectories diverge exponentially. Positive means chaos, negative means stability, zero marks the bifurcation boundary.</li>
-                        <li>The Benettin algorithm computes Lyapunov exponents by tracking orthonormalized perturbation vectors along the trajectory, avoiding exponential overflow that would occur with naive methods.</li>
-                        <li>Non-normal matrices can amplify perturbations transiently even when all eigenvalues are stable. The time-ordered product of Jacobians is non-commutative, so eigenvalues of \(A_{\mathrm{avg}}\) miss this transient amplification.</li>
-                    </ol>
-                </section>
+            <p>
+                At this level, the ghost behaves as hoped. A high-dimensional random matrix accepts a low-rank perturbation, and one eigenvalue carries the perturbation's signed overlap out of the bulk. The next step is harder because the network does not evolve by repeatedly applying \(J\).
+            </p>
 
+            <p class="section-title" id="section-2">II. When the Network Moves, the Matrix Changes</p>
+
+            <p>
+                Along a nonlinear trajectory, a small perturbation \(\delta h(t)\) evolves according to
+                \[
+                \tau\frac{d\,\delta h}{dt}=A(t)\delta h,
+                \qquad A(t)=-I+JD(t),
+                \]
+                where
+                \[
+                D(t)=\operatorname{diag}\!\left(\phi'(h_1(t)),\ldots,\phi'(h_N(t))\right).
+                \]
+                For ReLU, \(D(t)\) is a changing binary gate. Active neurons pass their columns of \(J\) into the linearization; inactive neurons remove theirs. The structured mode in \(J\) is therefore filtered differently at different times, and an eigenvector of the connectivity need not remain an eigenvector of the instantaneous Jacobian.
+            </p>
+
+            <p>
+                One natural compression is to replace the moving gate by its trajectory average,
+                \[
+                \bar D=\langle D(t)\rangle_t,
+                \qquad A_{\mathrm{avg}}=-I+J\bar D.
+                \]
+                This matrix remembers which neurons were active often and forgets the order in which they were active. That distinction is easy to overlook because \(A_{\mathrm{avg}}\) has an ordinary spectrum and admits the same outlier machinery as \(J\). It is nevertheless a different operator, with a bulk shifted by the leak and rescaled by heterogeneous gains.
+            </p>
+
+            <p>
+                The actual perturbation after time \(T\) is instead
+                \[
+                \delta h(T)=\mathcal T\exp\!\left(
+                \frac{1}{\tau}\int_0^T A(t)\,dt
+                \right)\delta h(0),
+                \]
+                where \(\mathcal T\) preserves temporal order. Its asymptotic growth rate is the top Lyapunov exponent,
+                \[
+                \lambda_1
+                =\lim_{T\to\infty}\frac{1}{T}
+                \log\left\|\mathcal T\exp\!\left(
+                \frac{1}{\tau}\int_0^T A(t)\,dt
+                \right)\right\|.
+                \]
+                A positive value means nearby trajectories separate exponentially; a negative value means perturbations decay. This is the stability verdict for the driven system. Neither an eigenvalue of \(J\) nor an eigenvalue of \(A_{\mathrm{avg}}\) inherits that verdict automatically.
+            </p>
+
+            <p class="section-title" id="section-3">III. A Cheap Outlier for an Averaged World</p>
+
+            <p>
+                Although \(A_{\mathrm{avg}}\) cannot settle stability, its low-rank outlier is still a useful intermediate object. Separate the unstructured base from the rank-one term,
+                \[
+                B=-I+(gW-bqq^\top)\bar D,
+                \qquad A_{\mathrm{avg}}=B+\rho u(v^\top\bar D).
+                \]
+                Applying the determinant identity again gives an exact scalar equation for an outlier \(z\),
+                \[
+                1=\rho v^\top\bar D\,(zI-B)^{-1}u.
+                \]
+                The object has already changed. The static overlap \(\alpha=v^\top u\) has become the trajectory-dependent contraction \(v^\top\bar D u\), while the random balanced base enters through the resolvent \((zI-B)^{-1}\). The trajectory has filtered the structure, but the filtered term remains rank one.
+            </p>
+
+            <p>
+                If we now replace \(B\) by the leak \(-I\), the resolvent becomes \((z+1)^{-1}I\), and the equation collapses to the cheap scalar proxy
+                \[
+                \hat z_{\mathrm{scalar}}=-1+\rho v^\top\bar D u.
+                \]
+                It costs only an inner product once a trajectory has supplied \(\bar D\), and it preserves how the mean gain mask aligns with the structured vectors. That alignment sounds informative, but it needs a baseline. The still cheaper alternative is
+                \[
+                \hat z_{\mathrm{mean}}=-1+\rho\alpha\bar p,
+                \qquad \bar p=\frac{1}{N}\operatorname{tr}\bar D,
+                \]
+                which retains only the population's active fraction. For a delocalized aligned mode that is weakly correlated with per-neuron gain, these two quantities can be almost indistinguishable.
+            </p>
+
+            <div class="callout">
+                The experiment is therefore a ladder of separate questions: does \(\rho\alpha\) locate the static outlier, does a scalar contraction preserve the right edge of \(A_{\mathrm{avg}}\), and does any averaged object share the sign of the ordered tangent flow?
             </div>
-        </div>
-    </div>
+
+            <p class="section-title" id="section-4">IV. The Scalar Shortcut Breaks First</p>
+
+            <p>
+                The corrected one-dimensional sweep follows the aligned mode through every level of that ladder. We fix \(N=500\), \(g=1.6\), \(b=5\), and \(\alpha=1\), then vary \(\rho\) from \(0\) to \(4\) across eight paired seeds. Pairing matters here: each seed reuses the same random bulk, structured vectors, initial condition, and drive increments across \(\rho\), so changes along a curve are not blurred by a fresh network at every point. The static spike detaches only after \(\rho>g\), and the overlap-tracked mode of \(A_{\mathrm{avg}}\) remains weakly identified until roughly \(\rho=2.4\). Before then, it is a bulk-tracking heuristic rather than a separated eigenmode.
+            </p>
+
+            <p>
+                Across all 88 paired samples, the structured scalar moves with the corrected finite-time Lyapunov estimate, with correlation \(0.79\). The agreement is real, but it is not distinctive. The global mean-gain baseline has lower RMSE, \(0.22\) rather than \(0.26\), and fewer positive-sign disagreements, about \(3\%\) rather than \(9\%\). In this aligned experiment, retaining the directional contraction \(v^\top\bar D u\) does not improve on knowing the active fraction alone.
+            </p>
+
+            <p>
+                The full averaged operator retains considerably more. Its spectral abscissa
+                \[
+                s(A_{\mathrm{avg}})=\max_i\operatorname{Re}\lambda_i(A_{\mathrm{avg}})
+                \]
+                has correlation \(0.96\) with the finite-time Lyapunov estimate, RMSE \(0.08\), and one sign disagreement across the sweep. At \(\rho=4\), the seed-mean scalar has moved to \(0.19\), the right edge of the averaged spectrum sits near \(0.00\), and the finite-time Lyapunov estimate remains at \(-0.12\). The paired bias \(\lambda_1-\hat z_{\mathrm{scalar}}\) is \(-0.31\), with a 95% interval from \(-0.47\) to \(-0.15\). Even the smaller residual \(\lambda_1-s(A_{\mathrm{avg}})\) remains negative there. Because the averaged spectral estimate is itself close to zero with non-negligible uncertainty, this comparison establishes a calibration gap, not the location of a boundary.
+            </p>
+
+            <figure class="wide-figure" id="dynamic-diagnostics-figure">
+                <picture>
+                    <source media="(max-width: 720px)" srcset="/assets/post4/dynamic-diagnostics-nord-mobile.png">
+                    <img src="/assets/post4/dynamic-diagnostics-nord.png" alt="Corrected low-rank sweep comparing two scalar gain summaries, the averaged-Jacobian spectrum, and a finite-time Lyapunov estimate">
+                </picture>
+                <figcaption>
+                    <span class="figure-number">Figure 4.</span> Corrected dynamic sweep with \(N=500\), \(g=1.6\), \(b=5\), \(\alpha=1\), \(\rho\in[0,4]\), eight paired seeds, \(\tau=1\), \(dt=0.01\), \(t_{\mathrm{burn}}=5\tau\), and \(t_{\mathrm{meas}}=20\tau\). The tangent vector is renormalized every \(0.5\tau\). Panel a shows seed means with 95% \(t\)-interval error bars; Nord-red rings mark mean sign disagreements. Panel b overlays faint paired-seed differences and paired means with 95% \(t\)-interval error bars. Marker and line styles duplicate the color encoding, and the Lyapunov curve is a finite-time estimate.
+                </figcaption>
+            </figure>
+
+            <p>
+                A longer-window check preserves the mean calibration gap. At \(g=1.6\) and \(\rho=4\), extending the measurement to \(60\tau\) gives \(\lambda_1=-0.146\pm0.071\) SEM, compared with a scalar proxy near \(0.20\) and a tracked averaged-Jacobian outlier near \(-0.04\). Halving the integration step gives the same ordering. Two of the eight seeds remain positive, so this is a persistent bias in the seed mean rather than a claim that every realization is stable.
+            </p>
+
+            <p>
+                This changes the story of the experiment. The structured mode survives the nonlinear gain average, yet compressing the whole averaged spectrum to that mode discards information that the spectral abscissa still carries. The first important loss does not wait for temporal order to be removed; it begins when one outlier is asked to stand in for the rest of \(A_{\mathrm{avg}}\).
+            </p>
+
+            <p>
+                We can describe that loss more carefully by separating two residuals,
+                \[
+                \Delta_{\mathrm{scalar}}
+                =\operatorname{Re}z_{\mathrm{avg}}-\hat z_{\mathrm{scalar}},
+                \qquad
+                \Delta_{\mathrm{dyn}}
+                =\lambda_1-\operatorname{Re}z_{\mathrm{avg}}.
+                \]
+                The scalarization gap records what is lost when the base resolvent is replaced by the leak. The dynamical gap is everything left after the averaged-Jacobian outlier has been computed: temporal ordering, gain fluctuations, products of non-normal matrices, finite-time and finite-\(N\) effects, and any remaining tracking error. At \(\rho=4\), their mean magnitudes are approximately \(0.19\) and \(0.12\), and neither dominates uniformly across the sweep. The second residual is descriptive; it is not a causal measurement of temporal ordering alone.
+            </p>
+
+            <p>
+                A corrected \(9\times9\) sweep over \((g,\rho)\) preserves the same ordering without producing a phase boundary. The mean finite-time Lyapunov estimate remains negative in all 81 sampled cells, while the cheap summaries become positive in part of the low-\(g\), high-\(\rho\) corner. Across 405 paired seed–grid-point samples, the structured scalar has correlation \(0.70\) with \(\lambda_1\) and a positive-sign disagreement rate near \(7\%\); the mean-gain baseline is again slightly better. That broader sweep is useful corroboration, but turning it into another large figure would suggest a measured transition that the data do not contain.
+            </p>
+
+            <p class="section-title" id="section-5">V. What Averaging Forgets</p>
+
+            <p>
+                The strong agreement between \(s(A_{\mathrm{avg}})\) and \(\lambda_1\) on the one-dimensional slice says that averaging is informative in this regime. It does not make the two objects identical, and the mathematical reason appears even in a trajectory with only two gain masks. Suppose \(D_1\) acts for one short interval and \(D_2\) for the next, producing Jacobians \(A_1\) and \(A_2\). The perturbation evolves as
+                \[
+                e^{\Delta t A_2/\tau}e^{\Delta t A_1/\tau}.
+                \]
+                The Baker–Campbell–Hausdorff expansion rewrites this product as
+                \[
+                \exp\!\left(
+                \frac{\Delta t}{\tau}(A_1+A_2)
+                +\frac{\Delta t^2}{2\tau^2}[A_2,A_1]
+                +\cdots
+                \right),
+                \]
+                where \([A_2,A_1]=A_2A_1-A_1A_2\). Averaging keeps the first term and discards the commutators. If the Jacobians commute, the missing terms vanish. In a random recurrent network with changing ReLU gates they generally do not, so the route taken through the active subspaces can survive even after their mean has been fixed.
+            </p>
+
+            <p>
+                Non-normality adds a related distinction between eventual decay and temporary growth. The spectral abscissa \(s(A)\) tracks the rightmost eigenvalue, while the numerical abscissa
+                \[
+                \omega(A)=\lambda_{\max}\!\left(\frac{A+A^\top}{2}\right)
+                \]
+                asks whether some direction initially grows in Euclidean norm. A matrix can have \(s(A)<0\) and \(\omega(A)>0\), so perturbations may grow transiently even when every eigenmode decays under that fixed operator. A moving gain mask compounds this geometry by changing the directions available for amplification. The mere fact that the full spectral edge lies to the right of a tracked outlier does not diagnose non-normality; that claim would require the numerical-abscissa comparison.
+            </p>
+
+            <p>
+                The diagnostic ladder is now easier to read. The structured scalar preserves one contraction \(v^\top\bar D u\). The full averaged Jacobian preserves the entire mean gain profile and, on this slice, most of the Lyapunov trend. Both have forgotten when those gates acted. Low-rank structure survives averaging; stability does not collapse to that structure, and any agreement with the averaged spectrum remains empirical rather than automatic.
+            </p>
+
+            <p class="section-title" id="section-6">VI. What the Ghost Can Tell Us</p>
+
+            <p>
+                The scalar proxy has a narrower role after these corrections, but it still has one. During a large parameter sweep or a training run, computing a full averaged spectrum or a long Lyapunov estimate at every checkpoint can be prohibitive. The contractions \(v^\top\bar D u\) and \(\alpha\bar p\) are cheap once a representative trajectory has been collected. In this aligned model the global baseline is at least as informative, so the structured contraction should be treated as one candidate summary rather than the privileged coordinate of stability.
+            </p>
+
+            <p>
+                What emerges is a diagnostic policy rather than a new theorem. Track the static outlier to verify that the intended low-rank structure exists. Track the scalar and mean-gain contractions to see how the trajectory's average gain filters it. Compute the spectrum of \(A_{\mathrm{avg}}\) when those scalar approximations need calibration. Use a time-ordered Lyapunov estimate when the sign of stability matters. The cheap objects decide where to look; the last object decides what the dynamics do.
+            </p>
+
+            <p>
+                The training animation fits this policy as a question for future work. An emerging spectral mode could trigger targeted trajectory and Lyapunov diagnostics during training, although the present experiments do not establish that such an outlier predicts a learning transition. The resemblance to the staged emergence of modes in <a href="https://arxiv.org/abs/1312.6120" target="_blank" rel="noopener">deep linear networks</a> is suggestive, but for now it remains an analogy rather than a mechanism.
+            </p>
+
+            <p>
+                A full low-rank non-stationary dynamical mean-field theory would try to close this gap instead of averaging it away. It would retain low-dimensional overlaps for the structured modes, couple them self-consistently to the time-dependent Gaussian bulk, and derive a reduced time-ordered stability problem. That theory remains unfinished. For now, the outlier is best understood as a ghost in the machine in a literal mathematical sense: it makes hidden structure visible, while the averaged spectrum and the tangent flow show that it does not act alone.
+            </p>
+
+            <p>
+                This project began in a graduate course on dynamical systems, neural networks, and theoretical neuroscience. I am grateful to Rainer Engelken for the conversations that shaped it, including the training movie that motivated this rework.
+            </p>
+
+            <p class="section-title" id="section-references">References</p>
+            <ol class="references">
+                <li>R. Engelken and S. Goedeke, “A non-stationary dynamic mean field theory for strongly interacting neuronal networks,” <a href="https://proceedings.neurips.cc/paper_files/paper/2022/hash/e6f29fb27bb400f89f5584c175005679-Abstract-Conference.html" target="_blank" rel="noopener">NeurIPS 2022</a>.</li>
+                <li>F. Mastrogiuseppe and S. Ostojic, “Linking connectivity, dynamics, and computations in low-rank recurrent neural networks,” <a href="https://doi.org/10.1016/j.neuron.2018.07.003" target="_blank" rel="noopener"><i>Neuron</i> 2018</a>.</li>
+                <li>T. Tao, “Outliers in the spectrum of iid matrices with bounded rank perturbations,” <a href="https://doi.org/10.1007/s00440-011-0397-9" target="_blank" rel="noopener"><i>Probability Theory and Related Fields</i> 2013</a>.</li>
+                <li>G. Benettin, L. Galgani, A. Giorgilli, and J.-M. Strelcyn, “Lyapunov characteristic exponents for smooth dynamical systems,” <a href="https://doi.org/10.1007/BF02128237" target="_blank" rel="noopener"><i>Meccanica</i> 1980</a>.</li>
+                <li>A. M. Saxe, J. L. McClelland, and S. Ganguli, “Exact solutions to the nonlinear dynamics of learning in deep linear neural networks,” <a href="https://arxiv.org/abs/1312.6120" target="_blank" rel="noopener">arXiv:1312.6120</a>.</li>
+            </ol>
+        </article>
+    </main>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var body = document.querySelector('.post-body');
-            var footnotes = document.querySelector('.footnotes');
-            if (!body || !footnotes) return;
+        (() => {
+            const sections = Array.from(document.querySelectorAll('.section-title[id]'));
+            const tocLinks = Array.from(document.querySelectorAll('.toc-sidebar a'));
+            const byId = new Map(tocLinks.map((link) => [link.getAttribute('href').slice(1), link]));
 
-            var sups = body.querySelectorAll('sup');
-            var items = footnotes.querySelectorAll('li');
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    const visible = entries
+                        .filter((entry) => entry.isIntersecting)
+                        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+                    if (!visible.length) return;
+                    tocLinks.forEach((link) => link.classList.remove('active'));
+                    const active = byId.get(visible[0].target.id);
+                    if (active) active.classList.add('active');
+                }, { rootMargin: '-18% 0px -68% 0px', threshold: 0 });
+                sections.forEach((section) => observer.observe(section));
+            }
 
-            sups.forEach(function(sup, i) {
-                var n = sup.textContent.trim();
-                if (!/^\d+$/.test(n)) return;
+            const video = document.getElementById('training-video');
+            const toggle = document.getElementById('training-toggle');
+            const playIcon = document.getElementById('training-play-icon');
+            const pauseIcon = document.getElementById('training-pause-icon');
+            const toggleLabel = document.getElementById('training-toggle-label');
+            const note = document.getElementById('training-motion-note');
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-                sup.id = 'fnref:' + n;
+            const updateButton = () => {
+                const paused = video.paused;
+                playIcon.hidden = !paused;
+                pauseIcon.hidden = paused;
+                toggleLabel.textContent = paused ? 'Play animation' : 'Pause animation';
+                toggle.setAttribute('aria-label', paused ? 'Play training animation' : 'Pause training animation');
+            };
 
-                var link = document.createElement('a');
-                link.href = '#fn:' + n;
-                link.className = 'footnote-ref';
-                link.textContent = '[' + n + ']';
-
-                sup.textContent = '';
-                sup.appendChild(link);
-
-                var li = items[parseInt(n) - 1];
-                if (li) {
-                    var tooltip = document.createElement('div');
-                    tooltip.className = 'footnote-tooltip';
-                    tooltip.innerHTML = '<sup>' + n + '</sup> ' + li.innerHTML;
-                    sup.appendChild(tooltip);
-
-                    li.id = 'fn:' + n;
-                    var numSup = document.createElement('sup');
-                    numSup.textContent = n;
-                    var backLink = document.createElement('a');
-                    backLink.href = '#fnref:' + n;
-                    backLink.className = 'footnote-backref';
-                    backLink.textContent = '↩';
-
-                    var original = li.innerHTML;
-                    li.innerHTML = '';
-                    li.appendChild(numSup);
-                    li.insertAdjacentHTML('beforeend', ' ' + original + ' ');
-                    li.appendChild(backLink);
+            const applyMotionPreference = () => {
+                if (reducedMotion.matches) {
+                    video.pause();
+                    note.textContent = 'Animation paused because reduced motion is enabled.';
+                } else {
+                    note.textContent = 'The movie loops through saved training checkpoints.';
+                    video.play().catch(() => updateButton());
                 }
+                updateButton();
+            };
+
+            toggle.addEventListener('click', async () => {
+                if (video.paused) {
+                    try {
+                        await video.play();
+                    } catch (_) {
+                        // The poster remains usable when a browser blocks playback.
+                    }
+                } else {
+                    video.pause();
+                }
+                updateButton();
             });
-        });
+            video.addEventListener('play', updateButton);
+            video.addEventListener('pause', updateButton);
+            reducedMotion.addEventListener?.('change', applyMotionPreference);
+            applyMotionPreference();
+        })();
     </script>
 </body>
 </html>
