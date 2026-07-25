@@ -440,40 +440,30 @@
 
         <article class="post-body">
             <p>
-                The pixels of a recurrent weight matrix do not usually tell a story. At initialization they look like static, and after training they often still look like static, except for a few regularities that appear only after the neurons have been put in a useful order. The spectrum can be less coy. In the animation below, a separately trained recurrent network reorganizes until a small number of eigenvalues distinguish themselves from the cloud, while the average connection within the current clusters drifts away from the average connection between them.
+                The pixels of a recurrent weight matrix almost refuse to tell a story. A low-rank term is spread across all \(N^2\) couplings, so even as its strength grows, any one entry can remain smaller than the random texture around it. The animation below follows the controlled experiment in this post: the random realization and structured direction stay fixed while \(\rho\) rises. Coarse-graining makes the planted geometry visible on the left, the static spectrum lets its eigenvalue escape the bulk in the middle, and the driven diagnostics on the right show where that clean matrix story begins to fray.
             </p>
 
-            <figure class="wide-figure" id="training-animation">
+            <figure class="wide-figure" id="project-animation">
                 <div class="animation-shell">
-                    <video id="training-video" autoplay muted loop playsinline preload="metadata" poster="/assets/post4/training-modes-nord-poster.png" aria-describedby="training-animation-caption">
+                    <video id="project-video" autoplay muted loop playsinline preload="metadata" poster="/assets/post4/training-modes-nord-poster.png" aria-describedby="project-animation-caption">
                         <source src="/assets/post4/training-modes-nord.mp4" type="video/mp4">
                     </video>
                     <div class="animation-controls">
-                        <button class="animation-button" id="training-toggle" type="button" aria-controls="training-video" aria-label="Pause training animation">
-                            <svg id="training-pause-icon" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="2" width="3.5" height="12" rx="0.7"></rect><rect x="9.5" y="2" width="3.5" height="12" rx="0.7"></rect></svg>
-                            <svg id="training-play-icon" viewBox="0 0 16 16" aria-hidden="true" hidden><path d="M4 2.4v11.2c0 .7.8 1.1 1.4.7l8.1-5.6c.5-.3.5-1.1 0-1.4L5.4 1.7C4.8 1.3 4 1.7 4 2.4Z"></path></svg>
-                            <span class="sr-only" id="training-toggle-label">Pause animation</span>
+                        <button class="animation-button" id="project-toggle" type="button" aria-controls="project-video" aria-label="Pause parameter sweep animation">
+                            <svg id="project-pause-icon" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="2" width="3.5" height="12" rx="0.7"></rect><rect x="9.5" y="2" width="3.5" height="12" rx="0.7"></rect></svg>
+                            <svg id="project-play-icon" viewBox="0 0 16 16" aria-hidden="true" hidden><path d="M4 2.4v11.2c0 .7.8 1.1 1.4.7l8.1-5.6c.5-.3.5-1.1 0-1.4L5.4 1.7C4.8 1.3 4 1.7 4 2.4Z"></path></svg>
+                            <span class="sr-only" id="project-toggle-label">Pause animation</span>
                         </button>
-                        <span id="training-motion-note">The movie loops through saved training checkpoints.</span>
+                        <span id="project-motion-note">The movie loops through the sampled rank-one strengths.</span>
                     </div>
                 </div>
-                <figcaption id="training-animation-caption">
-                    <span class="figure-number">Figure 1.</span> A separate two-stimulus network from the <a href="https://github.com/RainerEngelken/NeurIPS2022" target="_blank" rel="noopener">Engelken project</a>. The source script reclusters the neurons at every saved epoch and reorders the matrix using that frame's assignment. The center panel compares the eigenvalues of \(J-I\) with their pre-training locations; the right panel follows mean within-cluster, between-cluster, and global weights. This Nord restyling preserves the source frames. It motivates the question below, but it is not an experiment on the controlled rank-one model, and \(J-I\) is not the nonlinear tangent Jacobian.
+                <figcaption id="project-animation-caption">
+                    <span class="figure-number">Figure 1.</span> Following a planted mode through the model studied in this post. The animation loops across \(\rho=0,0.4,\ldots,4\); \(\rho\) is a control parameter, not training time. Panels a and b use one reproducible realization with \(N=500\), \(g=1.6\), \(b=5\), and a fixed mean-orthogonal direction \(u=v\). Panel a orders the neurons once by \(u_i\), averages \(J(\rho)\) into \(25\times25\) display bins, and scales those means by \(N\); Nord blue, white, and red encode negative, near-zero, and positive couplings. The binning is visual only. Panel b uses the full \(500\times500\) matrix: the dotted circle marks the bulk radius \(g\), the blue circle is the eigenvalue selected by overlap with \(u\), and the orange cross is the candidate \(\rho\alpha\). The blue marker is filled only when the candidate lies strictly beyond the random bulk; the balance outlier near \(-b\) is outside the cropped view. Panel c shows eight paired-seed means from the corrected driven experiment: orange diamonds and a dotted line are the scalar shortcut, blue squares and a solid line are \(s(A_{\mathrm{avg}})\), and dark open circles with a dashed line are the finite-time \(\lambda_1\). The last quantity comes from the ordered tangent flow, not from either matrix spectrum; Figure 4 restores the uncertainty intervals omitted here. The three-panel layout was inspired by <a href="https://github.com/RainerEngelken/NeurIPS2022" target="_blank" rel="noopener">Rainer Engelken's Julia movie script</a>, but every matrix and diagnostic shown here belongs to this controlled experiment.
                 </figcaption>
             </figure>
 
             <p>
-                There is a simple idealization in which the block means and the emerging spectral modes become two views of the same object. Let \(q=N^{-1/2}(1,\ldots,1)\) be the global direction, and let \(u=N^{-1/2}(1,\ldots,1,-1,\ldots,-1)\) contrast two equal clusters. If \(\bar J_{\mathrm{same}}\) and \(\bar J_{\mathrm{different}}\) are the mean within- and between-cluster connections, then the block-constant part of the matrix is
-                \[
-                J_{\mathrm{block}}
-                =\frac{N}{2}\left(\bar J_{\mathrm{same}}+\bar J_{\mathrm{different}}\right)qq^\top
-                +\frac{N}{2}\left(\bar J_{\mathrm{same}}-\bar J_{\mathrm{different}}\right)uu^\top.
-                \]
-                The sum of the block means sets a global population mode, while their difference sets a cluster-contrast mode. This rank-two picture is only an equal-cluster approximation—the trained matrix has a dense residual, unequal groups, and no fixed eigenvector labels—but it explains why faint block structure and isolated eigenvalues might appear together.
-            </p>
-
-            <p>
-                Rainer Engelken sent me this movie after a conversation about the outliers that emerge during training. An isolated eigenvalue compresses a high-dimensional change into a single coordinate, which made the movie invite an obvious question: if training can pull one mode away from a random spectral bulk, does that mode tell us when the driven dynamics are about to change? The experiments below are a deliberately smaller stress test. They use a random bulk, a global balance mode, and one generic mean-orthogonal aligned mode, rather than the movie's binary cluster contrast. They also push that mode toward positive instability, whereas the learned modes in the movie move toward stronger inhibition.
+                What I wanted to keep from Rainer's movie was its visual grammar rather than its data: a matrix, its spectrum, and one low-dimensional trace sharing the same clock. Here that clock is \(\rho\). No network is being trained, no neurons are reclustered between frames, and the random bulk and structured vectors do not change. The low-rank signal first becomes visible because sorting and averaging let it add coherently while the random component cancels; the spectrum is always computed before that display-only compression.
             </p>
 
             <p>
@@ -566,7 +556,7 @@
                     <img src="/assets/post4/static-outlier-nord.png" alt="Predicted signed low-rank eigenvalue versus the empirically tracked eigenvalue, with detached points distinguished from points inside the random bulk">
                 </picture>
                 <figcaption>
-                    <span class="figure-number">Figure 3.</span> Static calibration for \(J=gW-bqq^\top+\rho uv^\top\), using \(N=600\), \(g=1\), \(b=5\), eight random seeds, signed values of \(\rho\), and five alignments \(\alpha=v^\top u\). Filled markers satisfy \(|\rho\alpha|>g\); open markers lie inside the random bulk, where overlap tracking selects a bulk eigenvalue rather than an isolated mode. Across the 320 strictly detached samples, the signed prediction has RMSE \(0.0828\).
+                    <span class="figure-number">Figure 3.</span> Static calibration for \(J=gW-bqq^\top+\rho uv^\top\), using \(N=600\), \(g=1\), \(b=5\), eight random seeds, signed values of \(\rho\), and five alignments \(\alpha=v^\top u\). The pale Snow field between the dotted vertical bounds is the random-bulk interval \(|\rho\alpha|\leq g\); pale hollow circles there are overlap-selected bulk eigenvalues rather than isolated modes. Filled Frost-blue circles satisfy the strict detachment condition \(|\rho\alpha|>g\), and the dark dashed diagonal is the identity prediction. Across the 320 strictly detached samples, the signed prediction has RMSE \(0.0828\).
                 </figcaption>
             </figure>
 
@@ -672,7 +662,7 @@
                     <img src="/assets/post4/dynamic-diagnostics-nord.png" alt="Corrected low-rank sweep comparing two scalar gain summaries, the averaged-Jacobian spectrum, and a finite-time Lyapunov estimate">
                 </picture>
                 <figcaption>
-                    <span class="figure-number">Figure 4.</span> Corrected dynamic sweep with \(N=500\), \(g=1.6\), \(b=5\), \(\alpha=1\), \(\rho\in[0,4]\), eight paired seeds, \(\tau=1\), \(dt=0.01\), \(t_{\mathrm{burn}}=5\tau\), and \(t_{\mathrm{meas}}=20\tau\). The tangent vector is renormalized every \(0.5\tau\). Panel a shows seed means with 95% \(t\)-interval error bars; Nord-red rings mark mean sign disagreements. Panel b overlays faint paired-seed differences and paired means with 95% \(t\)-interval error bars. Marker and line styles duplicate the color encoding, and the Lyapunov curve is a finite-time estimate.
+                    <span class="figure-number">Figure 4.</span> Corrected dynamic sweep with \(N=500\), \(g=1.6\), \(b=5\), \(\alpha=1\), \(\rho\in[0,4]\), eight paired seeds, \(\tau=1\), \(dt=0.01\), \(t_{\mathrm{burn}}=5\tau\), and \(t_{\mathrm{meas}}=20\tau\). The tangent vector is renormalized every \(0.5\tau\). In panel a, orange diamonds with a dotted line are the structured scalar, teal triangles with a dash-dot line are the mean-gain baseline, blue squares with a solid line are \(s(A_{\mathrm{avg}})\), and dark hollow circles with a dashed line are the finite-time \(\lambda_1\). The bars are seed-mean 95% \(t\)-intervals; Nord-red rings mark proxy means whose sign disagrees with the Lyapunov mean. Panel b plots each of the three averaged diagnostics minus \(\lambda_1\), preserving the orange-diamond, teal-triangle, and blue-square identities. Faint dots are individual paired-seed differences, opaque connected marks are paired means, and the bars are 95% paired-seed \(t\)-intervals.
                 </figcaption>
             </figure>
 
@@ -741,7 +731,7 @@
             </p>
 
             <p>
-                The training animation fits this policy as a question for future work. An emerging spectral mode could trigger targeted trajectory and Lyapunov diagnostics during training, although the present experiments do not establish that such an outlier predicts a learning transition. The resemblance to the staged emergence of modes in <a href="https://arxiv.org/abs/1312.6120" target="_blank" rel="noopener">deep linear networks</a> is suggestive, but for now it remains an analogy rather than a mechanism.
+                The opening parameter sweep suggests how this policy might be used during training. If a learned mode begins to separate from the bulk, it could trigger targeted trajectory and Lyapunov diagnostics, although the controlled experiment here does not establish that an outlier predicts a learning transition. The resemblance to the staged emergence of modes in <a href="https://arxiv.org/abs/1312.6120" target="_blank" rel="noopener">deep linear networks</a> is suggestive, but for now it remains an analogy rather than a mechanism.
             </p>
 
             <p>
@@ -749,7 +739,7 @@
             </p>
 
             <p>
-                This project began in a graduate course on dynamical systems, neural networks, and theoretical neuroscience. I am grateful to Rainer Engelken for the conversations that shaped it, including the training movie that motivated this rework.
+                This project began in a graduate course on dynamical systems, neural networks, and theoretical neuroscience. I am grateful to Rainer Engelken for the conversations that shaped it, including the training movie whose visual grammar inspired the opening animation.
             </p>
 
             <p class="section-title" id="section-references">References</p>
@@ -782,12 +772,12 @@
                 sections.forEach((section) => observer.observe(section));
             }
 
-            const video = document.getElementById('training-video');
-            const toggle = document.getElementById('training-toggle');
-            const playIcon = document.getElementById('training-play-icon');
-            const pauseIcon = document.getElementById('training-pause-icon');
-            const toggleLabel = document.getElementById('training-toggle-label');
-            const note = document.getElementById('training-motion-note');
+            const video = document.getElementById('project-video');
+            const toggle = document.getElementById('project-toggle');
+            const playIcon = document.getElementById('project-play-icon');
+            const pauseIcon = document.getElementById('project-pause-icon');
+            const toggleLabel = document.getElementById('project-toggle-label');
+            const note = document.getElementById('project-motion-note');
             const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
             const updateButton = () => {
@@ -795,7 +785,7 @@
                 playIcon.hidden = !paused;
                 pauseIcon.hidden = paused;
                 toggleLabel.textContent = paused ? 'Play animation' : 'Pause animation';
-                toggle.setAttribute('aria-label', paused ? 'Play training animation' : 'Pause training animation');
+                toggle.setAttribute('aria-label', paused ? 'Play parameter sweep animation' : 'Pause parameter sweep animation');
             };
 
             const applyMotionPreference = () => {
@@ -803,7 +793,7 @@
                     video.pause();
                     note.textContent = 'Animation paused because reduced motion is enabled.';
                 } else {
-                    note.textContent = 'The movie loops through saved training checkpoints.';
+                    note.textContent = 'The movie loops through the sampled rank-one strengths.';
                     video.play().catch(() => updateButton());
                 }
                 updateButton();
