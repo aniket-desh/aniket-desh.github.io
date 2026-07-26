@@ -209,15 +209,10 @@
             transform: translateX(-50%);
         }
 
-        .experiment-figure img,
-        .experiment-figure video {
+        .experiment-figure img {
             display: block;
             width: 100%;
             height: auto;
-        }
-
-        .experiment-figure video {
-            background: #fff;
         }
 
         .experiment-figure--movie {
@@ -458,12 +453,9 @@
                 </p>
 
                 <figure class="experiment-figure experiment-figure--movie">
-                    <video id="weekday-formation-video" muted playsinline controls preload="metadata" poster="/blog/vi/assets/pythia-weekday-formation-poster.png">
-                        <source src="/blog/vi/assets/pythia-weekday-formation.mp4" type="video/mp4">
-                        <a href="/blog/vi/assets/pythia-weekday-formation.mp4">Watch the weekday-geometry animation.</a>
-                    </video>
+                    <img src="/blog/vi/assets/pythia-weekday-formation.gif" alt="Weekday activation scatter plots at eight measured Pythia 410M pretraining checkpoints.">
                     <figcaption>
-                        Weekday activations in layer 8 of Pythia 410M across eight pretraining checkpoints.<sup><a class="reference-mark" href="#ref-10">10</a></sup> Faint points are four prompt contexts for each day, and larger points are their centroids. A phase decoder fitted only at the final checkpoint defines the displayed plane and is applied unchanged to every earlier activation. Motion between measured checkpoints is interpolated.
+                        Weekday activations in layer 8 of Pythia 410M across eight pretraining checkpoints.<sup><a class="reference-mark" href="#ref-10">10</a></sup> Faint points are four prompt contexts for each day, and larger points are their centroids. A phase decoder fitted only at the final checkpoint defines the displayed plane and is applied unchanged to every earlier activation. Every frame is a saved checkpoint; no positions between checkpoints are synthesized.
                     </figcaption>
                 </figure>
 
@@ -715,27 +707,6 @@
             updateActiveSection();
         })();
 
-        (function() {
-            var video = document.getElementById("weekday-formation-video");
-            if (!video) return;
-            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-            function playOnce() {
-                video.play().catch(function() {});
-            }
-
-            if (!("IntersectionObserver" in window)) {
-                playOnce();
-                return;
-            }
-
-            var observer = new IntersectionObserver(function(entries) {
-                if (!entries[0].isIntersecting) return;
-                observer.disconnect();
-                playOnce();
-            }, { threshold: 0.55 });
-            observer.observe(video);
-        })();
     </script>
 </body>
 </html>
