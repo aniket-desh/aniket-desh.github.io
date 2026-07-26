@@ -1,2 +1,6 @@
 .DS_Store
+**/__pycache__/
+*.pyc
 blog/the-age-of-sail/
+blog/a-ghost-in-the-machine/rework/
+blog/vi/experiments/

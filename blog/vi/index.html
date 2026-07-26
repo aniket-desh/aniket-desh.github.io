@@ -288,11 +288,11 @@
 <body>
     <nav class="toc-sidebar" aria-label="Table of contents">
         <a href="#section-1">I. The Duality of Surprise</a>
-        <a href="#section-2">II. Seven Things, One Rule</a>
+        <a href="#section-2">II. A Rule \(\bmod 7\)</a>
         <a href="#section-3">III. Geometry Is Not Generalization</a>
         <a href="#section-4">IV. What a Rule Looks Like</a>
         <a href="#section-5">V. Measuring Reuse</a>
-        <a href="#section-6">VI. When a Shape Becomes a Rule</a>
+        <a href="#section-6">VI. Rule Shaping</a>
     </nav>
 
     <div class="container">
@@ -337,14 +337,14 @@
                         +
                         L(\text{data}\mid\text{predictor}).
                     \]
-                    Memorization moves information between these terms. A regularity produces genuine compression when its cost is paid once and the resulting savings recur across data that were not used to specify it.<sup><a class="reference-mark" href="#ref-2">2</a></sup>
+                    Memorization moves information between these terms. A regularity produces genuine compression when its cost is paid once and the resulting savings recur across data that were not used to specify it.<sup><a class="reference-mark" href="#ref-2">2</a>, <a class="reference-mark" href="#ref-12">12</a></sup>
                 </p>
 
                 <p>
                     Compression is consequently not a definition of intelligence. A passive compressor need not plan, choose interventions, or distinguish a cause from a correlation. What the accounting gives us is a test for reusable structure. Two networks can make the same predictions on familiar examples while organizing their knowledge very differently. One can preserve every case separately. The other can represent a relation once and spend it again. Their training losses agree until the world asks for a new combination, at which point the difference between stored skill and a more general learner becomes visible.
                 </p>
 
-                <p class="section-title" id="section-2">II. Seven Things, One Rule</p>
+                <p class="section-title" id="section-2">II. A Rule \(\bmod 7\)</p>
 
                 <p>
                     Consider the days of the week. A system can learn the answer to every offset query separately:
@@ -416,7 +416,7 @@
                 <p class="section-title" id="section-3">III. Geometry Is Not Generalization</p>
 
                 <p>
-                    Circular weekday and month features already appear in trained language models. Engels, Michaud, and collaborators found these structures in GPT-2, Mistral, and Llama-family models, then used interventions to show that the circles participate in calendar arithmetic.<sup><a class="reference-mark" href="#ref-3">3</a></sup> Goodfire later traced corresponding activation and behavior manifolds in Llama 3.1 8B, and found an addition mechanism shared across ordinary arithmetic and cyclic concepts.<sup><a class="reference-mark" href="#ref-4">4</a></sup> These results establish an important possibility: a nonlinear feature can be a computational object inside a trained model.
+                    Circular weekday and month features already appear in trained language models. Engels, Michaud, and collaborators recovered them with SAE clustering in GPT-2 and Mistral 7B, found analogous hidden-state circles in Llama 3 8B, and showed with interventions that circular subspaces affect calendar arithmetic in Mistral and Llama.<sup><a class="reference-mark" href="#ref-3">3</a></sup> Goodfire later traced corresponding activation and behavior manifolds in Llama 3.1 8B, and found an addition mechanism shared across ordinary arithmetic and cyclic concepts.<sup><a class="reference-mark" href="#ref-4">4</a></sup> These results establish an important possibility: a nonlinear feature can be a computational object inside a trained model.
                 </p>
 
                 <figure class="experiment-figure">
@@ -427,7 +427,7 @@
                 </figure>
 
                 <p>
-                    A circle by itself does not tell us when, or whether, the model learned to generalize. Cyclic geometry can be the passive consequence of cyclic statistics. If the normalized co-occurrence statistics for two states depend mostly on their separation, the resulting matrix is approximately circulant. Circulant matrices have Fourier eigenvectors, whose first sine and cosine pair already traces a circle. Recent work derives this mechanism for calendar concepts and finds the resulting geometry across embedding models and language models.<sup><a class="reference-mark" href="#ref-5">5</a></sup> The shape may therefore record a symmetry in the data before it supports any reusable computation.
+                    A circle by itself does not tell us when, or whether, the model learned to generalize. Cyclic geometry can be the passive consequence of cyclic statistics. If the normalized co-occurrence statistics for two states depend mostly on their separation, the resulting matrix is approximately circulant. Circulant matrices have a Fourier eigenbasis, and low-frequency sine and cosine pairs can already trace a circle. Recent work derives this mechanism for calendar concepts and finds the resulting geometry across embedding models and language models.<sup><a class="reference-mark" href="#ref-5">5</a></sup> The shape may therefore record a symmetry in the data before it supports any reusable computation.
                 </p>
 
                 <p>
@@ -435,11 +435,11 @@
                 </p>
 
                 <p>
-                    This separation also changes what it means for a concept to be learned. Park and collaborators assigned familiar words to nodes of rings, grids, and other graphs, then supplied a fixed language model with increasingly long traces from those graphs. Its activations reorganized toward the context-specified structure shortly before its answers improved. When a new ordering of weekdays conflicted with the calendar learned during pretraining, both rings remained present in different subspaces.<sup><a class="reference-mark" href="#ref-6">6</a></sup> A concept can acquire a new relational role without erasing everything it previously meant. The relevant object is often a context-conditioned subspace, not a single permanent embedding.
+                    This separation also changes what it means for a concept to be learned. Park and collaborators assigned familiar words to nodes of rings, grids, and other graphs, then supplied a fixed language model with increasingly long traces from those graphs. As context length increased, the graph-alignment energy reached its minimum shortly before rule-following accuracy rose. When a new ordering of weekdays conflicted with the calendar learned during pretraining, both rings remained present in different subspaces.<sup><a class="reference-mark" href="#ref-6">6</a></sup> A concept can acquire a new relational role without erasing everything it previously meant. The relevant object is often a context-conditioned subspace, not a single permanent embedding.
                 </p>
 
                 <p>
-                    Grokking supplies the training-time analogue. Small transformers trained on modular addition often memorize their observed table long before they generalize to its missing entries. Nanda and collaborators reverse-engineered a Fourier algorithm that gradually forms underneath this apparently sudden behavioral transition, followed by the later removal of memorizing components.<sup><a class="reference-mark" href="#ref-7">7</a></sup> The general lesson is more useful than the circle: a model can improve because the computation supporting its answers has changed, even after its training loss has already reached zero.
+                    Grokking supplies the training-time analogue. Small transformers trained on modular addition often memorize their observed table long before they generalize to its missing entries. Nanda and collaborators reverse-engineered a Fourier algorithm that gradually forms underneath this apparently sudden behavioral transition, followed by the later removal of memorizing components.<sup><a class="reference-mark" href="#ref-7">7</a></sup> The general lesson is more useful than the circle: a model can improve because the computation supporting its answers has changed, even after its training error has reached zero.
                 </p>
 
                 <p class="section-title" id="section-4">IV. What a Rule Looks Like</p>
@@ -453,7 +453,7 @@
                 </p>
 
                 <p>
-                    Geometry gives this act of reduction a possible visible form. If seven clouds of context-dependent activations become seven stable positions on one orbit, and an operator learned on part of that orbit transfers across the rest, the representation is behaving like a variable. A periodic grid should instead admit two commuting directions, an XOR problem a hypercube, and a problem with reflections operations that do not commute. The shape proposes an internal grammar for what transformations are possible. Transfer and intervention determine whether the model uses that grammar in its computation.
+                    Geometry gives this act of reduction a possible visible form. If seven clouds of context-dependent activations become seven stable positions on one orbit, and an operator learned on part of that orbit transfers across the rest, the representation is behaving like a variable. A periodic grid should instead admit two commuting directions, an XOR problem a hypercube, and a problem with reflections operations that do not commute. The shape proposes an internal grammar for what transformations are possible. Transfer asks whether that grammar extends beyond the examples used to fit it, while intervention tests whether the computation is sensitive to it.
                 </p>
 
                 <figure class="experiment-figure experiment-figure--movie">
@@ -516,60 +516,88 @@
                 </p>
 
                 <p>
-                    An intervention asks whether the proposed action is sufficient to change the model's computation. Replace a centered activation \(\widetilde h_t(k)\) with \(R_t(g)\widetilde h_t(k)\), restore the same intercept, and observe whether the output moves from \(k\) toward \(gk\). If matched random and scrambled transformations do not produce the same movement, the result supports causal participation at that site. It does not establish that the representation is necessary or that it fully mediates the behavior. The operator must also be estimated separately from the examples used to judge the intervention; transporting an activation directly toward a labeled target centroid is useful as an upper bound, but it does not demonstrate a learned, reusable operator.
+                    An intervention asks whether the proposed action is sufficient to change the model's computation. Replace a centered activation \(\widetilde h_t(k)\) with \(R_t(g)\widetilde h_t(k)\), restore the same intercept, and observe whether the output moves from \(k\) toward \(gk\). If matched random and scrambled transformations do not produce the same movement, the result supports the causal sufficiency of that intervention at that site. It does not establish that the representation is necessary or that it fully mediates the behavior. The operator must also be estimated separately from the examples used to judge the intervention; transporting an activation directly toward a labeled target centroid is useful as an upper bound, but it does not demonstrate a learned, reusable operator.
                 </p>
 
                 <p>
                     The evidence is therefore an alignment of held-out behavior, full-space symmetry, usable activation compression, operator transfer, and controlled intervention. Their relative timing tells us what kind of event generalization was. Geometry can precede behavior, behavior can precede cleanup, and a clean manifold may never become causally useful. None of these quantities is a universal intelligence score. Together they form a microscope for one possible act of intelligence: the point at which many cases become one reusable computation.
                 </p>
 
-                <p class="section-title" id="section-6">VI. When a Shape Becomes a Rule</p>
+                <p class="section-title" id="section-6">VI. Rule Shaping</p>
 
                 <p>
-                    In modular addition, the shape became evidence of a rule only when three facts aligned. The model answered combinations it had never seen, a cyclic code described its held-out activations more cheaply than either a lookup table or no state structure at all, and an operation fitted on one part of the representation could steer computations on another. The circle was the least important fact. What mattered was that one relation had become reusable.
+                    The shortest rule in a dataset does nothing until a learner finds it. Every clean modular-addition table in our experiments was generated by the same compact cycle, yet the models encoded it differently, sometimes used it without making our chosen activation code cheaper, and sometimes lost the behavior after having generalized. The world can be compressible while the learner remains unintelligent with respect to that compression.
                 </p>
 
                 <p>
-                    The preserved trajectories cover four run configurations, formed by crossing two random seeds with two numbers of surface aliases. They are not four independent seeds. Held-out accuracy first crossed 90 percent at step 17,800 for seed 0 with two aliases, 12,600 for seed 0 with four aliases, 30,000 for seed 1 with two aliases, and 14,400 for seed 1 with four aliases. At the state-token embedding, the median effective Fourier-mode count fell from 55.7817 at initialization to 18.1513 one thousand steps after each run's own crossing, while the median cyclic defect fell from 0.683385 to 0.307184. The representation had concentrated around a cyclic vocabulary as behavior generalized. These archives end between steps 51,900 and 53,900, so they do not establish long-run stability.
+                    This separates four questions that are easy to collapse into one. Held-out behavior asks whether a relation transfers to new cases. Description length asks whether a chosen vocabulary accounts for new activations more economically. Intervention asks whether the proposed operation is causally sufficient to change a computation. Training dynamics asks whether that organization persists. When all four agree, a shape has become strong evidence of a rule. When they disagree, the disagreement tells us which level of the learner changed. The code and exact analysis definitions are available in the <a href="https://github.com/aniket-desh/geometry-generalizing" target="_blank" rel="noopener">experiment repository</a>.
                 </p>
 
                 <p>
-                    The stronger compression result came from asking what this new vocabulary saved. At steps 10,000, 20,000, and 50,000, a sparse cyclic factorization was fitted on one set of states and aliases, then charged for its parameters and residual error on held-out states and aliases. Before generalization, it beat both a separate state lookup and an intercept-only code in none of 25 folds. After generalization, it did so in 34 of 35 folds. Across the generalized checkpoint and run combinations, the median usable saving ranged from 3.71 to 6.39 kilobits. Scrambling the state order erased the effect in all 60 folds.
+                    The shallow grokking runs provide the clearest alignment. In the stricter analysis, where states and surface aliases were held out together, a sparse cyclic code beat both lookup and null descriptions in none of 25 folds before generalization and 34 of 35 afterward, with median savings between 3.71 and 6.39 kilobits. Scrambling the cyclic order erased the gain in all 60 folds. In the new three-seed replication, every clean run reached perfect held-out accuracy, the alias-held-out code saved a median 1.72 kilobits at the endpoint, and a canonical step applied before the first transformer block steered the desired successor on 76.3 percent of examples while matched controls remained below 2.2 percent. Here the same relation transfers in behavior, shortens a held-out activation description, and is causally sufficient at an early site.
+                </p>
+
+                <figure class="experiment-figure experiment-figure--movie">
+                    <img src="/blog/vi/assets/measured-cycle-formation.gif" alt="Measured latent-state centroids forming a cyclic activation geometry during modular-addition training.">
+                    <figcaption>
+                        Formation of an activation geometry in one clean \(C_{113}\) grokking run. Each dot is a measured input-state token centroid from an actual saved checkpoint. One PCA basis fitted at the final checkpoint is held fixed across every frame; no point positions are interpolated and no framewise rotation is applied. This seed was selected for final two-dimensional legibility. The plane contains 21.75 percent of the final centered state-centroid energy, excluding within-state variation, and 95.16 percent of its displayed variance belongs to Fourier harmonic 25. The animation therefore shows one high-frequency cyclic component forming, not the entire representation or a canonical one-step circle.
+                    </figcaption>
+                </figure>
+
+                <p>
+                    The broader sweep separates these quantities. Across fifteen clean runs in five model families, every seed crossed 90 percent held-out accuracy at least once. Yet the predefined output-activation code was cheaper in only two families: it saved 1.72 kilobits for the shallow grokking model and 0.57 kilobits for the small transformer, while costing an additional 2.81 kilobits for the micro transformer, 0.43 kilobits for the medium transformer, and 0.15 kilobits for the large transformer. A code is a wager about the right coordinates and residual model. A negative gain rejects that wager; it does not show that the network failed to reuse structure in every possible representation.
                 </p>
 
                 <p>
-                    This is a statement about a usable description of the activations, not a proof that the network's entire program became shorter. The code searches sparse Fourier representations of the cycle \(C_{113}\), and finite-order closure is built into that vocabulary. Closure cannot then count as a second, independently learned discovery. What the result does show is narrower and more concrete: once behavior generalized, one relational code described new states and new aliases more economically than storing them separately.
+                    Corrupting 15 percent of the table makes the distinction sharper. The canonical rule can explain only about 84.9 percent of the held-out labels because the remaining labels are genuine exceptions. The one-layer grokking model stayed at chance, while the deeper micro and small transformers reached median held-out accuracies of 76.8 and 76.6 percent, and the medium transformer reached 83.5 percent, close to the rule's ceiling. The large transformer broke the apparent trend: one seed reached 82.9 percent, while the other two ended at 1.6 and 2.4 percent. Frequency-matched random tables stayed near chance.
                 </p>
 
                 <p>
-                    Description length still leaves open whether the model uses that code. In one generalized run and one held-out fold, a sixteen-dimensional orthogonal transport was estimated using only held-in states and aliases. Applied at the input-state site, it changed the model's answer to the desired successor on 77.44 percent of 1,024 jointly held-out examples at step 30,000 and 92.68 percent at step 50,000. Scrambled-successor and norm-matched random transports reached at most 1.47 percent. At the final output site, the learned transport reached 100 percent at both checkpoints, while the controls reached at most 2.54 percent.
+                    These are model and training presets, not an isolated scaling law. Width and depth change together, and the five families use batch sizes 4096, 4096, 4096, 2048, and 1024. What the comparison establishes is more modest and more interesting: adding parameters did not make the shorter rule inevitable within a fixed number of updates. The large model could recover it through noise, but whether it had done so by step 30,000 depended strongly on the seed and the path taken through optimization.
                 </p>
 
                 <p>
-                    The earlier intervention is the more informative one because the final output is already close to the logits. Even there, the transported activations remained 2.69 to 2.90 natural within-state radii from the target manifold. The intervention therefore establishes that this direction is sufficient to steer the computation at the patched site. It does not establish necessity, natural mediation, or a complete mechanism, and the evidence currently comes from one seed and one fold.
+                    To distinguish failure from delay, we then continued all three corrupted large runs to step 60,000. They ended at 84.34, 82.51, and 84.06 percent, all near the clean rule's ceiling. This continuation was chosen after seeing the 30,000-step result, so it does not retroactively enter the preregistered spectrum below. It changes the interpretation of that result: the largest preset did not lack access to the rule, but found it on a later and seed-dependent clock. A larger learner can have greater eventual reach while looking worse under a fixed training budget.
                 </p>
 
                 <p>
-                    A single-seed corruption pilot shows how contingent the discovery can be. At step 60,000, the model reached 97.56 percent held-out accuracy with 1.77 percent actual table corruption and 91.19 percent with 5.31 percent corruption, but only 1.19 percent with 15.04 percent corruption. The more heavily corrupted conditions and a random table stayed near chance, even though every model memorized its training entries. This is a sharp change for one model and one seed, not a universal corruption threshold.
+                    At the preregistered endpoint, recovered behavior also did not make the selected activation description cheap. Every corrupted family had a negative alias-held-out code gain. Even so, the canonical early-site intervention steered the desired successor on 50.2 percent of examples in the micro model, 65.9 percent in the small model, and 44.0 percent in the medium model. In the successful large seed it reached 63.2 percent, although the large-seed median stayed near chance because the other two models had not yet generalized. A cyclic action can therefore be causally sufficient even when the output residual stream is not organized in the economical form anticipated by our code. Behavioral reuse, activation economy, and causal reuse are related achievements, but none guarantees the others.
                 </p>
 
-                <!--
-                    LIVE CORE AND SCALE RESULTS SLOT
-                    Insert the matched multi-seed clean, corrupted, random, and
-                    capacity results and their verified figures here only after
-                    the final local archive and evidence ledger have been checked.
-                -->
+                <figure class="experiment-figure">
+                    <picture>
+                        <source media="(max-width: 640px)" srcset="/blog/vi/assets/model-spectrum-mobile.png">
+                        <img src="/blog/vi/assets/model-spectrum.png" alt="Held-out behavior, alias-held-out code gain, and early-site intervention success across five model presets under table corruption.">
+                    </picture>
+                    <figcaption>
+                        Behavior, activation description length, and causal reuse under 15 percent table corruption. Faint paths connect identical data seeds across presets, and the bold path is their pointwise median. The dashed behavioral reference is the median exact agreement between corrupted labels and the underlying clean rule. The middle panel reports savings from a predefined cyclic code at the final output activation; the right panel reports canonical-cycle intervention success before the first transformer block. Lines join measured endpoints without smoothing or confidence intervals. Width, depth, and batch size all change across presets, and the intervention metric uses qualified target accuracy only when enough examples qualify, so this is a descriptive spectrum rather than a pure scaling curve.
+                    </figcaption>
+                </figure>
 
                 <p>
-                    The broader one-seed task sweep makes the same point more forcefully. Every model reached 100 percent training accuracy, yet held-out behavior diverged. A \(5\times5\) torus reached 97.33 percent and a cycle of order 31 reached 94.45 percent, while a cycle of order 24 reached only 1.45 percent despite having an exact rule of the same general kind. Its failure was not explained by the mere absence of structure: the frequency-matched random table of order 31 also remained at 1.73 percent, while the dihedral and broken-cycle tasks ended at zero. XOR reached 54.55 percent, partial and unstable rather than a clean success.
+                    A rule can also be found and then lost. Every clean seed crossed 90 percent held-out accuracy, but several later suffered severe collapses. One medium run reached 100 percent and ended at 3.6 percent. One large run fell from 100 percent to 3.2 percent before recovering to 99.3 percent at the endpoint. Generalization is therefore a state of the training dynamics rather than an irreversible accumulation of knowledge. Discovering a reusable computation does not prevent later optimization from replacing or disrupting it, which is why the faint individual trajectories carry information that a final median hides.
                 </p>
 
                 <p>
-                    Aggregate accuracy was especially misleading on paths and trees. The path task reached 24.68 percent, exactly matching a simple per-relation majority predictor. The tree reached 72.59 percent because frequent root targets dominated the average, while its macro target-class accuracy was 22.42 percent, six target classes never appeared in training, and every held-out leaf target was wrong. A plausible shape or a respectable score can therefore record the statistics of a task without expressing its rule.
+                    The same limit appears across tasks. A cycle of order 31 generalized reliably across three seeds, ending at a median 99.3 percent. A two-dimensional torus reached a median 92.8 percent, but one seed stopped at 70.4 percent. A dihedral task has a compact group law too, yet its median remained at 1.2 percent, while the random-table control ended at 1.7 percent. The existence of a short description belongs to the problem. Whether gradient descent can discover and use it depends on the learner's inductive bias.
+                </p>
+
+                <figure class="experiment-figure">
+                    <picture>
+                        <source media="(max-width: 640px)" srcset="/blog/vi/assets/task-breadth-trajectories-mobile.png">
+                        <img src="/blog/vi/assets/task-breadth-trajectories.png" alt="Held-out accuracy trajectories for torus, cycle, dihedral, and random tasks across three seeds.">
+                    </picture>
+                    <figcaption>
+                        Held-out behavior across three seeds for a cycle, torus, dihedral system, and random table. Faint lines are individual runs and the bold line is their pointwise median. Every point is a measured evaluation, with no smoothing or confidence interval. The comparison shows which relational rules this learner discovered under one matched training setup; it is not a ranking of their intrinsic mathematical complexity.
+                    </figcaption>
+                </figure>
+
+                <p>
+                    Compression is therefore not one hidden scalar that rises whenever a model gets smarter. Held-out behavior tells us that a rule transferred. Description length tells us that one chosen language made the representation cheaper. Intervention tells us that an operation can alter the computation. Stability tells us whether training preserved the solution. Their agreement licenses the strongest story, while their disagreement prevents us from mistaking a clean picture for a complete mechanism.
                 </p>
 
                 <p>
-                    These results narrow the compression claim in a useful way. In modular addition, generalization coincided with a relational code that was cheaper on held-out activations and usable for causal steering. Across other structured tasks, the availability of a short rule did not guarantee that this learner would find it, and geometry alone did not cleanly separate success from failure. Intelligence, in this small setting, is the discovery and use of the shorter rule. The elegance of the available description is only the opportunity.
+                    The move from seven functions to one does not erase the seven states. It factors their relation away from the individual cases and makes that relation available somewhere new. In this narrow sense, a system becomes smarter when what it learns in one place changes what it can do in another. The world supplies the opportunity for compression; the learner earns it by making the shorter rule reusable.
                 </p>
 
                 <hr class="footnotes-sep">
@@ -594,16 +622,14 @@
                     </li>
                     <li id="ref-3">
                         Joshua Engels, Eric J. Michaud, Isaac Liao, Wes Gurnee, and Max Tegmark,
-                        <a href="https://arxiv.org/abs/2405.14860" target="_blank" rel="noopener">Not All Language Model Features Are One-Dimensionally Linear</a>,
+                        <a href="https://arxiv.org/abs/2405.14860" target="_blank" rel="noopener">Not All Language Model Features Are Linear</a>,
                         2024.
                     </li>
                     <li id="ref-4">
-                        Atticus Geiger et al.,
-                        <a href="https://www.goodfire.ai/research/the-world-inside-neural-networks" target="_blank" rel="noopener">The World Inside Neural Networks</a>;
                         Daniel Wurgaft et al.,
-                        <a href="https://www.goodfire.ai/research/manifold-steering" target="_blank" rel="noopener">Steering Along Manifolds to Control Neural Networks</a>;
+                        <a href="https://arxiv.org/abs/2605.05115" target="_blank" rel="noopener">Manifold Steering Reveals the Shared Geometry of Neural Network Representation and Behavior</a>;
                         and Sheridan Feucht et al.,
-                        <a href="https://www.goodfire.ai/research/a-geometric-calculator" target="_blank" rel="noopener">A Geometric Calculator Inside a Neural Network</a>,
+                        <a href="https://arxiv.org/abs/2605.01148" target="_blank" rel="noopener">Arithmetic in the Wild: Llama uses Base-10 Addition to Reason About Cyclic Concepts</a>,
                         2026.
                     </li>
                     <li id="ref-5">
@@ -640,6 +666,11 @@
                         Eric J. Michaud,
                         <a href="https://ericjmichaud.com/quanta/" target="_blank" rel="noopener">On neural scaling and the quanta hypothesis</a>,
                         2026.
+                    </li>
+                    <li id="ref-12">
+                        Jorma Rissanen,
+                        <a href="https://doi.org/10.1016/0005-1098(78)90005-5" target="_blank" rel="noopener">Modeling by shortest data description</a>,
+                        <em>Automatica</em> 14(5):465–471, 1978.
                     </li>
                 </ol>
             </div>
