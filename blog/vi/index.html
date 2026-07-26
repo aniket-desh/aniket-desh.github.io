@@ -292,7 +292,7 @@
         <a href="#section-3">III. Geometry Is Not Generalization</a>
         <a href="#section-4">IV. What a Rule Looks Like</a>
         <a href="#section-5">V. Measuring Reuse</a>
-        <a href="#section-6">VI. Experiments</a>
+        <a href="#section-6">VI. When a Shape Becomes a Rule</a>
     </nav>
 
     <div class="container">
@@ -523,33 +523,53 @@
                     The evidence is therefore an alignment of held-out behavior, full-space symmetry, usable activation compression, operator transfer, and controlled intervention. Their relative timing tells us what kind of event generalization was. Geometry can precede behavior, behavior can precede cleanup, and a clean manifold may never become causally useful. None of these quantities is a universal intelligence score. Together they form a microscope for one possible act of intelligence: the point at which many cases become one reusable computation.
                 </p>
 
-                <p class="section-title" id="section-6">VI. Experiments</p>
+                <p class="section-title" id="section-6">VI. When a Shape Becomes a Rule</p>
 
                 <p>
-                    The first anchor experiment is modular addition of order 113. Four one-layer transformers saw the same 30 percent of the operation table and were trained with strong weight decay. Every model memorized its observed entries while remaining at chance on the rest. Held-out accuracy then crossed 90 percent at steps 26,750, 27,000, 31,250, and 64,750.
-                </p>
-
-                <figure class="experiment-figure">
-                    <img src="/blog/vi/assets/grokking-spaghetti.png" alt="Four modular addition runs showing held-out accuracy rising as cyclic defect and Fourier mode count fall.">
-                    <figcaption>
-                        Four random seeds are shown faintly, with the pointwise median heavier. Geometry is measured in the full state embedding, before the relation token is visible. PCA is not used.
-                    </figcaption>
-                </figure>
-
-                <p>
-                    At initialization, the median embedding distributed its energy across 55.8 effective Fourier modes and had a cyclic defect of 0.68. One thousand steps after each run crossed 90 percent held-out accuracy, those medians were 18.5 modes and 0.33. The movement began before the behavioral transition, accelerated through it, and continued after accuracy had saturated. The model did not converge on one privileged circle. Its representation became more cyclic and concentrated energy into fewer harmonics. Those facts are compatible with a shorter relational description, but they do not establish that the harmonics carried the computation.
+                    In modular addition, the shape became evidence of a rule only when three facts aligned. The model answered combinations it had never seen, a cyclic code described its held-out activations more cheaply than either a lookup table or no state structure at all, and an operation fitted on one part of the representation could steer computations on another. The circle was the least important fact. What mattered was that one relation had become reusable.
                 </p>
 
                 <p>
-                    The transition was not perfectly final. Three seeds remained at perfect held-out accuracy through step 150,000, while one later fell to roughly 70 percent under the same strong weight decay. Nor was the cleanest geometry found at the output of the transformer block. It appeared in the state embedding and became messier downstream. Both details limit the inference available from the picture. Geometry depends on where it is measured, and late behavior can reverse even after an apparently clean transition. Held-out operator transfer and intervention are needed to locate any reusable computation.
+                    The preserved trajectories cover four run configurations, formed by crossing two random seeds with two numbers of surface aliases. They are not four independent seeds. Held-out accuracy first crossed 90 percent at step 17,800 for seed 0 with two aliases, 12,600 for seed 0 with four aliases, 30,000 for seed 1 with two aliases, and 14,400 for seed 1 with four aliases. At the state-token embedding, the median effective Fourier-mode count fell from 55.7817 at initialization to 18.1513 one thousand steps after each run's own crossing, while the median cyclic defect fell from 0.683385 to 0.307184. The representation had concentrated around a cyclic vocabulary as behavior generalized. These archives end between steps 51,900 and 53,900, so they do not establish long-run stability.
                 </p>
 
                 <p>
-                    A second, noisier check follows natural concepts through Pythia's public pretraining checkpoints.<sup><a class="reference-mark" href="#ref-10">10</a></sup> In the 1B model, the fraction of weekday activation energy in the first cyclic harmonic rose from 0.34 at initialization to 0.57 by step 4,000, while average probability on the correct successor among weekday candidates moved only from 0.15 to 0.20. It reached 0.25 much later. The 410M model showed the same ordering. This is consistent with a statistical geometry forming before the model can reliably use it, but it is not causal evidence. Prompt completions are noisy, and a harmonic can be present without carrying the computation.
+                    The stronger compression result came from asking what this new vocabulary saved. At steps 10,000, 20,000, and 50,000, a sparse cyclic factorization was fitted on one set of states and aliases, then charged for its parameters and residual error on held-out states and aliases. Before generalization, it beat both a separate state lookup and an intercept-only code in none of 25 folds. After generalization, it did so in 34 of 35 folds. Across the generalized checkpoint and run combinations, the median usable saving ranged from 3.71 to 6.39 kilobits. Scrambling the state order erased the effect in all 60 folds.
                 </p>
 
                 <p>
-                    The broader test is whether the account survives outside modular addition. Arbitrary aliases can separate a state's relational identity from its surface name, while larger cycles, tori, XOR, rotations with reflections, broken cycles, and random-permutation controls vary the rule that a useful representation would have to reuse. Paths and trees add a warning of their own: boundaries and imbalanced targets can reward shortcuts that look like generalization in aggregate accuracy. The comparison matters because a Fourier signature on one modular task is evidence about that task, not yet a general theory of how intelligence compresses experience.
+                    This is a statement about a usable description of the activations, not a proof that the network's entire program became shorter. The code searches sparse Fourier representations of the cycle \(C_{113}\), and finite-order closure is built into that vocabulary. Closure cannot then count as a second, independently learned discovery. What the result does show is narrower and more concrete: once behavior generalized, one relational code described new states and new aliases more economically than storing them separately.
+                </p>
+
+                <p>
+                    Description length still leaves open whether the model uses that code. In one generalized run and one held-out fold, a sixteen-dimensional orthogonal transport was estimated using only held-in states and aliases. Applied at the input-state site, it changed the model's answer to the desired successor on 77.44 percent of 1,024 jointly held-out examples at step 30,000 and 92.68 percent at step 50,000. Scrambled-successor and norm-matched random transports reached at most 1.47 percent. At the final output site, the learned transport reached 100 percent at both checkpoints, while the controls reached at most 2.54 percent.
+                </p>
+
+                <p>
+                    The earlier intervention is the more informative one because the final output is already close to the logits. Even there, the transported activations remained 2.69 to 2.90 natural within-state radii from the target manifold. The intervention therefore establishes that this direction is sufficient to steer the computation at the patched site. It does not establish necessity, natural mediation, or a complete mechanism, and the evidence currently comes from one seed and one fold.
+                </p>
+
+                <p>
+                    A single-seed corruption pilot shows how contingent the discovery can be. At step 60,000, the model reached 97.56 percent held-out accuracy with 1.77 percent actual table corruption and 91.19 percent with 5.31 percent corruption, but only 1.19 percent with 15.04 percent corruption. The more heavily corrupted conditions and a random table stayed near chance, even though every model memorized its training entries. This is a sharp change for one model and one seed, not a universal corruption threshold.
+                </p>
+
+                <!--
+                    LIVE CORE AND SCALE RESULTS SLOT
+                    Insert the matched multi-seed clean, corrupted, random, and
+                    capacity results and their verified figures here only after
+                    the final local archive and evidence ledger have been checked.
+                -->
+
+                <p>
+                    The broader one-seed task sweep makes the same point more forcefully. Every model reached 100 percent training accuracy, yet held-out behavior diverged. A \(5\times5\) torus reached 97.33 percent and a cycle of order 31 reached 94.45 percent, while a cycle of order 24 reached only 1.45 percent despite having an exact rule of the same general kind. Its failure was not explained by the mere absence of structure: the frequency-matched random table of order 31 also remained at 1.73 percent, while the dihedral and broken-cycle tasks ended at zero. XOR reached 54.55 percent, partial and unstable rather than a clean success.
+                </p>
+
+                <p>
+                    Aggregate accuracy was especially misleading on paths and trees. The path task reached 24.68 percent, exactly matching a simple per-relation majority predictor. The tree reached 72.59 percent because frequent root targets dominated the average, while its macro target-class accuracy was 22.42 percent, six target classes never appeared in training, and every held-out leaf target was wrong. A plausible shape or a respectable score can therefore record the statistics of a task without expressing its rule.
+                </p>
+
+                <p>
+                    These results narrow the compression claim in a useful way. In modular addition, generalization coincided with a relational code that was cheaper on held-out activations and usable for causal steering. Across other structured tasks, the availability of a short rule did not guarantee that this learner would find it, and geometry alone did not cleanly separate success from failure. Intelligence, in this small setting, is the discovery and use of the shorter rule. The elegance of the available description is only the opportunity.
                 </p>
 
                 <hr class="footnotes-sep">
