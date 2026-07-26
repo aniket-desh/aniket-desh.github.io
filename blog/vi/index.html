@@ -305,7 +305,7 @@
                 <p class="section-title" id="section-1">I. The Duality of Surprise</p>
 
                 <p>
-                    When we say that we want to make a language model smarter, we are asking a question about a process, not merely its outcome. A larger model can know more facts, score higher on a benchmark, and produce more impressive answers because we gave it more opportunities to store them. Intelligence, if the word is going to name something deeper than accumulated skill, should describe how experience changes what the system can learn next: how many cases become governed by the same rule, how far that rule transfers, and how little new evidence is needed before it becomes useful somewhere else.
+                    When we say that we want to make a language model smarter, we are asking a question about a process, not merely its outcome. A larger model can know more facts, score higher on a benchmark, and produce more impressive answers, yet those outcomes alone do not tell us whether it discovered more reusable structure or simply fit more cases. Intelligence, if the word is going to name something deeper than accumulated skill, should describe how experience changes what the system can learn next: how many cases become governed by the same rule, how far that rule transfers, and how little new evidence is needed before it becomes useful somewhere else.
                 </p>
 
                 <p>
@@ -347,29 +347,29 @@
                 <p class="section-title" id="section-2">II. Seven Things, One Rule</p>
 
                 <p>
-                    Consider the days of the week. A system can learn seven unrelated successor functions:
+                    Consider the days of the week. A system can learn the answer to every offset query separately:
                     \[
-                        f_{\mathrm{Mon}}\mapsto\mathrm{Tue},
+                        f_{\mathrm{Mon},+1}\mapsto\mathrm{Tue},
                         \qquad
-                        f_{\mathrm{Tue}}\mapsto\mathrm{Wed},
+                        f_{\mathrm{Mon},+2}\mapsto\mathrm{Wed},
                         \qquad
                         \ldots
                     \]
-                    Nothing in this representation says that the seven transitions are versions of one operation. A different system can assign every day a phase \(k\in\mathbb Z_7\) and learn
+                    Continued across seven starting days and seven offsets, this representation is a table of forty-nine answers. Nothing in the table says that its entries are versions of one operation. A different system can assign every day a phase \(k\in\mathbb Z_7\) and learn the same input-output function as
                     \[
                         f(k,m)=k+m\pmod 7.
                     \]
-                    The first program stores a table. The second stores a coordinate system and a rule. Both preserve which day is which, but the second can answer a question such as “three days after Thursday” without having stored that pair as a separate fact.
+                    The first program stores a table. The second stores a coordinate system and a rule. Both preserve which day is which, but the second can answer a question such as “three days after Thursday” even when that pair was withheld, provided the other examples were enough to identify the common operation.
                 </p>
 
                 <p>
-                    Generalization here is not seven concepts collapsing into one point. Such a collapse would destroy the information required to distinguish Monday from Thursday. It is seven arbitrary symbols becoming seven states of one latent variable. What gets compressed is their relational description:
+                    Generalization here is not seven concepts collapsing into one point. Such a collapse would destroy the information required to distinguish Monday from Thursday. It is seven arbitrary symbols becoming seven states of one latent variable. The proposed compression is in their relational description:
                     \[
                         \underbrace{\text{many unrelated transitions}}_{\text{lookup table}}
                         \quad\longrightarrow\quad
                         \underbrace{\text{one generator applied repeatedly}}_{\text{shared rule}}.
                     \]
-                    The entropy of the answer need not fall. The length of the program that relates the answers does.
+                    The entropy of the answer need not fall. The length of the program that relates the answers can. This comparison is always relative to a coding language: for a few queries, a table may be cheaper than transmitting coordinates and a generator. The shared rule earns its name only when that fixed cost is amortized across enough offsets, contexts, aliases, or held-out combinations.
                 </p>
 
                 <p>
@@ -387,13 +387,13 @@
                         +
                         r_t(k,c).
                     \]
-                    The matrix \(A_t\) embeds a common phase into activation space, while \(r_t\) contains context, surface form, and whatever else the network superposes there. A single rotation \(R_t\) can now implement the successor relation:
+                    The matrix \(A_t\) embeds a common phase into activation space, while \(r_t\) contains context, surface form, and whatever else the network superposes there. Let \(\widetilde h_t(k,c)=h_t(k,c)-b_t\). A single linear action on the centered state subspace can now implement the successor relation:
                     \[
-                        R_t h_t(k,c)\simeq h_t(k+1,c),
+                        R_t \widetilde h_t(k,c)\simeq \widetilde h_t(k+1,c),
                         \qquad
-                        R_t^7\simeq I.
+                        R_t^7\widetilde h_t(k,c)\simeq \widetilde h_t(k,c).
                     \]
-                    If the same \(R_t\) works across states, contexts, and unseen combinations, seven cases are behaving as one orbit of one operation.
+                    Equivalently, the operation on uncentered activations is affine: subtract \(b_t\), apply \(R_t\), then add \(b_t\) again. If the same action works across states, contexts, and unseen combinations, seven cases are behaving as one orbit of one operation.
                 </p>
 
                 <p>
@@ -445,19 +445,15 @@
                 <p class="section-title" id="section-4">IV. What a Rule Looks Like</p>
 
                 <p>
-                    What would license the stronger claim that a representation has become a rule? Monday through Sunday occupying nearby points is not enough. The same internal transformation must explain all seven successor relations and continue to work on states or contexts that did not determine it. In the language of two-part codes, memorizing seven arrows pays for seven separate pieces of program, while learning a state variable and one rotation pays once and reuses the result.<sup><a class="reference-mark" href="#ref-2">2</a></sup> The circle matters only insofar as it makes that reuse possible.
+                    What would license the stronger claim that a representation has become a rule? Monday through Sunday occupying nearby points is not enough. Different surface forms and contexts must first become interchangeable as evidence about the same state. The states must then become positions on a structure over which one operation acts, including on examples that did not determine it. In the language of two-part codes, a lookup scheme pays separately for local answers, while a state variable and one transferable operation pay a fixed cost that can be reused.<sup><a class="reference-mark" href="#ref-2">2</a></sup>
                 </p>
 
                 <p>
-                    The abstraction has two parts. First, different surface forms and contexts must become interchangeable as evidence about the same state. Then the states themselves must become positions on a structure over which one operation acts. The answer space has not become smaller. The vocabulary needed to explain its transitions has. What previously required many local descriptions can now be expressed by one generator plus a coordinate that says where the system currently is.
+                    This is the sense in which generalization begins to look like intelligence. The answer space has not become smaller. The vocabulary needed to explain its transitions has. A lookup table can answer a familiar question, while a relational representation can answer a new one because what it learned from one case changes how it treats the others. The more general learner discovers which distinctions can be factored away, which must be preserved, and which operation can be spent again on an unseen case.
                 </p>
 
                 <p>
-                    This is the sense in which generalization begins to look like intelligence. A lookup table can answer an old question. A relational representation can answer a new one because what it learned from one case changes how it treats the others. The more general learner is the one that discovers which distinctions can be factored away, which must be preserved, and which operation can be spent again on an unseen case. Its advantage is measured by how quickly experience becomes reusable structure, not by how many answers it can eventually memorize.
-                </p>
-
-                <p>
-                    Geometry gives this act of reduction a possible visible form. If seven clouds of context-dependent activations become seven stable positions on one orbit, and an operator learned on part of that orbit transfers across the rest, the representation is behaving like a variable. A periodic grid should instead admit two commuting directions, an XOR problem a hypercube, and a problem with reflections operations that do not commute. The shape proposes an internal grammar for what transformations are possible. Transfer and intervention determine whether the model actually uses it. A circle with no reusable shift is a description; a warped, high-dimensional orbit on which one shift acts reliably can be compression.
+                    Geometry gives this act of reduction a possible visible form. If seven clouds of context-dependent activations become seven stable positions on one orbit, and an operator learned on part of that orbit transfers across the rest, the representation is behaving like a variable. A periodic grid should instead admit two commuting directions, an XOR problem a hypercube, and a problem with reflections operations that do not commute. The shape proposes an internal grammar for what transformations are possible. Transfer and intervention determine whether the model uses that grammar in its computation.
                 </p>
 
                 <figure class="experiment-figure experiment-figure--movie">
@@ -474,15 +470,15 @@
                 <p class="section-title" id="section-5">V. Measuring Reuse</p>
 
                 <p>
-                    Any useful measure has to survive a change of basis and has to distinguish a short rule from a cheap failure to describe the data. The first requirement moves us away from the picture and toward the relations among the states. Let \(H_t\in\mathbb R^{n\times d}\) contain centered activation centroids for \(n\) states at checkpoint \(t\), averaged across surface forms and contexts, and let
+                    A picture can rotate or reflect without changing what the representation means, so the first useful measurement concerns relations among states rather than their displayed coordinates. Let \(H_t\in\mathbb R^{n\times d}\) contain centered activation centroids for \(n\) states at checkpoint \(t\), averaged across surface forms and contexts, and let
                     \[
                         G_t=H_tH_t^\top
                     \]
-                    be their Gram matrix. \(G_t\) forgets the arbitrary orientation of activation space while retaining every pairwise inner product.
+                    be their Gram matrix. \(G_t\) is unchanged by an orthogonal rotation or reflection of activation space and retains every pairwise inner product in the model's chosen activation metric. It is not invariant to an arbitrary invertible reparameterization, so it removes orientation, not every possible choice of basis.
                 </p>
 
                 <p>
-                    For a cycle, let \(P\) shift every state by one. If the representation has recognized one common orbit, shifting both arguments should preserve every inner product. We can project the Gram matrix onto the nearest cyclically invariant one,
+                    For a cycle, let \(P\) shift every state by one. If the centroids occupy one common orbit, shifting both arguments should preserve every inner product. We can project the Gram matrix onto the nearest cyclically invariant one,
                     \[
                         \overline G_t
                         =
@@ -490,33 +486,22 @@
                         \sum_{m=0}^{n-1}
                         P^mG_tP^{-m},
                     \]
-                    and define the symmetry defect
+                    then summarize the remaining distance as the symmetry defect
                     \[
                         \Delta_{\mathrm{cyc}}(t)
                         =
                         \frac{\lVert G_t-\overline G_t\rVert_F}
                         {\lVert G_t\rVert_F}.
                     \]
-                    This defect is computed in the full representation and becomes small when relative geometry depends only on cyclic separation. It asks whether seven concepts have become positions in one system, without demanding that the system look circular in two principal components.
+                    computed in the full representation. It becomes small when relative geometry depends only on cyclic separation, without demanding that the first two principal components draw a circle. A low defect is compatible with seven concepts occupying one cyclic system, but it cannot tell us whether the model uses that system.
                 </p>
 
                 <p>
-                    Symmetry is still only evidence that the representation knows which states belong together. Statistics alone can produce a ring, and even a regular simplex has abundant symmetry. The stronger question is whether one operation can be learned on some states and contexts, then reused on others. Fit \(R_t(g)\) on one part of the orbit and measure both its held-out equivariance and whether repeated application closes the cycle:
-                    \[
-                        \epsilon_{\mathrm{eq}}(t)
-                        =
-                        \frac{\lVert R_t(g)h_t(k)-h_t(gk)\rVert}
-                        {\lVert h_t(gk)\rVert},
-                        \qquad
-                        \epsilon_{\mathrm{close}}(t)
-                        =
-                        \frac{\lVert R_t(g)^n-I\rVert_F}{\sqrt d}.
-                    \]
-                    A reusable rule reduces both errors without erasing which state is which. This is the geometric analogue of a program bit paying for itself across many predictions.
+                    Statistics alone can produce a ring, and even a regular simplex has abundant symmetry. The stronger question is whether one operation can be learned on some states and contexts, then reused on others. Fit \(R_t(g)\) on one part of the orbit and judge it on held-out states. One application should carry \(\widetilde h_t(k)\) toward \(\widetilde h_t(gk)\), while \(n\) applications should carry each measured state back toward itself. This tests closure on the measured state span, rather than demanding that \(R_t(g)^n\) equal the identity on every unrelated activation direction.
                 </p>
 
                 <p>
-                    We can make the compression claim explicit by comparing three codes for held-out activations. A lookup code \(C_{\mathrm{lookup}}\) transmits a separate centroid for every state. A shared-rule code \(C_{\mathrm{shared}}\) transmits an intercept and a small set of relational components, together with their residual error. An intercept-only code \(C_{\mathrm{null}}\) transmits no state structure at all. Each code pays for its continuous parameters and its unexplained residuals, while the shared code also pays to identify the components it uses. The usable shared-rule gain is
+                    Geometry and operator transfer still do not establish that the predictor itself has become shorter. We can ask a narrower question: whether a predefined relational vocabulary describes held-out activations more economically than either memorizing them or ignoring their state structure. A lookup code \(C_{\mathrm{lookup}}\) transmits a separate centroid for every state. A shared-rule code \(C_{\mathrm{shared}}\) transmits an intercept and a small set of relational components, together with their residual error. An intercept-only code \(C_{\mathrm{null}}\) transmits no state structure at all. Each code pays for its continuous parameters and its unexplained residuals, while the shared code also pays to identify the components it uses. Their comparison gives the usable shared-rule gain
                     \[
                         G_{\mathrm{usable}}(t)
                         =
@@ -527,15 +512,15 @@
                         -
                         C_{\mathrm{shared}}(t).
                     \]
-                    A positive value means that the relational description beats both memorization and saying nothing. Selecting its components on held-out state folds, fitting on one set of surface aliases, scoring another set of aliases, and repeating the comparison after scrambling the relational labels prevents a conveniently chosen basis from manufacturing the result. If exact cyclic closure is built into the shared code, closure is a property of that model class and cannot also be counted as evidence that the network learned it.
+                    A positive value means that this relational code describes the held-out activations more cheaply than either alternative, under the chosen precision and residual model. It does not by itself show that the network's parameters form a shorter program or that the relation drives prediction. Fixing the code in advance, separating the states and surface aliases used for fitting from those used for scoring, and scrambling the relational labels guard against manufacturing a gain from a convenient basis. If exact cyclic closure is built into the shared code, closure is a property of that model class and cannot also be counted as evidence that the network learned it.
                 </p>
 
                 <p>
-                    Causality is the final distinction. Replace an activation \(h_t(k)\) with \(R_t(g)h_t(k)\) where the operator is most coherent. If the model's output moves from \(k\) toward \(gk\), and matched or scrambled transformations do not, the geometry is participating in the computation rather than merely describing it. The operator must be estimated separately from the examples used to judge the intervention; transporting an activation directly toward a labeled target centroid is useful as an upper bound, but it does not by itself demonstrate a learned, reusable operator.
+                    An intervention asks whether the proposed action is sufficient to change the model's computation. Replace a centered activation \(\widetilde h_t(k)\) with \(R_t(g)\widetilde h_t(k)\), restore the same intercept, and observe whether the output moves from \(k\) toward \(gk\). If matched random and scrambled transformations do not produce the same movement, the result supports causal participation at that site. It does not establish that the representation is necessary or that it fully mediates the behavior. The operator must also be estimated separately from the examples used to judge the intervention; transporting an activation directly toward a labeled target centroid is useful as an upper bound, but it does not demonstrate a learned, reusable operator.
                 </p>
 
                 <p>
-                    The evidence is therefore an alignment of held-out behavior, full-space symmetry, usable shared-rule compression, and causal operator reuse. Their relative timing tells us what kind of event generalization was. Geometry can precede behavior, behavior can precede cleanup, and a clean manifold may never become causally useful. None of these quantities is a universal intelligence score. Together they form a microscope for one possible act of intelligence: the point at which many cases become one reusable cause.
+                    The evidence is therefore an alignment of held-out behavior, full-space symmetry, usable activation compression, operator transfer, and controlled intervention. Their relative timing tells us what kind of event generalization was. Geometry can precede behavior, behavior can precede cleanup, and a clean manifold may never become causally useful. None of these quantities is a universal intelligence score. Together they form a microscope for one possible act of intelligence: the point at which many cases become one reusable computation.
                 </p>
 
                 <p class="section-title" id="section-6">VI. Experiments</p>
