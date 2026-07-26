@@ -305,11 +305,11 @@
                 <p class="section-title" id="section-1">I. The Duality of Surprise</p>
 
                 <p>
-                    When we say that we want to make a language model smarter, what change are we asking for? A lower pretraining loss, a higher benchmark score, and a new skill can all look like progress from the outside, but they need not describe the same change inside the model. It can improve because it has stored more cases, because the test has become familiar, or because it has found a rule that makes many cases instances of the same problem. Only the last kind of improvement changes how much the model must learn the next time around.
+                    When we say that we want to make a language model smarter, we are asking a question about a process, not merely its outcome. A larger model can know more facts, score higher on a benchmark, and produce more impressive answers because we gave it more opportunities to store them. Intelligence, if the word is going to name something deeper than accumulated skill, should describe how experience changes what the system can learn next: how many cases become governed by the same rule, how far that rule transfers, and how little new evidence is needed before it becomes useful somewhere else.
                 </p>
 
                 <p>
-                    This is an <a href="/blog/the-effective-reductionist/">effective-reductionist</a> question. Intelligence belongs to our description of an agent, while a neural network is implemented as arrays of numbers undergoing physical computation. The parameters are too low-level to explain the property, and the benchmark score is too high-level to locate it. We need an intermediate quantity that can be measured in the mechanism and still tells us something about what the system has learned. For a predictive model, information gives us one such bridge.<sup data-fn="animal-intelligence"></sup>
+                    This is an <a href="/blog/the-effective-reductionist/">effective-reductionist</a> question. Intelligence belongs to our description of an agent, while a neural network is implemented as arrays of numbers undergoing physical computation. A list of parameters is too low-level to explain the property, and a benchmark score is too high-level to locate it. We need an intermediate description that is measurable in the mechanism and still says what changed in the learner. For a predictive model, information gives us one such bridge.<sup data-fn="animal-intelligence"></sup>
                 </p>
 
                 <p>
@@ -329,11 +329,19 @@
                 </p>
 
                 <p>
-                    This is a duality between prediction and coding, not a definition of intelligence. A compressor can absorb regularities that never support planning, intervention, or learning in a new domain. It can also predict a dataset by storing the dataset. An honest account must charge for the description of the predictor as well as the data left unexplained. The regularities worth calling intelligent are the ones that cost less to represent than they save on cases the system has not seen.<sup><a class="reference-mark" href="#ref-2">2</a></sup>
+                    The equivalence is exact only after we condition on the predictor. The predictor itself is not free. A program with every answer written into its source can assign the data probability one, moving the entire description from the bitstream into the program. A complete account must therefore pay for both parts,
+                    \[
+                        L_{\mathrm{total}}
+                        =
+                        L(\text{predictor})
+                        +
+                        L(\text{data}\mid\text{predictor}).
+                    \]
+                    Memorization moves information between these terms. A regularity produces genuine compression when its cost is paid once and the resulting savings recur across data that were not used to specify it.<sup><a class="reference-mark" href="#ref-2">2</a></sup>
                 </p>
 
                 <p>
-                    That qualification moves the question inside the model. Two networks can make the same predictions on their training examples while using descriptions of very different lengths. One can assign a separate mechanism to every case. The other can represent a relation once and reuse it. Their losses agree until the world asks for a new combination, at which point the difference between memory and structure becomes visible.
+                    Compression is consequently not a definition of intelligence. A passive compressor need not plan, choose interventions, or distinguish a cause from a correlation. What the accounting gives us is a test for reusable structure. Two networks can make the same predictions on familiar examples while organizing their knowledge very differently. One can preserve every case separately. The other can represent a relation once and spend it again. Their training losses agree until the world asks for a new combination, at which point the difference between stored skill and a more general learner becomes visible.
                 </p>
 
                 <p class="section-title" id="section-2">II. Seven Things, One Rule</p>
@@ -365,7 +373,7 @@
                 </p>
 
                 <p>
-                    A cyclic representation makes this compression visible. At checkpoint \(t\), suppose a state \(k\) in context \(c\) has activation
+                    A cyclic representation can make this shorter description visible. At checkpoint \(t\), suppose a state \(k\) in context \(c\) has activation
                     \[
                         h_t(k,c)
                         =
@@ -385,7 +393,7 @@
                         \qquad
                         R_t^7\simeq I.
                     \]
-                    Seven cases have become an orbit of one operation.
+                    If the same \(R_t\) works across states, contexts, and unseen combinations, seven cases are behaving as one orbit of one operation.
                 </p>
 
                 <p>
@@ -408,7 +416,7 @@
                 <p class="section-title" id="section-3">III. Geometry Is Not Generalization</p>
 
                 <p>
-                    Circular weekday and month features already appear in trained language models. Engels, Michaud, and collaborators found these structures in GPT-2, Mistral, and Llama-family models, then used interventions to show that the circles participate in calendar arithmetic.<sup><a class="reference-mark" href="#ref-3">3</a></sup> Goodfire later traced smooth activation and behavior manifolds in Llama 3.1 8B, and found a more general geometric addition mechanism spanning ordinary arithmetic and cyclic concepts.<sup><a class="reference-mark" href="#ref-4">4</a></sup> These experiments show that a trained model can use a nonlinear feature as a computational object.
+                    Circular weekday and month features already appear in trained language models. Engels, Michaud, and collaborators found these structures in GPT-2, Mistral, and Llama-family models, then used interventions to show that the circles participate in calendar arithmetic.<sup><a class="reference-mark" href="#ref-3">3</a></sup> Goodfire later traced corresponding activation and behavior manifolds in Llama 3.1 8B, and found an addition mechanism shared across ordinary arithmetic and cyclic concepts.<sup><a class="reference-mark" href="#ref-4">4</a></sup> These results establish an important possibility: a nonlinear feature can be a computational object inside a trained model.
                 </p>
 
                 <figure class="experiment-figure">
@@ -419,29 +427,29 @@
                 </figure>
 
                 <p>
-                    They do not show that the circle appeared when the model learned to generalize. A cyclic geometry can be the passive consequence of cyclic statistics. If the relationship between two states depends mostly on their separation, their co-occurrence matrix is approximately circulant. Circulant matrices have Fourier eigenvectors, whose first sine and cosine pair already traces a circle. Recent work derives this mechanism for calendar concepts and finds that it persists across embedding models and language models.<sup><a class="reference-mark" href="#ref-5">5</a></sup>
+                    A circle by itself does not tell us when, or whether, the model learned to generalize. Cyclic geometry can be the passive consequence of cyclic statistics. If the relationship between two states depends mostly on their separation, their co-occurrence matrix is approximately circulant. Circulant matrices have Fourier eigenvectors, whose first sine and cosine pair already traces a circle. Recent work derives this mechanism for calendar concepts and finds the resulting geometry across embedding models and language models.<sup><a class="reference-mark" href="#ref-5">5</a></sup> The shape may therefore record a symmetry in the data before it supports any reusable computation.
                 </p>
 
                 <p>
-                    The distinction is developmental. A model may first organize observations according to a symmetry in its data, later learn an operation that acts on that organization, and later still remove the machinery that memorized individual cases. The representation, the reusable computation, the held-out behavior, and the final cleanup can occur at different times. A static activation plot cannot tell us which event we are looking at.
+                    Several changes that look identical in a final picture must therefore be separated. A model may first organize observations according to a statistical symmetry, later learn an operation that acts on that organization, and later still stop relying on machinery that handled individual cases. Representational symmetry, operator reuse, held-out behavior, and cleanup can occur at different times. A static activation plot cannot tell us which event we are looking at.
                 </p>
 
                 <p>
-                    Park and collaborators have come closest to watching arbitrary concepts acquire a new geometry. They assigned familiar words to nodes of rings, grids, and other graphs, then supplied a fixed language model with increasingly long traces from those graphs. Its activations reorganized toward the context-specified structure shortly before its answers improved. When a new ordering of weekdays conflicted with the calendar learned during pretraining, both rings remained present in different subspaces.<sup><a class="reference-mark" href="#ref-6">6</a></sup> A concept can acquire a relational role without erasing everything it previously meant.
+                    This separation also changes what it means for a concept to be learned. Park and collaborators assigned familiar words to nodes of rings, grids, and other graphs, then supplied a fixed language model with increasingly long traces from those graphs. Its activations reorganized toward the context-specified structure shortly before its answers improved. When a new ordering of weekdays conflicted with the calendar learned during pretraining, both rings remained present in different subspaces.<sup><a class="reference-mark" href="#ref-6">6</a></sup> A concept can acquire a new relational role without erasing everything it previously meant. The relevant object is often a context-conditioned subspace, not a single permanent embedding.
                 </p>
 
                 <p>
-                    Grokking supplies the training-time analogue. Small transformers trained on modular addition often memorize their observed table long before they generalize to its missing entries. Nanda and collaborators reverse-engineered a Fourier algorithm that gradually forms underneath this apparently sudden behavioral transition, then watched memorizing components disappear afterward.<sup><a class="reference-mark" href="#ref-7">7</a></sup> The result suggests a sharper account of learning: the model gets better when an expensive collection of exceptions is displaced by a reusable computation, even if its training loss had already reached zero.
+                    Grokking supplies the training-time analogue. Small transformers trained on modular addition often memorize their observed table long before they generalize to its missing entries. Nanda and collaborators reverse-engineered a Fourier algorithm that gradually forms underneath this apparently sudden behavioral transition, followed by the later removal of memorizing components.<sup><a class="reference-mark" href="#ref-7">7</a></sup> The general lesson is more useful than the circle: a model can improve because the computation supporting its answers has changed, even after its training loss has already reached zero.
                 </p>
 
-                <p class="section-title" id="section-4">IV. What a Rule Looks Like from the Inside</p>
+                <p class="section-title" id="section-4">IV. What a Rule Looks Like</p>
 
                 <p>
-                    The compression claim becomes stronger here. A model has not compressed the weekdays merely because Monday through Sunday occupy nearby points. It has compressed them when the same internal transformation explains all seven successor relations. In the language of two-part codes, memorizing seven arrows pays for seven separate pieces of program, while learning a state variable and one rotation pays once and reuses the result.<sup><a class="reference-mark" href="#ref-2">2</a></sup> The circle matters only insofar as it makes that reuse possible.
+                    What would license the stronger claim that a representation has become a rule? Monday through Sunday occupying nearby points is not enough. The same internal transformation must explain all seven successor relations and continue to work on states or contexts that did not determine it. In the language of two-part codes, memorizing seven arrows pays for seven separate pieces of program, while learning a state variable and one rotation pays once and reuses the result.<sup><a class="reference-mark" href="#ref-2">2</a></sup> The circle matters only insofar as it makes that reuse possible.
                 </p>
 
                 <p>
-                    Before this reorganization, the model can treat each surface form in each context as its own route to an answer. Afterward, those surface forms become instances of seven states, and the seven states become positions on one orbit. The answer space has not become smaller. The causal vocabulary has. Seven local explanations have been replaced by one generator plus a coordinate that says where the system currently is.
+                    The abstraction has two parts. First, different surface forms and contexts must become interchangeable as evidence about the same state. Then the states themselves must become positions on a structure over which one operation acts. The answer space has not become smaller. The vocabulary needed to explain its transitions has. What previously required many local descriptions can now be expressed by one generator plus a coordinate that says where the system currently is.
                 </p>
 
                 <p>
@@ -449,7 +457,7 @@
                 </p>
 
                 <p>
-                    Geometry gives this act of reduction a visible form. If seven clouds of context-dependent activations gradually become seven positions on one orbit, we are watching the model invent a variable. A periodic grid should instead acquire two commuting directions, an XOR problem a hypercube, and a problem with reflections a geometry whose operations do not commute. Each shape is an internal grammar for what transformations are possible. A circle with no reusable shift is decoration; a warped, high-dimensional orbit on which one shift acts reliably is compression.
+                    Geometry gives this act of reduction a possible visible form. If seven clouds of context-dependent activations become seven stable positions on one orbit, and an operator learned on part of that orbit transfers across the rest, the representation is behaving like a variable. A periodic grid should instead admit two commuting directions, an XOR problem a hypercube, and a problem with reflections operations that do not commute. The shape proposes an internal grammar for what transformations are possible. Transfer and intervention determine whether the model actually uses it. A circle with no reusable shift is a description; a warped, high-dimensional orbit on which one shift acts reliably can be compression.
                 </p>
 
                 <figure class="experiment-figure experiment-figure--movie">
@@ -466,7 +474,7 @@
                 <p class="section-title" id="section-5">V. Measuring Reuse</p>
 
                 <p>
-                    To call this compression, we need a quantity that cannot be won by choosing a flattering projection. The natural object is not the picture but the relations among the states. Let \(H_t\in\mathbb R^{n\times d}\) contain centered activation centroids for \(n\) states at checkpoint \(t\), averaged across surface forms and contexts, and let
+                    Any useful measure has to survive a change of basis and has to distinguish a short rule from a cheap failure to describe the data. The first requirement moves us away from the picture and toward the relations among the states. Let \(H_t\in\mathbb R^{n\times d}\) contain centered activation centroids for \(n\) states at checkpoint \(t\), averaged across surface forms and contexts, and let
                     \[
                         G_t=H_tH_t^\top
                     \]
@@ -493,7 +501,7 @@
                 </p>
 
                 <p>
-                    Symmetry is still only evidence that the representation knows which states belong together. Statistics alone can produce a ring, and even a regular simplex has abundant symmetry. The stronger question is whether one operation can be learned on some states and contexts, then reused on others. Fit \(R_t(g)\) on part of the orbit and measure both its held-out equivariance and whether repeated application closes the cycle:
+                    Symmetry is still only evidence that the representation knows which states belong together. Statistics alone can produce a ring, and even a regular simplex has abundant symmetry. The stronger question is whether one operation can be learned on some states and contexts, then reused on others. Fit \(R_t(g)\) on one part of the orbit and measure both its held-out equivariance and whether repeated application closes the cycle:
                     \[
                         \epsilon_{\mathrm{eq}}(t)
                         =
@@ -508,17 +516,26 @@
                 </p>
 
                 <p>
-                    Causality closes the argument. Replace an activation \(h_t(k)\) with \(R_t(g)h_t(k)\) where the operator is most coherent. If the model's output moves from \(k\) toward \(gk\), the geometry is part of the computation rather than a description imposed afterward. The relevant progress measure is therefore the alignment of four traces over training:
+                    We can make the compression claim explicit by comparing three codes for held-out activations. A lookup code \(C_{\mathrm{lookup}}\) transmits a separate centroid for every state. A shared-rule code \(C_{\mathrm{shared}}\) transmits an intercept and a small set of relational components, together with their residual error. An intercept-only code \(C_{\mathrm{null}}\) transmits no state structure at all. Each code pays for its continuous parameters and its unexplained residuals, while the shared code also pays to identify the components it uses. The usable shared-rule gain is
                     \[
-                        \text{held-out behavior},
-                        \qquad
-                        \text{full-space symmetry},
-                        \qquad
-                        \text{operator reuse},
-                        \qquad
-                        \text{causal motion}.
+                        G_{\mathrm{usable}}(t)
+                        =
+                        \min\!\left\{
+                            C_{\mathrm{lookup}}(t),
+                            C_{\mathrm{null}}(t)
+                        \right\}
+                        -
+                        C_{\mathrm{shared}}(t).
                     \]
-                    Their relative timing tells us what kind of event generalization was. The measure is not a universal intelligence score. It is a microscope for one act of intelligence: the moment many cases become one cause.
+                    A positive value means that the relational description beats both memorization and saying nothing. Selecting its components on held-out state folds, fitting on one set of surface aliases, scoring another set of aliases, and repeating the comparison after scrambling the relational labels prevents a conveniently chosen basis from manufacturing the result. If exact cyclic closure is built into the shared code, closure is a property of that model class and cannot also be counted as evidence that the network learned it.
+                </p>
+
+                <p>
+                    Causality is the final distinction. Replace an activation \(h_t(k)\) with \(R_t(g)h_t(k)\) where the operator is most coherent. If the model's output moves from \(k\) toward \(gk\), and matched or scrambled transformations do not, the geometry is participating in the computation rather than merely describing it. The operator must be estimated separately from the examples used to judge the intervention; transporting an activation directly toward a labeled target centroid is useful as an upper bound, but it does not by itself demonstrate a learned, reusable operator.
+                </p>
+
+                <p>
+                    The evidence is therefore an alignment of held-out behavior, full-space symmetry, usable shared-rule compression, and causal operator reuse. Their relative timing tells us what kind of event generalization was. Geometry can precede behavior, behavior can precede cleanup, and a clean manifold may never become causally useful. None of these quantities is a universal intelligence score. Together they form a microscope for one possible act of intelligence: the point at which many cases become one reusable cause.
                 </p>
 
                 <p class="section-title" id="section-6">VI. Experiments</p>
@@ -535,11 +552,11 @@
                 </figure>
 
                 <p>
-                    At initialization, the median embedding distributed its energy across 55.8 effective Fourier modes and had a cyclic defect of 0.68. One thousand steps after each run crossed 90 percent held-out accuracy, those medians were 18.5 modes and 0.33. The movement began before the behavioral transition, accelerated through it, and continued after accuracy had saturated. The model did not discover one privileged circle. It concentrated a diffuse collection of case-specific directions into a smaller set of harmonics on which one shift could act.
+                    At initialization, the median embedding distributed its energy across 55.8 effective Fourier modes and had a cyclic defect of 0.68. One thousand steps after each run crossed 90 percent held-out accuracy, those medians were 18.5 modes and 0.33. The movement began before the behavioral transition, accelerated through it, and continued after accuracy had saturated. The model did not converge on one privileged circle. Its representation became more cyclic and concentrated energy into fewer harmonics. Those facts are compatible with a shorter relational description, but they do not establish that the harmonics carried the computation.
                 </p>
 
                 <p>
-                    The transition was not perfectly final. Three seeds remained at perfect held-out accuracy through step 150,000, while one later fell to roughly 70 percent under the same strong weight decay. Nor was the cleanest geometry found at the output of the transformer block. It appeared in the state embedding and became messier downstream. Both details matter: a progress measure should follow the representation where the shared rule is written, and generalization can be lost when continued optimization damages that representation.
+                    The transition was not perfectly final. Three seeds remained at perfect held-out accuracy through step 150,000, while one later fell to roughly 70 percent under the same strong weight decay. Nor was the cleanest geometry found at the output of the transformer block. It appeared in the state embedding and became messier downstream. Both details limit the inference available from the picture. Geometry depends on where it is measured, and late behavior can reverse even after an apparently clean transition. Held-out operator transfer and intervention are needed to locate any reusable computation.
                 </p>
 
                 <p>
@@ -547,7 +564,7 @@
                 </p>
 
                 <p>
-                    The remaining runs ask whether this story survives outside modular addition. They replace one name per state with sixteen arbitrary aliases, then repeat the protocol on larger cycles, tori, XOR, rotations with reflections, bounded paths, trees, broken cycles, and random-permutation controls. Those experiments will determine whether the pattern is relational compression or merely the familiar Fourier signature of modular arithmetic.
+                    The broader test is whether the account survives outside modular addition. Arbitrary aliases can separate a state's relational identity from its surface name, while larger cycles, tori, XOR, rotations with reflections, broken cycles, and random-permutation controls vary the rule that a useful representation would have to reuse. Paths and trees add a warning of their own: boundaries and imbalanced targets can reward shortcuts that look like generalization in aggregate accuracy. The comparison matters because a Fourier signature on one modular task is evidence about that task, not yet a general theory of how intelligence compresses experience.
                 </p>
 
                 <hr class="footnotes-sep">
