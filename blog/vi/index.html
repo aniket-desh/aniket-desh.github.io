@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="icon" href="/assets/penrose.png" type="image/x-icon">
+    <title>VI | aniket deshpande</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&amp;family=Alegreya+SC:wght@400;500&amp;display=swap" rel="stylesheet">
+    <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background: #f9e6e6;
+        }
+
+        ::-moz-selection {
+            background: #f9e6e6;
+        }
+
+        html {
+            overflow-x: hidden;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background: #fff;
+            font-family: "Alegreya", Georgia, "Times New Roman", serif;
+            font-size: 17.6px;
+            font-weight: 450;
+            line-height: 1.5;
+            font-optical-sizing: auto;
+            font-variant-numeric: oldstyle-nums;
+            font-feature-settings: "onum";
+        }
+
+        a {
+            color: #434c5e;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: #434c5e;
+        }
+
+        .container {
+            width: min(100% - 48px, 620px);
+            margin: 0 auto;
+            padding: 120px 0 88px;
+        }
+
+        @media screen and (max-width: 640px) {
+            .container {
+                width: min(100% - 32px, 620px);
+                padding: 64px 0;
+            }
+        }
+
+        .back-arrow {
+            display: inline-block;
+            margin-bottom: 15px;
+            color: #999;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        .back-arrow:hover {
+            color: #434c5e;
+        }
+
+        .post-header {
+            margin-bottom: 6px;
+            font-family: "Alegreya SC", Georgia, "Times New Roman", serif;
+            font-weight: 400;
+            font-size: 25.3px;
+            text-align: center;
+        }
+
+        .post-date {
+            margin: 0 0 24px;
+            color: #666;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .content {
+            width: 100%;
+            max-width: none;
+        }
+
+        .post-body p {
+            margin-bottom: 20px;
+        }
+
+        .post-body mjx-container[display="true"] {
+            max-width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+
+        .section-title {
+            margin: 35px 0 2px !important;
+            font-family: "Alegreya SC", Georgia, "Times New Roman", serif;
+            font-weight: 500;
+            font-size: 17px;
+        }
+
+        .section-title + p {
+            margin-top: 0;
+        }
+
+        sup {
+            position: relative;
+        }
+
+        .footnote-ref {
+            position: relative;
+            z-index: 1;
+            color: #434c5e;
+            background: none;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .footnote-ref:hover {
+            color: #434c5e;
+            text-decoration: none;
+        }
+
+        .footnote-tooltip {
+            position: absolute;
+            z-index: 10;
+            top: calc(100% + 0.5em);
+            left: 50%;
+            width: 36vw;
+            max-width: 350px;
+            padding: 14px 18px;
+            transform: translateX(-50%);
+            visibility: hidden;
+            color: #333;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        @media screen and (min-width: 768px) {
+            sup .footnote-ref:hover + .footnote-tooltip {
+                visibility: visible;
+            }
+        }
+
+        .footnotes-sep {
+            margin-top: 40px;
+            border: none;
+            border-top: 1px solid #ddd;
+        }
+
+        .footnotes {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .footnotes ol {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .footnotes li {
+            margin-bottom: 10px;
+        }
+
+        .footnotes li sup {
+            color: #434c5e;
+            font-weight: 600;
+        }
+
+        .footnote-backref {
+            margin-left: 4px;
+            color: #434c5e;
+            font-size: 0.75em;
+            text-decoration: none;
+        }
+
+        .footnote-backref:hover {
+            text-decoration: underline;
+        }
+
+        .section-placeholder {
+            color: #aaa;
+        }
+
+        .experiment-figure {
+            width: min(960px, calc(100vw - 48px));
+            margin: 30px 0 26px 50%;
+            transform: translateX(-50%);
+        }
+
+        .experiment-figure img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .experiment-figure figcaption {
+            max-width: 620px;
+            margin: 10px auto 0;
+            color: #666;
+            font-size: 14px;
+            line-height: 1.45;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 640px) {
+            .experiment-figure {
+                width: 100%;
+                margin-left: 0;
+                transform: none;
+            }
+        }
+
+        .reference-mark {
+            font-size: 0.75em;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        ol.references {
+            padding-left: 1.5em;
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        ol.references li {
+            margin-bottom: 10px;
+        }
+
+        .toc-sidebar {
+            display: none;
+            font-family: "Alegreya SC", Georgia, "Times New Roman", serif;
+        }
+
+        @media screen and (min-width: 1100px) {
+            .toc-sidebar {
+                display: block;
+                position: fixed;
+                top: 350px;
+                left: calc((100vw - 680px) / 2 - 260px);
+                width: 210px;
+                font-size: 13px;
+                line-height: 1.6;
+            }
+
+            .toc-sidebar a {
+                display: block;
+                padding: 3px 0;
+                color: #ccc;
+                text-decoration: none;
+                transition: color 0.2s ease;
+            }
+
+            .toc-sidebar a:hover,
+            .toc-sidebar a.active {
+                color: #333;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="toc-sidebar" aria-label="Table of contents">
+        <a href="#section-1">I. The Duality of Surprise</a>
+        <a href="#section-2">II. Seven Things, One Rule</a>
+        <a href="#section-3">III. Geometry Is Not Generalization</a>
+        <a href="#section-4">IV. Watching a Rule Appear</a>
+        <a href="#section-5">V. An Order Parameter</a>
+        <a href="#section-6">VI. Experiments</a>
+    </nav>
+
+    <div class="container">
+        <a href="/blog/" class="back-arrow" aria-label="Back to blog">←</a>
+        <div class="post-header">VI</div>
+        <p class="post-date">draft</p>
+
+        <div class="content">
+            <div class="post-body">
+                <p class="section-title" id="section-1">I. The Duality of Surprise</p>
+
+                <p>
+                    When we say that we want to make a language model smarter, what change are we asking for? A lower pretraining loss, a higher benchmark score, and a new skill can all look like progress from the outside, but they need not describe the same change inside the model. It can improve because it has stored more cases, because the test has become familiar, or because it has found a rule that makes many cases instances of the same problem. Only the last kind of improvement changes how much the model must learn the next time around.
+                </p>
+
+                <p>
+                    This is an <a href="/blog/the-effective-reductionist/">effective-reductionist</a> question. Intelligence belongs to our description of an agent, while a neural network is implemented as arrays of numbers undergoing physical computation. The parameters are too low-level to explain the property, and the benchmark score is too high-level to locate it. We need an intermediate quantity that can be measured in the mechanism and still tells us something about what the system has learned. For a predictive model, information gives us one such bridge.<sup data-fn="animal-intelligence"></sup>
+                </p>
+
+                <p>
+                    A language model repeatedly turns a history \(x_{&lt;t}\) into a distribution over what might come next. If it assigns probability \(q(x_t\mid x_{&lt;t})\) to the token that arrives, an ideal code spends
+                    \[
+                        \ell_t=-\log_2 q(x_t\mid x_{&lt;t})
+                    \]
+                    bits to record it. A probability of \(1/2\) costs one bit; a probability of \(1/256\) costs eight. Across a sequence,
+                    \[
+                        L_q(x_{1:T})
+                        =
+                        -\sum_{t=1}^{T}\log_2 q(x_t\mid x_{&lt;t})
+                        =
+                        -\log_2 q(x_{1:T}).
+                    \]
+                    Surprise, predictive loss, and description length are the same bill written in different units. Arithmetic coding can turn the model's probabilities into a bitstream approaching this length, while the lengths of any uniquely decodable code induce a corresponding probability distribution.<sup><a class="reference-mark" href="#ref-1">1</a></sup>
+                </p>
+
+                <p>
+                    This is a duality between prediction and coding, not a definition of intelligence. A compressor can absorb regularities that never support planning, intervention, or learning in a new domain. It can also predict a dataset by storing the dataset. An honest account must charge for the description of the predictor as well as the data left unexplained. The regularities worth calling intelligent are the ones that cost less to represent than they save on cases the system has not seen.<sup><a class="reference-mark" href="#ref-2">2</a></sup>
+                </p>
+
+                <p>
+                    That qualification moves the question inside the model. Two networks can make the same predictions on their training examples while using descriptions of very different lengths. One can assign a separate mechanism to every case. The other can represent a relation once and reuse it. Their losses agree until the world asks for a new combination, at which point the difference between memory and structure becomes visible.
+                </p>
+
+                <p class="section-title" id="section-2">II. Seven Things, One Rule</p>
+
+                <p>
+                    Consider the days of the week. A system can learn seven unrelated successor functions:
+                    \[
+                        f_{\mathrm{Mon}}\mapsto\mathrm{Tue},
+                        \qquad
+                        f_{\mathrm{Tue}}\mapsto\mathrm{Wed},
+                        \qquad
+                        \ldots
+                    \]
+                    Nothing in this representation says that the seven transitions are versions of one operation. A different system can assign every day a phase \(k\in\mathbb Z_7\) and learn
+                    \[
+                        f(k,m)=k+m\pmod 7.
+                    \]
+                    The first program stores a table. The second stores a coordinate system and a rule. Both preserve which day is which, but the second can answer a question such as “three days after Thursday” without having stored that pair as a separate fact.
+                </p>
+
+                <p>
+                    Generalization here is not seven concepts collapsing into one point. Such a collapse would destroy the information required to distinguish Monday from Thursday. It is seven arbitrary symbols becoming seven states of one latent variable. What gets compressed is their relational description:
+                    \[
+                        \underbrace{\text{many unrelated transitions}}_{\text{lookup table}}
+                        \quad\longrightarrow\quad
+                        \underbrace{\text{one generator applied repeatedly}}_{\text{shared rule}}.
+                    \]
+                    The entropy of the answer need not fall. The length of the program that relates the answers does.
+                </p>
+
+                <p>
+                    A cyclic representation makes this compression visible. At checkpoint \(t\), suppose a state \(k\) in context \(c\) has activation
+                    \[
+                        h_t(k,c)
+                        =
+                        b_t
+                        +
+                        A_t
+                        \begin{bmatrix}
+                            \cos(2\pi k/7) \\
+                            \sin(2\pi k/7)
+                        \end{bmatrix}
+                        +
+                        r_t(k,c).
+                    \]
+                    The matrix \(A_t\) embeds a common phase into activation space, while \(r_t\) contains context, surface form, and whatever else the network superposes there. A single rotation \(R_t\) can now implement the successor relation:
+                    \[
+                        R_t h_t(k,c)\simeq h_t(k+1,c),
+                        \qquad
+                        R_t^7\simeq I.
+                    \]
+                    Seven cases have become an orbit of one operation.
+                </p>
+
+                <p>
+                    Weekdays are only the easiest picture. Months and clock positions are other cycles. A two-dimensional periodic grid requires two commuting generators. Binary attributes under XOR form a hypercube. Rotations and reflections form a dihedral system in which the operations no longer commute. Paths, trees, and broken cycles have boundaries or exceptions that prevent the same exact symmetry. If relational compression is a useful account of generalization, the geometry should follow the structure of the problem rather than our preference for circles.
+                </p>
+
+                <p>
+                    This also explains why low dimensionality is the wrong definition of compression. A cyclic representation may use several Fourier harmonics,
+                    \[
+                        h(k)
+                        =
+                        \sum_q
+                        a_q\cos(2\pi qk/7)
+                        +
+                        b_q\sin(2\pi qk/7),
+                    \]
+                    and still be exactly equivariant to the same shift. The resulting loop may be rippled and high-rank while the underlying rule remains short. What matters is whether the representation admits a common action, not whether its first two principal components draw a pretty circle.<sup data-fn="rank"></sup>
+                </p>
+
+                <p class="section-title" id="section-3">III. Geometry Is Not Generalization</p>
+
+                <p>
+                    Circular weekday and month features already appear in trained language models. Engels, Michaud, and collaborators found these structures in GPT-2, Mistral, and Llama-family models, then used interventions to show that the circles participate in calendar arithmetic.<sup><a class="reference-mark" href="#ref-3">3</a></sup> Goodfire later traced smooth activation and behavior manifolds in Llama 3.1 8B, and found a more general geometric addition mechanism spanning ordinary arithmetic and cyclic concepts.<sup><a class="reference-mark" href="#ref-4">4</a></sup> These experiments show that a trained model can use a nonlinear feature as a computational object.
+                </p>
+
+                <p>
+                    They do not show that the circle appeared when the model learned to generalize. A cyclic geometry can be the passive consequence of cyclic statistics. If the relationship between two states depends mostly on their separation, their co-occurrence matrix is approximately circulant. Circulant matrices have Fourier eigenvectors, whose first sine and cosine pair already traces a circle. Recent work derives this mechanism for calendar concepts and finds that it persists across embedding models and language models.<sup><a class="reference-mark" href="#ref-5">5</a></sup>
+                </p>
+
+                <p>
+                    The distinction is developmental. A model may first organize observations according to a symmetry in its data, later learn an operation that acts on that organization, and later still remove the machinery that memorized individual cases. The representation, the reusable computation, the held-out behavior, and the final cleanup can occur at different times. A static activation plot cannot tell us which event we are looking at.
+                </p>
+
+                <p>
+                    Park and collaborators have come closest to watching arbitrary concepts acquire a new geometry. They assigned familiar words to nodes of rings, grids, and other graphs, then supplied a fixed language model with increasingly long traces from those graphs. Its activations reorganized toward the context-specified structure shortly before its answers improved. When a new ordering of weekdays conflicted with the calendar learned during pretraining, both rings remained present in different subspaces.<sup><a class="reference-mark" href="#ref-6">6</a></sup> A concept can acquire a relational role without erasing everything it previously meant.
+                </p>
+
+                <p>
+                    Grokking supplies the training-time analogue. Small transformers trained on modular addition often memorize their observed table long before they generalize to its missing entries. Nanda and collaborators reverse-engineered a Fourier algorithm that gradually forms underneath this apparently sudden behavioral transition, then watched memorizing components disappear afterward.<sup><a class="reference-mark" href="#ref-7">7</a></sup> The result suggests a sharper account of learning: the model gets better when an expensive collection of exceptions is displaced by a reusable computation, even if its training loss had already reached zero.
+                </p>
+
+                <p class="section-title" id="section-4">IV. Watching a Rule Appear</p>
+
+                <p>
+                    The experiment I want is a movie of this replacement. Give a model arbitrary surface tokens generated by a hidden relational system. Reveal only part of its operation table during training, and reserve unseen combinations for testing. Save dense checkpoints from random initialization, through memorization, through any later transition in held-out accuracy. At each checkpoint, ask whether the activations have become a representation on which the hidden relations act simply.
+                </p>
+
+                <p>
+                    A seven-state cycle is the intuitive first case, but it cannot carry the claim alone. The same protocol should include larger cycles, periodic grids, XOR hypercubes, and rotations with reflections. It should also include bounded paths, broken cycles, and independent random permutations with matched token frequencies. Every latent state should have several arbitrary names and appear in several nuisance contexts. Otherwise, a circle might reflect token identity, frequency, or one prompt template rather than a rule that survives changes of surface form.
+                </p>
+
+                <p>
+                    The most revealing outcome is not necessarily that geometry and behavior change together. Suppose the cyclic defect falls while held-out accuracy remains at chance. Then the model has found a statistical manifold before learning how to compute with it. Suppose accuracy rises while the geometry remains messy. Then a reusable circuit may exist in a subspace that our summary has missed, or the model may have generalized by a different algorithm. Suppose both improve and a fitted shift operator becomes causally effective. Only then can we say that a geometric compression is doing the work.
+                </p>
+
+                <p>
+                    This is why the animation is the last step rather than the measurement. Principal components will let us watch points move, but every claim will be computed in the original activation space. The picture should make the transition legible; it should not be allowed to create one.
+                </p>
+
+                <p class="section-title" id="section-5">V. An Order Parameter for Generalization</p>
+
+                <p>
+                    Let \(H_t\in\mathbb R^{n\times d}\) contain centered activation centroids for \(n\) latent states at checkpoint \(t\), averaged over matched surface forms and contexts, and let
+                    \[
+                        G_t=H_tH_t^\top
+                    \]
+                    be their Gram matrix. For a cycle, let \(P\) shift every state by one. If the representation respects the cyclic action, shifting both arguments should preserve every inner product. We can project the Gram matrix onto the nearest cyclically invariant one,
+                    \[
+                        \overline G_t
+                        =
+                        \frac{1}{n}
+                        \sum_{m=0}^{n-1}
+                        P^mG_tP^{-m},
+                    \]
+                    and define the symmetry defect
+                    \[
+                        \Delta_{\mathrm{cyc}}(t)
+                        =
+                        \frac{\lVert G_t-\overline G_t\rVert_F}
+                        {\lVert G_t\rVert_F}.
+                    \]
+                    This number is computed in the full representation, survives rotations of activation coordinates, and becomes small when relative geometry depends only on cyclic separation.
+                </p>
+
+                <p>
+                    For a general family of transformations \(\rho(g)\), the same idea averages \(G_t\) over the relevant group action. But symmetry alone permits a passive encoding and even a regular simplex, so it must be paired with an operator test. Fit \(R_t(g)\) on some states and contexts, evaluate it on held-out ones, and measure both equivariance and algebraic closure:
+                    \[
+                        \epsilon_{\mathrm{eq}}(t)
+                        =
+                        \frac{\lVert R_t(g)h_t(k)-h_t(gk)\rVert}
+                        {\lVert h_t(gk)\rVert},
+                        \qquad
+                        \epsilon_{\mathrm{close}}(t)
+                        =
+                        \frac{\lVert R_t(g)^n-I\rVert_F}{\sqrt d}.
+                    \]
+                    A reusable cyclic rule should reduce both errors without sacrificing the decodability of the individual states.
+                </p>
+
+                <p>
+                    Finally, intervene. Replace an activation \(h_t(k)\) with \(R_t(g)h_t(k)\) at the layer where the operator is most coherent. If the model's output moves from \(k\) toward \(gk\), the geometry is part of the computation rather than a convenient description imposed afterward. The complete order parameter is therefore not one scalar. It is the alignment of four traces over training:
+                    \[
+                        \text{held-out behavior},
+                        \qquad
+                        \text{full-space symmetry},
+                        \qquad
+                        \text{operator reuse},
+                        \qquad
+                        \text{causal motion}.
+                    \]
+                    Their relative timing is the result.
+                </p>
+
+                <p class="section-title" id="section-6">VI. Experiments</p>
+
+                <p>
+                    The first anchor experiment is modular addition of order 113. Four one-layer transformers saw the same 30 percent of the operation table and were trained with strong weight decay. Every model memorized its observed entries while remaining at chance on the rest. Held-out accuracy then crossed 90 percent at steps 26,750, 27,000, 31,250, and 64,750.
+                </p>
+
+                <figure class="experiment-figure">
+                    <img src="/blog/vi/assets/grokking-spaghetti.png" alt="Four modular addition runs showing held-out accuracy rising as cyclic defect and Fourier mode count fall.">
+                    <figcaption>
+                        Four random seeds are shown faintly, with the pointwise median heavier. Geometry is measured in the full state embedding, before the relation token is visible. PCA is not used.
+                    </figcaption>
+                </figure>
+
+                <p>
+                    At initialization, the median embedding distributed its energy across 55.8 effective Fourier modes and had a cyclic defect of 0.68. One thousand steps after each run crossed 90 percent held-out accuracy, those medians were 18.5 modes and 0.33. The movement began before the behavioral transition, accelerated through it, and continued after accuracy had saturated. The model did not discover one privileged circle. It concentrated a diffuse collection of case-specific directions into a smaller set of harmonics on which one shift could act.
+                </p>
+
+                <p>
+                    The transition was not perfectly final. Three seeds remained at perfect held-out accuracy through step 150,000, while one later fell to roughly 70 percent under the same strong weight decay. Nor was the cleanest geometry found at the output of the transformer block. It appeared in the state embedding and became messier downstream. Both details matter: a progress measure should follow the representation where the shared rule is written, and generalization can be lost when continued optimization damages that representation.
+                </p>
+
+                <p>
+                    A second, noisier check follows natural concepts through Pythia's public pretraining checkpoints.<sup><a class="reference-mark" href="#ref-10">10</a></sup> In the 1B model, the fraction of weekday activation energy in the first cyclic harmonic rose from 0.34 at initialization to 0.57 by step 4,000, while average probability on the correct successor among weekday candidates moved only from 0.15 to 0.20. It reached 0.25 much later. The 410M model showed the same ordering. This is consistent with a statistical geometry forming before the model can reliably use it, but it is not causal evidence. Prompt completions are noisy, and a harmonic can be present without carrying the computation.
+                </p>
+
+                <p>
+                    The remaining runs ask whether this story survives outside modular addition. They replace one name per state with sixteen arbitrary aliases, then repeat the protocol on larger cycles, tori, XOR, rotations with reflections, bounded paths, trees, broken cycles, and random-permutation controls. Those experiments will determine whether the pattern is relational compression or merely the familiar Fourier signature of modular arithmetic.
+                </p>
+
+                <hr class="footnotes-sep">
+                <section class="footnotes">
+                    <ol>
+                        <li data-fn="animal-intelligence">Animals give us partial descriptions, though no agreed biological scalar. Comparative test batteries look for shared variation across learning, memory, and reasoning, but evidence for a unitary non-human \(g\) remains weak.<sup><a class="reference-mark" href="#ref-8">8</a></sup> At the mechanistic level, Cantlon and Piantadosi propose that human cognition reflects expanded information-processing capacity shared across memory, attention, and learning.<sup><a class="reference-mark" href="#ref-9">9</a></sup> These are constraints on what might be increasing, not yet a settled meter of intelligence.</li>
+                        <li data-fn="rank">Effective rank is still useful for measuring cleanup and redundancy, but it is not an order parameter for relational structure. A representation can lose rank without becoming equivariant, or gain redundant Fourier modes while preserving the same exact group action.</li>
+                    </ol>
+                </section>
+
+                <p class="section-title" id="section-refs">References</p>
+                <ol class="references">
+                    <li id="ref-1">
+                        Grégoire Delétang et al.,
+                        <a href="https://arxiv.org/abs/2309.10668" target="_blank" rel="noopener">Language Modeling Is Compression</a>,
+                        2023.
+                    </li>
+                    <li id="ref-2">
+                        Ryan Greene,
+                        <a href="https://www.greene.sh/compression-and-intelligence/" target="_blank" rel="noopener">Compression and Intelligence</a>,
+                        2026.
+                    </li>
+                    <li id="ref-3">
+                        Joshua Engels, Eric J. Michaud, Isaac Liao, Wes Gurnee, and Max Tegmark,
+                        <a href="https://arxiv.org/abs/2405.14860" target="_blank" rel="noopener">Not All Language Model Features Are Linear</a>,
+                        2024.
+                    </li>
+                    <li id="ref-4">
+                        Goodfire,
+                        <a href="https://www.goodfire.ai/research/neural-geometry" target="_blank" rel="noopener">The Geometry of Thought</a>,
+                        <a href="https://www.goodfire.ai/research/manifold-steering" target="_blank" rel="noopener">Manifold Steering</a>,
+                        and
+                        <a href="https://www.goodfire.ai/research/a-geometric-calculator" target="_blank" rel="noopener">A Geometric Calculator Inside a Neural Network</a>,
+                        2026.
+                    </li>
+                    <li id="ref-5">
+                        Dhruva Karkada, Daniel J. Korchinski, Andres Nava, Matthieu Wyart, and Yasaman Bahri,
+                        <a href="https://arxiv.org/abs/2602.15029" target="_blank" rel="noopener">Symmetry in Language Statistics Shapes the Geometry of Model Representations</a>,
+                        2026.
+                    </li>
+                    <li id="ref-6">
+                        Core Francisco Park et al.,
+                        <a href="https://arxiv.org/abs/2501.00070" target="_blank" rel="noopener">In-Context Learning of Representations</a>,
+                        2025.
+                    </li>
+                    <li id="ref-7">
+                        Neel Nanda, Lawrence Chan, Tom Lieberum, Jess Smith, and Jacob Steinhardt,
+                        <a href="https://arxiv.org/abs/2301.05217" target="_blank" rel="noopener">Progress Measures for Grokking via Mechanistic Interpretability</a>,
+                        2023.
+                    </li>
+                    <li id="ref-8">
+                        Marc-Antoine Poirier et al.,
+                        <a href="https://doi.org/10.1098/rspb.2020.1853" target="_blank" rel="noopener">How General Is Cognitive Ability in Non-Human Animals? A Meta-Analytical and Multi-Level Reanalysis Approach</a>,
+                        2020.
+                    </li>
+                    <li id="ref-9">
+                        Jessica F. Cantlon and Steven T. Piantadosi,
+                        <a href="https://doi.org/10.1038/s44159-024-00283-3" target="_blank" rel="noopener">Uniquely Human Intelligence Arose from Expanded Information Capacity</a>,
+                        2024.
+                    </li>
+                    <li id="ref-10">
+                        Stella Biderman et al.,
+                        <a href="https://arxiv.org/abs/2304.01373" target="_blank" rel="noopener">Pythia: A Suite for Analyzing Large Language Models Across Training and Scaling</a>,
+                        2023.
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var body = document.querySelector(".post-body");
+            var footnotes = document.querySelector(".footnotes");
+            if (!body || !footnotes) return;
+
+            var items = {};
+            footnotes.querySelectorAll("li[data-fn]").forEach(function(item) {
+                items[item.getAttribute("data-fn")] = item;
+            });
+
+            var assigned = {};
+            var counter = 0;
+
+            body.querySelectorAll("sup[data-fn]").forEach(function(sup) {
+                var key = sup.getAttribute("data-fn");
+                var item = items[key];
+                if (!key || !item) return;
+
+                if (!assigned[key]) {
+                    counter += 1;
+                    assigned[key] = counter;
+                }
+
+                var number = assigned[key];
+                sup.id = "fnref:" + number;
+
+                var link = document.createElement("a");
+                link.href = "#fn:" + number;
+                link.className = "footnote-ref";
+                link.textContent = "[" + number + "]";
+                sup.appendChild(link);
+
+                if (!item.id) {
+                    var tooltip = document.createElement("div");
+                    tooltip.className = "footnote-tooltip";
+                    tooltip.innerHTML = "<sup>" + number + "</sup> " + item.innerHTML;
+                    sup.appendChild(tooltip);
+
+                    item.id = "fn:" + number;
+                    var numberSup = document.createElement("sup");
+                    numberSup.textContent = number;
+                    var backLink = document.createElement("a");
+                    backLink.href = "#fnref:" + number;
+                    backLink.className = "footnote-backref";
+                    backLink.textContent = "↩";
+
+                    var original = item.innerHTML;
+                    item.innerHTML = "";
+                    item.appendChild(numberSup);
+                    item.insertAdjacentHTML("beforeend", " " + original + " ");
+                    item.appendChild(backLink);
+                }
+            });
+        });
+
+        (function() {
+            var links = Array.prototype.slice.call(document.querySelectorAll(".toc-sidebar a"));
+            var sections = links
+                .map(function(link) {
+                    return document.querySelector(link.getAttribute("href"));
+                })
+                .filter(Boolean);
+
+            function updateActiveSection() {
+                var current = sections[0];
+                sections.forEach(function(section) {
+                    if (section.getBoundingClientRect().top <= 120) {
+                        current = section;
+                    }
+                });
+
+                links.forEach(function(link) {
+                    link.classList.toggle(
+                        "active",
+                        current && link.getAttribute("href") === "#" + current.id
+                    );
+                });
+            }
+
+            window.addEventListener("scroll", updateActiveSection, { passive: true });
+            updateActiveSection();
+        })();
+    </script>
+</body>
+</html>
