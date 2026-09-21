@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="icon" href="/assets/penrose.png" type="image/x-icon" />
+    <title>Ising Model — aniket deshpande</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&amp;display=swap" rel="stylesheet">
+    <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background: #f9e6e6;
+        }
+
+        ::-moz-selection {
+            background: #f9e6e6;
+        }
+
+        html {
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #fff;
+            font-family: "Alegreya", Georgia, "Times New Roman", serif;
+            font-size: 17.6px;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        a {
+            color: #434c5e;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: #434c5e;
+        }
+
+        .container {
+            width: min(100% - 48px, 620px);
+            margin: 0 auto;
+            padding: 120px 0 88px;
+        }
+
+        @media screen and (max-width: 640px) {
+            .container {
+                width: min(100% - 32px, 620px);
+                padding: 64px 0 64px;
+            }
+        }
+
+        .back-arrow {
+            display: inline-block;
+            text-decoration: none;
+            color: #999;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .back-arrow:hover {
+            color: #434c5e;
+        }
+
+        .post-header {
+            margin: 0 0 6px;
+            font-weight: 400;
+            font-size: 25.3px;
+            text-align: center;
+        }
+
+        .content {
+            width: 100%;
+            max-width: none;
+        }
+
+        .post-body p {
+            margin-bottom: 20px;
+        }
+
+        .post-body mjx-container[display="true"] {
+            max-width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 0.25em 0;
+        }
+
+        .post-body h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 32px 0 12px;
+        }
+
+        .post-body h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 24px 0 10px;
+        }
+
+        .post-body h4 {
+            font-size: 17px;
+            font-weight: 600;
+            margin: 20px 0 8px;
+        }
+
+        .section-title {
+            font-weight: 600;
+            font-size: 17px;
+            margin: 35px 0 2px 0 !important;
+        }
+
+        ol.references {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #555;
+            padding-left: 1.5em;
+        }
+
+        ol.references li {
+            margin-bottom: 10px;
+        }
+
+        ol.references a {
+            color: #434c5e;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="/drosophila/" class="back-arrow" aria-label="Back to drosophila">←</a>
+        <!-- h1 is the page title; use it once per page. -->
+        <h1 class="post-header">Ising Model</h1>
+
+        <div class="content">
+            <div class="post-body">
+                <!-- Write body text inside p tags. -->
+                <p>The Ising model is a highly simplified model of a magnetic material. On a two-dimensional square lattice at zero external field, it provides an exactly solvable example of a <i>phase transition</i>.</p>
+                <p>
+                    Consider an \(N\)-site lattice \(\Lambda\) with each site \(i \in \Lambda\) having a spin variable
+                    \[
+                        s_i \in \{-1, +1\}.
+                    \]
+                    For some spin configuration \(\mathbf{s}\), the energy of the system is given by its Hamiltonian
+                    \[
+                        H(\mathbf{s}) = -J \sum_{\langle i, j \rangle} s_i s_j - h \sum_{i \in \Lambda} s_i.
+                    \]
+                    Here, \(\langle i, j \rangle\) labels nearest-neighbor pairs, with each bond counted once. The constant \(J\) is the interaction strength, and \(h\) is the external magnetic field multiplied by the spin's magnetic moment, so it has units of energy.
+                </p>
+                <p>
+                    If \(J > 0\), neighboring spins prefer to align, and the interaction is <i>ferromagnetic</i>. If \(J < 0\), neighboring spins prefer to anti-align, and the interaction is <i>antiferromagnetic</i>. In what follows, we take \(J > 0\) on a connected lattice. The field \(h\) favors spins with its sign. An anti-aligned bond then costs energy \(2J\) relative to an aligned bond.
+                </p>
+                <p>
+                    The Hamiltonian specifies the microscopic energy. Together with the equilibrium distribution, it determines macroscopic properties such as magnetization.
+                </p>
+                <p>
+                    At thermal equilibrium, the probability of a spin configuration \(\mathbf{s}\) is given by the Boltzmann distribution
+                    \[
+                        P(\mathbf{s}) = \frac{e^{-\beta H(\mathbf{s})}}{Z},
+                    \]
+                    where \(\beta = 1/(k_B T)\) is the inverse temperature and \(Z\) is the partition function over all \(2^N\) possible spin configurations:
+                    \[
+                        Z = \sum_{\mathbf{s}} e^{-\beta H(\mathbf{s})}.
+                    \]
+                    For low temperatures, an energy difference produces a large probability ratio. At higher temperatures, configurations with different energies receive more similar weights. The principal quantities are
+                    \[
+                        F = -k_B T \log Z,\quad M(\mathbf{s}) = \sum_{i \in \Lambda} s_i,\quad m = \frac{1}{N} \langle M(\mathbf{s}) \rangle.
+                    \]
+                    Here, \(F\) is the Helmholtz free energy, \(M(\mathbf{s})\) is the magnetization of a configuration \(\mathbf{s}\), and \(m\) is the average magnetization per site.
+                </p>
+                <p>
+                    We often study the Ising model when \(h = 0\). In this case, the system has a \(\mathbb{Z}_2\) symmetry
+                    \[
+                        H(\mathbf{s}) = H(-\mathbf{s}),
+                    \]
+                    which means that the Hamiltonian is invariant under \(s_i \mapsto -s_i\) for all \(i\). With free or periodic boundary conditions, the two ground states are the all-up and all-down configurations. For any finite system with these boundary conditions at \(h=0\), spin-flip symmetry gives \(\langle M \rangle = 0\), even at low temperatures. Nonzero spontaneous magnetization requires taking the thermodynamic limit before sending a symmetry-breaking field to zero.
+                </p>
+                <p>
+                    There are <i>enormously</i> many configurations with equal numbers of up and down spins. For even \(N\), their number is
+                    \[
+                        \# \{ M = 0 \} = \binom{N}{N/2} \approx \frac{2^N}{\sqrt{\pi N/2}}.
+                    \]
+                    The approximation holds for large \(N\). In the canonical ensemble, the entropy and free energy are
+                    \[
+                        S = -k_B \sum_{\mathbf{s}} P(\mathbf{s}) \log P(\mathbf{s}),\quad F = E - TS,\quad E = \langle H \rangle.
+                    \]
+                    For an ensemble of \(\Omega\) equally likely configurations, this reduces to \(S = k_B \log \Omega\). A disordered phase can have a lower free energy even though it has a higher mean energy than an ordered phase.
+                </p>
+                <p>
+                    At low temperatures, alignment is energetically favored. At high temperatures, the multiplicity of disordered configurations dominates. Whether this competition produces a phase transition at a nonzero critical temperature \(T_c\) depends on dimension. A sharp thermal phase transition requires the thermodynamic limit \(N \to \infty\).
+                </p>
+
+                <!-- h2 starts a main section. -->
+                <h2>One-Dimensional Case</h2>
+                <p>
+                    The choice of dimension matters immensely when studying the Ising model. Specifically, dimension governs the behavior of <i>domains</i>, regions of predominantly aligned spins.
+                </p>
+                <p>
+                    In a periodic one-dimensional chain at \(h=0\), reversing a contiguous segment of \(1 \leq n < N\) spins in an otherwise aligned configuration creates two domain walls, costing \(4J\) in total. This cost is independent of the segment's length, so arbitrarily long reversed domains have the same energy cost. At any positive temperature, a nonzero density of domain walls occurs in the infinite chain. These walls interrupt alignment over sufficiently long distances.
+                </p>
+                <p>
+                    Thus, the nearest-neighbor, one-dimensional Ising model at \(h=0\) has no long-range ferromagnetic order and no phase transition at any positive temperature.
+                </p>
+
+                <p>
+                    For a periodic chain at \(h=0\), with \(s_{N+1}=s_1\), the Hamiltonian is
+                    \[
+                        H(\mathbf{s}) = -J \sum_{i=1}^{N} s_i s_{i+1}.
+                    \]
+                    Define \(K = \beta J\). The partition function is
+                    \[
+                        Z = \sum_{\mathbf{s}} e^{K \sum_{i=1}^{N} s_i s_{i+1}}.
+                    \]
+                    We can rewrite the exponential of the sum as a product over nearest-neighbor pairs:
+                    \[
+                        Z = \sum_{\mathbf{s}} \prod_{i=1}^{N} e^{K s_i s_{i+1}}.
+                    \]
+                    Define the <i>transfer matrix</i> \(\mathsf{T}\) in the basis \((+1,-1)\) by
+                    \[
+                        \mathsf{T}_{s,s'} = e^{Kss'},\quad \mathsf{T} = \begin{pmatrix} e^K & e^{-K} \\ e^{-K} & e^K \end{pmatrix}.
+                    \]
+                    Multiplying these matrices sums over intermediate spin configurations. The partition function is then
+                    \[
+                        Z = \sum_{\mathbf{s}} \prod_{i=1}^{N} \mathsf{T}_{s_i,s_{i+1}} = \sum_{\mathbf{s}} \mathsf{T}_{s_1,s_2} \mathsf{T}_{s_2,s_3} \cdots \mathsf{T}_{s_N,s_1} = \operatorname{Tr} \mathsf{T}^N.
+                    \]
+                    The transfer matrix has eigenvalues
+                    \[
+                        \lambda_+ = 2 \cosh K,\quad \lambda_- = 2 \sinh K,
+                    \]
+                    and hence \(Z = \lambda_+^N + \lambda_-^N\). At fixed \(T>0\), the larger eigenvalue determines the free energy per site in the thermodynamic limit:
+                    \[
+                        f = \lim_{N\to\infty} \frac{F}{N} = -\frac{1}{\beta} \log \lambda_+.
+                    \]
+                    This is smooth for all positive temperatures, consistent with the absence of a finite-temperature phase transition in the one-dimensional Ising model.
+                </p>
+                <p>
+                    The infinite-chain correlation function is equally revealing:
+                    \[
+                        \langle s_i s_j \rangle = (\tanh K)^{|i-j|} = e^{-|i-j|/\xi},\quad \xi = -\frac{1}{\log \tanh K},
+                    \]
+                    where \(\xi\) is the correlation length, measured in lattice spacings. It is finite for all positive temperatures and diverges as \(T \to 0^+\):
+                    \[
+                        \xi \sim \frac{1}{2}e^{2\beta J} \quad \text{as } T \to 0^+.
+                    \]
+                    A cold finite chain can look ordered simply because it is shorter than the correlation length. Distinguishing this finite-size effect from long-range order requires examining how correlations behave as the system size grows.
+                </p>
+
+                <h2>Two-Dimensional Case</h2>
+                <p>
+                    We now consider the square-lattice Ising model with uniform nearest-neighbor coupling \(J>0\) and \(h=0\). Two is the lowest integer spatial dimension in which this nearest-neighbor model has a phase transition at positive temperature.
+                </p>
+                <p>
+                    Before stating the exact results, we can understand why an ordered phase can survive at low positive temperatures. Fix the boundary spins to \(+1\) and consider a domain of reversed spins surrounded by up spins. If its boundary crosses \(\ell\) nearest-neighbor bonds, its energy cost relative to the aligned configuration is
+                    \[
+                        \Delta E = 2J \ell.
+                    \]
+                    Large reversed domains now require long boundaries. The number of contours of length \(\ell\) enclosing a specified site grows at most exponentially with \(\ell\), up to polynomial factors. At sufficiently low temperatures, the Boltzmann factor \(e^{-2\beta J\ell}\) suppresses these contours strongly enough to preserve positive magnetization in the thermodynamic limit. This is the essence of the <i>Peierls argument</i>. Together with the absence of long-range order at sufficiently high temperatures, it establishes a finite-temperature phase transition.
+                </p>
+                <p>
+                    For this square-lattice model at zero field, <a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.65.117">Lars Onsager obtained the exact free energy in 1944</a>. The critical temperature is
+                    \[
+                    k_B T_c = \frac{2J}{\log(1 + \sqrt{2})} \approx 2.269 J.
+                    \]
+                    The positive spontaneous magnetization per site is defined by the ordered limits
+                    \[
+                        m_{\mathrm{sp}}(T) = \lim_{h\to 0^+} \lim_{N\to\infty} \frac{\langle M \rangle_{T,h}}{N}.
+                    \]
+                    Its exact value is
+                    \[
+                        m_{\mathrm{sp}}(T) = \begin{cases} \left[ 1 - \sinh^{-4}(2\beta J) \right]^{1/8}, & 0 < T < T_c \\ 0, & T \geq T_c \end{cases},
+                    \]
+                    with \(m_{\mathrm{sp}}(T)\to 1\) as \(T\to 0^+\). Taking \(h\to 0^-\) selects the opposite magnetization. <a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.85.808">C. N. Yang published the exact magnetization calculation in 1952</a>, following Onsager's solution for the thermodynamics.
+                </p>
+
+                <p class="section-title" id="section-refs">References</p>
+                <ol class="references">
+                    <li><a href="https://www.damtp.cam.ac.uk/user/tong/statphys.html" target="_blank" rel="noopener">Lectures on Statistical Physics</a><br>Tong, D. Lecture notes, University of Cambridge.</li>
+                    <li><a href="https://www.damtp.cam.ac.uk/user/tong/sft.html" target="_blank" rel="noopener">Lectures on Statistical Field Theory</a><br>Tong, D. (2017). Lecture notes, University of Cambridge.</li>
+                    <li><a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.65.117" target="_blank" rel="noopener">Crystal Statistics. I. A Two-Dimensional Model with an Order-Disorder Transition</a><br>Onsager, L. (1944).</li>
+                    <li><a href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.85.808" target="_blank" rel="noopener">The Spontaneous Magnetization of a Two-Dimensional Ising Model</a><br>Yang, C. N. (1952).</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

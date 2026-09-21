@@ -48,6 +48,19 @@
       pointer-events: none;
     }
 
+    /* A cursor-following orange highlight within the blue university text. */
+    .illini-trigger.illini-hover {
+      background: radial-gradient(
+        circle at var(--illini-x, 50%) var(--illini-y, 50%),
+        #FF5F05 0 16px,
+        #13294B 65px
+      ) fixed;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+
     a {
       color: #434c5e;
       text-decoration: underline;
@@ -276,20 +289,23 @@
 
     <section id="about" style="margin-top: 8px;">
       <p>
-        I study physics at the University of Illinois, Urbana-Champaign.
+        I'm an AI safety researcher working in <a href="https://www.cbai.ai/">Cambridge, MA</a>.
       </p>
       <p>
-        My research spans information and representation in language models, alongside learning problems in quantum many-body physics. More broadly, I study how intelligent and physical systems compute. 
+        My research focuses on the learning mechanics of neural networks. I also study the efficient learning and simulation of quantum systems. Broadly, I am interested in how complex systems compute.
+      </p>
+      <p>
+        I'm a senior studying physics at the <span class="illini-trigger">University of Illinois, Urbana-Champaign</span>.
       </p>
       <!-- <p>
         <i>Recently, I have been interested in discrete generative models in science!</i>
       </p> -->
       <p>
-        I also maintain a <a href="/blog/">blog</a> with longer thoughts. 
+        Some <a href="/drosophila/">notes</a> on various topics. My <a href="/blog/">blog</a> with longer thoughts.
       </p>
       <div class="contact-note">
         <p>
-          I'm applying to PhD programs in the statistical physics of learning. If my interests align with your group, please reach out!
+          I'm applying to Fall 2027 PhD programs in the physics of learning.
         </p>
         <code>aniket4 [at] illinois [dot] edu</code>
       </div>
@@ -338,5 +354,31 @@
 
     </div>
 
+  <script>
+    (() => {
+      const trigger = document.querySelector('.illini-trigger');
+      const hoverPointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+
+      const clearIlliniHover = () => {
+        trigger.classList.remove('illini-hover');
+      };
+
+      const updateIlliniHover = (event) => {
+        if (!hoverPointer.matches || event.pointerType === 'touch') return;
+        trigger.style.setProperty('--illini-x', `${event.clientX}px`);
+        trigger.style.setProperty('--illini-y', `${event.clientY}px`);
+        trigger.classList.add('illini-hover');
+      };
+
+      trigger.addEventListener('pointerenter', updateIlliniHover);
+      trigger.addEventListener('pointermove', updateIlliniHover);
+      trigger.addEventListener('pointerleave', clearIlliniHover);
+      trigger.addEventListener('pointercancel', clearIlliniHover);
+      window.addEventListener('blur', clearIlliniHover);
+      window.addEventListener('pagehide', clearIlliniHover);
+      window.addEventListener('scroll', clearIlliniHover, { passive: true });
+      hoverPointer.addEventListener('change', clearIlliniHover);
+    })();
+  </script>
 </body>
 </html>

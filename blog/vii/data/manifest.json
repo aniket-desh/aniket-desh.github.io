@@ -1,0 +1,11 @@
+{
+  "quick": false,
+  "elapsed_seconds": 8.947619290993316,
+  "python": "3.11.4",
+  "platform": "macOS-26.5-arm64-arm-64bit",
+  "seed_policy": "fixed independent NumPy generators by experiment and repetition",
+  "model": {
+    "teacher_norm_squared": 1.0,
+    "label_noise_variance": 0.5
+  }
+}

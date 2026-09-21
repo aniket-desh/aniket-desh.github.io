@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="A replica and random-matrix theory of high-dimensional ridge-regression snapshot ensembles, inspired by q0.">
+    <link rel="icon" href="/assets/penrose.png" type="image/x-icon">
+    <title>A Model Is Not Its Loss | aniket deshpande</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&amp;family=Alegreya+SC:wght@400;500&amp;display=swap" rel="stylesheet">
+    <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background: #f9e6e6;
+        }
+
+        ::-moz-selection {
+            background: #f9e6e6;
+        }
+
+        html {
+            overflow-x: hidden;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            color: #2e3440;
+            background: #fff;
+            font-family: "Alegreya", Georgia, "Times New Roman", serif;
+            font-size: 17.6px;
+            font-weight: 450;
+            line-height: 1.5;
+            font-optical-sizing: auto;
+            font-variant-numeric: oldstyle-nums;
+            font-feature-settings: "onum";
+        }
+
+        a {
+            color: #434c5e;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: #434c5e;
+        }
+
+        .container {
+            width: min(100% - 48px, 620px);
+            margin: 0 auto;
+            padding: 120px 0 88px;
+        }
+
+        @media screen and (max-width: 640px) {
+            .container {
+                width: min(100% - 32px, 620px);
+                padding: 64px 0;
+            }
+        }
+
+        .back-arrow {
+            display: inline-block;
+            margin-bottom: 15px;
+            color: #999;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        .back-arrow:hover {
+            color: #434c5e;
+        }
+
+        .post-header {
+            margin-bottom: 6px;
+            font-family: "Alegreya SC", Georgia, "Times New Roman", serif;
+            font-weight: 400;
+            font-size: 25.3px;
+            text-align: center;
+        }
+
+        .post-date {
+            margin: 0 0 24px;
+            color: #666;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .hero-image {
+            margin: 0 0 24px;
+        }
+
+        .hero-image img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .hero-image figcaption {
+            margin-top: 6px;
+            color: #999;
+            font-size: 14px;
+            line-height: 1.35;
+        }
+
+        .content {
+            width: 100%;
+            max-width: none;
+        }
+
+        .post-body p {
+            margin-bottom: 20px;
+        }
+
+        .post-body mjx-container[display="true"] {
+            display: block;
+            max-width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding-bottom: 3px;
+        }
+
+        .section-title {
+            margin: 35px 0 2px !important;
+            font-family: "Alegreya SC", Georgia, "Times New Roman", serif;
+            font-weight: 500;
+            font-size: 17px;
+        }
+
+        .section-title + p {
+            margin-top: 0;
+        }
+
+        .derivation {
+            margin: 22px 0;
+            padding: 0 0 0 15px;
+            border-left: 2px solid #d8dee9;
+        }
+
+        .derivation summary {
+            color: #3b4252;
+            cursor: pointer;
+            font-style: normal;
+        }
+
+        .derivation summary::marker {
+            color: #5e81ac;
+        }
+
+        .derivation-body {
+            color: #4c566a;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .derivation-body p {
+            margin: 14px 0;
+        }
+
+        .derivation-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .concept-figure {
+            margin: 27px 0;
+            padding: 18px 18px 15px;
+            border: 1px solid #d8dee9;
+            background: rgba(236, 239, 244, 0.28);
+        }
+
+        .flow-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 3px 0;
+        }
+
+        .flow-node {
+            padding: 5px 8px;
+            border: 1px solid #d8dee9;
+            background: #fff;
+            color: #3b4252;
+            font-size: 14.5px;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        .flow-arrow {
+            color: #81a1c1;
+            font-size: 18px;
+        }
+
+        .flow-turn {
+            margin: 2px 0;
+            color: #81a1c1;
+            font-size: 18px;
+            line-height: 1;
+            text-align: center;
+        }
+
+        .concept-figure figcaption {
+            margin-top: 12px;
+            color: #666;
+            font-size: 14px;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .claim-box {
+            margin: 24px 0;
+            padding: 14px 17px;
+            border-left: 2px solid #81a1c1;
+            color: #3b4252;
+            background: rgba(236, 239, 244, 0.24);
+        }
+
+        .claim-box p {
+            margin: 0;
+        }
+
+        .experiment-figure {
+            width: min(960px, calc(100vw - 48px));
+            margin: 30px 0 26px 50%;
+            transform: translateX(-50%);
+        }
+
+        .experiment-figure img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .experiment-figure figcaption {
+            max-width: 620px;
+            margin: 10px auto 0;
+            color: #666;
+            font-size: 14px;
+            line-height: 1.45;
+            text-align: center;
+        }
+
+        sup {
+            position: relative;
+        }
+
+        .footnote-ref {
+            position: relative;
+            z-index: 1;
+            color: #434c5e;
+            background: none;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .footnote-ref:hover {
+            color: #434c5e;
+            text-decoration: none;
+        }
+
+        .footnote-tooltip {
+            position: absolute;
+            z-index: 10;
+            top: calc(100% + 0.5em);
+            left: 50%;
+            width: 36vw;
+            max-width: 350px;
+            padding: 14px 18px;
+            transform: translateX(-50%);
+            visibility: hidden;
+            color: #333;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        @media screen and (min-width: 768px) {
+            sup .footnote-ref:hover + .footnote-tooltip {
+                visibility: visible;
+            }
+        }
+
+        .footnotes-sep {
+            margin-top: 40px;
+            border: none;
+            border-top: 1px solid #ddd;
+        }
+
+        .footnotes {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .footnotes ol {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .footnotes li {
+            margin-bottom: 10px;
+        }
+
+        .footnotes li sup {
+            color: #434c5e;
+            font-weight: 600;
+        }
+
+        .footnote-backref {
+            margin-left: 4px;
+            color: #434c5e;
+            font-size: 0.75em;
+            text-decoration: none;
+        }
+
+        .footnote-backref:hover {
+            text-decoration: underline;
+        }
+
+        .reference-mark {
+            font-size: 0.75em;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        ol.references {
+            padding-left: 1.5em;
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        ol.references li {
+            margin-bottom: 10px;
+        }
+
+        .toc-sidebar {
+            display: none;
+            font-family: "Alegreya SC", Georgia, "Times New Roman", serif;
+        }
+
+        @media screen and (min-width: 1420px) {
+            .toc-sidebar {
+                display: block;
+                position: fixed;
+                top: 310px;
+                left: calc(50vw - 710px);
+                width: 220px;
+                font-size: 13px;
+                line-height: 1.6;
+            }
+
+            .toc-sidebar a {
+                display: block;
+                padding: 3px 0;
+                color: #ccc;
+                text-decoration: none;
+                transition: color 0.2s ease;
+            }
+
+            .toc-sidebar a:hover,
+            .toc-sidebar a.active {
+                color: #333;
+            }
+        }
+
+        @media screen and (max-width: 640px) {
+            .experiment-figure {
+                width: 100%;
+                margin-left: 0;
+                transform: none;
+            }
+
+            .footnote-tooltip {
+                display: none;
+            }
+
+            .flow-row {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+
+            .post-body mjx-container[display="true"] {
+                font-size: 92% !important;
+            }
+        }
+
+        .derivation summary:focus-visible,
+        a:focus-visible {
+            outline: 2px solid #88c0d0;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="toc-sidebar" aria-label="Table of contents">
+        <a href="#section-1">I. A Model Is Not Its Loss</a>
+        <a href="#section-2">II. The Matrix Between Models</a>
+        <a href="#section-3">III. Replicas of What?</a>
+        <a href="#section-4">IV. What the Prior Learns</a>
+        <a href="#section-5">V. The Oracle in the Pool</a>
+        <a href="#section-6">VI. A Chain That Forgets</a>
+        <a href="#section-7">VII. Where Training Time Enters</a>
+    </nav>
+
+    <div class="container">
+        <a href="/blog/" class="back-arrow" aria-label="Back to blog">←</a>
+        <div class="post-header">A Model Is Not Its Loss</div>
+        <p class="post-date">08.11.2026</p>
+        <figure class="hero-image">
+            <img src="/blog/vii/assets/avercamp-winter-landscape.jpg" alt="Avercamp's winter landscape, with hundreds of people skating and walking along different paths on one frozen river.">
+            <figcaption>Hendrick Avercamp, <a href="https://www.rijksmuseum.nl/en/collection/object/Winter-Landscape-with-Ice-Skaters--918895dc18da94e357c6763adda8882f" target="_blank" rel="noopener"><i>Winter Landscape with Ice Skaters</i></a> (c. 1608), oil on panel, Rijksmuseum. Public domain.</figcaption>
+        </figure>
+
+        <div class="content">
+            <div class="post-body">
+                <p>
+                    An ensemble changes what it means for a model to be good. In q0, Q Labs trains a population of neural-network snapshots across long cyclic trajectories, then learns a single prior over their predictions on a held-out fitness set. In its main experiment, the population contains 128 snapshots from two trajectories and sixty-four cycles. The learned top-eight ensemble shares only two members with the eight snapshots selected greedily by individual fitness loss.<sup><a class="reference-mark" href="#ref-1">1</a></sup> A model that loses alone can still earn a place in company.
+                </p>
+
+                <p>
+                    “Diversity” is the usual explanation, but the word leaves the operative quantity unnamed. Parameter distance does not tell us whether two models fail on the same examples, just as distance between two skaters in Avercamp's frozen landscape does not tell us whether their paths will meet. What matters is a relation between errors. Once that relation is written as a matrix, the learned prior becomes a geometric optimization problem rather than an intuition about variety.
+                </p>
+
+                <p>
+                    I want to solve the simplest version of that problem exactly. The models will be high-dimensional ridge regressors trained on the same Gaussian dataset, each snapshot will have a different effective regularization or finite-time filter, and the ensemble will average their scalar predictions under squared loss.<sup data-fn="q0-analogy"></sup> This toy cannot reproduce q0's nonconvex dynamics. Its value is sharper: it tells us which part of the ensemble effect follows from high-dimensional statistics alone, then exposes the point at which the analogy breaks.
+                </p>
+
+                <p class="section-title" id="section-1">I. A Model Is Not Its Loss</p>
+
+                <p>
+                    Let \(p\) training examples live in \(d\) dimensions,
+
+                    \[
+                        x_\mu\sim\mathcal N(0,I_d),
+                        \qquad
+                        y_\mu=x_\mu^{\mathsf T}\theta^\star+\epsilon_\mu,
+                        \qquad
+                        \epsilon_\mu\sim\mathcal N(0,\eta^2),
+                    \]
+
+                    with \(d/p\to q\in(0,\infty)\). The teacher is independent of the design and has fixed squared norm \(A=\lVert\theta^\star\rVert^2\). Following the standard high-dimensional regression setup, define
+
+                    \[
+                        \widehat\Sigma=\frac1pX^{\mathsf T} X,
+                        \qquad
+                        b=\frac1pX^{\mathsf T} y.
+                    \]
+
+                    Snapshot \(i\) is the ridge solution at effective regularization \(\lambda_i>0\),
+
+                    \[
+                        \theta_i=(\widehat\Sigma+\lambda_iI)^{-1}b.
+                    \]
+
+                    This is an equilibrium caricature of a training snapshot. Weight decay, learning-rate history, and incomplete optimization have all been compressed into one scalar for now.<sup><a class="reference-mark" href="#ref-2">2</a></sup>
+                </p>
+
+                <details class="derivation">
+                    <summary><strong>Derivation: the ridge snapshot and its two sources of error</strong></summary>
+                    <div class="derivation-body">
+                        <p>
+                            The stationary condition for
+                            \[
+                                \frac1{2p}\lVert X\theta-y\rVert^2+\frac{\lambda_i}{2}\lVert\theta\rVert^2
+                            \]
+                            is \((\widehat\Sigma+\lambda_iI)\theta_i=b\). Writing \(G_i=(\widehat\Sigma+\lambda_iI)^{-1}\) and substituting \(y=X\theta^\star+\epsilon\) gives
+                            \[
+                                b=\widehat\Sigma\theta^\star+\frac1pX^{\mathsf T}\epsilon.
+                            \]
+                        </p>
+                        <p>
+                            Since \(G_i\widehat\Sigma=I-\lambda_iG_i\),
+                            \[
+                                \theta_i-\theta^\star
+                                =-\lambda_iG_i\theta^\star
+                                +G_i\frac1pX^{\mathsf T}\epsilon.
+                            \]
+                            The first term is shrinkage bias. The second is the part of the training noise fitted through the same random covariance matrix.
+                        </p>
+                    </div>
+                </details>
+
+                <p>
+                    Flatten q0's trajectory-cycle index \((n,c)\) into \(i=1,\ldots,M\), and average the snapshots with nonnegative weights satisfying \(\mathbf1^{\mathsf T} w=1\). For one trained population, let
+
+                    \[
+                        e_i=\theta_i-\theta^\star,
+                        \qquad
+                        C_{ij}=e_i^{\mathsf T} e_j.
+                    \]
+
+                    A fresh test example then has conditional mean-squared error
+
+                    \[
+                        R_{\mathrm{test}}(w\mid X,\epsilon)
+                        =\eta^2+w^{\mathsf T} Cw.
+                    \]
+
+                    The irreducible test noise is \(\eta^2\). Everything the ensemble can change sits in \(C\), the Gram matrix of its parameter errors.
+                </p>
+
+                <p>
+                    This already resolves the conceptual problem. A standalone loss sees only \(C_{ii}=\lVert e_i\rVert^2\). An ensemble is controlled by the off-diagonal entries \(C_{ij}\) as well. Ranking models by individual fitness discards most of the object that determines their joint prediction.
+                </p>
+
+                <p>
+                    Three related matrices will appear, and keeping them separate prevents a subtle mistake. \(C\) is the realized error geometry of one trained population. The conditional average
+
+                    \[
+                        \mathcal R_{ij}(X,\theta^\star)
+                        =\mathbb E_{\epsilon_{\mathrm{train}}}
+                        [C_{ij}\mid X,\theta^\star]
+                    \]
+
+                    averages repeated label noise while holding the design fixed. In the proportional limit, trace and bilinear observables of \(\mathcal R\) approach a deterministic Marchenko-Pastur matrix, which I will also denote by \(\mathcal R\) when the level is clear.<sup data-fn="deterministic-equivalence"></sup>
+                </p>
+
+                <p class="section-title" id="section-2">II. The Matrix Between Models</p>
+
+                <p>
+                    The same bias-noise split that gives the usual ridge risk also gives every cross-snapshot entry. Conditional on \(X\) and \(\theta^\star\), the training noise has mean zero, so the mixed terms disappear:
+
+                    \[
+                        \mathcal R_{ij}
+                        =
+                        \lambda_i\lambda_j(\theta^\star)^{\mathsf T} G_iG_j\theta^\star
+                        +\frac{\eta^2}{p}
+                        \operatorname{tr}(\widehat\Sigma G_iG_j).
+                    \]
+
+                    The first term measures shared bias, while the second measures the noise directions fitted by both snapshots. Individual ridge risk is only the case \(i=j\).
+                </p>
+
+                <details class="derivation">
+                    <summary><strong>Derivation: the exact pairwise overlap</strong></summary>
+                    <div class="derivation-body">
+                        <p>
+                            Multiply the two error decompositions and average over training noise. The signal-noise cross terms vanish. For the noise-noise term,
+                            \[
+                                \mathbb E_\epsilon\!\left[
+                                \frac1{p^2}G_iX^{\mathsf T}\epsilon\epsilon^{\mathsf T} XG_j
+                                \right]
+                                =\frac{\eta^2}{p^2}G_iX^{\mathsf T} XG_j
+                                =\frac{\eta^2}{p}G_i\widehat\Sigma G_j.
+                            \]
+                            Taking the trace gives the stated scalar overlap.
+                        </p>
+                        <p>
+                            Rotational invariance makes the deterministic teacher bilinear equivalent to a normalized trace,
+                            \[
+                                (\theta^\star)^{\mathsf T} G_iG_j\theta^\star
+                                \longrightarrow
+                                A\,\frac1d\operatorname{tr}(G_iG_j),
+                            \]
+                            provided the teacher is independent of \(X\) and \(A=O(1)\).
+                        </p>
+                    </div>
+                </details>
+
+                <p>
+                    Every entry now reduces to one scalar resolvent,
+
+                    \[
+                        g(\lambda)
+                        =\lim_{d\to\infty}\frac1d
+                        \operatorname{tr}(\widehat\Sigma+\lambda I)^{-1}.
+                    \]
+
+                    For two distinct regularizations, the resolvent identity gives
+
+                    \[
+                        H_{ij}
+                        =\frac{g(\lambda_i)-g(\lambda_j)}{\lambda_j-\lambda_i},
+                        \qquad
+                        K_{ij}
+                        =\frac{\lambda_jg(\lambda_j)-\lambda_ig(\lambda_i)}{\lambda_j-\lambda_i},
+                    \]
+
+                    and therefore
+
+                    \[
+                        \boxed{
+                        \mathcal R_{ij}
+                        =A\lambda_i\lambda_jH_{ij}
+                        +\eta^2qK_{ij}.}
+                    \]
+                </p>
+
+                <details class="derivation">
+                    <summary><strong>Derivation: divided differences and the diagonal limit</strong></summary>
+                    <div class="derivation-body">
+                        <p>
+                            Because \(G_i-G_j=(\lambda_j-\lambda_i)G_iG_j\),
+                            \[
+                                \frac1d\operatorname{tr}(G_iG_j)
+                                =\frac{g(\lambda_i)-g(\lambda_j)}{\lambda_j-\lambda_i}=H_{ij}.
+                            \]
+                            Also \(\widehat\Sigma G_i=I-\lambda_iG_i\), so
+                            \[
+                                \frac1d\operatorname{tr}(\widehat\Sigma G_iG_j)
+                                =\frac{\lambda_jg(\lambda_j)-\lambda_ig(\lambda_i)}{\lambda_j-\lambda_i}=K_{ij}.
+                            \]
+                        </p>
+                        <p>
+                            Coincident regularizations are derivative limits, not substitutions into a zero denominator:
+                            \[
+                                H_{ii}=-g'(\lambda_i),
+                                \qquad
+                                K_{ii}=g(\lambda_i)+\lambda_i g'(\lambda_i).
+                            \]
+                            Thus
+                            \[
+                                \mathcal R_{ii}
+                                =A\lambda_i^2[-g'(\lambda_i)]
+                                +\eta^2q[g(\lambda_i)+\lambda_i g'(\lambda_i)].
+                            \]
+                        </p>
+                    </div>
+                </details>
+
+                <p>
+                    We have turned an \(M\times M\) ensemble problem into the evaluation of \(g\) at \(M\) points. The remaining question is where that scalar function comes from when the same random design is frozen beneath every snapshot.
+                </p>
+
+                <p class="section-title" id="section-3">III. Replicas of What?</p>
+
+                <p>
+                    The design matrix is <i>quenched</i><sup data-fn="quenched-origin"></sup>: training responds to one realized \(X\), while the theoretical risk asks what happens across draws of that frozen environment. This means the central object is an average of a logarithm. Introduce the Gaussian partition function
+
+                    \[
+                        Z_X(\beta,\lambda)
+                        =\int_{\mathbb R^d}du\,
+                        \exp\!\left[-\frac\beta2
+                        u^{\mathsf T}(\widehat\Sigma+\lambda I)u\right].
+                    \]
+
+                    Since
+
+                    \[
+                        \log Z_X
+                        =\frac d2\log\frac{2\pi}{\beta}
+                        -\frac12\log\det(\widehat\Sigma+\lambda I),
+                    \]
+
+                    differentiating gives the resolvent:
+
+                    \[
+                        g(\lambda)
+                        =-\frac2d\,\partial_\lambda
+                        \mathbb E_X\log Z_X.
+                    \]
+                </p>
+
+                <p>
+                    The replica method handles the logarithm through
+
+                    \[
+                        \mathbb E\log Z
+                        =\lim_{r\to0}\frac{\mathbb E Z^r-1}{r}.
+                    \]
+
+                    For a positive integer \(r\), \(Z^r\) introduces \(r\) dummy vectors \(u^1,\ldots,u^r\). They are independent integration variables, but they all see the same \(X\). After the Gaussian rows of \(X\) are averaged, the coordinates matter only through their replica overlap matrix
+
+                    \[
+                        Q_{ab}=\frac1d(u^a)^{\mathsf T} u^b.
+                    \]
+
+                    This is the conceptual step that makes replicas useful. A high-dimensional integral over \(rd\) coordinates becomes a fixed-dimensional integral over the \(r\times r\) Gram matrix \(Q\).<sup><a class="reference-mark" href="#ref-3">3</a></sup>
+                </p>
+
+                <figure class="concept-figure">
+                    <div class="flow-row">
+                        <span class="flow-node">frozen data \(X\)</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-node">partition function \(Z\)</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-node">\(r\) shared-disorder copies</span>
+                        <span class="flow-arrow">→</span>
+                        <span class="flow-node">overlap \(Q\)</span>
+                    </div>
+                    <div class="flow-turn">↓</div>
+                    <div class="flow-row">
+                        <span class="flow-node">snapshot geometry \(\mathcal R\)</span>
+                        <span class="flow-arrow">←</span>
+                        <span class="flow-node">resolvent \(g(\lambda)\)</span>
+                        <span class="flow-arrow">←</span>
+                        <span class="flow-node">large-\(d\) saddle</span>
+                    </div>
+                    <figcaption>The replicas are bookkeeping copies used to average the frozen disorder. They are not the trained snapshot population.</figcaption>
+                </figure>
+
+                <details class="derivation">
+                    <summary><strong>Derivation: one Gaussian row and the fixed-\(Q\) volume</strong></summary>
+                    <div class="derivation-body">
+                        <p>
+                            For one row \(x\sim\mathcal N(0,I_d)\), the replicated projections \(z_a=x^{\mathsf T} u^a\) are Gaussian with covariance \(dQ\). Therefore
+                            \[
+                                \mathbb E_x\exp\!\left[-\frac{\beta}{2p}
+                                \sum_a(x^{\mathsf T} u^a)^2\right]
+                                =\det(I_r+\beta qQ)^{-1/2}.
+                            \]
+                            There are \(p=d/q\) independent rows, so their combined contribution is
+                            \[
+                                \exp\!\left[-\frac d{2q}\log\det(I_r+\beta qQ)\right].
+                            \]
+                        </p>
+                        <p>
+                            The microscopic vectors with a given Gram matrix occupy a volume proportional to
+                            \[
+                                (\det Q)^{(d-r-1)/2}.
+                            \]
+                            One way to see this is to arrange the replicas as a \(d\times r\) matrix \(U\), write \(U=YR\) with \(Y^{\mathsf T}Y=I_r\), and use \(U^{\mathsf T}U=R^{\mathsf T}R=dQ\). The angular Stiefel factor is independent of \(Q\), while the radial Jacobian supplies the determinant power. At leading order this becomes the entropy term \(\tfrac d2\log\det Q\).
+                        </p>
+                    </div>
+                </details>
+
+                <p>
+                    Combining that entropy with the ridge energy and the averaged data rows gives an integral of the form \(\int dQ\,e^{d\Phi(Q)}\). Large dimension concentrates it at a saddle. Rotational and replica symmetry reduce the source-free saddle to \(Q=Q_0I_r\), and the stationarity condition becomes
+
+                    \[
+                        \frac1{Q_0}
+                        =\beta\lambda+\frac{\beta}{1+\beta qQ_0}.
+                    \]
+
+                    A Gaussian coordinate under the replicated measure has variance \(g/\beta\), so \(g=\beta Q_0\). The saddle is exactly the Marchenko-Pastur fixed point<sup><a class="reference-mark" href="#ref-4">4</a></sup>
+
+                    \[
+                        \boxed{
+                        \frac1g=\lambda+\frac1{1+qg}.}
+                    \]
+
+                    Replicas have turned the random matrix into one scalar self-consistency equation.<sup data-fn="replica-continuation"></sup>
+                </p>
+
+                <details class="derivation">
+                    <summary><strong>Derivation: the saddle and the closed resolvent</strong></summary>
+                    <div class="derivation-body">
+                        <p>
+                            Up to constants independent of \(Q\),
+                            \[
+                                \Phi(Q)
+                                =\frac12\log\det Q
+                                -\frac{\beta\lambda}{2}\operatorname{tr}Q
+                                -\frac1{2q}\log\det(I_r+\beta qQ).
+                            \]
+                            Setting its matrix derivative to zero yields
+                            \[
+                                Q^{-1}=\beta\lambda I_r+\beta(I_r+\beta qQ)^{-1}.
+                            \]
+                            Substituting \(Q=Q_0I_r\) and \(g=\beta Q_0\) gives the fixed point above.
+                        </p>
+                        <p>
+                            Cross-multiplication produces
+                            \[
+                                q\lambda g^2+(\lambda+1-q)g-1=0,
+                            \]
+                            whose positive branch is
+                            \[
+                                g(\lambda)
+                                =\frac{-(\lambda+1-q)+
+                                \sqrt{(\lambda+1-q)^2+4q\lambda}}
+                                {2q\lambda}.
+                            \]
+                            Implicit differentiation gives the negative derivative
+                            \[
+                                g'(\lambda)
+                                =-\frac{qg^2+g}{2q\lambda g+\lambda+1-q}.
+                            \]
+                        </p>
+                    </div>
+                </details>
+
+                <p>
+                    There are now two overlap matrices with different jobs. \(Q\) describes dummy copies inside the disorder average. \(\mathcal R\) describes the errors of trained snapshots and decides whether their predictions combine well. Confusing them makes the replica calculation seem more mystical than it is: \(Q\) is the route to \(g\), and \(g\) is the route to \(\mathcal R\).
+                </p>
+
+                <figure class="experiment-figure">
+                    <picture>
+                        <source media="(max-width: 640px)" srcset="/blog/vii/assets/overlap-theory-mobile.png">
+                        <img src="/blog/vii/assets/overlap-theory.png" alt="Theory and simulation comparison for the full ridge-snapshot error-overlap matrix.">
+                    </picture>
+                    <figcaption>
+                        <b>Figure 1.</b> The replica resolvent predicts the full off-diagonal error geometry. Each condition uses \(A=1,\eta^2=0.5\), nine regularizations from \(\lambda^\star/16\) to \(16\lambda^\star\), thirty independent Gaussian designs, and eight training-noise draws per design. Theory is evaluated at the realized ratio \(q=d/p\). <b>(a)</b> Predicted lower triangle and simulated upper triangle of the normalized overlap matrix at \(q\approx0.9,d=512\). <b>(b)</b> All eighty-one snapshot pairs for four aspect ratios at \(d=512\); open marks are diagonal risks. <b>(c)</b> Mean relative Frobenius error between the exact conditional matrix and its deterministic limit, with 95% confidence intervals across designs. Convergence is slower near and beyond interpolation, but the error is already only two to four percent at \(d=512\).
+                    </figcaption>
+                </figure>
+
+                <p>
+                    The parity plot is deliberately about every pair, not only the diagonal. Predicting ordinary ridge risk would show that the resolvent is correct. Predicting all \(M^2\) entries shows that it has recovered the object the ensemble actually uses. The same answer can also be obtained through deterministic-equivalence ridge renormalization and the \(S\)-transform of free probability, which provides an independent check on the replica saddle.<sup><a class="reference-mark" href="#ref-5">5</a></sup>
+                </p>
+
+                <p class="section-title" id="section-4">IV. What the Prior Learns</p>
+
+                <p>
+                    Give the trained population a separate fitness set of \(m\) labeled examples. Let \(P_{ti}=x_t^{\mathsf T}\theta_i\) be its prediction matrix and \(r_{ti}=P_{ti}-y_t\) its residuals. Fitting nonnegative ensemble weights under squared loss solves
+
+                    \[
+                        \min_{w\ge0,\,\mathbf1^{\mathsf T}w=1}
+                        \frac1m\lVert Pw-y\rVert^2
+                        =
+                        \min_{w\ge0,\,\mathbf1^{\mathsf T}w=1}
+                        w^{\mathsf T}\widehat Fw,
+                        \qquad
+                        \widehat F=\frac1m r^{\mathsf T} r.
+                    \]
+
+                    Conditional on one trained population,
+
+                    \[
+                        \widehat F\longrightarrow C+\eta^2\mathbf1\mathbf1^{\mathsf T}.
+                    \]
+
+                    The second term contributes the constant \(\eta^2\) on the simplex. A sufficiently large fitness set is therefore estimating the realized cross-error matrix, then choosing the lowest-error point in the convex hull of the snapshots.
+                </p>
+
+                <p>
+                    This is the squared-loss analog of q0's learned prior. q0 fits one global softmax vector on cached ground-truth probabilities, then keeps its largest \(K\) entries and renormalizes without refitting.<sup><a class="reference-mark" href="#ref-1">1</a></sup> In the high-dimensional limit, if the weights are fixed independently of the finite fitness noise, the population problem becomes
+
+                    \[
+                        \boxed{
+                        \min_{w\ge0,\,\mathbf1^{\mathsf T} w=1}w^{\mathsf T}\mathcal Rw.}
+                    \]
+                </p>
+
+                <details class="derivation">
+                    <summary><strong>Derivation: simplex KKT conditions and the two-snapshot rule</strong></summary>
+                    <div class="derivation-body">
+                        <p>
+                            For a positive-definite matrix \(R\), the Lagrangian is
+                            \[
+                                L(w,\nu,\mu)=w^{\mathsf T} Rw-\nu(\mathbf1^{\mathsf T} w-1)-\mu^{\mathsf T} w.
+                            \]
+                            The Karush-Kuhn-Tucker conditions are
+                            \[
+                                2Rw-\nu\mathbf1-\mu=0,
+                                \quad w\ge0,
+                                \quad\mu\ge0,
+                                \quad\mu_iw_i=0.
+                            \]
+                            If every weight is active, \(\mu=0\) and
+                            \[
+                                w=\frac{R^{-1}\mathbf1}{\mathbf1^{\mathsf T} R^{-1}\mathbf1}.
+                            \]
+                            This inverse-overlap expression is only the interior equality-constrained solution. Negative entries require an active-set simplex solve, and duplicate snapshots require a pseudoinverse or removal of redundancy.
+                        </p>
+                        <p>
+                            With two snapshots and weight \(w\) on model 1,
+                            \[
+                                \rho(w)=w^2R_{11}+(1-w)^2R_{22}+2w(1-w)R_{12}.
+                            \]
+                            Before clipping to \([0,1]\),
+                            \[
+                                w^\star=\frac{R_{22}-R_{12}}{R_{11}+R_{22}-2R_{12}}.
+                            \]
+                            If model 1 is worse alone, \(R_{11}>R_{22}\), it still receives positive weight whenever \(R_{12}\lt R_{22}\). Its error need not be small; it needs a component that model 2 does not already contain.
+                        </p>
+                    </div>
+                </details>
+
+                <p>
+                    At finite dimension, the learned weights contain another ingredient. They depend on the realized fitness labels and can correlate with the particular \(C\) produced by this training run. Such a prior is a richer estimator than a population-fixed \(w\). If it beats a training-only oracle, that does not contradict the asymptotic calculation below; it means the fitness labels supplied extra information. The fair comparison is a scalar ridge parameter tuned on the same fitness set, followed by evaluation on an independent test distribution.<sup data-fn="fitness-information"></sup>
+                </p>
+
+                <p class="section-title" id="section-5">V. The Oracle in the Pool</p>
+
+                <p>
+                    The isotropic model contains a stronger negative result than the original derivation suggests. Forget ridge mixtures for a moment and allow any scalar spectral filter \(f\), so that the estimator is \(\theta_f=f(\widehat\Sigma)b\). If \(s\) is an eigenvalue of \(\widehat\Sigma\), its asymptotic excess risk is
+
+                    \[
+                        \mathcal E[f]
+                        =\int\left[
+                        A(1-sf(s))^2
+                        +\eta^2q\,s f(s)^2
+                        \right]d\mu_q(s),
+                    \]
+
+                    where \(\mu_q\) is the Marchenko-Pastur law. The integrand can be minimized at every \(s\) independently, giving
+
+                    \[
+                        \boxed{
+                        f^\star(s)=\frac1{s+\lambda^\star},
+                        \qquad
+                        \lambda^\star=\frac{q\eta^2}{A}.}
+                    \]
+
+                    The optimal scalar spectral filter is already one ridge estimator.
+                </p>
+
+                <details class="derivation">
+                    <summary><strong>Derivation: why oracle ridge is pointwise optimal</strong></summary>
+                    <div class="derivation-body">
+                        <p>
+                            Along an eigenvector with sample eigenvalue \(s\), the signal is multiplied by \(sf(s)\), while the fitted noise contributes variance proportional to \(sf(s)^2\). Differentiating the integrand with respect to \(f\) gives
+                            \[
+                                2As(sf-1)+2\eta^2qsf=0.
+                            \]
+                            For \(s>0\),
+                            \[
+                                f(s)=\frac{A}{As+q\eta^2}
+                                =\frac1{s+q\eta^2/A}.
+                            \]
+                            At a zero eigenvalue no filter can recover the missing teacher component, so its value does not change the conclusion.
+                        </p>
+                        <p>
+                            A simplex mixture of ridge snapshots has filter
+                            \[
+                                f_w(s)=\sum_i\frac{w_i}{s+\lambda_i}.
+                            \]
+                            It can interpolate a coarse candidate grid, but it cannot beat the pointwise optimum. If \(\lambda^\star\) is present and candidates are distinct, the population optimum collapses to that snapshot.
+                        </p>
+                    </div>
+                </details>
+
+                <div class="claim-box">
+                    <p>
+                        The isotropic theory supports complementarity inside a restricted or mistuned pool. It does not support a claim that population-fixed snapshot mixing beats optimally tuned ridge.
+                    </p>
+                </div>
+
+                <figure class="experiment-figure">
+                    <picture>
+                        <source media="(max-width: 640px)" srcset="/blog/vii/assets/weighting-anatomy-mobile.png">
+                        <img src="/blog/vii/assets/weighting-anatomy.png" alt="Population and fitness-adaptive weighting experiments for a coarse pool of ridge snapshots.">
+                    </picture>
+                    <figcaption>
+                        <b>Figure 2.</b> What overlap-aware weighting can and cannot buy in the isotropic teacher model, with \(d=256,p=320,A=1,\eta^2=0.5\), so \(\lambda^\star=0.4\). <b>(a)</b> The coarse pool excludes \(\lambda^\star\). Population overlap weights place \(0.487\) on \(\lambda/\lambda^\star=1/2\) and \(0.513\) on \(2\), reaching \(0.92617\) test MSE against the oracle's \(0.92539\); adding the oracle candidate collapses all mass onto it. <b>(b)</b> One hundred independent trained populations with 512 disjoint fitness examples and exact risk on the independent Gaussian test distribution. Pale green paths are individual runs; opaque marks and bars are means and 95% confidence intervals. Fitness-adaptive weights do not beat ridge tuned on the same labels. <b>(c)</b> Mean fitness-simplex weights against standalone risk. The \(1/2\) snapshot is worse alone than the \(2\) snapshot, yet receives substantial weight because the pair brackets the missing oracle regularization.
+                    </figcaption>
+                </figure>
+
+                <p>
+                    The first panel is a clean version of the worse-member effect. Selecting the two best individual models and averaging them also gets close here, but it deteriorates as more models are forced into the average. Overlap weighting simply leaves redundant or harmful candidates at zero. Its gain is real relative to the discrete pool and almost entirely explained by regularization interpolation.
+                </p>
+
+                <p>
+                    The finite-fitness experiment reaches the same boundary from another direction. With 512 fitness examples, the learned top-four mixture averages \(0.92797\) test MSE, fixed Marchenko-Pastur weights average \(0.92822\), and ridge tuned on those same fitness labels averages \(0.92743\). At 2,048 fitness examples, the learned mixture and tuned ridge both reach \(0.9263\) to four decimal places. Treating the fitness labels as ordinary training data would lower ridge risk much further, to \(0.671\) at \(m=512\), which is not the q0 protocol but makes the source of information explicit. There is no residual evidence here for a mechanism beyond validation-label adaptation and scalar regularization.
+                </p>
+
+                <p>
+                    This limitation is specific, not universal. An anisotropic teacher, structured covariance, nonlinear features, or task-dependent errors can make the optimal shrinkage vary across spectral bands. A ridge mixture can then approximate a richer filter. The present theorem says that such structure must be modeled before it is claimed; an isotropic Gaussian teacher cannot supply it by implication.
+                </p>
+
+                <p class="section-title" id="section-6">VI. A Chain That Forgets</p>
+
+                <p>
+                    q0 does more than save independent snapshots. Each cycle distills a student from the preceding model while retaining the ground-truth objective. The squared-loss analog minimizes
+
+                    \[
+                        \frac{1-\alpha}{2p}\lVert X\theta-y\rVert^2
+                        +\frac{\alpha}{2p}\lVert X\theta-X\theta_{c-1}\rVert^2
+                        +\frac\lambda2\lVert\theta\rVert^2.
+                    \]
+
+                    Exact optimization gives the recurrence
+
+                    \[
+                        (\widehat\Sigma+\lambda I)\theta_c
+                        =(1-\alpha)b+\alpha\widehat\Sigma\theta_{c-1}.
+                    \]
+
+                    At a fixed point,
+
+                    \[
+                        \boxed{
+                        \theta_\infty
+                        =\left(\widehat\Sigma+
+                        \frac{\lambda}{1-\alpha}I\right)^{-1}b.}
+                    \]
+
+                    In an exactly solved convex problem, constant-strength chain distillation is simply stronger ridge. It forgets the initialization that distinguished one trajectory from another.
+                </p>
+
+                <details class="derivation">
+                    <summary><strong>Derivation: unrolling the exact distillation chain</strong></summary>
+                    <div class="derivation-body">
+                        <p>
+                            In an eigendirection of \(\widehat\Sigma\) with eigenvalue \(s\),
+                            \[
+                                \theta_c(s)
+                                =\frac{\alpha s}{s+\lambda}\theta_{c-1}(s)
+                                +\frac{1-\alpha}{s+\lambda}b(s).
+                            \]
+                            The contraction factor is \(a(s)=\alpha s/(s+\lambda)\), which lies below one for \(\lambda>0\) and \(0\le\alpha\lt1\). From zero initialization, summing the geometric series gives the finite-cycle filter
+                            \[
+                                f_c(s)
+                                =\frac{1-\alpha}{(1-\alpha)s+\lambda}
+                                \left[1-\left(\frac{\alpha s}{s+\lambda}\right)^c\right].
+                            \]
+                        </p>
+                        <p>
+                            As \(c\to\infty\), the bracket tends to one and
+                            \[
+                                f_\infty(s)
+                                =\frac1{s+\lambda/(1-\alpha)}.
+                            \]
+                            Differences between two initializations are multiplied by \(a(s)^c\), so every eigendirection loses its trajectory identity geometrically.
+                        </p>
+                    </div>
+                </details>
+
+                <p>
+                    This is a second useful failure. Distillation may still improve the individual model because it changes effective regularization, but exact convex equilibrium cannot preserve a useful population of different solutions. Any q0-like complementarity must enter through an ingredient that the fixed point erased.
+                </p>
+
+                <p class="section-title" id="section-7">VII. Where Training Time Enters</p>
+
+                <p>
+                    Finite optimization prevents that erasure. During cycle \(c\), let
+
+                    \[
+                        h_c=(1-\alpha)b+\alpha\widehat\Sigma\theta_{c-1},
+                    \]
+
+                    perturb the inherited state at the cycle boundary, and take only \(L\) full-batch steps,
+
+                    \[
+                        \theta^{(t+1)}
+                        =\theta^{(t)}-\gamma
+                        \left[(\widehat\Sigma+\lambda I)\theta^{(t)}-h_c\right].
+                    \]
+
+                    Every eigendirection now carries a finite-time polynomial filter. Starting points, learning-rate schedules, and boundary kicks survive until optimization has had enough time to remove them. This is the first place the linear model can imitate the trajectory structure of q0 rather than only its endpoint.
+                </p>
+
+                <figure class="experiment-figure">
+                    <picture>
+                        <source media="(max-width: 640px)" srcset="/blog/vii/assets/chain-dynamics-mobile.png">
+                        <img src="/blog/vii/assets/chain-dynamics.png" alt="Exact and finite-time chain-distillation experiments showing collapse of trajectory diversity.">
+                    </picture>
+                    <figcaption>
+                        <b>Figure 3.</b> Convex chain distillation forgets the population faster than perturbations can make it useful. The experiment uses fifty independent training sets at \(d=256,p=320\), four trajectories, sixteen cycles, and the final four snapshots from each trajectory. Every condition matches \(\lambda/(1-\alpha)=\lambda^\star\), and a top-eight simplex is fitted on 512 disjoint fitness examples. <b>(a)</b> Exact cycle minimization at \(\alpha=0.5\); pale paths are runs and the dark curve is their mean. The numerical floor is reached near cycle twenty. <b>(b, c)</b> Mean snapshot quality versus cross-trajectory error correlation without and with distillation. Color is the initial relative kick \(\sigma_0\), which decays fivefold across cycles; marker shape is the number \(L\) of full-batch steps. Bars are 95% confidence intervals. Large, short-trained kicks reduce correlation by worsening members, while longer optimization restores quality and correlation. Averaged across the nine conditions, learned top-eight risk remains \(0.4\) and \(0.3\) milli-MSE above the best member, respectively.
+                    </figcaption>
+                </figure>
+
+                <p>
+                    The tradeoff is visible in the rightward bend. With the largest kick and one optimization step, cross-trajectory error correlation falls to \(0.983\) without distillation and \(0.972\) with it, but mean snapshot MSE rises from the converged value near \(0.925\) to \(0.934\) and \(0.952\). Sixteen steps recover the good solution and drive correlation back above \(0.9998\). The largest mean effective rank of the sixteen-snapshot error Gram matrix is only \(1.044\). These are perturbed versions of essentially one error direction, not a population with stable complementary structure.
+                </p>
+
+                <p>
+                    One cell produces a tiny average ensemble gain, but its paired confidence interval crosses zero; the sweep as a whole does not support a positive claim. That negative result is more informative than an unqualified demonstration that noise creates distance. Boundary perturbations create diversity easily. The difficult part is preserving diversity that cancels error without sacrificing the quality of each member.
+                </p>
+
+                <p>
+                    The natural next theory is dynamical rather than another equilibrium replica calculation. Two-point deterministic equivalence studies products of resolvents at different training times, precisely the kind of object needed for an overlap \(F(t,t')\) between finite-time filters.<sup><a class="reference-mark" href="#ref-6">6</a></sup> Minibatch noise, cyclic learning rates, changing weight decay, nonconvex features, and soft teacher targets can then be added one at a time. The convex experiment does not say which of these explains q0. It says that exact chain minimization and isotropic ridge complementarity do not.
+                </p>
+
+                <p>
+                    The calculation leaves us with two matrices. \(Q\) is the overlap among dummy replicas that solves the quenched random-matrix average. \(\mathcal R\) is the overlap among trained errors that solves ensemble selection. The first produces the resolvent; the second decides whether a snapshot is useful. In isotropic equilibrium they are analytically tractable, and that tractability reveals a hard boundary: a coarse population can repair mistuned regularization, but it cannot defeat oracle ridge, while an exact distillation chain eventually becomes one ridge model.
+                </p>
+
+                <p>
+                    A model is not its loss, because its value to a population depends on whom it fails with. A population is not its loss histogram either. It is an error geometry, and the interesting q0 mechanism begins where that geometry stops collapsing to one spectral filter.
+                </p>
+
+                <hr class="footnotes-sep">
+                <section class="footnotes">
+                    <ol>
+                        <li data-fn="q0-analogy">q0 averages token probability distributions and optimizes negative log-likelihood. The toy averages scalar predictions and optimizes squared loss. The analogy is the shared held-out weighting problem and its dependence on cross-model errors, not an identity between probability mixtures and parameter averages.</li>
+                        <li data-fn="deterministic-equivalence">“Deterministic” here refers to normalized traces and teacher bilinears. At fixed \(q\), the sample covariance does not converge to the identity in operator norm; its eigenvalue distribution remains broad.</li>
+                        <li data-fn="quenched-origin">The language is metallurgical. A quench cools a material too quickly for its microscopic structure to equilibrate, while annealing cools it slowly enough to rearrange. Statistical mechanics borrows the distinction for disorder held fixed while the dynamical variables equilibrate: one averages \(\log Z\), rather than taking the logarithm after averaging \(Z\).<sup><a class="reference-mark" href="#ref-7">7</a></sup></li>
+                        <li data-fn="replica-continuation">The continuation from positive integer \(r\) to \(r\to0\) is the heuristic step in the replica method. For this convex Gaussian Wishart problem, its result agrees with the rigorous Marchenko-Pastur law and with deterministic-equivalence calculations, so the heuristic is checkable rather than free-floating.</li>
+                        <li data-fn="fitness-information">This distinction is easy to miss because both procedures end with one scalar prediction. Population-fixed weights use only the training distribution and asymptotic parameters. Fitness-adaptive weights are fitted separately for each realized population, so they can use held-out labels to learn which errors happened in that run.</li>
+                    </ol>
+                </section>
+
+                <p class="section-title" id="section-refs">References</p>
+                <ol class="references">
+                    <li id="ref-1">
+                        Bishwas Mandal, Shmuel Berman, Akshay Vegesna, and Samip Dahal,
+                        <a href="https://arxiv.org/abs/2606.03938v2" target="_blank" rel="noopener">q0: Primitives for Hyper-Epoch Pretraining</a>,
+                        2026; accompanying <a href="https://github.com/qlabs-eng/slowrun/commit/a200723a72510f51adcec85224933d4c205a53fb" target="_blank" rel="noopener">reference implementation</a>.
+                    </li>
+                    <li id="ref-2">
+                        Jacob A. Zavatone-Veth,
+                        <a href="https://jzv.io/assets/pdf/am226_generalization_in_ridge_regression_lecture_notes.pdf" target="_blank" rel="noopener">Lecture Notes on the Inductive Biases of High-Dimensional Ridge Regression</a>,
+                        2024.
+                    </li>
+                    <li id="ref-3">
+                        Jacob A. Zavatone-Veth,
+                        <a href="https://jzv.io/assets/pdf/wishart_eigenvalue_and_gaussian_data_pca_replica_notes.pdf" target="_blank" rel="noopener">Lecture Notes on the Replica Method for Wishart Matrix Eigenvalues</a>,
+                        updated 2025; and
+                        <a href="https://jzv.io/assets/pdf/replica_trick_wishart_log_det_notes.pdf" target="_blank" rel="noopener">notes on the replica trick for the Wishart log determinant</a>.
+                    </li>
+                    <li id="ref-4">
+                        V. A. Marchenko and L. A. Pastur,
+                        <a href="https://doi.org/10.1070/SM1967v001n04ABEH001994" target="_blank" rel="noopener">Distribution of Eigenvalues for Some Sets of Random Matrices</a>,
+                        <em>Mathematics of the USSR-Sbornik</em> 1(4):457–483, 1967.
+                    </li>
+                    <li id="ref-5">
+                        Alexander Atanasov, Jacob A. Zavatone-Veth, and Cengiz Pehlevan,
+                        <a href="https://doi.org/10.1088/1742-5468/ae4bba" target="_blank" rel="noopener">Scaling and Renormalization in High-Dimensional Regression</a>,
+                        <em>Journal of Statistical Mechanics: Theory and Experiment</em>, 043404, 2026.
+                    </li>
+                    <li id="ref-6">
+                        Alexander Atanasov, Blake Bordelon, Jacob A. Zavatone-Veth, Courtney Paquette, and Cengiz Pehlevan,
+                        <a href="https://doi.org/10.4310/ATMP.260412235902" target="_blank" rel="noopener">Two-Point Deterministic Equivalence for Stochastic Gradient Dynamics in Linear Models</a>,
+                        <em>Advances in Theoretical and Mathematical Physics</em> 30(1):3–39, 2026.
+                    </li>
+                    <li id="ref-7">
+                        C. L. Baldwin and B. Swingle,
+                        <a href="https://doi.org/10.1103/PhysRevX.10.031026" target="_blank" rel="noopener">Quenched vs Annealed: Glassiness from SK to SYK</a>,
+                        <em>Physical Review X</em> 10, 031026, 2020.
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var body = document.querySelector(".post-body");
+            var footnotes = document.querySelector(".footnotes");
+            if (!body || !footnotes) return;
+
+            var items = {};
+            footnotes.querySelectorAll("li[data-fn]").forEach(function(item) {
+                items[item.getAttribute("data-fn")] = item;
+            });
+
+            var assigned = {};
+            var counter = 0;
+
+            body.querySelectorAll("sup[data-fn]").forEach(function(sup) {
+                var key = sup.getAttribute("data-fn");
+                var item = items[key];
+                if (!key || !item) return;
+
+                if (!assigned[key]) {
+                    counter += 1;
+                    assigned[key] = counter;
+                }
+
+                var number = assigned[key];
+                sup.id = "fnref:" + number;
+
+                var link = document.createElement("a");
+                link.href = "#fn:" + number;
+                link.className = "footnote-ref";
+                link.textContent = "[" + number + "]";
+                sup.appendChild(link);
+
+                if (!item.id) {
+                    var tooltip = document.createElement("div");
+                    tooltip.className = "footnote-tooltip";
+                    tooltip.innerHTML = "<sup>" + number + "</sup> " + item.innerHTML;
+                    sup.appendChild(tooltip);
+
+                    item.id = "fn:" + number;
+                    var numberSup = document.createElement("sup");
+                    numberSup.textContent = number;
+                    var backLink = document.createElement("a");
+                    backLink.href = "#fnref:" + number;
+                    backLink.className = "footnote-backref";
+                    backLink.textContent = "↩";
+
+                    var original = item.innerHTML;
+                    item.innerHTML = "";
+                    item.appendChild(numberSup);
+                    item.insertAdjacentHTML("beforeend", " " + original + " ");
+                    item.appendChild(backLink);
+                }
+            });
+        });
+
+        (function() {
+            var links = Array.prototype.slice.call(document.querySelectorAll(".toc-sidebar a"));
+            var sections = links
+                .map(function(link) {
+                    return document.querySelector(link.getAttribute("href"));
+                })
+                .filter(Boolean);
+
+            function updateActiveSection() {
+                var current = sections[0];
+                sections.forEach(function(section) {
+                    if (section.getBoundingClientRect().top <= 120) {
+                        current = section;
+                    }
+                });
+
+                links.forEach(function(link) {
+                    link.classList.toggle(
+                        "active",
+                        current && link.getAttribute("href") === "#" + current.id
+                    );
+                });
+            }
+
+            window.addEventListener("scroll", updateActiveSection, { passive: true });
+            updateActiveSection();
+        })();
+    </script>
+</body>
+</html>
