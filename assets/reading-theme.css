@@ -1,0 +1,200 @@
+:root {
+    --reading-paper: #fff;
+    --reading-ink: #292929;
+    --reading-secondary: #62605c;
+    --reading-rule: #dedbd5;
+    --reading-icon: #888;
+    --reading-link: #434c5e;
+    --reading-surface: #f8f8f8;
+    --reading-hover: #eeece7;
+}
+
+html[data-theme="dark"] {
+    color-scheme: dark;
+    --reading-paper: #191918;
+    --reading-ink: #e5e3dc;
+    --reading-secondary: #b8b5ac;
+    --reading-rule: #45443f;
+    --reading-icon: #aaa69d;
+    --reading-link: #b6c7dd;
+    --reading-surface: #242422;
+    --reading-hover: #302f2b;
+}
+
+body.reading-page {
+    background: var(--reading-paper);
+    color: var(--reading-ink);
+}
+
+html[data-theme="dark"] body.reading-page ::selection {
+    background: #565046;
+    color: var(--reading-ink);
+}
+
+html[data-theme="dark"] body.reading-page a,
+html[data-theme="dark"] body.reading-page .footnote-ref,
+html[data-theme="dark"] body.reading-page .footnotes li sup {
+    color: var(--reading-link);
+}
+
+html[data-theme="dark"] body.reading-page a:hover,
+html[data-theme="dark"] body.reading-page .footnote-ref:hover {
+    color: var(--reading-ink);
+}
+
+html[data-theme="dark"] body.reading-page :is(
+    .post-date,
+    figcaption,
+    .references,
+    .footnotes,
+    .section-placeholder,
+    .viz-status,
+    .viz-detail,
+    .visual-controls,
+    .derivation-body,
+    .animation-controls,
+    .ladder-source span,
+    .ladder-step span,
+    .ladder-branch-label,
+    .ladder-arrow
+) {
+    color: var(--reading-secondary);
+}
+
+html[data-theme="dark"] body.reading-page .back-arrow,
+html[data-theme="dark"] body.reading-page .toc-sidebar a {
+    color: var(--reading-icon);
+}
+
+html[data-theme="dark"] body.reading-page .toc-sidebar a:hover {
+    color: var(--reading-secondary);
+}
+
+html[data-theme="dark"] body.reading-page .toc-sidebar a.active,
+html[data-theme="dark"] body.reading-page .back-arrow:hover {
+    color: var(--reading-ink);
+}
+
+html[data-theme="dark"] body.reading-page :is(
+    .footnote-tooltip,
+    .thm,
+    .def,
+    .lem,
+    .callout,
+    .interactive-figure,
+    .animation-shell,
+    .concept-figure,
+    .ladder-source,
+    .ladder-step,
+    .ladder-path,
+    .ladder-chip
+) {
+    background: var(--reading-surface);
+    color: var(--reading-ink);
+}
+
+html[data-theme="dark"] body.reading-page :is(
+    .footnotes-sep,
+    .thm,
+    .def,
+    .lem,
+    .derivation,
+    .interactive-figure,
+    .animation-shell,
+    .animation-controls,
+    .concept-figure,
+    .ladder-source,
+    .ladder-step,
+    .ladder-path,
+    .ladder-chip
+) {
+    border-color: var(--reading-rule);
+}
+
+html[data-theme="dark"] body.reading-page :is(
+    .figure-number,
+    .visual-readout,
+    .derivation summary,
+    .animation-button,
+    .ladder-source strong,
+    .ladder-step strong,
+    .ladder-route-title
+) {
+    color: var(--reading-ink);
+}
+
+html[data-theme="dark"] body.reading-page .ladder-static {
+    color: var(--reading-link) !important;
+    border-color: #81a1c1;
+}
+
+html[data-theme="dark"] body.reading-page .ladder-source {
+    border-top-color: #5e81ac;
+}
+
+html[data-theme="dark"] body.reading-page .ladder-path--average {
+    border-top-color: #d08770;
+}
+
+html[data-theme="dark"] body.reading-page .ladder-path--ordered {
+    border-top-color: var(--reading-secondary);
+}
+
+html[data-theme="dark"] body.reading-page .ladder-chip--blue {
+    border-left-color: #5e81ac;
+}
+
+html[data-theme="dark"] body.reading-page .ladder-chip--green {
+    border-left-color: #a3be8c;
+}
+
+html[data-theme="dark"] body.reading-page .ladder-chip--orange {
+    border-left-color: #d08770;
+}
+
+html[data-theme="dark"] body.reading-page .ladder-chip--dark {
+    border-left-color: var(--reading-secondary);
+}
+
+html[data-theme="dark"] body.reading-page :is(.viz-btn, .icon-button) {
+    color: var(--reading-ink);
+    background: var(--reading-surface);
+    border-color: var(--reading-rule);
+}
+
+html[data-theme="dark"] body.reading-page :is(
+    .viz-btn:hover:not(:disabled),
+    .icon-button:hover,
+    .animation-button:hover
+) {
+    color: var(--reading-ink);
+    background: var(--reading-hover);
+}
+
+html[data-theme="dark"] body.reading-page .viz-btn:disabled {
+    color: var(--reading-secondary);
+}
+
+html[data-theme="dark"] body.reading-page .viz-btn.is-active {
+    border-color: #5e81ac;
+    background: #5e81ac;
+    color: #eceff4;
+}
+
+html[data-theme="dark"] body.reading-page .icon-button:hover,
+html[data-theme="dark"] body.reading-page .derivation summary::marker {
+    color: #a8c3df;
+    border-color: #81a1c1;
+}
+
+/* Plot labels and data colors were drawn for white canvases. */
+html[data-theme="dark"] body.reading-page :is(
+    #markov-svg,
+    #congestion-svg,
+    #transport-svg,
+    .visual-stage
+) {
+    color-scheme: light;
+    background: #fff;
+    color: #2e3440;
+}

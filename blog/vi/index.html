@@ -6,6 +6,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link rel="icon" href="/assets/penrose.png" type="image/x-icon">
     <title>training thoughts — aniket deshpande</title>
+    <script src="/assets/reading-theme.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&amp;family=Alegreya+SC:wght@400;500&amp;display=swap" rel="stylesheet">
@@ -299,9 +300,11 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="/assets/reading-theme.css">
+    <link rel="stylesheet" href="/assets/reading.css">
 </head>
 
-<body>
+<body class="reading-page">
     <nav class="toc-sidebar" aria-label="Table of contents">
         <a href="#section-1">I. The Duality of Surprise</a>
         <a href="#section-2">II. A Rule \(\bmod 7\)</a>
@@ -312,9 +315,18 @@
     </nav>
 
     <div class="container">
-        <a href="/blog/" class="back-arrow" aria-label="Back to blog">←</a>
-        <div class="post-header">Training Thoughts</div>
-        <p class="post-date">07.26.2026</p>
+        <nav class="reading-tools" aria-label="Post navigation and appearance">
+            <a href="/blog/" class="back-arrow" aria-label="Back to not so sparse">← not so sparse</a>
+            <button class="theme-toggle" type="button" aria-label="Switch to dark mode" hidden>
+                <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401Z"/></svg>
+                <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+        </nav>
+        <header class="post-heading">
+            <h1 class="post-header">Training Thoughts</h1>
+            <p class="post-subtitle">On compression, reusable rules, and the geometry of generalization.</p>
+            <p class="post-meta"><span>Aniket Deshpande</span> <span class="meta-dot" aria-hidden="true">·</span> <span>Published <time datetime="2026-07-26">July 26, 2026</time></span> <span class="meta-dot" aria-hidden="true">·</span> <span>Updated <time datetime="2026-09-26">September 26, 2026</time></span></p>
+        </header>
         <figure class="hero-image">
             <img src="/assets/rain-steam-and-speed.jpg" alt="Turner's Rain, Steam and Speed, showing a locomotive emerging through rain and steam on the Great Western Railway.">
             <figcaption>Joseph Mallord William Turner (1775–1851), <i>Rain, Steam and Speed – The Great Western Railway</i> (1844), oil on canvas, 91 × 121.8 cm, The National Gallery, London. Wikimedia Commons.</figcaption>
