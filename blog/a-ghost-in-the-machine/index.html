@@ -9,7 +9,7 @@
     <title>a ghost in the machine — aniket deshpande</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&amp;family=Alegreya+SC:wght@400;500&amp;display=swap" rel="stylesheet">
     <script>
         window.MathJax = {
             tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
@@ -55,7 +55,10 @@
             font-family: "Alegreya", Georgia, "Times New Roman", serif;
             font-size: 17.6px;
             font-weight: 400;
-            line-height: 1.55;
+            line-height: 1.5;
+            font-optical-sizing: auto;
+            font-variant-numeric: oldstyle-nums;
+            font-feature-settings: "onum";
         }
 
         a {
@@ -84,8 +87,9 @@
 
         .post-header {
             font-size: 25.3px;
-            font-weight: 500;
+            font-weight: 400;
             text-align: center;
+            font-family: "Alegreya SC", Georgia, "Times New Roman", serif;
         }
 
         .post-date {
@@ -113,9 +117,10 @@
 
         .section-title {
             margin: 52px 0 20px !important;
-            font-size: 20px;
-            font-weight: 600;
+            font-size: 17px;
+            font-weight: 500;
             scroll-margin-top: 24px;
+            font-family: "Alegreya", Georgia, "Times New Roman", serif;
         }
 
         .callout {
@@ -143,7 +148,7 @@
         figcaption {
             margin-top: 11px;
             color: var(--polar-4);
-            font-size: 15px;
+            font-size: 14px;
             font-style: normal;
             line-height: 1.45;
             text-align: left;
@@ -355,12 +360,15 @@
             padding-left: 1.35em;
             color: var(--polar-4);
             font-size: 14px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .references li { margin-bottom: 9px; }
 
-        .toc-sidebar { display: none; }
+        .toc-sidebar {
+            display: none;
+            font-family: "Alegreya", Georgia, "Times New Roman", serif;
+        }
 
         @media screen and (min-width: 1500px) {
             .toc-sidebar {
@@ -370,7 +378,7 @@
                 display: block;
                 width: 200px;
                 font-size: 13px;
-                line-height: 1.45;
+                line-height: 1.6;
             }
 
             .toc-sidebar a {
@@ -405,7 +413,6 @@
         }
 
         @media screen and (max-width: 430px) {
-            body { font-size: 17px; }
             .ladder-metrics { grid-template-columns: 1fr; }
             .section-title { margin-top: 44px !important; }
         }

@@ -8,7 +8,7 @@
     <title>walking the quantum line — aniket deshpande</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&amp;family=Alegreya+SC:wght@400;500&amp;display=swap" rel="stylesheet">
   <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         * {
@@ -36,6 +36,9 @@
             font-size: 17.6px;
             font-weight: 400;
             line-height: 1.5;
+            font-optical-sizing: auto;
+            font-variant-numeric: oldstyle-nums;
+            font-feature-settings: "onum";
         }
 
         a {
@@ -77,6 +80,7 @@
             font-weight: 400;
             font-size: 25.3px;
             text-align: center;
+            font-family: "Alegreya SC", Georgia, "Times New Roman", serif;
         }
 
         .hero-image { margin: 0 0 24px; }
@@ -100,9 +104,10 @@
         }
 
         .post-title {
-            font-weight: 700;
+            font-weight: 500;
             font-size: 20px;
             margin-bottom: 5px;
+            font-family: "Alegreya", Georgia, "Times New Roman", serif;
         }
 
         .post-date {
@@ -119,6 +124,12 @@
 
         .post-body p {
             margin-bottom: 20px;
+        }
+
+        .post-body mjx-container[display="true"] {
+            max-width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
         }
 
 </style>
