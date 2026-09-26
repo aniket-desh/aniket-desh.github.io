@@ -3,7 +3,6 @@
 
     var storageKey = 'aniket-reading-theme';
     var root = document.documentElement;
-    var systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
     var preference = null;
 
     function validTheme(value) {
@@ -27,7 +26,7 @@
     }
 
     function preferredTheme() {
-        return preference || (systemTheme.matches ? 'dark' : 'light');
+        return preference || 'light';
     }
 
     // This script runs in the head so the chosen palette is ready before paint.
@@ -54,10 +53,6 @@
     } else {
         bindControls();
     }
-
-    systemTheme.addEventListener('change', function () {
-        if (!preference) applyTheme(preferredTheme());
-    });
 
     window.addEventListener('storage', function (event) {
         if (event.key !== storageKey && event.key !== null) return;

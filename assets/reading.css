@@ -1,5 +1,6 @@
 .reading-page .container {
-    padding-top: 36px;
+    width: min(100% - 48px, 620px);
+    padding: 120px 0 88px;
 }
 
 .reading-tools {
@@ -145,7 +146,8 @@ html[data-theme="dark"] .theme-toggle .theme-sun {
 
 @media (max-width: 640px) {
     .reading-page .container {
-        padding-top: 24px;
+        width: min(100% - 32px, 620px);
+        padding: 64px 0;
     }
 
     .reading-tools {
