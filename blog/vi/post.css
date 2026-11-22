@@ -1,0 +1,81 @@
+body {
+    overflow-x: hidden;
+}
+
+@media screen and (max-width: 640px) {
+    .container {
+        padding: 64px 0;
+    }
+}
+
+.section-title {
+    margin: 35px 0 2px !important;
+}
+
+.section-placeholder {
+    color: #aaa;
+}
+
+.experiment-figure {
+    width: min(960px, calc(100vw - 48px));
+    margin: 30px 0 26px 50%;
+    transform: translateX(-50%);
+}
+
+.experiment-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.experiment-figure--movie {
+    width: min(620px, calc(100vw - 48px));
+}
+
+.experiment-figure figcaption {
+    max-width: 620px;
+    margin: 10px auto 0;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.45;
+    text-align: center;
+}
+
+@media screen and (max-width: 640px) {
+    .experiment-figure {
+        width: 100%;
+        margin-left: 0;
+        transform: none;
+    }
+}
+
+.reference-mark {
+    font-size: 0.75em;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+@media screen and (min-width: 1420px) {
+    .toc-sidebar {
+        display: block;
+        position: fixed;
+        top: 350px;
+        left: calc(50vw - 710px);
+        width: 210px;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .toc-sidebar a {
+        display: block;
+        padding: 3px 0;
+        color: #ccc;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .toc-sidebar a:hover,
+    .toc-sidebar a.active {
+        color: #333;
+    }
+}

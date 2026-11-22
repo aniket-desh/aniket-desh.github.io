@@ -383,3 +383,38 @@
         initializeGlossary();
     }
 })();
+
+// Three-spin frustration figure: clicking a spin flips it.
+(function() {
+    const figure = document.querySelector('.spin-figure');
+    const buttons = Array.from(figure.querySelectorAll('.spin-node'));
+    const bonds = Array.from(figure.querySelectorAll('.spin-bond'));
+    const status = figure.querySelector('.spin-status');
+    const spins = [1, -1, 1];
+    const names = ['A', 'B', 'C'];
+
+    function updateSpins() {
+        buttons.forEach(function(button, index) {
+            const up = spins[index] === 1;
+            const direction = up ? 'up' : 'down';
+            button.textContent = up ? '↑' : '↓';
+            button.setAttribute('aria-label', 'Spin ' + names[index] + ' points ' + direction + '. Flip spin.');
+            button.setAttribute('aria-pressed', String(up));
+        });
+
+        let disagreements = 0;
+        bonds.forEach(function(bond) {
+            const frustrated = spins[Number(bond.dataset.a)] === spins[Number(bond.dataset.b)];
+            bond.classList.toggle('is-frustrated', frustrated);
+            disagreements += Number(frustrated);
+        });
+        status.textContent = disagreements === 1 ? 'One pair disagrees.' : 'All three pairs disagree.';
+    }
+
+    buttons.forEach(function(button, index) {
+        button.addEventListener('click', function() {
+            spins[index] *= -1;
+            updateSpins();
+        });
+    });
+})();

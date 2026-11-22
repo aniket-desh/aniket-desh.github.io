@@ -1,0 +1,8 @@
+/* Differs from /assets/post.css: this post never had smooth scrolling. */
+html {
+    scroll-behavior: auto;
+}
+
+.hero-image img {
+    max-width: 620px;
+}

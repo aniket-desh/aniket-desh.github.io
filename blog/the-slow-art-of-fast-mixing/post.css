@@ -1,0 +1,212 @@
+.hero-image img {
+    max-width: 620px;
+}
+
+.post-body h3 {
+    font-weight: 500;
+    font-size: 20px;
+    margin: 25px 0 10px 0;
+    font-family: "Alegreya", Georgia, "Times New Roman", serif;
+}
+
+.post-body ul {
+    margin: 0 0 20px 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.post-body ul li {
+    margin-bottom: 15px;
+}
+
+.section-title {
+    margin: 35px 0 2px 0 !important;
+}
+
+/* Theorem-style environments */
+.thm, .def, .lem {
+    margin: 20px 0;
+    padding: 12px 18px;
+    background: #f8f8f8;
+    border-left: 3px solid #ccc;
+    border-radius: 2px;
+    font-size: 17px;
+    line-height: 1.55;
+}
+
+.thm-label, .def-label, .lem-label {
+    font-weight: 600;
+    font-style: normal;
+    margin-right: 0.3em;
+}
+
+.proof {
+    margin: 15px 0 20px 0;
+}
+
+.proof-label {
+    font-style: normal;
+    font-weight: 600;
+    margin-right: 0.3em;
+}
+
+.qed {
+    margin-left: 4px;
+}
+
+.callout {
+    text-align: center;
+    margin: 25px 0;
+    background-color: #f8f8f8;
+    padding: 15px;
+    border-radius: 4px;
+    font-style: italic;
+}
+
+/* Interactive figures. Visual colors are restricted to Nord. */
+.interactive-figure {
+    margin: 30px 0;
+    padding: 14px 14px 12px;
+    background: #fff;
+    border: 1px solid #d8dee9;
+    border-radius: 4px;
+    color: #2e3440;
+}
+
+.interactive-figure svg {
+    display: block;
+    width: 100%;
+    background: #fff;
+    color: #2e3440;
+    font-family: inherit;
+}
+
+.interactive-figure figcaption {
+    margin-top: 10px;
+    color: #4c566a;
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.viz-controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.viz-btn {
+    appearance: none;
+    border: 1px solid #d8dee9;
+    border-radius: 3px;
+    background: #fff;
+    color: #2e3440;
+    cursor: pointer;
+    font: inherit;
+    font-size: 14px;
+    line-height: 1.2;
+    padding: 5px 10px;
+}
+
+.viz-btn:hover:not(:disabled) {
+    background: #eceff4;
+}
+
+.viz-btn:focus-visible {
+    outline: 2px solid #88c0d0;
+    outline-offset: 2px;
+}
+
+.viz-btn:disabled {
+    color: #4c566a;
+    cursor: default;
+    opacity: 0.5;
+}
+
+.viz-btn.is-active {
+    border-color: #5e81ac;
+    background: #5e81ac;
+    color: #eceff4;
+}
+
+.viz-status {
+    margin-left: auto;
+    color: #4c566a;
+    font-size: 14px;
+}
+
+.viz-detail {
+    min-height: 1.5em;
+    margin: 7px 0 0;
+    color: #4c566a;
+    font-size: 14px;
+    text-align: center;
+}
+
+#congestion-svg {
+    height: 430px;
+}
+
+#markov-svg {
+    height: 260px;
+}
+
+#transport-svg {
+    height: 300px;
+}
+
+@media screen and (max-width: 520px) {
+    .interactive-figure {
+        padding: 10px 8px;
+    }
+
+    .viz-status {
+        flex-basis: 100%;
+        margin-left: 0;
+    }
+
+    #congestion-svg {
+        height: 500px;
+    }
+
+    #markov-svg {
+        height: 280px;
+    }
+
+    #transport-svg {
+        height: 330px;
+    }
+}
+
+ol.references a {
+    color: #434c5e;
+}
+
+@media screen and (min-width: 1100px) {
+    .toc-sidebar {
+        display: block;
+        position: fixed;
+        left: calc((100vw - 680px) / 2 - 260px);
+        top: 350px;
+        width: 220px;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .toc-sidebar a {
+        display: block;
+        text-decoration: none;
+        color: #ccc;
+        padding: 3px 0;
+        transition: color 0.2s ease;
+    }
+
+    .toc-sidebar a:hover {
+        color: #888;
+    }
+
+    .toc-sidebar a.active {
+        color: #333;
+    }
+}

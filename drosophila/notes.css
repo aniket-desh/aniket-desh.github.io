@@ -1,0 +1,43 @@
+/* Styles shared by the drosophila notes, on top of /assets/post.css. */
+
+/* Differs from /assets/post.css: the notes never had smooth scrolling. */
+html {
+    scroll-behavior: auto;
+}
+
+.post-header {
+    margin: 0 0 6px;
+}
+
+.post-body mjx-container[display="true"] {
+    padding: 0.25em 0;
+}
+
+.post-body h2 {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 32px 0 12px;
+    font-family: "Alegreya", Georgia, "Times New Roman", serif;
+}
+
+.post-body h3 {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 24px 0 10px;
+    font-family: "Alegreya", Georgia, "Times New Roman", serif;
+}
+
+.post-body h4 {
+    font-size: 17px;
+    font-weight: 500;
+    margin: 20px 0 8px;
+    font-family: "Alegreya", Georgia, "Times New Roman", serif;
+}
+
+.section-title {
+    margin: 35px 0 2px 0 !important;
+}
+
+ol.references a {
+    color: #434c5e;
+}

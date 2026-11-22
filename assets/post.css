@@ -1,0 +1,218 @@
+/* Shared defaults for every blog post.
+ *
+ * Load order in a post's <head>:
+ *   /assets/post.css            these defaults
+ *   /blog/<slug>/post.css       that post's own styles and overrides
+ *   /assets/reading-theme.css   light and dark palettes
+ *   /assets/reading.css         reading layout, which overrides the above
+ */
+
+* {
+    box-sizing: border-box;
+}
+
+::selection {
+    background: #f9e6e6;
+}
+
+::-moz-selection {
+    background: #f9e6e6;
+}
+
+html {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font-family: "Alegreya", Georgia, "Times New Roman", serif;
+    font-size: 17.6px;
+    font-weight: 400;
+    line-height: 1.5;
+    font-optical-sizing: auto;
+    font-variant-numeric: oldstyle-nums;
+    font-feature-settings: "onum";
+}
+
+a {
+    color: #434c5e;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #434c5e;
+}
+
+.container {
+    width: min(100% - 48px, 620px);
+    margin: 0 auto;
+    padding: 120px 0 88px;
+}
+
+@media screen and (max-width: 640px) {
+    .container {
+        width: min(100% - 32px, 620px);
+        padding: 64px 0 64px;
+    }
+}
+
+.back-arrow {
+    display: inline-block;
+    text-decoration: none;
+    color: #999;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.back-arrow:hover {
+    color: #434c5e;
+}
+
+.post-header {
+    margin-bottom: 6px;
+    font-weight: 400;
+    font-size: 25.3px;
+    text-align: center;
+    font-family: "Alegreya SC", Georgia, "Times New Roman", serif;
+}
+
+.content {
+    width: 100%;
+    max-width: none;
+}
+
+.post-body p {
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-weight: 500;
+    font-size: 17px;
+    font-family: "Alegreya", Georgia, "Times New Roman", serif;
+}
+
+.section-title + p {
+    margin-top: 0;
+}
+
+ol.references {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #555;
+    padding-left: 1.5em;
+}
+
+ol.references li {
+    margin-bottom: 10px;
+}
+
+/* --- Sidebar TOC --- */
+.toc-sidebar {
+    display: none;
+    font-family: "Alegreya", Georgia, "Times New Roman", serif;
+}
+
+.hero-image { margin: 0 0 24px; }
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.hero-image figcaption {
+    color: #999;
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+sup {
+    position: relative;
+}
+
+.footnote-ref {
+    background: none;
+    font-size: 0.75em;
+    font-weight: 600;
+    text-decoration: none;
+    color: #434c5e;
+    position: relative;
+    z-index: 1;
+}
+
+.footnote-ref:hover {
+    text-decoration: none;
+    color: #434c5e;
+}
+
+.footnote-tooltip {
+    z-index: 10;
+    background-color: #fff;
+    visibility: hidden;
+    width: 36vw;
+    max-width: 350px;
+    padding: 14px 18px;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333;
+    position: absolute;
+    top: calc(100% + 0.5em);
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+}
+
+@media screen and (min-width: 768px) {
+    sup .footnote-ref:hover + .footnote-tooltip {
+        visibility: visible;
+    }
+}
+
+.footnotes-sep {
+    margin-top: 40px;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+.footnotes {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.footnotes ol {
+    padding-left: 0;
+    list-style: none;
+}
+
+.footnotes li {
+    margin-bottom: 10px;
+}
+
+.footnotes li sup {
+    font-weight: 600;
+    color: #434c5e;
+}
+
+.footnote-backref {
+    text-decoration: none;
+    color: #434c5e;
+    margin-left: 4px;
+    font-size: 0.75em;
+}
+
+.footnote-backref:hover {
+    text-decoration: underline;
+}
+
+.post-body mjx-container[display="true"] {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
