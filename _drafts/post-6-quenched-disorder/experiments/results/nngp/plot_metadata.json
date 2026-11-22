@@ -1,0 +1,18 @@
+{
+  "pair_probe_indices": [
+    0,
+    2
+  ],
+  "scatter_axis_window": [
+    -4.5,
+    4.5
+  ],
+  "scatter_outside_view_counts": {
+    "2": 14,
+    "512": 0
+  },
+  "display_networks": 2000,
+  "layout": "only the two paired-output scatter panels; MMD results retained offline",
+  "plot_source_sha256": "2e1e4dbe26b2926b704f99be6749830a90ae13f8c6b53b66cac96701e99fe61a",
+  "plot_helper_sha256": "45d79f5c08c0dc458672546cc31b3920a97114d351051d6357e1abd829548178"
+}

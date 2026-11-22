@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <title>disordered minds — aniket deshpande</title>
+    <script src="/assets/reading-theme.js?v=20260926-2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&amp;family=Alegreya+SC:wght@400;500&amp;display=swap" rel="stylesheet">
+    <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background: #f9e6e6;
+        }
+
+        ::-moz-selection {
+            background: #f9e6e6;
+        }
+
+        html {
+            overflow-x: hidden;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background: #fff;
+            font-family: "Alegreya", Georgia, "Times New Roman", serif;
+            font-size: 17.6px;
+            font-weight: 400;
+            line-height: 1.5;
+            font-optical-sizing: auto;
+            font-variant-numeric: oldstyle-nums;
+            font-feature-settings: "onum";
+        }
+
+        a {
+            color: var(--reading-link);
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: var(--reading-link);
+        }
+
+        .container {
+            width: min(100% - 48px, 620px);
+            margin: 0 auto;
+            padding: 120px 0 88px;
+        }
+
+        @media screen and (max-width: 640px) {
+            .container {
+                width: min(100% - 32px, 620px);
+                padding: 64px 0;
+            }
+        }
+
+        .back-arrow {
+            display: inline-block;
+            margin-bottom: 15px;
+            color: #999;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        .back-arrow:hover {
+            color: var(--reading-link);
+        }
+
+        .post-header {
+            margin-bottom: 6px;
+            font-family: "Alegreya SC", Georgia, "Times New Roman", serif;
+            font-weight: 400;
+            font-size: 25.3px;
+            text-align: center;
+        }
+
+        .post-date {
+            margin: 0 0 24px;
+            color: #666;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .hero-image {
+            margin: 0 0 24px;
+        }
+
+        .hero-image img {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            object-position: center 35%;
+        }
+
+        .hero-image figcaption {
+            margin-top: 6px;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .content {
+            width: 100%;
+            max-width: none;
+        }
+
+        .post-body p {
+            margin-bottom: 20px;
+        }
+
+        .post-body mjx-container[display="true"] {
+            max-width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+
+        .section-title {
+            margin: 35px 0 2px !important;
+            font-family: "Alegreya", Georgia, "Times New Roman", serif;
+            font-weight: 500;
+            font-size: 17px;
+        }
+
+        .section-title + p {
+            margin-top: 0;
+        }
+
+        sup {
+            position: relative;
+        }
+
+        .footnote-ref {
+            position: relative;
+            z-index: 1;
+            color: var(--reading-link);
+            background: none;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .footnote-ref:hover {
+            color: var(--reading-link);
+            text-decoration: none;
+        }
+
+        .footnote-tooltip {
+            position: absolute;
+            z-index: 10;
+            top: calc(100% + 0.5em);
+            left: 50%;
+            width: 36vw;
+            max-width: 350px;
+            padding: 14px 18px;
+            transform: translateX(-50%);
+            visibility: hidden;
+            color: #333;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        @media screen and (min-width: 768px) {
+            sup .footnote-ref:hover + .footnote-tooltip {
+                visibility: visible;
+            }
+        }
+
+        .footnotes-sep {
+            margin-top: 40px;
+            border: none;
+            border-top: 1px solid #ddd;
+        }
+
+        .footnotes {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .footnotes ol {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .footnotes li {
+            margin-bottom: 10px;
+        }
+
+        .footnotes li sup {
+            color: var(--reading-link);
+            font-weight: 600;
+        }
+
+        .footnote-backref {
+            margin-left: 4px;
+            color: var(--reading-link);
+            font-size: 0.75em;
+            text-decoration: none;
+        }
+
+        .footnote-backref:hover {
+            text-decoration: underline;
+        }
+
+        .reference-mark {
+            font-size: 0.75em;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        ol.references {
+            padding-left: 1.5em;
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        ol.references li {
+            margin-bottom: 10px;
+        }
+
+        .toc-sidebar {
+            display: none;
+            font-family: "Alegreya", Georgia, "Times New Roman", serif;
+        }
+
+        @media screen and (min-width: 1420px) {
+            .toc-sidebar {
+                display: block;
+                position: fixed;
+                top: 350px;
+                left: calc(50vw - 710px);
+                width: 210px;
+                font-size: 13px;
+                line-height: 1.6;
+            }
+
+            .toc-sidebar a {
+                display: block;
+                padding: 3px 0;
+                color: #ccc;
+                text-decoration: none;
+                transition: color 0.2s ease;
+            }
+
+            .toc-sidebar a:hover,
+            .toc-sidebar a.active {
+                color: #333;
+            }
+        }
+
+        body.reading-page {
+            --reading-link: #795b36;
+            --reading-icon: #8a765c;
+            --spin-ink: #62472f;
+            --spin-rule: #baa484;
+            --spin-accent: #a65332;
+            --spin-paper: #f8f4eb;
+        }
+
+        html[data-theme="dark"] body.reading-page {
+            --reading-link: #d3b17d;
+            --reading-icon: #b9a285;
+            --spin-ink: #e0c7a1;
+            --spin-rule: #8d795d;
+            --spin-accent: #dc976c;
+            --spin-paper: #29241e;
+        }
+
+        .spin-figure {
+            width: min(100%, 300px);
+            margin: 24px auto 28px;
+            text-align: center;
+        }
+
+        .spin-triangle {
+            position: relative;
+            width: 260px;
+            height: 164px;
+            margin: 0 auto;
+        }
+
+        .spin-bond {
+            position: absolute;
+            width: 137.64px;
+            border-top: 1.5px solid var(--spin-rule);
+            transform-origin: 0 50%;
+        }
+
+        .spin-bond[data-a="0"] {
+            left: 130px;
+            top: 24px;
+        }
+
+        .spin-bond[data-b="1"] {
+            transform: rotate(125.54deg);
+        }
+
+        .spin-bond[data-b="2"][data-a="0"] {
+            transform: rotate(54.46deg);
+        }
+
+        .spin-bond[data-a="1"] {
+            left: 50px;
+            top: 136px;
+            width: 160px;
+        }
+
+        .spin-bond.is-frustrated {
+            border-top: 2px dashed var(--spin-accent);
+        }
+
+        .spin-node {
+            position: absolute;
+            display: grid;
+            place-items: center;
+            width: 44px;
+            height: 44px;
+            padding: 0 0 3px;
+            transform: translate(-50%, -50%);
+            border: 1px solid var(--spin-rule);
+            border-radius: 50%;
+            background: var(--spin-paper);
+            color: var(--spin-ink);
+            font: 30px/1 "Alegreya", Georgia, serif;
+            cursor: pointer;
+        }
+
+        .spin-node[data-spin="0"] { left: 130px; top: 24px; }
+        .spin-node[data-spin="1"] { left: 50px; top: 136px; }
+        .spin-node[data-spin="2"] { left: 210px; top: 136px; }
+
+        .spin-node:hover {
+            border-color: var(--spin-ink);
+        }
+
+        .spin-node:focus-visible {
+            outline: 2px solid var(--spin-accent);
+            outline-offset: 4px;
+        }
+
+        .spin-figure figcaption {
+            color: var(--reading-secondary);
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .spin-status {
+            display: block;
+            margin-top: 4px;
+            color: var(--spin-accent);
+        }
+
+    </style>
+    <link rel="stylesheet" href="/assets/reading-theme.css?v=20260926-2">
+    <link rel="stylesheet" href="/assets/reading.css?v=20260926-2">
+    <link rel="stylesheet" href="/assets/disordered-minds.css">
+    <script src="/assets/disordered-minds.js" defer></script>
+    <link rel="stylesheet" href="/assets/nngp-width-animation.css">
+    <script src="/assets/nngp-width-animation.js" defer></script>
+    <!-- Generated social preview: scripts/generate_social_cards.py -->
+    <link rel="canonical" href="https://aniketdeshpande.com/blog/disordered-minds/">
+    <meta name="description" content="Randomness, replicas, and the physics of neural networks">
+    <meta name="author" content="Aniket Deshpande">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="not so sparse">
+    <meta property="og:title" content="Disordered Minds">
+    <meta property="og:description" content="Randomness, replicas, and the physics of neural networks">
+    <meta property="og:url" content="https://aniketdeshpande.com/blog/disordered-minds/">
+    <meta property="og:image" content="https://aniketdeshpande.com/assets/social/disordered-minds.jpg?v=cdc43df8f065">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Disordered Minds — Aniket Deshpande. Background: Diego Velázquez’s The Forge of Vulcan, showing Apollo visiting Vulcan and his assistants at their forge.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Disordered Minds">
+    <meta name="twitter:description" content="Randomness, replicas, and the physics of neural networks">
+    <meta name="twitter:image" content="https://aniketdeshpande.com/assets/social/disordered-minds.jpg?v=cdc43df8f065">
+    <meta name="twitter:image:alt" content="Disordered Minds — Aniket Deshpande. Background: Diego Velázquez’s The Forge of Vulcan, showing Apollo visiting Vulcan and his assistants at their forge.">
+    <!-- End generated social preview -->
+</head>
+
+<body class="reading-page">
+    <nav class="toc-sidebar" aria-label="Table of contents">
+        <a href="#section-1">I. Frozen in the Forge</a>
+        <a href="#section-2">II. Seeing Double</a>
+        <a href="#section-3">III. Lessons in the Grain</a>
+        <a href="#section-4">IV. Walking on Frozen Ground</a>
+        <a href="#section-5">V. A Different Cast</a>
+        <a href="#section-6">VI. The Average Within</a>
+        <a href="#section-7">VII. What the Fire Leaves Behind</a>
+        <a href="#section-appendix">Appendix. Beneath the Surface</a>
+        <a href="#section-refs">References</a>
+    </nav>
+
+    <div class="container">
+        <nav class="reading-tools" aria-label="Post navigation and appearance">
+            <a href="/blog/" class="back-arrow" aria-label="Back to not so sparse">← not so sparse</a>
+            <button class="theme-toggle" type="button" aria-label="Switch to dark mode" hidden>
+                <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401Z"/></svg>
+                <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+        </nav>
+        <header class="post-heading">
+            <h1 class="post-header">Disordered Minds</h1>
+            <p class="post-subtitle">Randomness, replicas, and the physics of neural networks</p>
+            <p class="post-meta"><span>Aniket Deshpande</span> <span class="meta-dot" aria-hidden="true">·</span> <span>Updated <time datetime="2026-11-21">November 21, 2026</time></span></p>
+        </header>
+        <figure class="hero-image">
+            <img src="/assets/forge-of-vulcan.jpg" width="1600" height="1243" alt="Diego Velázquez’s The Forge of Vulcan, showing Apollo visiting Vulcan and his assistants at their forge.">
+            <figcaption>Diego Velázquez (1599–1660), <i>The Forge of Vulcan</i> (1630), oil on canvas, 223 × 290 cm, Museo Nacional del Prado, Madrid. <a href="https://commons.wikimedia.org/wiki/File:Vel%C3%A1zquez_-_La_Fragua_de_Vulcano_(Museo_del_Prado,_1630).jpg" target="_blank" rel="noopener">Wikimedia Commons</a>.</figcaption>
+        </figure>
+
+        <div class="content">
+            <div class="post-body">
+                <p class="section-title" id="section-1">I. Frozen in the Forge</p>
+
+                <p>
+                    A blacksmith shaping a steel blade has mastered the art of disorder. The smith has to control how the metal cools as carefully as how it is hammered. After heating the metal, they plunge it into water or oil, cooling it fast enough to change its internal structure. With the right steel and heat treatment, the blade emerges more resilient. Two pieces with the same chemical composition can consequently have vastly different properties, due to the difference in the timescales they were cooled under. The history of a smith's forge survives in the arrangement of the atoms of their work.
+                </p>
+
+                <p>
+                    The element the smith must control is carbon. Its atoms fit into gaps between the iron atoms. Slow cooling gives them time to redistribute, while a rapid <em><button type="button" class="glossary-term" data-glossary="quench" aria-controls="glossary-panel" aria-expanded="false">quench</button></em> can trap them in a different arrangement. That changes how easily the steel deforms, letting the smith shape its properties through the timing of the cooling.<sup><a class="reference-mark" href="#ref-1">1</a>, <a class="reference-mark" href="#ref-2">2</a></sup><sup data-fn="steel"></sup>
+                </p>
+
+                <p>
+                    Physics borrows the words <em><button type="button" class="glossary-term" data-glossary="quenched" aria-controls="glossary-panel" aria-expanded="false">quenched</button></em> and <em><button type="button" class="glossary-term" data-glossary="annealed" aria-controls="glossary-panel" aria-expanded="false">annealed</button></em> from these heat treatments. Annealing gives atoms time and thermal mobility to rearrange toward a more stable structure. Quenching makes further rearrangements too slow to matter during an observation. On the timescales we care about, some variables become effectively <em>frozen</em>, while others can still change. A variable is quenched when it stays fixed while we study the others.<sup><a class="reference-mark" href="#ref-3">3</a></sup>
+                </p>
+
+                <p>
+                    Consider copper with a small amount of manganese mixed into it. Each manganese atom acts like a tiny magnet. Its <em><button type="button" class="glossary-term" data-glossary="magnetic-moment" aria-controls="glossary-panel" aria-expanded="false">magnetic moment</button></em> describes that magnet's strength and direction, which we can picture as an arrow. After the alloy cools, the atoms can stay in place while these arrows keep changing direction. The positions are quenched, while the magnetic directions can fluctuate.<sup><a class="reference-mark" href="#ref-4">4</a>, <a class="reference-mark" href="#ref-10">10</a></sup>
+                </p>
+
+                <p>
+                    Where the atoms end up determines how their magnets interact. Some pairs prefer to point in the same direction, others in opposite directions. When these preferences can't all be satisfied together, the system is <em><button type="button" class="glossary-term" data-glossary="frustration" aria-controls="glossary-panel" aria-expanded="false">frustrated</button></em>. We can see it with just three arrows, each allowed to point up or down.<sup><a class="reference-mark" href="#ref-5">5</a></sup>
+                </p>
+
+                <figure class="spin-figure" aria-label="Three spins with competing preferences">
+                    <div class="spin-triangle" role="group" aria-label="Flip any spin to explore frustration">
+                        <span class="spin-bond" data-a="0" data-b="1" aria-hidden="true"></span>
+                        <span class="spin-bond is-frustrated" data-a="0" data-b="2" aria-hidden="true"></span>
+                        <span class="spin-bond" data-a="1" data-b="2" aria-hidden="true"></span>
+                        <button class="spin-node" type="button" data-spin="0" aria-label="Spin A points up. Flip spin." aria-pressed="true">↑</button>
+                        <button class="spin-node" type="button" data-spin="1" aria-label="Spin B points down. Flip spin." aria-pressed="false">↓</button>
+                        <button class="spin-node" type="button" data-spin="2" aria-label="Spin C points up. Flip spin." aria-pressed="true">↑</button>
+                    </div>
+                    <figcaption>
+                        Each pair prefers opposite arrows. Flip any <button type="button" class="glossary-term" data-glossary="spin" aria-controls="glossary-panel" aria-expanded="false">spin</button>.<sup><a class="reference-mark" href="#ref-8">8</a>, <a class="reference-mark" href="#ref-9">9</a></sup>
+                        <output class="spin-status" aria-live="polite">One pair disagrees.</output>
+                    </figcaption>
+                </figure>
+
+                <p>
+                    We now have two kinds of randomness to keep track of. Within one sample, spins fluctuate while the atomic positions stay fixed. Across samples, the positions differ too. Studying quenched disorder means working out what happens within each fixed sample before averaging over possible samples.<sup><a class="reference-mark" href="#ref-3">3</a></sup><sup data-fn="timescales"></sup>
+                </p>
+
+                <p>
+                    A neural network gives us the same choice. A dataset can define a fixed learning problem while we compare possible choices of weights. For a particular network, we can hold the weights fixed and study its responses to different inputs. What we call disorder depends on which variables define the instance and which we allow to vary. <button type="button" class="glossary-term" data-glossary="replica" aria-controls="glossary-panel" aria-expanded="false">Replicas</button> will give us a way to calculate properties averaged over those frozen instances.<sup><a class="reference-mark" href="#ref-6">6</a>, <a class="reference-mark" href="#ref-7">7</a></sup>
+                </p>
+
+                <p class="section-title" id="section-2">II. Seeing Double</p>
+
+                <p>
+                    To turn frozen disorder into a calculation, consider \(N\) spins, each pointing up or down, \(s_i\in\{-1,+1\}\). Give each spin a local bias \(h_i\) that favors one direction. We draw these biases independently from a <button type="button" class="glossary-term" data-glossary="gaussian" aria-controls="glossary-panel" aria-expanded="false">Gaussian distribution</button>, then hold them fixed while the spins fluctuate. The <button type="button" class="glossary-term" data-glossary="energy" aria-controls="glossary-panel" aria-expanded="false">energy</button> of a <button type="button" class="glossary-term" data-glossary="configuration" aria-controls="glossary-panel" aria-expanded="false">configuration</button> is
+                    \[
+                        H(s;h)=-\sum_{i=1}^{N}h_i s_i,
+                        \qquad
+                        h_i\sim\mathcal N(0,\Delta^2).
+                    \]
+                </p>
+
+                <p>
+                    Here, \(\Delta\) controls the strength of the disorder. At temperature \(T\), the probability of a configuration is proportional to \(e^{-\beta H}\), where \(\beta=1/(k_{\mathrm B}T)\). Lower temperatures give greater weight to configurations that follow their local biases. The <button type="button" class="glossary-term" data-glossary="normalization" aria-controls="glossary-panel" aria-expanded="false">normalization</button> is the <em><button type="button" class="glossary-term" data-glossary="partition-function" aria-controls="glossary-panel" aria-expanded="false">partition function</button></em>,
+                    \[
+                        Z_h(\beta)
+                        =
+                        \sum_{s_1,\ldots,s_N=\pm1}
+                        e^{\beta\sum_i h_i s_i}
+                        =
+                        \prod_{i=1}^{N}2\cosh(\beta h_i).
+                    \]
+                    Intuitively, the partition function counts the available spin configurations, weighting each by how energetically favorable it is at the chosen temperature.
+                </p>
+
+                <p>
+                    Each frozen sample has its own partition function and its own <button type="button" class="glossary-term" data-glossary="free-energy" aria-controls="glossary-panel" aria-expanded="false">free energy</button>, \(F_h=-\beta^{-1}\log Z_h\). The logarithm makes free energies additive when independent systems are combined, and its derivatives give quantities such as the average energy. To characterize samples drawn from our disorder distribution, we average their free energies. This gives the <em>quenched</em> free energy per spin,
+                    \[
+                        f_{\mathrm q}
+                        =
+                        -\frac{1}{\beta N}\,\mathbb E_h[\log Z_h].
+                    \]
+                </p>
+
+                <p>
+                    In \(\mathbb E_h[\log Z_h]\), each sample equilibrates with its disorder frozen before we average, while \(\log\mathbb E_h[Z_h]\) lets the disorder equilibrate alongside the spins, so they describe strictly different physics. The latter gives the <em>annealed</em> free energy per spin,
+                    \[
+                        f_{\mathrm a}
+                        =
+                        -\frac{1}{\beta N}\log\mathbb E_h[Z_h].
+                    \]
+                    <button type="button" class="glossary-term" data-glossary="jensen" aria-controls="glossary-panel" aria-expanded="false">Jensen's inequality</button> gives \(\mathbb E_h[\log Z_h]\leq\log\mathbb E_h[Z_h]\), so \(f_{\mathrm a}\leq f_{\mathrm q}\) and the annealed free energy is a lower bound on the quenched free energy.
+                </p>
+
+                <p>
+                    Averaging \(Z_h\) directly can give disproportionate weight to rare samples with unusually large partition functions. For quenched disorder, every sample first gets its own normalized <button type="button" class="glossary-term" data-glossary="equilibrium" aria-controls="glossary-panel" aria-expanded="false">equilibrium distribution</button>.<sup><a class="reference-mark" href="#ref-3">3</a></sup>
+                </p>
+
+                <p>
+                    Our example also makes the large-system limit transparent. Since \(\log Z_h\) is a sum of independent contributions, the <button type="button" class="glossary-term" data-glossary="law-large-numbers" aria-controls="glossary-panel" aria-expanded="false">law of large numbers</button> gives
+                    \[
+                        \frac{1}{N}\log Z_h
+                        \;\longrightarrow\;
+                        \mathbb E_{h\sim\mathcal N(0,\Delta^2)}
+                        \log[2\cosh(\beta h)]
+                    \]
+                    as \(N\to\infty\), with temperature and disorder strength held fixed. The free energy per spin becomes predictable even though the microscopic biases remain random. This concentration around a common value is called <em><button type="button" class="glossary-term" data-glossary="self-averaging" aria-controls="glossary-panel" aria-expanded="false">self-averaging</button></em>.
+                </p>
+
+                <p>
+                    In more complicated systems, averaging the logarithm becomes difficult. The <button type="button" class="glossary-term" data-glossary="replica-method" aria-controls="glossary-panel" aria-expanded="false">replica method</button> approaches it through powers of the partition function,
+                    \[
+                        \mathbb E_h[\log Z_h]
+                        =
+                        \lim_{n\to0}
+                        \frac{\mathbb E_h[Z_h^n]-1}{n}.
+                    \]
+                    This identity holds under suitable <button type="button" class="glossary-term" data-glossary="integrability" aria-controls="glossary-panel" aria-expanded="false">integrability conditions</button>.<sup data-fn="replica-limit"></sup> Its advantage appears when \(n\) is a positive integer. Multiplying \(n\) partition functions introduces \(n\) independent spin configurations, all experiencing the same frozen biases. These configurations are the <em>replicas</em>. For our Gaussian fields, averaging over the biases gives
+                    \[
+                        \mathbb E_h[Z_h^n]
+                        =
+                        \sum_{\{s_i^a=\pm1\}}
+                        \exp\left[
+                        \frac{\beta^2\Delta^2}{2}
+                        \sum_{i=1}^{N}
+                        \left(\sum_{a=1}^{n}s_i^a\right)^2
+                        \right].
+                    \]
+                </p>
+
+                <p>
+                    The index \(a\) labels a replica. Expanding the square produces terms involving \(s_i^a s_i^b\), so averaging over the shared disorder couples the replicas mathematically. Their common environment creates correlations that survive the average. This suggests tracking their <em><button type="button" class="glossary-term" data-glossary="overlap" aria-controls="glossary-panel" aria-expanded="false">overlap</button></em>,
+                    \[
+                        Q_{ab}
+                        =
+                        \frac{1}{N}\sum_{i=1}^{N}s_i^a s_i^b.
+                    \]
+                </p>
+
+                <p>
+                    An overlap of \(1\) means that two configurations agree everywhere, while \(-1\) means that every spin points oppositely. In our example, the overlap between distinct replicas concentrates around \(q=\mathbb E_h[\tanh^2(\beta h)]\) as \(N\) grows. Both configurations tend to follow the same local biases.
+                </p>
+
+                <p>
+                    For interacting systems, the large-\(N\) calculation often becomes an <button type="button" class="glossary-term" data-glossary="extremization" aria-controls="glossary-panel" aria-expanded="false">extremization</button> over an overlap matrix. The <em><button type="button" class="glossary-term" data-glossary="replica-symmetry" aria-controls="glossary-panel" aria-expanded="false">replica-symmetric</button></em> <button type="button" class="glossary-term" data-glossary="ansatz" aria-controls="glossary-panel" aria-expanded="false">ansatz</button> assigns one common value to every off-diagonal entry, \(Q_{ab}=q\) for \(a\ne b\). <em><button type="button" class="glossary-term" data-glossary="replica-symmetry-breaking" aria-controls="glossary-panel" aria-expanded="false">Replica symmetry breaking</button></em> allows further structure in those overlaps, describing how equilibrium configurations organize into distinct groups of states. Whether that additional structure is needed depends on the model and its regime.<sup><a class="reference-mark" href="#ref-7">7</a></sup>
+                </p>
+
+                <p>
+                    For neural networks, the first step is choosing what a replica contains. With a fixed dataset, replicas can be different parameter configurations. With fixed weights, they can be different inputs. That choice determines the partition function, the disorder average, and what an overlap can tell us about the network.
+                </p>
+
+                <p class="section-title" id="section-3">III. Lessons in the Grain</p>
+
+                <figure class="network-figure" data-mode="dataset" aria-label="Sources of randomness in a neural network">
+                    <div class="network-controls" role="group" aria-label="What stays fixed?">
+                        <button type="button" data-mode="dataset" aria-pressed="true">Frozen dataset</button>
+                        <button type="button" data-mode="weights" aria-pressed="false">Frozen weights</button>
+                        <button type="button" data-mode="probes" aria-pressed="false">Fixed probes</button>
+                    </div>
+                    <output class="network-status" aria-live="polite">One dataset, three posterior weight samples.</output>
+                    <canvas class="network-canvas" width="620" height="178" role="img" aria-label="One dataset, three posterior weight samples." aria-describedby="network-description-dataset">Three replicas share the same dataset while their weights vary.</canvas>
+                    <span class="network-description" id="network-description-dataset">Three copies of the same neural architecture share a frozen training dataset. Dashed terracotta connections change between copies, representing independent weight samples from the posterior conditioned on that dataset.</span>
+                    <figcaption>
+                        <span class="network-key"><span class="network-key-mark" aria-hidden="true"></span>Frozen · solid</span>
+                        <span class="network-key"><span class="network-key-mark is-sampled" aria-hidden="true"></span>Sampled · dashed</span>
+                        <span>Schematic</span>
+                    </figcaption>
+                </figure>
+
+                <p>
+                    A training dataset is a particular realization of a much larger collection of possible observations. We could have collected different examples, measured different noise, or sampled different labels. Once we begin learning, though, we usually hold that realization fixed. The dataset becomes the environment in which the network's parameters are allowed to vary.
+                </p>
+
+                <p>
+                    Write our dataset as \(D=\{(x^\mu,y^\mu)\}_{\mu=1}^{P}\), and let \(f_\theta(x)\) denote a network with parameters \(\theta\). For a regression problem, suppose we model each label as the network's output plus independent Gaussian noise of <button type="button" class="glossary-term" data-glossary="variance" aria-controls="glossary-panel" aria-expanded="false">variance</button> \(\sigma^2\). The squared error then plays the role of an energy,
+                    \[
+                        E_D(\theta)
+                        =
+                        \frac12\sum_{\mu=1}^{P}
+                        \bigl(f_\theta(x^\mu)-y^\mu\bigr)^2.
+                    \]
+                </p>
+
+                <p>
+                    <button type="button" class="glossary-term" data-glossary="bayesian-learning" aria-controls="glossary-panel" aria-expanded="false">Bayesian learning</button> gives us a precise statistical <button type="button" class="glossary-term" data-glossary="ensemble" aria-controls="glossary-panel" aria-expanded="false">ensemble</button> over networks. Starting from a <button type="button" class="glossary-term" data-glossary="prior" aria-controls="glossary-panel" aria-expanded="false">prior</button> \(p_0(\theta)\), we condition on the observed data to obtain
+                    \[
+                        p_\beta(\theta\mid D)
+                        =
+                        \frac{p_0(\theta)e^{-\beta E_D(\theta)}}{Z_D(\beta)},
+                    \]
+                    \[
+                        Z_D(\beta)
+                        =
+                        \int d\theta\,p_0(\theta)e^{-\beta E_D(\theta)},
+                    \]
+                    where \(\beta=\sigma^{-2}\). The prior provides the reference measure over parameters, and the <button type="button" class="glossary-term" data-glossary="likelihood" aria-controls="glossary-panel" aria-expanded="false">likelihood</button> favors networks that explain the observations. The partition function measures the prior-weighted volume of networks compatible with the data.<sup data-fn="bayesian-evidence"></sup> A larger \(\beta\) means that we assume less observation noise, so discrepancies with the training labels receive a stronger penalty.
+                </p>
+
+                <p>
+                    The dataset is now the quenched disorder, and the parameters are the fluctuating variables. Each dataset defines its own <button type="button" class="glossary-term" data-glossary="posterior" aria-controls="glossary-panel" aria-expanded="false">posterior</button> and partition function. To study a distribution of learning problems, we first solve the inference problem for each fixed dataset, then average quantities such as \(\log Z_D\) over the possible datasets.
+                </p>
+
+                <p>
+                    A replica is an independent parameter sample from this posterior. Two replicas share every training example and label, but they can explain those observations using different weights. These are samples from a specified probability distribution over networks. Whether a training algorithm actually samples that distribution is a separate question about its dynamics.
+                </p>
+
+                <p>
+                    The replicated partition function has the same structure we encountered for spins,
+                    \[
+                        \begin{aligned}
+                            \mathbb E_D[Z_D^n]
+                            &amp;=
+                            \int
+                            \prod_{a=1}^{n}
+                            \bigl[d\theta^a\,p_0(\theta^a)\bigr]\\
+                            &amp;\qquad\times
+                            \mathbb E_D
+                            \exp\!\left[
+                            -\beta\sum_{a=1}^{n}E_D(\theta^a)
+                            \right].
+                        \end{aligned}
+                    \]
+                    Every term inside the sum contains the same dataset. Averaging over that shared dataset couples the replicas mathematically, because the same random observations constrain all of them.
+                </p>
+
+                <p>
+                    Their relationship also has a direct interpretation in learning. If two posterior samples make different predictions on a new input \(x\), their disagreement measures uncertainty that the training data have left unresolved. For independent replicas \(\theta^a\) and \(\theta^b\),
+                    \[
+                        \begin{aligned}
+                            &amp;\frac12\,
+                            \mathbb E_{\theta^a,\theta^b\mid D}
+                            \left[
+                            \bigl(f_{\theta^a}(x)-f_{\theta^b}(x)\bigr)^2
+                            \right]\\
+                            &amp;\qquad=
+                            \operatorname{Var}_{\theta\mid D}
+                            \bigl[f_\theta(x)\bigr].
+                        \end{aligned}
+                    \]
+                    This identity holds for any posterior with a finite predictive variance. It gives replicas an immediate purpose: comparing possible networks tells us how confidently the ensemble predicts beyond its training examples.
+                </p>
+
+                <p>
+                    We can work through the entire calculation for a single linear neuron,
+                    \[
+                        f_w(x)=w^\top x,
+                        \qquad
+                        w\sim\mathcal N(0,\tau^2 I_d).
+                    \]
+                    Collect the training inputs into the rows of a matrix \(X\in\mathbb R^{P\times d}\), and the labels into \(y\in\mathbb R^P\). The posterior combines the Gaussian prior with a quadratic training error, so completing the square gives another Gaussian,
+                    \[
+                        p(w\mid D)=\mathcal N(m_D,C_D),
+                    \]
+                    \[
+                        C_D
+                        =
+                        \left(
+                        \tau^{-2}I_d+\sigma^{-2}X^\top X
+                        \right)^{-1},
+                    \]
+                    \[
+                        m_D
+                        =
+                        \sigma^{-2}C_DX^\top y.
+                    \]
+                </p>
+
+                <p>
+                    The posterior mean is a <button type="button" class="glossary-term" data-glossary="ridge-regression" aria-controls="glossary-panel" aria-expanded="false">ridge-regression</button> predictor. The <button type="button" class="glossary-term" data-glossary="covariance" aria-controls="glossary-panel" aria-expanded="false">covariance</button> tells us what remains uncertain about its weights. Along an <button type="button" class="glossary-term" data-glossary="eigenvector" aria-controls="glossary-panel" aria-expanded="false">eigenvector</button> of \(X^\top X\) with <button type="button" class="glossary-term" data-glossary="eigenvalue" aria-controls="glossary-panel" aria-expanded="false">eigenvalue</button> \(s\), the posterior variance is
+                    \[
+                        \frac{1}{\tau^{-2}+\sigma^{-2}s}.
+                    \]
+                    Large eigenvalues correspond to directions that the observations constrain strongly. A direction in the <button type="button" class="glossary-term" data-glossary="nullspace" aria-controls="glossary-panel" aria-expanded="false">nullspace</button> of \(X\) retains its original variance \(\tau^2\), because changing the weights along that direction leaves every training prediction unchanged. The frozen dataset determines which combinations of weights learning can identify.<sup><a class="reference-mark" href="#ref-13">13</a></sup> The <a href="#appendix-bayes">full Gaussian integral</a> is worked out in the appendix.
+                </p>
+
+                <p>
+                    To connect that uncertainty to new predictions, suppose training and test inputs are drawn independently from \(\mathcal N(0,I_d/d)\). This normalization keeps typical outputs of order one as \(d\) grows. Averaging over a fresh test input gives
+                    \[
+                        \begin{aligned}
+                            \mathbb E_x\,
+                            \operatorname{Var}_{w\mid D}(w^\top x)
+                            &amp;=\mathbb E_x[x^\top C_Dx]\\
+                            &amp;=\frac1d\operatorname{Tr}C_D.
+                        \end{aligned}
+                    \]
+                    Under the stated Bayesian model, this is also the expected squared error of using the posterior mean to predict the unknown, noiseless response. Predicting a noisy label adds the observation variance \(\sigma^2\). If the model is misspecified, posterior uncertainty and actual prediction error can differ.
+                </p>
+
+                <p>
+                    The relevant <button type="button" class="glossary-term" data-glossary="thermodynamic-limit" aria-controls="glossary-panel" aria-expanded="false">thermodynamic limit</button> lets the number of examples and the input dimension grow together,
+                    \[
+                        P,d\longrightarrow\infty,
+                        \qquad
+                        \frac{P}{d}\longrightarrow\alpha,
+                    \]
+                    with the prior scale and observation noise held fixed. The ratio \(\alpha\) measures how many observations constrain each parameter. For Gaussian inputs with \(P&lt;d\), there are almost surely \(d-P\) directions that the dataset never observes. Even as the assumed noise tends to zero, those directions retain their prior uncertainty, leaving an average predictive variance of \(\tau^2(1-P/d)\). Once the inputs span the whole parameter space, that particular source of uncertainty disappears. At finite noise, the full spectrum of \(X^\top X\) determines how much uncertainty remains.
+                </p>
+
+                <p>
+                    The partition function connects this calculation to <button type="button" class="glossary-term" data-glossary="random-matrix-theory" aria-controls="glossary-panel" aria-expanded="false">random matrix theory</button>. Integrating over the weights produces a <button type="button" class="glossary-term" data-glossary="log-determinant" aria-controls="glossary-panel" aria-expanded="false">log-determinant</button> contribution,
+                    \[
+                        -\frac12
+                        \log\det\!\left(
+                        I_d+\frac{\tau^2}{\sigma^2}X^\top X
+                        \right).
+                    \]
+                    It records how the observations narrow the ensemble along different directions. Averaging it over random datasets means studying the eigenvalues of a random design matrix. This gives us a setting where replica calculations can be checked against Gaussian integration and established results about <button type="button" class="glossary-term" data-glossary="wishart" aria-controls="glossary-panel" aria-expanded="false">Wishart matrices</button>.<sup><a class="reference-mark" href="#ref-11">11</a></sup>
+                </p>
+
+                <p>
+                    Adding layers makes the weight ensemble more complicated even when every <button type="button" class="glossary-term" data-glossary="activation" aria-controls="glossary-panel" aria-expanded="false">activation</button> remains linear. A <button type="button" class="glossary-term" data-glossary="deep-linear" aria-controls="glossary-panel" aria-expanded="false">deep linear network</button> represents a linear function of its input, but its output depends on products of weight matrices. Independent Gaussian priors on those matrices consequently induce a different distribution over predictors from a Gaussian prior on one effective weight vector.
+                </p>
+
+                <p>
+                    Li and Sompolinsky study this ensemble by integrating out the learned weights layer by layer. Each integration changes the <button type="button" class="glossary-term" data-glossary="kernel" aria-controls="glossary-panel" aria-expanded="false">kernel</button> governing the remaining problem, with the change determined by <button type="button" class="glossary-term" data-glossary="self-consistency" aria-controls="glossary-panel" aria-expanded="false">self-consistency equations</button>. Their controlled limit sends the hidden width \(N\), input dimension \(d\), and sample count \(P\) to infinity together, keeping \(P/N\) and \(P/d\) finite at fixed depth. The resulting theory describes how depth, width, and the training task affect prediction and uncertainty in deep linear networks.<sup><a class="reference-mark" href="#ref-14">14</a></sup>
+                </p>
+
+                <p>
+                    We can see a prior's preference directly in a small nonlinear example. Put the inputs on a circle, \(x(t)=(\cos t,\sin t)\), and freeze 512 <button type="button" class="glossary-term" data-glossary="random-features" aria-controls="glossary-panel" aria-expanded="false">random tanh features</button>. Only their <button type="button" class="glossary-term" data-glossary="readout" aria-controls="glossary-panel" aria-expanded="false">readout</button> coefficients are learned, using an exact Gaussian posterior and twelve noisy observations of \(\cos(2t)+0.3\sin t\). Without hidden biases, every feature obeys \(\phi(t+\pi)=-\phi(t)\), so every possible readout does too. The prior excludes the target's even component before seeing a single label.
+                </p>
+
+                <figure class="experiment-figure" id="figure-inductive-bias">
+                    <img class="experiment-light" src="../../assets/disordered-minds/inductive-bias-light.png" width="1521" height="1393" loading="lazy" alt="Prior variance vanishes at even angular frequencies without hidden biases. Given the same observations, the bias-free posterior misses the target's even component, while the biased network follows it.">
+                    <img class="experiment-dark" src="../../assets/disordered-minds/inductive-bias-dark.png" width="1521" height="1393" loading="lazy" alt="Prior variance vanishes at even angular frequencies without hidden biases. Given the same observations, the bias-free posterior misses the target's even component, while the biased network follows it.">
+                    <figcaption>Computed Bayesian readout experiment. Top: prior variance in each <button type="button" class="glossary-term" data-glossary="fourier-mode" aria-controls="glossary-panel" aria-expanded="false">Fourier mode</button>, with means and ranges over eight paired feature draws. Bottom: one predetermined draw, the same observations, and posterior means with bands of two latent standard deviations. Hidden weights stay frozen in both conditions.</figcaption>
+                </figure>
+
+                <p>
+                    Giving the hidden neurons Gaussian biases makes those even modes available. We reduce the hidden weight variance at the same time, keeping the variance of the signal entering each tanh fixed. Across eight paired feature draws, the root mean squared prediction error falls from \(0.708\) to \(0.058\). The narrow uncertainty band in the bias-free model doesn't rescue it: the posterior is confident within a family that cannot express the target. This is a deliberately mismatched example, showing how architectural assumptions survive Bayesian conditioning. The <a href="#appendix-experiments">experiment details</a> separate this restricted readout model from inference over every weight.
+                </p>
+
+                <p>
+                    Quenched disorder alone doesn't require replica symmetry breaking. Our single-neuron posterior is Gaussian, and its uncertainty can be described without a hierarchy of distinct equilibrium states. For a more complicated learning ensemble, the question is whether independently sampled solutions organize into groups whose overlaps require additional structure. Multiple minima in a parameterization don't settle that question, especially when different weights can represent the same function.<sup data-fn="matched-bayes"></sup>
+                </p>
+
+                <p>
+                    A concrete example comes from the <button type="button" class="glossary-term" data-glossary="spherical-perceptron" aria-controls="glossary-panel" aria-expanded="false">spherical perceptron</button>, where one studies weights of fixed norm satisfying random constraints \(y^\mu w^\top x^\mu\geq\kappa\). Here the ensemble is uniform over the allowed weights. In the <button type="button" class="glossary-term" data-glossary="negative-margin" aria-controls="glossary-panel" aria-expanded="false">negative-margin regime</button>, its solution space develops a hierarchical structure near the threshold where the constraints become impossible to satisfy. Replica symmetry breaking describes that organization and changes the prediction of the feasibility boundary. The disorder is still the frozen collection of training patterns, but the geometry of compatible weights is much richer than in Gaussian regression.<sup><a class="reference-mark" href="#ref-15">15</a></sup>
+                </p>
+
+                <p>
+                    Throughout these examples, the dataset defines the instance and the weights explore its possible explanations. Next we can reverse that choice, freezing one particular network and letting its inputs vary.
+                </p>
+
+                <p class="section-title" id="section-4">IV. Walking on Frozen Ground</p>
+
+                <figure class="network-figure" data-mode="weights" aria-label="Sources of randomness in a neural network">
+                    <div class="network-controls" role="group" aria-label="What stays fixed?">
+                        <button type="button" data-mode="dataset" aria-pressed="false">Frozen dataset</button>
+                        <button type="button" data-mode="weights" aria-pressed="true">Frozen weights</button>
+                        <button type="button" data-mode="probes" aria-pressed="false">Fixed probes</button>
+                    </div>
+                    <output class="network-status" aria-live="polite">One fixed network, three input samples.</output>
+                    <canvas class="network-canvas" width="620" height="178" role="img" aria-label="One fixed network, three input samples." aria-describedby="network-description-weights">Three copies have identical solid umber connections, representing one frozen network. Dashed terracotta input nodes represent different samples from the chosen input measure.</canvas>
+                    <span class="network-description" id="network-description-weights">Three copies have identical solid umber connections, representing one frozen network. Dashed terracotta input nodes represent different samples from the chosen input measure.</span>
+                    <figcaption>
+                        <span class="network-key"><span class="network-key-mark" aria-hidden="true"></span>Frozen · solid</span>
+                        <span class="network-key"><span class="network-key-mark is-sampled" aria-hidden="true"></span>Sampled · dashed</span>
+                        <span>Schematic</span>
+                    </figcaption>
+                </figure>
+
+                <p>
+                    We have been asking which networks could explain a fixed set of observations. Now choose one network and keep it. Its weights no longer fluctuate. They define a landscape over the inputs, and our configurations are points in that landscape. Two replicas are two inputs presented to the same network.
+                </p>
+
+                <p>
+                    Let the scalar output of this network be \(H_W(x)\), and choose a reference distribution \(p_0(x)\). We can explore its responses through the input ensemble
+                    \[
+                        p_{\beta,W}(x)
+                        =\frac{p_0(x)e^{-\beta H_W(x)}}{Z_W(\beta)},
+                    \]
+                    \[
+                        Z_W(\beta)=\int dx\,p_0(x)e^{-\beta H_W(x)}.
+                    \]
+                    At \(\beta=0\), we simply draw ordinary inputs from \(p_0\). Positive \(\beta\) favors inputs with lower outputs. Replacing \(H_W\) by \(-H_W\) lets us investigate unusually high outputs instead. The input distribution and the output we choose to tilt are both part of the model.<sup data-fn="input-measure"></sup>
+                </p>
+
+                <p>
+                    This construction gives a statistical meaning to searching the input space. An optimizer follows one trajectory toward an extreme response. The <button type="button" class="glossary-term" data-glossary="gibbs-ensemble" aria-controls="glossary-panel" aria-expanded="false">Gibbs ensemble</button> asks how much input probability lies at different outputs and how inputs producing those outputs relate to one another. A very low output might occur in an exceptionally small region, while slightly less extreme outputs might be available throughout a much larger region. Temperature controls this competition between output value and probability mass.
+                </p>
+
+                <p>
+                    The partition function packages that information. Writing \(\langle\cdot\rangle_{\beta,W}\) for an average over inputs drawn from this ensemble,
+                    \[
+                        -\frac{\partial}{\partial\beta}\log Z_W
+                        =\langle H_W(x)\rangle_{\beta,W}.
+                    \]
+                    Its second derivative is the variance of the output under the tilted distribution, when the required moments exist. The same function consequently describes both the mean response selected by the tilt and the fluctuations around it. Averaging \(\log Z_W\) over weight realizations then asks what this landscape looks like for networks drawn from the specified initialization ensemble.
+                </p>
+
+                <p>
+                    A linear neuron already shows how the two kinds of randomness separate. Take \(H_v(x)=v^\top x\), with frozen \(v\), and draw reference inputs from \(\mathcal N(0,I_d)\). Completing the square gives
+                    \[
+                        p_{\beta,v}(x)=\mathcal N(-\beta v,I_d),
+                        \qquad
+                        \log Z_v=\frac{\beta^2}{2}\|v\|^2.
+                    \]
+                    The tilt shifts the cloud of inputs against the weight vector. Its covariance stays unchanged. Two independent replicas therefore tend to point in a common direction even though their fluctuations are independent.
+                </p>
+
+                <p>
+                    We can quantify their similarity with the input overlap,
+                    \[
+                        Q_{ab}=\frac1d(x^a)^\top x^b.
+                    \]
+                    For distinct replicas in this linear example, its mean is \(\beta^2\|v\|^2/d\). If \(\|v\|^2/d\) stays finite as dimension grows, the fluctuations of \(Q_{ab}\) vanish. The replicas share a preference without developing a hierarchy of states. The <a href="#appendix-inputs">Gaussian calculation below</a> makes this explicit, including a regime where the annealed partition function diverges although the quenched free energy remains finite.
+                </p>
+
+                <p>
+                    Winer and Hanin apply this perspective to deep random networks with Gaussian reference inputs. They let the input dimension and hidden widths grow proportionally at fixed depth. Their final <button type="button" class="glossary-term" data-glossary="readout" aria-controls="glossary-panel" aria-expanded="false">readout</button> coefficients have variance one, giving ordinary outputs of order \(\sqrt N\) and allowing the tilted ensemble to select energies of order \(N\). This makes \(\log Z_W/N\) the relevant thermodynamic quantity. The scaling differs from the readout convention we will use for <button type="button" class="glossary-term" data-glossary="gaussian-process" aria-controls="glossary-panel" aria-expanded="false">Gaussian processes</button>.<sup><a class="reference-mark" href="#ref-7">7</a></sup>
+                </p>
+
+                <p>
+                    A nonlinear network can organize its favored inputs much less simply than the shifted Gaussian cloud. Imagine drawing two inputs independently from the same low-temperature ensemble. They might belong to the same group of similar configurations, to different groups, or to groups nested inside larger groups. An overlap distribution records how often these different similarities occur.
+                </p>
+
+                <p>
+                    In a replica-symmetric description, one off-diagonal overlap describes typical pairs. Replica symmetry breaking allows a richer organization. One step introduces groups with distinct within-group and between-group overlaps. Full RSB allows a hierarchy with a continuous range of overlap levels. The replicas remain independent conditional on the network; the structure concerns where that common probability distribution places its mass.
+                </p>
+
+                <p>
+                    The paper's numerical solutions of the replica equations find full RSB for sinusoidal activations in the regimes examined, while shallow <button type="button" class="glossary-term" data-glossary="relu" aria-controls="glossary-panel" aria-expanded="false">ReLU</button> and tanh examples are replica symmetric. The linear case is analytically solvable. These results concern particular architectures, normalizations, and regimes, rather than a classification of all networks using those activations.<sup><a class="reference-mark" href="#ref-7">7</a></sup> They show why choosing an activation can change the geometry of important inputs even when the weights are drawn by an otherwise similar procedure.
+                </p>
+
+                <p>
+                    We can make that change visible by solving a finite hierarchy of replica equations ourselves. Take one hidden sine layer, with the same variance-one readout convention, and grow width and input dimension together at \(N/d=1\). At higher temperatures the overlap levels coincide. As we cool the system, the solution separates into branches: one common similarity no longer describes the hierarchy.
+                </p>
+
+                <figure class="experiment-figure" id="figure-replica-bifurcation">
+                    <img class="experiment-light" src="../../assets/disordered-minds/replica-bifurcation-light.png" width="1346" height="943" loading="lazy" alt="Computed overlap levels coincide at high temperature, then separate as inverse temperature increases. The replica-symmetric solution continues between the lower and upper branches.">
+                    <img class="experiment-dark" src="../../assets/disordered-minds/replica-bifurcation-dark.png" width="1346" height="943" loading="lazy" alt="Computed overlap levels coincide at high temperature, then separate as inverse temperature increases. The replica-symmetric solution continues between the lower and upper branches.">
+                    <figcaption>Computed 20-step replica ansatz for a Gaussian-input sine network, following Winer–Hanin's hierarchical construction.<sup><a class="reference-mark" href="#ref-7">7</a></sup> Thin curves show the overlap levels; bold curves bound them. The dashed curve restricts the calculation to replica symmetry. Below: the spread between the extreme overlaps. Here \(q=x^\top x'/d\), so it can exceed one.</figcaption>
+                </figure>
+
+                <p>
+                    On this temperature grid, the branches separate between \(\beta=3.5\) and \(3.75\), where an independent local stability check also finds that the replica-symmetric solution becomes unstable. This is a numerical result within a finite-step ansatz. Finer hierarchies and integration grids check its resolution; they don't prove the full infinite hierarchy or the global equilibrium solution. Our explicit aspect ratio also means that its transition needn't match the published figure's temperature. The <a href="#appendix-experiments">calculation details</a> state the model, normalization, and checks.
+                </p>
+
+                <p>
+                    This is the insight supplied by frozen weights. The network becomes an environment, and we study the geometry of the inputs that it favors. Generalization in weight space and rare responses in input space can use closely related mathematics while answering different questions.
+                </p>
+
+                <p class="section-title" id="section-5">V. A Different Cast</p>
+
+                <figure class="network-figure" data-mode="probes" aria-label="Sources of randomness in a neural network">
+                    <div class="network-controls" role="group" aria-label="What stays fixed?">
+                        <button type="button" data-mode="dataset" aria-pressed="false">Frozen dataset</button>
+                        <button type="button" data-mode="weights" aria-pressed="false">Frozen weights</button>
+                        <button type="button" data-mode="probes" aria-pressed="true">Fixed probes</button>
+                    </div>
+                    <output class="network-status" aria-live="polite">One collection of probes, three prior weight samples.</output>
+                    <canvas class="network-canvas" width="620" height="178" role="img" aria-label="One collection of probes, three prior weight samples." aria-describedby="network-description-probes">Three copies share the same fixed probe inputs. Dashed terracotta connections change between copies, representing different random initializations drawn from the weight prior.</canvas>
+                    <span class="network-description" id="network-description-probes">Three copies share the same fixed probe inputs. Dashed terracotta connections change between copies, representing different random initializations drawn from the weight prior.</span>
+                    <figcaption>
+                        <span class="network-key"><span class="network-key-mark" aria-hidden="true"></span>Frozen · solid</span>
+                        <span class="network-key"><span class="network-key-mark is-sampled" aria-hidden="true"></span>Sampled · dashed</span>
+                        <span>Schematic</span>
+                    </figcaption>
+                </figure>
+
+                <p>
+                    There is another way to repeat the experiment. Keep a few inputs on the table, draw fresh weights, and observe a new network's responses to exactly those inputs. The architecture stays the same, but each initialization produces another function. We are now studying the joint distribution of those functions' values at our chosen probes.
+                </p>
+
+                <p>
+                    For a single hidden layer, write
+                    \[
+                        f_N(x)=\frac1{\sqrt N}\sum_{i=1}^{N}a_i\phi(w_i^\top x),
+                    \]
+                    where the pairs \((a_i,w_i)\) are independent and identically distributed. Within each pair, the readout weight \(a_i\) is independent of \(w_i\), with mean zero and variance \(\sigma_a^2\). For fixed probes \(x^1,\ldots,x^m\), each hidden neuron contributes a random vector of \(m\) responses. The network output is a normalized sum of these independent vectors.
+                </p>
+
+                <p>
+                    With finite second moments, the <button type="button" class="glossary-term" data-glossary="central-limit" aria-controls="glossary-panel" aria-expanded="false">multivariate central limit theorem</button> gives
+                    \[
+                        \bigl(f_N(x^1),\ldots,f_N(x^m)\bigr)
+                        \;\Rightarrow\;
+                        \mathcal N(0,K),
+                    \]
+                    where
+                    \[
+                        K_{\mu\nu}
+                        =\sigma_a^2\,\mathbb E_w
+                        \bigl[\phi(w^\top x^\mu)\phi(w^\top x^\nu)\bigr].
+                    \]
+                    The kernel \(K\) tells us which inputs tend to receive similar outputs across initializations. A Gaussian process is a random function whose values on every finite collection of inputs have a joint Gaussian distribution. The limiting construction gives such a prior over functions.
+                </p>
+
+                <p>
+                    To watch that limit take shape, fix inputs on the unit circle and draw 2,000 independent one-hidden-layer ReLU networks. Choose \(w_i\sim\mathcal N(0,I_2)\) and \(a_i\sim\mathcal N(0,2)\), so each output has variance one. The animation follows each network as we add hidden neurons and rescale by \(1/\sqrt N\). At small width the paired-output cloud differs visibly from its Gaussian limit. Increasing the width fills in the cloud while preserving the correlations between inputs.
+                </p>
+
+                <figure class="experiment-figure nngp-width" id="figure-nngp" data-nngp-width data-src="/assets/disordered-minds/nngp-width-animation.json">
+                    <div data-nngp-fallback>
+                        <img class="experiment-light" src="/assets/disordered-minds/nngp-correspondence-light.png" width="1504" height="804" loading="lazy" alt="Network output pairs at widths 2 and 512, compared with the analytic Gaussian-process ellipse.">
+                        <img class="experiment-dark" src="/assets/disordered-minds/nngp-correspondence-dark.png" width="1504" height="804" loading="lazy" alt="Network output pairs at widths 2 and 512, compared with the analytic Gaussian-process ellipse.">
+                    </div>
+                    <canvas class="nngp-width-canvas" data-nngp-canvas role="img" aria-label="Two thousand network output pairs as width increases." hidden></canvas>
+                    <div class="nngp-width-controls" data-nngp-controls hidden>
+                        <button type="button" data-nngp-play>Play</button>
+                        <label class="nngp-width-sr-only" for="nngp-width-slider">Network width</label>
+                        <input id="nngp-width-slider" type="range" min="0" max="28" value="0" step="1" data-nngp-range>
+                        <output for="nngp-width-slider" data-nngp-readout>N = 1</output>
+                    </div>
+                    <div class="nngp-width-key" data-nngp-key hidden><span><i aria-hidden="true"></i>Network outputs</span><span><i class="nngp-width-ellipse" aria-hidden="true"></i>GP 95% ellipse</span></div>
+                    <p class="nngp-width-sr-only" data-nngp-status hidden></p>
+                    <p class="nngp-width-sr-only" data-nngp-announcement role="status" aria-live="polite" aria-atomic="true"></p>
+                    <figcaption>Two fixed inputs, 2,000 independent networks, and an increasing hidden width. Each dot follows one sequence of actual neuron draws. The dashed ellipse contains 95% of the limiting Gaussian law. Play the animation or move the slider to compare widths; \(N=1{,}024\) is a finite approximation to the limit.</figcaption>
+                </figure>
+
+                <p>
+                    The narrow network's lines along the axes have a simple origin: a ReLU neuron can be silent at one probe while responding at the other. Adding independent neurons smooths out that structure. Covariance alone would miss the change, because it already equals \(K\) at every finite width in this model. What approaches the Gaussian process is the joint distribution, including behavior beyond its first two moments. The animation shows that change at two fixed probes; it doesn't settle the geometry of rare inputs in a growing-dimensional space.
+                </p>
+
+                <p>
+                    In deep networks, the corresponding kernels propagate through the layers. A layer takes a jointly Gaussian pair of preactivations, applies the activation to each, and uses their expected product to determine the next layer's covariance. The <a href="#appendix-kernels">kernel recursion in the appendix</a> spells out the normalization and Gaussian integral. Zavatone-Veth develops this <button type="button" class="glossary-term" data-glossary="mean-field" aria-controls="glossary-panel" aria-expanded="false">mean-field</button> picture, while Lee and collaborators and Matthews and collaborators establish the deep-network Gaussian-process correspondence under their respective assumptions.<sup><a class="reference-mark" href="#ref-17">17</a>, <a class="reference-mark" href="#ref-18">18</a>, <a class="reference-mark" href="#ref-19">19</a></sup>
+                </p>
+
+                <p>
+                    This gives architecture an interpretable statistical effect. Even when the weights have mean zero, the kernel need not treat all pairs of inputs equally. Inputs that the random features tend to represent similarly remain correlated across the ensemble. The activation and its repeated composition through depth determine which distinctions the prior preserves. We can inspect that <button type="button" class="glossary-term" data-glossary="inductive-bias" aria-controls="glossary-panel" aria-expanded="false">inductive bias</button> before fitting any labels.
+                </p>
+
+                <p>
+                    Conditioning the resulting Gaussian process on a fixed regression dataset connects us back to Bayesian learning. With Gaussian observation noise, the posterior mean and covariance follow from Gaussian conditioning using the kernel on training and test inputs. This is the function-space counterpart of the weight-space Gaussian calculation for the linear neuron. Lee and collaborators use the correspondence to perform Bayesian prediction for infinitely wide deep networks.<sup><a class="reference-mark" href="#ref-18">18</a></sup>
+                </p>
+
+                <p>
+                    The order of limits matters here. In the familiar fixed-probe construction, depth and the number of probes stay finite while hidden widths grow; we can hold input dimension fixed as well. The kernel describes a fixed-size joint output distribution. In the proportional learning limit of section III, the number of observations grows with the network dimensions. The number of constraints is then itself macroscopic. A result derived with finitely many constraints cannot simply be carried into that regime.<sup><a class="reference-mark" href="#ref-14">14</a>, <a class="reference-mark" href="#ref-17">17</a></sup>
+                </p>
+
+                <p>
+                    There is a related distinction for input landscapes. Convergence at any specified finite set of probes does not, by itself, control an integral over a growing-dimensional input space with exponential weighting. Such an integral can emphasize inputs that were extremely unlikely under the original distribution. Establishing its limit requires control of that selection and of the tails, along with the <button type="button" class="glossary-term" data-glossary="hamiltonian" aria-controls="glossary-panel" aria-expanded="false">Hamiltonian</button>'s normalization.
+                </p>
+
+                <p>
+                    We should also keep the word <em>quenched</em> attached to a defined ensemble. The Gaussian-process construction averages over weights at fixed inputs. It does not by itself introduce a free energy, an equilibrium distribution over inputs, or a question about replica symmetry breaking. Those appear when we specify the additional probability measure and observable. The three perspectives are connected by their choices of conditioning, rather than by three interchangeable uses of the same average.
+                </p>
+
+                <p>
+                    Random initialization consequently tells us how networks vary across possible preparations. To understand the responses of one particular preparation, we have to keep its actual weights in the calculation.
+                </p>
+
+                <p class="section-title" id="section-6">VI. The Average Within</p>
+
+                <p>
+                    Suppose someone hands us a network, including every weight, and asks for its average response to Gaussian inputs. We know the function and the input distribution. The remaining problem is an integral,
+                    \[
+                        m_W=\mathbb E_{x\sim\mathcal N(0,I_d)}[f_W(x)].
+                    \]
+                    Sampling inputs and averaging forward passes is an immediate estimate. But knowing the network's internal computation may let us evaluate or approximate the integral more efficiently.
+                </p>
+
+                <p>
+                    Averaging over initializations can hide this problem. For a centered, independent final readout, the expectation of \(m_W\) over weights can be zero. A particular network can still have a substantial nonzero input mean. Knowing that positive and negative means cancel across an ensemble gives us little information about the sign and size of the mean for the weights in front of us.
+                </p>
+
+                <p>
+                    A one-hidden-layer ReLU network makes the distinction exact. Absorb any readout normalization into \(a_i\) and write \(f_W(x)=\sum_i a_i\operatorname{ReLU}(w_i^\top x)\). Gaussian inputs give
+                    \[
+                        m_W=\frac1{\sqrt{2\pi}}\sum_i a_i\|w_i\|.
+                    \]
+                    Each hidden unit contributes its positive half-Gaussian mean, weighted by its actual readout coefficient. The expression is generally nonzero for a fixed network. Centered random readout coefficients make its average over initializations zero. The <a href="#appendix-estimation">short derivation below</a> also shows how its fluctuations survive that cancellation.
+                </p>
+
+                <p>
+                    Replicas give us a way to retain the missing information. Draw two independent inputs, use the same network for both, and average their product,
+                    \[
+                        \mathbb E_W[m_W^2]
+                        =\mathbb E_{W,x^1,x^2}
+                        \bigl[f_W(x^1)f_W(x^2)\bigr].
+                    \]
+                    Their <button type="button" class="glossary-term" data-glossary="conditional-independence" aria-controls="glossary-panel" aria-expanded="false">conditional independence</button> turns the product of input averages into a two-input average. If each input received independently redrawn weights instead, the result would factor into the square of the ensemble mean. Sharing the weights is exactly what preserves the variation between network instances.
+                </p>
+
+                <figure class="estimation-figure" aria-label="Two ways to estimate the input expectation of one fixed network">
+                    <div class="estimation-path">
+                        <span class="estimation-label">Sample inputs</span>
+                        <span class="estimation-step">Many input draws</span><span class="estimation-arrow" aria-hidden="true">→</span>
+                        <span class="estimation-step">Repeated passes through the same W</span><span class="estimation-arrow" aria-hidden="true">→</span>
+                        <span class="estimation-step">Average outputs</span>
+                    </div>
+                    <div class="estimation-path">
+                        <span class="estimation-label">Propagate statistics</span>
+                        <span class="estimation-step">Input distribution</span><span class="estimation-arrow" aria-hidden="true">→</span>
+                        <span class="estimation-step">Layerwise cumulant estimates using W</span><span class="estimation-arrow" aria-hidden="true">→</span>
+                        <span class="estimation-step">Estimate the output mean</span>
+                    </div>
+                    <figcaption>Both procedures estimate an input expectation for the supplied weights. The second uses the network's structure to approximate the integral.</figcaption>
+                </figure>
+
+                <p>
+                    ARC's recent work studies this fixed-network estimation problem for wide random multilayer perceptrons. Its algorithms take the supplied weights and propagate approximate statistics of the input distribution through the layers. The approximation tracks <em><button type="button" class="glossary-term" data-glossary="cumulants" aria-controls="glossary-panel" aria-expanded="false">cumulants</button></em>: the mean, covariance, and higher-order quantities that describe departures from Gaussian behavior. The theory gives settings where these estimates outperform <button type="button" class="glossary-term" data-glossary="monte-carlo" aria-controls="glossary-panel" aria-expanded="false">Monte Carlo</button> at a specified <button type="button" class="glossary-term" data-glossary="mean-squared-error" aria-controls="glossary-panel" aria-expanded="false">mean squared error</button>, with that error subsequently averaged over random weight realizations.<sup><a class="reference-mark" href="#ref-20">20</a></sup>
+                </p>
+
+                <p>
+                    The reason higher-order statistics matter is visible even in a scalar activation. A Gaussian input is determined by its mean and variance, but passing it through a nonlinear function usually produces a non-Gaussian output. Later layers can depend on features of that distribution that its first two moments do not capture. An approximation that propagates only means and covariances can consequently miss a contribution to the final expectation. Tracking additional cumulants retains more of that information.
+                </p>
+
+                <p>
+                    In the paper, the proved bounds assume fixed depth, polynomial activations, and specified accuracy regimes as width grows. The experiments also examine ReLU networks. The authors' factorized algorithms exploit the structure of the cumulant calculations to reduce cost, and the numerical comparisons measure accuracy against computational effort.<sup><a class="reference-mark" href="#ref-20">20</a></sup> The <a href="#appendix-estimation">appendix</a> records the theorem's scaling conditions so that the intuitive comparison does not acquire a broader guarantee than the result provides.
+                </p>
+
+                <p>
+                    This is a practical reason to keep track of quenched structure. The weights contain instance-specific information that can help calculate an average over inputs. Replacing the network by its average over initializations removes the very coefficients the estimator can use. Ordinary expectations commute when integrable, while the conditional expectation retains a dependence on \(W\) that the ensemble mean discards.
+                </p>
+
+                <p>
+                    The two-replica identity above is an elementary moment identity; ARC's estimation algorithms use cumulant propagation. We can connect their question to the replica language without making the replica trick, or RSB, a required ingredient of every calculation involving a frozen network.
+                </p>
+
+                <p class="section-title" id="section-7">VII. What the Fire Leaves Behind</p>
+
+                <p>
+                    Across these examples, the architecture alone never specified the statistical system. We also had to choose what was held fixed, what could vary, and which probability measure described that variation. A dataset, an initialized network, and a set of probe inputs each define a different experiment.
+                </p>
+
+                <div class="ensemble-table-wrap">
+                    <table class="ensemble-table" aria-label="Summary of the three ensembles">
+                        <thead><tr><th scope="col">Held fixed</th><th scope="col">Allowed to vary</th><th scope="col">What we learn</th><th scope="col">Typical large-system limit</th></tr></thead>
+                        <tbody>
+                            <tr><th scope="row">Training dataset</th><td>Posterior parameters</td><td>Which explanations remain plausible, and how uncertain their predictions are</td><td>Samples and dimension grow at fixed \(P/d\); deep linear theory also keeps \(P/N\) finite</td></tr>
+                            <tr><th scope="row">Network weights</th><td>Inputs under a reference or tilted measure</td><td>Average responses, rare outputs, and the geometry of favored inputs</td><td>Input dimension and layer widths grow proportionally at fixed depth in the landscape theory</td></tr>
+                            <tr><th scope="row">Probe inputs</th><td>Random initializations</td><td>Joint output statistics and the prior over functions</td><td>Widths grow at fixed depth and a fixed finite set of probes</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>
+                    Their large-system limits preserve different balances. In regression, \(P/d\) can remain finite so that data and unknowns grow together. Deep linear learning can keep \(P/N\) finite as well. The input-landscape calculation grows input dimension with width, while the familiar Gaussian-process construction holds a finite set of probes fixed. Calling all of them infinite-width theories leaves out the ratios that determine which effects survive.
+                </p>
+
+                <p>
+                    Replica symmetry breaking is a further question about the organization of the chosen measure. A quenched instance can have a simple Gaussian ensemble, a single concentrating overlap, or a hierarchy of equilibrium configurations. A nonzero overlap, a complicated network, or an average over random variables is insufficient to choose among those possibilities. The calculation has to establish the relevant structure in the regime being studied.
+                </p>
+
+                <p>
+                    This also tells us what the analogy with the forge contributes. A smith's preparation leaves a persistent arrangement of material, and that arrangement shapes what the blade can subsequently do. In our learning problem, a fixed dataset shapes the explanations available to a network. In our input problem, fixed weights shape its possible responses. Changing which variables we freeze changes the possibilities we are asking about.
+                </p>
+
+                <p>
+                    Disorder becomes useful when we give it that precise role. The microscopic details can be random, while their consequences admit a predictable theory. We can calculate how much remains uncertain, how unusual responses are organized, and when knowing the particular realization helps us do better than averaging it away.
+                </p>
+
+                <p class="section-title" id="section-appendix">Appendix. Beneath the Surface</p>
+
+                <p>The calculations below supply the algebra behind the examples. Each uses the measure and normalization stated in the main text.</p>
+
+                <details class="math-appendix" id="appendix-bayes">
+                    <summary>A. Completing the Bayesian square</summary>
+                    <div class="appendix-body">
+                        <p>For the linear model, the negative log posterior, up to terms independent of \(w\), is
+                        \[
+                            \begin{aligned}
+                            &amp;\frac{\|w\|^2}{2\tau^2}+\frac{\|Xw-y\|^2}{2\sigma^2}\\
+                            &amp;\qquad=\frac12 w^\top A w-b^\top w+\frac{y^\top y}{2\sigma^2},
+                            \end{aligned}
+                        \]
+                        with \(A=\tau^{-2}I_d+\sigma^{-2}X^\top X\) and \(b=\sigma^{-2}X^\top y\). Since \(A\) is <button type="button" class="glossary-term" data-glossary="positive-definite" aria-controls="glossary-panel" aria-expanded="false">positive definite</button> for \(\tau,\sigma>0\), set \(C=A^{-1}\) and \(m=Cb\). Then
+                        \[
+                            \begin{aligned}
+                            &amp;\frac12w^\top Aw-b^\top w\\
+                            &amp;\qquad=\frac12(w-m)^\top A(w-m)-\frac12b^\top Cb.
+                            \end{aligned}
+                        \]
+                        This proves the posterior mean and covariance in section III.</p>
+                        <p>Including the normalized prior, the Gaussian integral gives
+                        \[
+                            \begin{aligned}
+                            \log Z_D={}&-\frac12\log\det\!\left(I_d+\frac{\tau^2}{\sigma^2}X^\top X\right)\\
+                            &amp;-\frac{y^\top y}{2\sigma^2}+\frac{y^\top XCX^\top y}{2\sigma^4}.
+                            \end{aligned}
+                        \]
+                        The determinant records the change in volume, while the remaining terms depend on the observed labels. Multiplication by \((2\pi\sigma^2)^{-P/2}\) restores the normalized Gaussian likelihood and yields the evidence.</p>
+                        <p>For an independent test input with covariance \(I_d/d\), the identity \(x^\top Cx=\operatorname{Tr}(Cxx^\top)\) gives \(\mathbb E_x[x^\top Cx]=\operatorname{Tr}C/d\). In a null direction of \(X\), \(C\) has eigenvalue \(\tau^2\). The other eigenvalues tend to zero as \(\sigma\downarrow0\) at fixed full-rank design on its observed subspace. This gives \(\tau^2(d-P)/d\) when \(P&lt;d\).</p>
+                    </div>
+                </details>
+
+                <details class="math-appendix" id="appendix-inputs">
+                    <summary>B. A linear landscape, including a divergent annealed average</summary>
+                    <div class="appendix-body">
+                        <p>Let \(x\sim\mathcal N(0,I_d)\) and \(H_v(x)=v^\top x\). The exponent satisfies
+                        \[
+                            -\frac12\|x\|^2-\beta v^\top x
+                            =-\frac12\|x+\beta v\|^2+\frac{\beta^2}{2}\|v\|^2.
+                        \]
+                        Thus \(Z_v=e^{\beta^2\|v\|^2/2}\), and the normalized input measure is \(\mathcal N(-\beta v,I_d)\). Differentiation gives \(\langle H_v\rangle=-\beta\|v\|^2\).</p>
+                        <p>For independent replicas write \(x^a=-\beta v+\xi^a\), with independent standard Gaussian \(\xi^a\). For \(a\ne b\),
+                        \[
+                            \mathbb E[Q_{ab}\mid v]=\frac{\beta^2\|v\|^2}{d},
+                        \]
+                        \[
+                            \operatorname{Var}(Q_{ab}\mid v)
+                            =\frac{d+2\beta^2\|v\|^2}{d^2}.
+                        \]
+                        The three centered terms in the expanded dot product have zero pairwise covariance. A bounded \(\|v\|^2/d\) therefore makes the overlap concentrate.</p>
+                        <p>Now choose the quenched coefficients independently as \(v_i\sim\mathcal N(0,1)\). The quenched log partition function is finite for every finite \(\beta\),
+                        \[
+                            \mathbb E_v\log Z_v=\frac{d\beta^2}{2}.
+                        \]
+                        But Gaussian integration over \(v\) gives
+                        \[
+                            \mathbb E_v Z_v^{\,r}=(1-r\beta^2)^{-d/2}
+                            \quad\text{only when }r\beta^2&lt;1.
+                        \]
+                        For \(r\beta^2\geq1\), the integral diverges. In particular, the annealed average \(\mathbb E_v Z_v\) diverges for \(|\beta|\geq1\), despite the finite quenched answer.</p>
+                        <p>A real neighborhood of \(r=0\) still exists, and differentiating there recovers \(\mathbb E\log Z_v\). At sufficiently large \(\beta\), however, no positive integer moment is finite. The real-variable identity near zero and the strategy of computing integer replica moments have different domains of applicability.</p>
+                    </div>
+                </details>
+
+                <details class="math-appendix" id="appendix-kernels">
+                    <summary>C. From random features to a deep kernel</summary>
+                    <div class="appendix-body">
+                        <p>For the single-layer model, define the random vector \(Y_i\in\mathbb R^m\) by \((Y_i)_\mu=a_i\phi(w_i^\top x^\mu)\). These vectors are independent and identically distributed, with zero mean and covariance \(K\). Under finite second moments, the multivariate central limit theorem applies to \(N^{-1/2}\sum_iY_i\). This proves convergence for each fixed finite probe collection.</p>
+                        <p>For a deep network, use preactivations
+                        \[
+                            h_i^{\ell+1}(x)=b_i^{\ell+1}
+                            +\frac{\sigma_w}{\sqrt{n_\ell}}\sum_{j=1}^{n_\ell}W_{ij}^{\ell+1}\phi(h_j^\ell(x)),
+                        \]
+                        where \(W_{ij}^{\ell+1}\) are independent standard Gaussians and \(b_i^{\ell+1}\sim\mathcal N(0,\sigma_b^2)\). If \(K_\ell\) denotes the limiting preactivation covariance, the recursion is
+                        \[
+                            K_{\ell+1}(x,x')=\sigma_b^2+\sigma_w^2\mathbb E[\phi(u)\phi(v)],
+                        \]
+                        with
+                        \[
+                            \begin{pmatrix}u\\v\end{pmatrix}\sim\mathcal N\!\left(0,
+                            \begin{pmatrix}K_\ell(x,x)&amp;K_\ell(x,x')\\K_\ell(x',x)&amp;K_\ell(x',x')\end{pmatrix}\right).
+                        \]
+                        For a Gaussian first-layer weight distribution scaled by input dimension, \(K_1(x,x')=\sigma_b^2+\sigma_w^2 x^\top x'/d\). A fixed number of layers and finitely many probes is the regime used here. Extending the argument through depth also requires control of the empirical covariances and moments, as in the cited Gaussian-process results.<sup><a class="reference-mark" href="#ref-17">17</a>, <a class="reference-mark" href="#ref-19">19</a></sup></p>
+                        <p>For Gaussian regression noise of variance \(\sigma^2\), let \(k_*\) collect the prior covariances between a test point and training inputs. Joint Gaussian conditioning yields
+                        \[
+                            \mathbb E[f_*\mid D]=k_*^\top(K+\sigma^2I)^{-1}y,
+                        \]
+                        \[
+                            \operatorname{Var}(f_*\mid D)=K_{**}-k_*^\top(K+\sigma^2I)^{-1}k_*.
+                        \]
+                        This is uncertainty in the latent function value. Observation noise adds \(\sigma^2\) to the variance of a new label.</p>
+                    </div>
+                </details>
+
+                <details class="math-appendix" id="appendix-estimation">
+                    <summary>D. The mean of one network, and the scope of ARC's bounds</summary>
+                    <div class="appendix-body">
+                        <p>For fixed \(w_i\) and standard Gaussian inputs, \(z_i=w_i^\top x\sim\mathcal N(0,\|w_i\|^2)\). If \(s=\|w_i\|>0\),
+                        \[
+                            \begin{aligned}
+                            \mathbb E[\operatorname{ReLU}(z_i)]
+                            &amp;=\int_0^\infty\frac{z}{s\sqrt{2\pi}}e^{-z^2/(2s^2)}dz\\
+                            &amp;=\frac{s}{\sqrt{2\pi}}.
+                            \end{aligned}
+                        \]
+                        The formula also holds for \(s=0\). Linearity of expectation proves the expression for \(m_W\), even though hidden activations from the same input can be correlated.</p>
+                        <p>For centered independent readout coefficients with variance \(s_a^2\), conditional on the hidden weights,
+                        \[
+                            \mathbb E_a m_W=0,
+                            \qquad
+                            \operatorname{Var}_a(m_W)=\frac{s_a^2}{2\pi}\sum_i\|w_i\|^2.
+                        \]
+                        The normalization absorbed into \(a_i\) determines how this variance scales with width.</p>
+                        <p>More generally, conditional independence of \(x^1,x^2\) gives \(\mathbb E_{x^1,x^2}[f_W(x^1)f_W(x^2)\mid W]=m_W^2\). Taking the weight average proves the two-replica identity in the main text, assuming the required second moments exist. The <button type="button" class="glossary-term" data-glossary="total-variance" aria-controls="glossary-panel" aria-expanded="false">law of total variance</button> gives another useful separation,
+                        \[
+                            \begin{aligned}
+                            \operatorname{Var}_{W,x}(f_W(x))={}&\mathbb E_W\operatorname{Var}_x(f_W(x)\mid W)\\
+                            &amp;+\operatorname{Var}_W(m_W).
+                            \end{aligned}
+                        \]
+                        Variation among inputs inside a network and variation among networks are distinct contributions.</p>
+                        <p>ARC's main theorems fix depth and polynomial activation functions, use independent Gaussian weights with variance \(2/n\), and bound mean squared estimation error per output averaged over those weights. The error tolerance \(0&lt;\varepsilon(n)\leq1\) must be at least inverse-polynomial eventually. The basic algorithm has runtime \(O(n^2/\varepsilon^2)\); the factorized result gives \(O(n/\varepsilon^2)\) in the additional regime \(\varepsilon^2=O(n^{-2})\). These statements suppress constants depending on fixed depth, activations, and the accuracy regime. ReLU comparisons in the paper are empirical.<sup><a class="reference-mark" href="#ref-20">20</a></sup></p>
+                    </div>
+                </details>
+
+                <details class="math-appendix" id="appendix-replicas">
+                    <summary>E. What an overlap ansatz adds</summary>
+                    <div class="appendix-body">
+                        <p>For Gaussian disorder shared by replicas, averaging exponentials creates terms containing their mutual overlaps. In the independent-field example of section II,
+                        \[
+                            \mathbb E_h e^{\beta h\sum_a s^a}
+                            =\exp\!\left[\frac{\beta^2\Delta^2}{2}\left(\sum_a s^a\right)^2\right].
+                        \]
+                        Expanding the square gives the diagonal contribution plus \(2\sum_{a&lt;b}s^as^b\). This is the origin of the coupling after disorder averaging. The original replicas are independent conditional on \(h\).</p>
+                        <p>For input replicas with <button type="button" class="glossary-term" data-glossary="gram-matrix" aria-controls="glossary-panel" aria-expanded="false">Gram matrix</button> \(Q\), a replica-symmetric ansatz takes the form
+                        \[
+                            Q_{ab}=(q_{\mathrm d}-q)\delta_{ab}+q.
+                        \]
+                        Here \(q_{\mathrm d}\) is the self-overlap and \(q\) the common overlap of distinct replicas. For a positive integer replica count \(r\), the <button type="button" class="glossary-term" data-glossary="transverse-mode" aria-controls="glossary-panel" aria-expanded="false">transverse eigenvalue</button> is \(q_{\mathrm d}-q\), with multiplicity \(r-1\), and the <button type="button" class="glossary-term" data-glossary="longitudinal-mode" aria-controls="glossary-panel" aria-expanded="false">longitudinal eigenvalue</button> is \(q_{\mathrm d}+(r-1)q\). Consequently,
+                        \[
+                            \det Q=(q_{\mathrm d}-q)^{r-1}\bigl(q_{\mathrm d}+(r-1)q\bigr).
+                        \]
+                        The ansatz reduces a matrix problem to a few scalar parameters. Whether it yields the correct equilibrium solution is a further question.</p>
+                        <p>A one-step ansatz introduces an overlap within replica blocks and a different overlap between blocks. Full RSB replaces a finite hierarchy by an <button type="button" class="glossary-term" data-glossary="order-parameter" aria-controls="glossary-panel" aria-expanded="false">order-parameter function</button>, often denoted \(q(u)\) for \(0\leq u\leq1\). That function describes a distribution of mutual similarities. Its <button type="button" class="glossary-term" data-glossary="saddle-point" aria-controls="glossary-panel" aria-expanded="false">saddle-point equations</button> and stability conditions depend on the Hamiltonian and reference measure. The computed figure in section IV uses a finite hierarchy of these overlaps; its numerical checks are recorded in appendix F.</p>
+                        <p>The continuation toward zero replicas remains an additional mathematical step. An ansatz for integer matrices and a formal continuation do not establish an interchange of limits. Appendix B gives a case where the quenched quantity exists but the positive integer moments needed for a direct replica computation do not.</p>
+                    </div>
+                </details>
+
+                <details class="math-appendix" id="appendix-experiments">
+                    <summary>F. How the computed figures were made</summary>
+                    <div class="appendix-body">
+                        <p><em>Architectural bias.</em> The two conditions use the same standard Gaussian hidden draws and twelve observations in six antipodal pairs. Data seed 20261121 fixes their angles and independent observation noise with standard deviation \(0.05\). Hidden-feature seeds 100–107 give eight paired realizations; seed 100 was chosen for the posterior panels before comparing errors. For \(v\in\{0,1/4\}\), the features are
+                        \[
+                            \psi_i(t)=\frac{\tanh\!\left(\sqrt{1-v}\,w_i^\top x(t)+\sqrt v\,b_i\right)}{\sqrt{512\,c}},
+                            \qquad c=\mathbb E_{Z\sim\mathcal N(0,1)}\tanh^2 Z,
+                        \]
+                        with \(w_i\sim\mathcal N(0,I_2)\), \(b_i\sim\mathcal N(0,1)\), and independent standard Gaussian readout priors. This gives unit prior output variance after averaging over hidden draws. Hidden features are frozen during learning. Gaussian conditioning on their empirical kernel is exactly equivalent to inference over the readout weights; a small direct weight-space calculation checks that equivalence.</p>
+                        <p>The top panel measures the prior's expected squared Fourier amplitudes on a 512-point uniform grid, combining sine and cosine contributions at each positive frequency. With \(v=0\), antipodal oddness excludes every even frequency, including the constant. Orthogonality then gives a mean squared error of at least \(\tfrac12\) against the chosen target. The measured root mean squared errors, averaged over the eight hidden draws, are 0.707707 and 0.058396 for \(v=0\) and \(v=1/4\). The plotted bands describe latent function uncertainty; they omit observation noise. Their coverage of this deliberately mismatched target is not a calibration test. <a href="../../assets/disordered-minds/inductive-bias.pdf">Figure PDF.</a></p>
+                        <p><em>The Gaussian-process limit.</em> Eight separated, non-antipodal circle probes are fixed before drawing any outputs. For the ReLU model in section V, their analytic covariance is
+                        \[
+                            K(\rho)=\frac{\sqrt{1-\rho^2}+(\pi-\arccos\rho)\rho}{\pi},
+                            \qquad \rho=x^\top x'.
+                        \]
+                        The animation uses two of those probes and 2,000 independent sequences of Gaussian hidden and readout weights. Every sequence is drawn once with seed 7701024. Its width-\(N\) network uses the first \(N\) neurons, divided by \(\sqrt N\), so dots retain their identity as the width grows. The saved widths run from 1 to 1,024. Motion between them connects those sampled outputs; it doesn't represent training. The displayed limit is a finite-width approximation, and the dashed ellipse is the analytic limiting Gaussian's 95% probability contour. Both axes stay fixed at \([-4.5,4.5]\). At widths 1 and 2, respectively 26 and 16 of the 2,000 points fall outside that view; at widths 512 and 1,024, none do. Independent angular integration checks the kernel. <a href="../../assets/disordered-minds/nngp-correspondence.pdf">Static comparison PDF.</a></p>
+                        <p><em>The replica branches.</em> Here the network and measure are
+                        \[
+                            H_W(x)=\sum_{i=1}^N a_i\sin(w_i^\top x),\qquad p_0=\mathcal N(0,I_d),
+                        \]
+                        with \(w_{ij}\sim\mathcal N(0,1/d)\), \(a_i\sim\mathcal N(0,1)\), and \(N/d=1\). There is no \(1/\sqrt N\) factor in the output. Following the one-layer construction in Winer–Hanin, we eliminate the dual overlap matrices and evaluate a finite-step Parisi functional directly.<sup><a class="reference-mark" href="#ref-7">7</a></sup> Let \(D\) be the diagonal self-overlap, \(q_0\leq\cdots\leq q_K\) the off-diagonal levels, and \(m_j=j/(K+1)\). Define
+                        \[
+                            c=D-q_K,\qquad
+                            \chi_i=c+\sum_{j=i+1}^K m_j(q_j-q_{j-1}).
+                        \]
+                        The continued Gaussian entropy is
+                        \[
+                            s(Q)=\log c+\frac{q_0}{\chi_0}
+                            +\sum_{j=1}^K\frac1{m_j}\log\frac{\chi_{j-1}}{\chi_j}.
+                        \]
+                        Write \(\mathcal L_v g(h)=\mathbb E_{z\sim\mathcal N(0,1)}g(h+\sqrt v\,z)\) for <button type="button" class="glossary-term" data-glossary="gaussian-convolution" aria-controls="glossary-panel" aria-expanded="false">Gaussian convolution</button>. For each fixed readout field \(a\), compute
+                        \[
+                            F_K(h;a)=\log\mathcal L_c\!\left[e^{\beta a\sin h}\right],
+                        \]
+                        \[
+                            F_{j-1}(h;a)=\frac1{m_j}\log\mathcal L_{q_j-q_{j-1}}\!\left[e^{m_jF_j(h;a)}\right].
+                        \]
+                        The final site contribution is \(\mathbb E_a[(\mathcal L_{q_0}F_0)(0;a)]\). The sign of \(\beta a\) is immaterial after this symmetric Gaussian readout average. We minimize
+                        \[
+                            \mathcal S=\tfrac12[s(Q)-D+1]
+                            +\frac Nd\,\mathbb E_a[(\mathcal L_{q_0}F_0)(0;a)]
+                        \]
+                        over the off-diagonal profile at fixed \(D\), then maximize over \(D\). These are distinct directions of the replica saddle.</p>
+                        <p>The plotted sweep uses \(K=20\), a 256-point periodic field grid, and 128-point Gaussian readout quadrature. Periodicity lets us evaluate the convolutions in Fourier space. Small hierarchical perturbations prevent an exactly symmetric initialization from remaining on the restricted RS branch. The linear-activation limit reproduces \(q=\beta^2\), \(D=1+\beta^2\), and \(\log Z/d=\beta^2/2\) to machine precision. Independent scalar integration and finite differences check the nonlinear integrals and derivatives. The largest saved saddle residual is below \(6\times10^{-6}\). At \(\beta=7.1\), increasing the hierarchy from 20 to 50 steps moves the smallest overlap by about 0.007 and the largest by less than 0.001, while changing the functional by less than \(4\times10^{-6}\). These checks support the finite-step numerical branches, without establishing a global Parisi variational principle for this network. <a href="../../assets/disordered-minds/replica-bifurcation.pdf">Figure PDF.</a></p>
+                    </div>
+                </details>
+
+                <hr class="footnotes-sep">
+                <section class="footnotes" aria-label="Footnotes">
+                    <ol>
+                        <li data-fn="steel">In hardening carbon steel, the hot crystalline phase is <em><button type="button" class="glossary-term" data-glossary="austenite" aria-controls="glossary-panel" aria-expanded="false">austenite</button></em>. A rapid quench can produce <em><button type="button" class="glossary-term" data-glossary="martensite" aria-controls="glossary-panel" aria-expanded="false">martensite</button></em>, trapping excess carbon as the iron lattice changes shape. This strains the lattice and hinders <button type="button" class="glossary-term" data-glossary="dislocation" aria-controls="glossary-panel" aria-expanded="false">dislocation</button> motion, contributing to hardness. The blade remains solid throughout. Quenching can lower toughness, so steel is often <button type="button" class="glossary-term" data-glossary="tempering" aria-controls="glossary-panel" aria-expanded="false">tempered</button> afterwards to improve that tradeoff.<sup><a class="reference-mark" href="#ref-1">1</a>, <a class="reference-mark" href="#ref-2">2</a></sup></li>
+                        <li data-fn="timescales">The separation depends on temperature and observation time. At low temperatures, spins themselves can relax extremely slowly, so an equilibrium calculation also requires that they have time to explore the states being averaged over.<sup><a class="reference-mark" href="#ref-8">8</a></sup></li>
+                        <li data-fn="replica-limit">For a positive, finite \(Z\), a sufficient condition for the displayed identity is that \(\mathbb E[Z^\epsilon+Z^{-\epsilon}]&lt;\infty\) for some \(\epsilon>0\). Computing moments at positive integers and continuing the resulting expression toward zero requires additional justification, especially when exchanging this limit with \(N\to\infty\). Rigorous proofs establish replica predictions in particular models, including the Parisi free-energy formula for the Sherrington–Kirkpatrick spin glass.<sup><a class="reference-mark" href="#ref-11">11</a>, <a class="reference-mark" href="#ref-12">12</a></sup></li>
+                        <li data-fn="bayesian-evidence">With the Gaussian likelihood used here, the conditional evidence is \(p(y\mid X)=(2\pi\sigma^2)^{-P/2}Z_D\). The likelihood's normalization cancels from the posterior over weights, but matters when comparing evidence across noise levels.</li>
+                        <li data-fn="matched-bayes">When the parameters generating the data are drawn from the same prior used for inference, with the same likelihood, those generating parameters and independent posterior replicas are exchangeable conditional on the observations. This gives the <em><button type="button" class="glossary-term" data-glossary="nishimori" aria-controls="glossary-panel" aria-expanded="false">Nishimori identities</button></em>, which constrain their overlap statistics. Whether RSB occurs still requires analysis of the particular model and regime.<sup><a class="reference-mark" href="#ref-16">16</a></sup></li>
+                        <li data-fn="input-measure">The integral defining \(Z_W\) must be finite. A Gaussian reference measure does not guarantee this for every Hamiltonian: \(H(x)=-x^4\) in one dimension gives a divergent \(Z(\beta)\) for every \(\beta&gt;0\). Keeping \(p_0\) explicit also preserves its normalization: the dimensionless potential for standard Gaussian inputs is \(\|x\|^2/2+\beta H_W(x)\).</li>
+                    </ol>
+                </section>
+
+                <p class="section-title" id="section-refs">References</p>
+                <ol class="references">
+                    <li id="ref-1">
+                        H. K. D. H. Bhadeshia,
+                        <a href="https://www.phase-trans.msm.cam.ac.uk/2002/MP10-6.pdf" target="_blank" rel="noopener">Ferrous Alloys</a>,
+                        Course MP10, Lecture 6, University of Cambridge, pp. 1–3.
+                    </li>
+                    <li id="ref-2">
+                        H. K. D. H. Bhadeshia,
+                        <a href="https://www.phase-trans.msm.cam.ac.uk/2004/Tempered.Martensite/tempered.martensite.html" target="_blank" rel="noopener">Tempered Martensite</a>,
+                        University of Cambridge.
+                    </li>
+                    <li id="ref-3">
+                        Marc Mézard and Andrea Montanari,
+                        <a href="https://web.stanford.edu/~montanar/RESEARCH/BOOK/partB.pdf" target="_blank" rel="noopener">Information, Physics, and Computation</a>,
+                        author-hosted draft, November 2007, section 5.4, pp. 102–103.
+                    </li>
+                    <li id="ref-4">
+                        Th. M. Nieuwenhuizen and C. N. A. van Duin,
+                        <a href="https://arxiv.org/abs/cond-mat/9804143" target="_blank" rel="noopener">Theory of site-disordered magnets</a>,
+                        1998.
+                    </li>
+                    <li id="ref-5">
+                        Sam Edwards,
+                        <a href="https://garfield.library.upenn.edu/classics1985/A1985APZ5700001.pdf" target="_blank" rel="noopener">Retrospective on “Theory of spin glasses”</a>,
+                        <em>This Week's Citation Classic</em>, September 16, 1985.
+                    </li>
+                    <li id="ref-6">
+                        Jacob A. Zavatone-Veth,
+                        <a href="https://jzv.io/assets/pdf/wishart_eigenvalue_and_gaussian_data_pca_replica_notes.pdf" target="_blank" rel="noopener">Lecture notes on the replica method for Wishart matrix eigenvalues</a>,
+                        updated November 27, 2025.
+                    </li>
+                    <li id="ref-7">
+                        Mike Winer and Boris Hanin,
+                        <a href="https://arxiv.org/abs/2503.23982" target="_blank" rel="noopener">Deep Neural Nets as Hamiltonians</a>,
+                        2025.
+                    </li>
+                    <li id="ref-8">
+                        Chandan Dasgupta,
+                        <a href="https://www.icts.res.in/sites/default/files/1267685100Chandan-Dasgupta-Jan8-Lecture1.pdf" target="_blank" rel="noopener">Introduction to the Theory of Spin Glasses</a>,
+                        School on Glass Formers and Glasses, JNCASR, January 2010.
+                    </li>
+                    <li id="ref-9">
+                        K. Binder and A. P. Young,
+                        <a href="https://doi.org/10.1103/RevModPhys.58.801" target="_blank" rel="noopener">Spin glasses: Experimental facts, theoretical concepts, and open questions</a>,
+                        <em>Reviews of Modern Physics</em> 58, 801, 1986.
+                    </li>
+                    <li id="ref-10">
+                        Samuel J. Ling, Jeff Sanny, and William Moebs,
+                        <a href="https://openstax.org/books/university-physics-volume-2/pages/12-7-magnetism-in-matter" target="_blank" rel="noopener">Magnetism in Matter</a>,
+                        <em>University Physics, Volume 2</em>, section 12.7, OpenStax.
+                    </li>
+                    <li id="ref-11">
+                        Jacob A. Zavatone-Veth,
+                        <a href="https://jzv.io/assets/pdf/replica_trick_wishart_log_det_notes.pdf" target="_blank" rel="noopener">What is the simplest model problem for the replica trick in random matrix theory?</a>,
+                        November 10, 2024.
+                    </li>
+                    <li id="ref-12">
+                        Michel Talagrand,
+                        <a href="https://annals.math.princeton.edu/2006/163-1/p04" target="_blank" rel="noopener">The Parisi formula</a>,
+                        <em>Annals of Mathematics</em> 163, 221–263, 2006.
+                    </li>
+                    <li id="ref-13">
+                        Jacob A. Zavatone-Veth,
+                        <a href="https://jzv.io/assets/pdf/am226_generalization_in_ridge_regression_lecture_notes.pdf" target="_blank" rel="noopener">Lecture notes on the inductive biases of high-dimensional ridge regression</a>,
+                        October 6, 2024.
+                    </li>
+                    <li id="ref-14">
+                        Qianyi Li and Haim Sompolinsky,
+                        <a href="https://arxiv.org/html/2012.04030v2" target="_blank" rel="noopener">Statistical Mechanics of Deep Linear Neural Networks: The Back-Propagating Kernel Renormalization</a>,
+                        <em>Physical Review X</em> 11, 031059, 2021.
+                    </li>
+                    <li id="ref-15">
+                        Silvio Franz and Giorgio Parisi,
+                        <a href="https://arxiv.org/html/1501.03397v1" target="_blank" rel="noopener">The simplest model of jamming</a>,
+                        arXiv:1501.03397, 2015.
+                    </li>
+                    <li id="ref-16">
+                        Lenka Zdeborová and Florent Krzakala,
+                        <a href="https://arxiv.org/html/1511.02476v5" target="_blank" rel="noopener">Statistical physics of inference: Thresholds and algorithms</a>,
+                        <em>Advances in Physics</em> 65, 453–552, 2016, revised 2018.
+                    </li>
+                    <li id="ref-17">
+                        Jacob A. Zavatone-Veth,
+                        <a href="https://jzv.io/assets/pdf/lecture_notes_on_nngp_from_mft.pdf" target="_blank" rel="noopener">A brief introduction to the neural network Gaussian process from the perspective of mean field theory</a>, June 29, 2023.
+                    </li>
+                    <li id="ref-18">
+                        Jaehoon Lee, Yasaman Bahri, Roman Novak, Samuel S. Schoenholz, Jeffrey Pennington, and Jascha Sohl-Dickstein,
+                        <a href="https://arxiv.org/abs/1711.00165" target="_blank" rel="noopener">Deep Neural Networks as Gaussian Processes</a>, ICLR 2018.
+                    </li>
+                    <li id="ref-19">
+                        Alexander G. de G. Matthews, Mark Rowland, Jiri Hron, Richard E. Turner, and Zoubin Ghahramani,
+                        <a href="https://arxiv.org/abs/1804.11271" target="_blank" rel="noopener">Gaussian Process Behaviour in Wide Deep Neural Networks</a>, 2018.
+                    </li>
+                    <li id="ref-20">
+                        Wilson Wu, Victor Lecomte, Michael Winer, George Robinson, Jacob Hilton, and Paul Christiano,
+                        <a href="https://arxiv.org/html/2605.05179v3" target="_blank" rel="noopener">Estimating the expected output of wide random MLPs more efficiently than sampling</a>, arXiv:2605.05179v3, revised November 2, 2026.
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const figure = document.querySelector('.spin-figure');
+            const buttons = Array.from(figure.querySelectorAll('.spin-node'));
+            const bonds = Array.from(figure.querySelectorAll('.spin-bond'));
+            const status = figure.querySelector('.spin-status');
+            const spins = [1, -1, 1];
+            const names = ['A', 'B', 'C'];
+
+            function updateSpins() {
+                buttons.forEach(function(button, index) {
+                    const up = spins[index] === 1;
+                    const direction = up ? 'up' : 'down';
+                    button.textContent = up ? '↑' : '↓';
+                    button.setAttribute('aria-label', 'Spin ' + names[index] + ' points ' + direction + '. Flip spin.');
+                    button.setAttribute('aria-pressed', String(up));
+                });
+
+                let disagreements = 0;
+                bonds.forEach(function(bond) {
+                    const frustrated = spins[Number(bond.dataset.a)] === spins[Number(bond.dataset.b)];
+                    bond.classList.toggle('is-frustrated', frustrated);
+                    disagreements += Number(frustrated);
+                });
+                status.textContent = disagreements === 1 ? 'One pair disagrees.' : 'All three pairs disagree.';
+            }
+
+            buttons.forEach(function(button, index) {
+                button.addEventListener('click', function() {
+                    spins[index] *= -1;
+                    updateSpins();
+                });
+            });
+        })();
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var body = document.querySelector(".post-body");
+            var footnotes = document.querySelector(".footnotes");
+            if (!body || !footnotes) return;
+
+            var items = {};
+            footnotes.querySelectorAll("li[data-fn]").forEach(function(item) {
+                items[item.getAttribute("data-fn")] = item;
+            });
+
+            var assigned = {};
+            var counter = 0;
+
+            body.querySelectorAll("sup[data-fn]").forEach(function(sup) {
+                var key = sup.getAttribute("data-fn");
+                var item = items[key];
+                if (!key || !item) return;
+
+                if (!assigned[key]) {
+                    counter += 1;
+                    assigned[key] = counter;
+                }
+
+                var number = assigned[key];
+                sup.id = "fnref:" + number;
+
+                var link = document.createElement("a");
+                link.href = "#fn:" + number;
+                link.className = "footnote-ref";
+                link.textContent = "[" + number + "]";
+                sup.appendChild(link);
+
+                if (!item.id) {
+                    var tooltip = document.createElement("div");
+                    tooltip.className = "footnote-tooltip";
+                    tooltip.innerHTML = "<sup>" + number + "</sup> " + item.innerHTML;
+                    sup.appendChild(tooltip);
+
+                    item.id = "fn:" + number;
+                    var numberSup = document.createElement("sup");
+                    numberSup.textContent = number;
+                    var backLink = document.createElement("a");
+                    backLink.href = "#fnref:" + number;
+                    backLink.className = "footnote-backref";
+                    backLink.textContent = "↩";
+
+                    var original = item.innerHTML;
+                    item.innerHTML = "";
+                    item.appendChild(numberSup);
+                    item.insertAdjacentHTML("beforeend", " " + original + " ");
+                    item.appendChild(backLink);
+                }
+            });
+        });
+
+        (function() {
+            var links = Array.prototype.slice.call(document.querySelectorAll(".toc-sidebar a"));
+            var sections = links
+                .map(function(link) {
+                    return document.querySelector(link.getAttribute("href"));
+                })
+                .filter(Boolean);
+
+            function updateActiveSection() {
+                var current = sections[0];
+                sections.forEach(function(section) {
+                    if (section.getBoundingClientRect().top <= 120) {
+                        current = section;
+                    }
+                });
+
+                links.forEach(function(link) {
+                    link.classList.toggle(
+                        "active",
+                        current && link.getAttribute("href") === "#" + current.id
+                    );
+                });
+            }
+
+            window.addEventListener("scroll", updateActiveSection, { passive: true });
+            updateActiveSection();
+        })();
+
+    </script>
+
+    <aside id="glossary-panel" class="glossary-panel" aria-labelledby="glossary-title" hidden>
+        <div class="glossary-panel-header">
+            <span class="glossary-label">Glossary</span>
+        </div>
+        <h2 id="glossary-title"></h2>
+        <div class="glossary-body" id="glossary-body"></div>
+    </aside>
+    <div class="glossary-announcement" role="status" aria-live="polite" aria-atomic="true"></div>
+    <template id="glossary-quench" data-term="Quench">
+        <p>Rapid cooling that prevents some rearrangements from keeping up. The resulting structure can retain a memory of how the material was prepared.</p>
+    </template>
+    <template id="glossary-quenched" data-term="Quenched disorder">
+        <p>Effectively fixed while the variables we are studying fluctuate. We solve the problem within each frozen instance before averaging across instances.</p>
+    </template>
+    <template id="glossary-annealed" data-term="Annealed disorder">
+        <p>Allowed to rearrange along with the other variables. Its realizations contribute to the total statistical weight before we take the logarithm.</p>
+    </template>
+    <template id="glossary-magnetic-moment" data-term="Magnetic moment">
+        <p>An arrow describing the strength and direction of a tiny magnet. For an atom, it summarizes the magnetic effect associated with its electrons.</p>
+    </template>
+    <template id="glossary-frustration" data-term="Frustration">
+        <p>Different interactions demand incompatible arrangements. At least one preference must remain unsatisfied, even in the lowest-energy configuration.</p>
+    </template>
+    <template id="glossary-spin" data-term="Spin">
+        <p>A microscopic magnetic variable. In this post’s simplified model it takes two values, +1 and −1, pictured as arrows pointing up and down.</p>
+    </template>
+    <template id="glossary-replica" data-term="Replica">
+        <p>An independent configuration drawn from the same probability distribution while sharing the same frozen instance. Replicas can be spin arrangements, network parameters, or inputs.</p>
+    </template>
+    <template id="glossary-configuration" data-term="Configuration">
+        <p>One complete assignment of the variables that can change. It could be all the spin orientations, one network’s parameters, or one input vector.</p>
+    </template>
+    <template id="glossary-gaussian" data-term="Gaussian distribution">
+        <p>A bell-shaped probability distribution determined by its mean and variance. Its multivariable version is determined by a mean vector and covariance matrix.</p>
+    </template>
+    <template id="glossary-energy" data-term="Energy">
+        <p>A score assigned to a configuration. In the positive-temperature ensembles used here, lower-energy configurations receive more statistical weight.</p>
+    </template>
+    <template id="glossary-normalization" data-term="Normalization">
+        <p>The adjustment that makes probabilities add up, or integrate, to one. Dividing each statistical weight by the total weight Z produces a normalized distribution.</p>
+    </template>
+    <template id="glossary-partition-function" data-term="Partition function">
+        <p>The total statistical weight of all configurations. Dividing by it turns weights into probabilities; its derivatives also give useful averages.</p>
+        <p class="glossary-equation">Z = sum or integral of statistical weights</p>
+    </template>
+    <template id="glossary-free-energy" data-term="Free energy">
+        <p>A summary of the competition between low energy and the number of configurations available. Many moderately favorable configurations can outweigh a few very favorable ones.</p>
+        <p class="glossary-equation">F = −log Z / β</p>
+    </template>
+    <template id="glossary-jensen" data-term="Jensen’s inequality">
+        <p>Averaging and applying a curved function generally produce different answers. Because log is concave, the average of log Z is at most the log of the average Z.</p>
+        <p class="glossary-equation">E[log Z] ≤ log E[Z]</p>
+    </template>
+    <template id="glossary-equilibrium" data-term="Equilibrium distribution">
+        <p>The probabilities describing a system after the relevant variables have had time to relax. Individual configurations can continue changing while the overall statistics stay steady.</p>
+    </template>
+    <template id="glossary-law-large-numbers" data-term="Law of large numbers">
+        <p>The average of many independent draws from the same distribution approaches their expected value, provided the required expectation exists. This can make a bulk quantity predictable despite microscopic randomness.</p>
+    </template>
+    <template id="glossary-self-averaging" data-term="Self-averaging">
+        <p>A large system’s suitably normalized bulk quantity becomes nearly the same across different random instances, even though their microscopic details remain different.</p>
+    </template>
+    <template id="glossary-replica-method" data-term="Replica method">
+        <p>A way to study an average of log Z through powers of Z. Integer powers introduce copies sharing the same disorder; continuing toward zero replicas requires additional mathematical justification.</p>
+    </template>
+    <template id="glossary-integrability" data-term="Integrability conditions">
+        <p>Conditions ensuring that the relevant integrals or expectations are finite. Stronger conditions can justify moving a derivative or limit through an average.</p>
+    </template>
+    <template id="glossary-overlap" data-term="Overlap">
+        <p>A measure of similarity between two configurations. Its distribution tells us whether independent configurations resemble one another in one typical way or at several different levels.</p>
+    </template>
+    <template id="glossary-extremization" data-term="Extremization">
+        <p>Finding a minimum, maximum, or other stationary point of a function. A large-system calculation often reduces an integral to a search over a few collective quantities.</p>
+    </template>
+    <template id="glossary-replica-symmetry" data-term="Replica symmetry">
+        <p>A description assigning one common overlap to distinct replicas in the large-system calculation. Typical replica pairs are described by the same degree of similarity.</p>
+    </template>
+    <template id="glossary-ansatz" data-term="Ansatz">
+        <p>A proposed structured form for an unknown solution. It reduces the calculation to fewer quantities, whose consistency and stability must then be checked.</p>
+    </template>
+    <template id="glossary-replica-symmetry-breaking" data-term="Replica symmetry breaking">
+        <p>The equilibrium distribution can organize configurations into groups with different mutual similarities. RSB describes that organization through a hierarchy of overlaps.</p>
+    </template>
+    <template id="glossary-bayesian-learning" data-term="Bayesian learning">
+        <p>Updating a probability distribution over possible explanations after observing data. The result describes which parameter choices remain plausible and how uncertain their predictions are.</p>
+    </template>
+    <template id="glossary-ensemble" data-term="Statistical ensemble">
+        <p>A collection of possible configurations together with their probabilities. Choosing the ensemble specifies what can vary and how the possibilities are weighted.</p>
+    </template>
+    <template id="glossary-prior" data-term="Prior">
+        <p>The distribution over possible parameters before conditioning on the observed data. It specifies which networks the model initially favors.</p>
+    </template>
+    <template id="glossary-likelihood" data-term="Likelihood">
+        <p>The probability the model assigns to the observed data for a particular parameter choice. It measures how compatible that network is with the observations.</p>
+    </template>
+    <template id="glossary-posterior" data-term="Posterior">
+        <p>The distribution over parameters after conditioning on the data. It combines the prior with how well each parameter choice explains the observations.</p>
+    </template>
+    <template id="glossary-variance" data-term="Variance">
+        <p>The average squared distance from a quantity’s mean. Larger variance means a wider spread of possible values.</p>
+        <p class="glossary-equation">Var(X) = E[(X − E[X])²]</p>
+    </template>
+    <template id="glossary-ridge-regression" data-term="Ridge regression">
+        <p>Linear regression with a penalty favoring smaller weights. Gaussian observation noise and a Gaussian weight prior produce a posterior mean of this form.</p>
+    </template>
+    <template id="glossary-covariance" data-term="Covariance">
+        <p>A matrix recording how uncertainties in different variables relate. Diagonal entries are variances; off-diagonal entries describe which changes tend to occur together.</p>
+    </template>
+    <template id="glossary-eigenvector" data-term="Eigenvector">
+        <p>A direction that a matrix scales without rotating it into a different line. It lets us study a matrix’s effect one direction at a time.</p>
+    </template>
+    <template id="glossary-eigenvalue" data-term="Eigenvalue">
+        <p>The scaling factor associated with an eigenvector. For the data matrix combination XᵀX, it measures how strongly the observations constrain that direction in weight space.</p>
+        <p class="glossary-equation">A v = λ v</p>
+    </template>
+    <template id="glossary-nullspace" data-term="Nullspace">
+        <p>Directions that a matrix sends to zero. Changing the weights along a null direction of X leaves every training prediction unchanged.</p>
+        <p class="glossary-equation">X v = 0</p>
+    </template>
+    <template id="glossary-thermodynamic-limit" data-term="Thermodynamic limit">
+        <p>A large-system limit that keeps specified ratios and scales fixed. It reveals which collective effects survive as the number of variables grows.</p>
+    </template>
+    <template id="glossary-random-matrix-theory" data-term="Random matrix theory">
+        <p>The study of matrices built from random quantities. It predicts collective properties such as eigenvalue distributions, which here control learning and uncertainty.</p>
+    </template>
+    <template id="glossary-log-determinant" data-term="Log determinant">
+        <p>A determinant measures how a matrix scales volume. For a positive-definite matrix, taking its logarithm adds the logs of its directional scaling factors.</p>
+        <p class="glossary-equation">log det A = ∑ᵢ log λᵢ</p>
+    </template>
+    <template id="glossary-wishart" data-term="Wishart matrices">
+        <p>Random matrices built from Gaussian data, typically as XᵀX. They model the random geometry of sample covariance and regression problems.</p>
+    </template>
+    <template id="glossary-activation" data-term="Activation function">
+        <p>The function applied to a neuron’s incoming score. A nonlinear activation changes which responses the network can represent as layers are composed.</p>
+    </template>
+    <template id="glossary-deep-linear" data-term="Deep linear network">
+        <p>A multilayer network whose activations are linear. It represents a linear function of its inputs, but its parameters interact through products of weight matrices.</p>
+    </template>
+    <template id="glossary-kernel" data-term="Kernel">
+        <p>A function or matrix recording pairwise relationships between input representations. In a Gaussian process, it describes how function values at different inputs vary together.</p>
+    </template>
+    <template id="glossary-self-consistency" data-term="Self-consistency equations">
+        <p>A proposed collective statistic helps determine a distribution that must reproduce that same statistic. A solution agrees with its own consequences.</p>
+    </template>
+    <template id="glossary-spherical-perceptron" data-term="Spherical perceptron">
+        <p>A toy learning model with a linear score and weights constrained to have fixed length. Each training pattern imposes an inequality that the weights must satisfy.</p>
+    </template>
+    <template id="glossary-negative-margin" data-term="Negative margin">
+        <p>The threshold κ in the signed-score constraint is negative, so some negative scores are permitted. This changes the geometry of the allowed weight configurations.</p>
+        <p class="glossary-equation">y wᵀx ≥ κ, with κ &lt; 0</p>
+    </template>
+    <template id="glossary-hamiltonian" data-term="Hamiltonian">
+        <p>The function assigning an energy to each configuration. Here a network’s scalar output can serve as that energy when we define a probability distribution over its inputs.</p>
+    </template>
+    <template id="glossary-gibbs-ensemble" data-term="Gibbs ensemble">
+        <p>A distribution weighting configurations by exp(−βH), relative to a chosen reference measure. Increasing β favors configurations with lower H.</p>
+    </template>
+    <template id="glossary-readout" data-term="Readout">
+        <p>The final weighted combination of hidden-unit responses that produces the output. Its normalization determines how output size changes with width.</p>
+    </template>
+    <template id="glossary-gaussian-process" data-term="Gaussian process">
+        <p>A distribution over functions whose values on every finite collection of inputs are jointly Gaussian. A mean function and covariance kernel specify the distribution.</p>
+    </template>
+    <template id="glossary-central-limit" data-term="Central limit theorem">
+        <p>A normalized sum of many independent contributions approaches a Gaussian distribution under suitable assumptions. The multivariate version describes several responses jointly.</p>
+    </template>
+    <template id="glossary-mean-field" data-term="Mean-field description">
+        <p>A description summarizing many interacting variables through representative fields or collective statistics. Those statistics can become exact in suitable large-system limits.</p>
+    </template>
+    <template id="glossary-inductive-bias" data-term="Inductive bias">
+        <p>Preferences built into a model before it sees training labels. Here, the architecture and random initialization favor some relationships between function values over others.</p>
+    </template>
+    <template id="glossary-fourier-mode" data-term="Fourier mode">
+        <p>A sine or cosine with a particular frequency. On the input circle, mode k makes k oscillations per turn. The variance in that mode measures how much the prior allows functions to vary in that pattern.</p>
+    </template>
+    <template id="glossary-random-features" data-term="Random features">
+        <p>Fixed nonlinear responses built from randomly drawn weights. Learning changes only how these responses are combined. Here each feature uses tanh, which smoothly squashes a neuron's incoming score into the interval from −1 to 1.</p>
+    </template>
+    <template id="glossary-gaussian-convolution" data-term="Gaussian convolution">
+        <p>Average a function after adding Gaussian noise to its input. This smooths the function over a scale set by the noise variance. In the replica calculation, each application averages fluctuations at one level of the hierarchy.</p>
+    </template>
+    <template id="glossary-relu" data-term="ReLU">
+        <p>An activation that keeps positive scores and sets negative scores to zero. This simple bend makes the network’s response nonlinear.</p>
+        <p class="glossary-equation">ReLU(z) = max(0, z)</p>
+    </template>
+    <template id="glossary-monte-carlo" data-term="Monte Carlo estimation">
+        <p>Estimating an average by drawing random samples and averaging their outputs. For independent samples with finite variance, typical error decreases like one over the square root of sample count.</p>
+    </template>
+    <template id="glossary-cumulants" data-term="Cumulants">
+        <p>Statistics organizing a distribution by order. The first two are the mean and covariance; higher cumulants capture departures from Gaussian behavior.</p>
+    </template>
+    <template id="glossary-mean-squared-error" data-term="Mean squared error">
+        <p>The average squared difference between an estimate and the quantity it aims to predict. Squaring makes larger mistakes count more heavily.</p>
+    </template>
+    <template id="glossary-conditional-independence" data-term="Conditional independence">
+        <p>Two quantities are independent once specified background information is held fixed. Outputs from independent inputs can be independent given W but correlated after averaging over W.</p>
+    </template>
+    <template id="glossary-positive-definite" data-term="Positive definite">
+        <p>A symmetric matrix whose quadratic form is positive in every nonzero direction. Here this ensures a Gaussian distribution is confined and its covariance can be obtained by inversion.</p>
+        <p class="glossary-equation">vᵀ A v &gt; 0 for v ≠ 0</p>
+    </template>
+    <template id="glossary-total-variance" data-term="Law of total variance">
+        <p>Separates variation within an instance from variation between instance means. Here it adds input fluctuations inside a fixed network to differences in average response across networks.</p>
+    </template>
+    <template id="glossary-gram-matrix" data-term="Gram matrix">
+        <p>A matrix of pairwise dot products between vectors. For replicas, it records every pair’s overlap along with each replica’s self-overlap.</p>
+    </template>
+    <template id="glossary-transverse-mode" data-term="Transverse replica mode">
+        <p>A mode in which replicas change relative to one another while their combined change sums to zero. Its eigenvalue measures the matrix’s response to that kind of relative variation.</p>
+    </template>
+    <template id="glossary-longitudinal-mode" data-term="Longitudinal replica mode">
+        <p>A mode in which every replica changes together by the same amount. It probes a collective change rather than differences between replicas.</p>
+    </template>
+    <template id="glossary-order-parameter" data-term="Order parameter">
+        <p>A small set of quantities summarizing the collective organization of a large system. In full RSB, a whole function of overlap levels is needed to describe that organization.</p>
+    </template>
+    <template id="glossary-saddle-point" data-term="Saddle-point equations">
+        <p>Equations locating a stationary point, where first derivatives vanish. In large-system calculations they identify collective quantities controlling the leading contribution to an integral.</p>
+    </template>
+    <template id="glossary-austenite" data-term="Austenite">
+        <p>A high-temperature crystalline arrangement of iron that can dissolve carbon. Quenching can prevent carbon from redistributing as the steel changes structure.</p>
+    </template>
+    <template id="glossary-martensite" data-term="Martensite">
+        <p>A structure that can form during rapid cooling of steel through coordinated displacements of the iron atoms. Carbon can remain trapped in it, contributing to hardness.</p>
+    </template>
+    <template id="glossary-dislocation" data-term="Dislocation">
+        <p>A line defect in a crystal. Its motion lets the crystal deform, so obstacles to that motion can make the material harder.</p>
+    </template>
+    <template id="glossary-tempering" data-term="Tempering">
+        <p>Reheating hardened steel under controlled conditions to let its structure relax. It usually trades some hardness for improved toughness.</p>
+    </template>
+    <template id="glossary-nishimori" data-term="Nishimori identities">
+        <p>Relations that hold when the data-generating prior and likelihood match those used for inference. Conditional on the data, the generating parameters can be exchanged with a posterior sample in the corresponding averages.</p>
+    </template>
+</body>
+</html>

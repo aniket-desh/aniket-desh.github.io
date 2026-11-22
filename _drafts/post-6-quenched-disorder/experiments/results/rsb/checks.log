@@ -1,0 +1,79 @@
+{
+  "integer_matrix_entropy_error": 5.551115123125783e-17,
+  "exact_linear_RS": [
+    {
+      "beta": 0,
+      "value": 0.0,
+      "value_error": 0.0,
+      "gradient_max": 2.3314683517128287e-15
+    },
+    {
+      "beta": 1,
+      "value": 0.5,
+      "value_error": 0.0,
+      "gradient_max": 2.3314683517128287e-15
+    },
+    {
+      "beta": 4.5,
+      "value": 10.125,
+      "value_error": 0.0,
+      "gradient_max": 1.7763568394002505e-15
+    },
+    {
+      "beta": 7.1,
+      "value": 25.205,
+      "value_error": 0.0,
+      "gradient_max": 3.552713678800501e-15
+    }
+  ],
+  "terminal_fft_vs_independent_adaptive_quadrature": [
+    {
+      "c": 0.6,
+      "h": 0.0,
+      "a": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "c": 0.9,
+      "h": 1.1044661672776617,
+      "a": -2.0,
+      "absolute_error": 1.7763568394002505e-15
+    },
+    {
+      "c": 0.6,
+      "h": 2.9943304979527716,
+      "a": 4.0,
+      "absolute_error": 0.0
+    }
+  ],
+  "autodiff_central_difference": [
+    {
+      "index": 0,
+      "autodiff": 0.009321261756633503,
+      "finite_difference": 0.009321261740247166,
+      "absolute_error": 1.6386336731954998e-11
+    },
+    {
+      "index": 1,
+      "autodiff": -0.05486365225171819,
+      "finite_difference": -0.05486365208806631,
+      "absolute_error": 1.636518767722528e-10
+    },
+    {
+      "index": 5,
+      "autodiff": -0.045433700168232116,
+      "finite_difference": -0.045433700202046616,
+      "absolute_error": 3.381449981132434e-11
+    },
+    {
+      "index": 21,
+      "autodiff": -0.0031717362805272487,
+      "finite_difference": -0.0031717363402350425,
+      "absolute_error": 5.970779383066005e-11
+    }
+  ]
+}
+refinement {'steps': 20, 'mesh': 512, 'quadrature': 128, 'alpha': 1.0} 7.1 0.9507101087912825 1.5929739370749965 4.179079372557126e-07
+refinement {'steps': 20, 'mesh': 256, 'quadrature': 256, 'alpha': 1.0} 7.1 0.950725474853686 1.5928099914930873 -6.282573974392136e-07
+refinement {'steps': 50, 'mesh': 256, 'quadrature': 128, 'alpha': 1.0} 4.5 0.8726606685069529 1.0793720889693164 3.2220969425900137e-07
+refinement {'steps': 50, 'mesh': 256, 'quadrature': 128, 'alpha': 1.0} 7.1 0.9575614583308113 1.5925273903674564 4.542618902148021e-07

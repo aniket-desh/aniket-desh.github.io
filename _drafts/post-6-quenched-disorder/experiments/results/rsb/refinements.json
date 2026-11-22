@@ -1,0 +1,1482 @@
+{
+  "metadata": {
+    "date_utc": "2026-11-22T01:51:30Z",
+    "base_commit": "56f16086082bfa1b18321372604e7c7dd2cc7859",
+    "source_sha256": {
+      "rsb_solver.py": "37f7d5ad1414ecb87e68120f2058c3cedef3e1e508b630bd28a80ddc7691be96",
+      "replica_bifurcation.py": "cc91ace0bc1b0738287119e86e1a288e8091172ebd9463d05f607e64688efc33"
+    },
+    "python": "3.11.4",
+    "numpy": "1.26.4",
+    "scipy": "1.17.1",
+    "torch": "2.8.0",
+    "random_seed": null,
+    "initialization": "deterministic RS plus .02 total hierarchy spread; break RS at every collapsed continuation point",
+    "reference": "Mike Winer and Boris Hanin, Deep Neural Nets as Hamiltonians, arXiv:2503.23982v2, Appendix A.2; Fig. 2; https://arxiv.org/html/2503.23982v2",
+    "model": "Gaussian x~N(0,I_d); H=sum_i a_i sin(w_i.x); w_ij~N(0,1/d), a_i~N(0,1); N/d=1",
+    "method": "minimize finite-step off-diagonal Parisi profile at fixed diagonal, maximize over diagonal",
+    "thermodynamic_limit": "d,N\u2192\u221e with N/d=1; finite 20-step replica ansatz, not a finite-network simulation"
+  },
+  "rows": [
+    {
+      "config": {
+        "steps": 20,
+        "mesh": 512,
+        "quadrature": 128,
+        "alpha": 1.0
+      },
+      "beta": 7.1,
+      "fit": {
+        "D": 2.1686053500222853,
+        "increments": [
+          0.9507101087912825,
+          0.0,
+          2.8080808899098822e-06,
+          1.0550394085758698e-05,
+          4.044246986556482e-22,
+          5.309581933414493e-07,
+          1.489214155167544e-23,
+          6.595412839380773e-08,
+          0.0,
+          3.8116482626443515e-21,
+          0.42434757334380885,
+          0.1692176243121657,
+          0.027604198562533985,
+          0.01926068505548416,
+          0.00034997523174710895,
+          0.0013214368024712572,
+          2.5842512620110698e-05,
+          4.131553646201573e-06,
+          0.0,
+          0.0,
+          0.0001184055219396714
+        ],
+        "q": [
+          0.9507101087912825,
+          0.9507101087912825,
+          0.9507129168721724,
+          0.9507234672662581,
+          0.9507234672662581,
+          0.9507239982244514,
+          0.9507239982244514,
+          0.9507240641785798,
+          0.9507240641785798,
+          0.9507240641785798,
+          1.3750716375223886,
+          1.5442892618345543,
+          1.5718934603970882,
+          1.5911541454525724,
+          1.5915041206843195,
+          1.5928255574867907,
+          1.5928513999994107,
+          1.5928555315530568,
+          1.5928555315530568,
+          1.5928555315530568,
+          1.5929739370749965
+        ],
+        "c": 0.5756314129472886,
+        "value": 3.7380736434622155,
+        "diagonal_gradient": 4.179079372557126e-07,
+        "profile_residual": 5.188423068958059e-08,
+        "success": true,
+        "iterations": 93,
+        "message": "Optimization terminated successfully",
+        "rs": {
+          "D": 2.157980309791705,
+          "q": 1.2454403790470576,
+          "c": 0.9125399307446473,
+          "residual": 1.7852386235972517e-13,
+          "success": true,
+          "message": "`gtol` termination condition is satisfied."
+        },
+        "outer_evaluations": 17,
+        "breakpoints": [
+          0.047619047619047616,
+          0.09523809523809523,
+          0.14285714285714285,
+          0.19047619047619047,
+          0.23809523809523808,
+          0.2857142857142857,
+          0.3333333333333333,
+          0.38095238095238093,
+          0.42857142857142855,
+          0.47619047619047616,
+          0.5238095238095238,
+          0.5714285714285714,
+          0.6190476190476191,
+          0.6666666666666666,
+          0.7142857142857143,
+          0.7619047619047619,
+          0.8095238095238095,
+          0.8571428571428571,
+          0.9047619047619048,
+          0.9523809523809523
+        ]
+      },
+      "diagnostics": {
+        "stages": [
+          {
+            "minimum_raw_convolution": 4.409550741420187e-05,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0006043904477897044,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0008755716019422377,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.00126830494240604,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0018372810372789816,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0026621019935102463,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0039059423972702123,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.005675054755194253,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.009496868848198503,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.01610876705199238,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.042139052724838644,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.12352207429970496,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.17066511378433957,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.20771219927907064,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.25280128534863083,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.30767805984059626,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.37446731134224587,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.4557546982179565,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.5546895978896896,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6750986146388199,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.8216439099259065,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 4.409550741420187e-05
+      },
+      "seconds": 47.296109199523926
+    },
+    {
+      "config": {
+        "steps": 20,
+        "mesh": 256,
+        "quadrature": 256,
+        "alpha": 1.0
+      },
+      "beta": 7.1,
+      "fit": {
+        "D": 2.1686187994348454,
+        "increments": [
+          0.950725474853686,
+          9.403694932617138e-07,
+          0.0,
+          0.0,
+          2.155057325919168e-09,
+          2.205607467013255e-10,
+          7.718345170070743e-07,
+          1.2918563136541831e-08,
+          0.0,
+          7.262873461341781e-06,
+          0.4244735434616709,
+          0.169059385509828,
+          0.027544275823498214,
+          0.01908645966023145,
+          0.0015184590700218202,
+          0.0003331440415910293,
+          1.886133337621318e-05,
+          0.0,
+          1.0938899501986307e-05,
+          6.4147696363084295e-24,
+          3.0458468029021784e-05
+        ],
+        "q": [
+          0.950725474853686,
+          0.9507264152231792,
+          0.9507264152231792,
+          0.9507264152231792,
+          0.9507264173782366,
+          0.9507264175987974,
+          0.9507271894333144,
+          0.9507272023518775,
+          0.9507272023518775,
+          0.9507344652253388,
+          1.3752080086870095,
+          1.5442673941968375,
+          1.5718116700203357,
+          1.590898129680567,
+          1.592416588750589,
+          1.59274973279218,
+          1.5927685941255563,
+          1.5927685941255563,
+          1.5927795330250583,
+          1.5927795330250583,
+          1.5928099914930873
+        ],
+        "c": 0.5758088079417578,
+        "value": 3.738073550294632,
+        "diagonal_gradient": -6.282573974392136e-07,
+        "profile_residual": 1.033200791589195e-08,
+        "success": true,
+        "iterations": 105,
+        "message": "Optimization terminated successfully",
+        "rs": {
+          "D": 2.158031197381658,
+          "q": 1.2454848260445894,
+          "c": 0.9125463713370685,
+          "residual": 9.536815781530095e-14,
+          "success": true,
+          "message": "`gtol` termination condition is satisfied."
+        },
+        "outer_evaluations": 12,
+        "breakpoints": [
+          0.047619047619047616,
+          0.09523809523809523,
+          0.14285714285714285,
+          0.19047619047619047,
+          0.23809523809523808,
+          0.2857142857142857,
+          0.3333333333333333,
+          0.38095238095238093,
+          0.42857142857142855,
+          0.47619047619047616,
+          0.5238095238095238,
+          0.5714285714285714,
+          0.6190476190476191,
+          0.6666666666666666,
+          0.7142857142857143,
+          0.7619047619047619,
+          0.8095238095238095,
+          0.8571428571428571,
+          0.9047619047619048,
+          0.9523809523809523
+        ]
+      },
+      "diagnostics": {
+        "stages": [
+          {
+            "minimum_raw_convolution": 3.5853574814039e-05,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0005886223829394965,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0008537982195944149,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.001238565582171225,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0017964983399210155,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0026062565442766528,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0037926520101506656,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.005577141987084644,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.009344521018012253,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.015877979793318675,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.04169990310114452,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.12281787627970442,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1698459950433387,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.20682612160848385,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.2518574021464221,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.3066933006131955,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.3734681917319144,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.45478161079940077,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.553799005805296,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6743749779633803,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.8212034652842535,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 3.5853574814039e-05
+      },
+      "seconds": 44.69484806060791
+    },
+    {
+      "config": {
+        "steps": 50,
+        "mesh": 256,
+        "quadrature": 128,
+        "alpha": 1.0
+      },
+      "beta": 4.5,
+      "fit": {
+        "D": 1.825190555441518,
+        "increments": [
+          0.8726606685069529,
+          0.00023316204513468782,
+          0.0,
+          2.201309791209529e-19,
+          4.907318661732117e-20,
+          5.837103702713553e-05,
+          0.0,
+          5.726257522448008e-20,
+          6.641641120083106e-20,
+          0.0,
+          6.450625046257809e-21,
+          0.0,
+          0.0,
+          2.4985297702497586e-21,
+          1.855671730356621e-21,
+          1.0233833182540988e-23,
+          4.2922935125568793e-23,
+          2.263621523989155e-21,
+          0.0,
+          9.828663841751315e-22,
+          4.434357098881354e-22,
+          3.5494152981318064e-22,
+          7.893018574420964e-22,
+          0.0,
+          0.0,
+          0.0,
+          2.191821955442365e-19,
+          0.0,
+          1.3321850502542888e-19,
+          0.02492754674770225,
+          0.06719782825313199,
+          0.047508818579825716,
+          0.028416378354745656,
+          0.02003276123206365,
+          0.014330810945797441,
+          0.003150538394202116,
+          3.612019688738597e-20,
+          1.2935460804633516e-05,
+          0.0,
+          0.0,
+          3.923350272529505e-19,
+          2.178069946191484e-19,
+          0.0,
+          0.00025286009994254945,
+          0.0,
+          3.4560043231543895e-19,
+          0.000107680423427487,
+          0.0,
+          0.0,
+          5.050188133558879e-05,
+          0.0004312270072227167
+        ],
+        "q": [
+          0.8726606685069529,
+          0.8728938305520876,
+          0.8728938305520876,
+          0.8728938305520876,
+          0.8728938305520876,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8729522015891147,
+          0.8978797483368169,
+          0.965077576589949,
+          1.0125863951697747,
+          1.0410027735245204,
+          1.061035534756584,
+          1.0753663457023814,
+          1.0785168840965835,
+          1.0785168840965835,
+          1.0785298195573882,
+          1.0785298195573882,
+          1.0785298195573882,
+          1.0785298195573882,
+          1.0785298195573882,
+          1.0785298195573882,
+          1.0787826796573308,
+          1.0787826796573308,
+          1.0787826796573308,
+          1.0788903600807582,
+          1.0788903600807582,
+          1.0788903600807582,
+          1.0789408619620937,
+          1.0793720889693164
+        ],
+        "c": 0.7458184664722016,
+        "value": 2.001461036383886,
+        "diagonal_gradient": 3.2220969425900137e-07,
+        "profile_residual": 8.561142050833581e-08,
+        "success": true,
+        "iterations": 236,
+        "message": "Optimization terminated successfully",
+        "rs": {
+          "D": 1.8256601440906,
+          "q": 0.951095516422034,
+          "c": 0.874564627668566,
+          "residual": 1.1102230246251565e-16,
+          "success": true,
+          "message": "`gtol` termination condition is satisfied."
+        },
+        "outer_evaluations": 17,
+        "breakpoints": [
+          0.0196078431372549,
+          0.0392156862745098,
+          0.058823529411764705,
+          0.0784313725490196,
+          0.09803921568627451,
+          0.11764705882352941,
+          0.13725490196078433,
+          0.1568627450980392,
+          0.17647058823529413,
+          0.19607843137254902,
+          0.21568627450980393,
+          0.23529411764705882,
+          0.2549019607843137,
+          0.27450980392156865,
+          0.29411764705882354,
+          0.3137254901960784,
+          0.3333333333333333,
+          0.35294117647058826,
+          0.37254901960784315,
+          0.39215686274509803,
+          0.4117647058823529,
+          0.43137254901960786,
+          0.45098039215686275,
+          0.47058823529411764,
+          0.49019607843137253,
+          0.5098039215686274,
+          0.5294117647058824,
+          0.5490196078431373,
+          0.5686274509803921,
+          0.5882352941176471,
+          0.6078431372549019,
+          0.6274509803921569,
+          0.6470588235294118,
+          0.6666666666666666,
+          0.6862745098039216,
+          0.7058823529411765,
+          0.7254901960784313,
+          0.7450980392156863,
+          0.7647058823529411,
+          0.7843137254901961,
+          0.803921568627451,
+          0.8235294117647058,
+          0.8431372549019608,
+          0.8627450980392157,
+          0.8823529411764706,
+          0.9019607843137255,
+          0.9215686274509803,
+          0.9411764705882353,
+          0.9607843137254902,
+          0.9803921568627451
+        ]
+      },
+      "diagnostics": {
+        "stages": [
+          {
+            "minimum_raw_convolution": 0.0003418901670226501,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0032950106610307173,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0036964628036688096,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.004144164590410115,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.004645941369887385,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.005212499608763688,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0058438994633713826,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.006551361496414998,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0073569256893519785,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.00824836421159364,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.00924651586209102,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.010365455912788646,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.011619801218366144,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.013025937449385183,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.01460332167980416,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.016370565663843595,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.01866570310322857,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.022478376800687205,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.027589159826685028,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.034527717242937905,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.045120153962536325,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.06043699274960329,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.07177635715042219,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0792185698282929,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.08672705611431586,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.09494721097034103,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.10394648769311066,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1137987329307566,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.12458479265676953,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1363931755793334,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.14932077942984845,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1634736860904622,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.17896803208529954,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.19593096157849244,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.2145016696991774,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.2348325447548134,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.25709041870564414,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.28145793616150455,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.30813505313472683,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.33734067784771715,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.3693144670593522,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.4043187926506291,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.4426408946070079,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.48459523806452454,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.5305260937611855,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.5808103630684598,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6358745977154989,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6961427552437698,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.7621206529094507,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.8343516975734926,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.9134445080961127,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 0.0003418901670226501
+      },
+      "seconds": 84.80013012886047
+    },
+    {
+      "config": {
+        "steps": 50,
+        "mesh": 256,
+        "quadrature": 128,
+        "alpha": 1.0
+      },
+      "beta": 7.1,
+      "fit": {
+        "D": 2.1682959829291133,
+        "increments": [
+          0.9575614583308113,
+          2.6418671112007638e-05,
+          1.3005726112101456e-20,
+          7.011588473854844e-20,
+          2.649154215006101e-20,
+          0.0,
+          0.0,
+          2.281716080735509e-20,
+          4.716311488807276e-06,
+          0.0,
+          0.0,
+          0.0,
+          4.690533576084967e-23,
+          3.827062013563518e-22,
+          6.743561821147527e-22,
+          0.0,
+          2.0987119259021694e-22,
+          0.0,
+          2.2908032594948313e-20,
+          0.0,
+          0.0,
+          4.4114798694069776e-20,
+          1.059958271438738e-20,
+          0.0,
+          0.0,
+          0.49025595168080816,
+          0.04293112748402735,
+          0.0327080161506472,
+          0.022674239528706258,
+          0.014362341811186247,
+          0.015508550270025455,
+          0.005760707380070318,
+          0.006697908535471951,
+          0.003599471482534048,
+          0.0,
+          0.0003771793730711553,
+          2.0510005994521222e-19,
+          0.0,
+          6.67916707975852e-21,
+          4.9043645268863053e-20,
+          0.0,
+          0.0,
+          1.1608298703294616e-20,
+          6.779917054840329e-21,
+          0.0,
+          1.4270566714272892e-19,
+          5.930335749623307e-05,
+          0.0,
+          2.487553359594099e-22,
+          4.032813341803763e-20,
+          0.0
+        ],
+        "q": [
+          0.9575614583308113,
+          0.9575878770019233,
+          0.9575878770019233,
+          0.9575878770019233,
+          0.9575878770019233,
+          0.9575878770019233,
+          0.9575878770019233,
+          0.9575878770019233,
+          0.9575925933134121,
+          0.9575925933134121,
+          0.9575925933134121,
+          0.9575925933134121,
+          0.9575925933134121,
+          0.9575925933134121,
+          0.9575925933134121,
+          0.9575925933134121,
+          0.9575925933134121,
+          0.9575925933134121,
+          0.9575925933134121,
+          0.9575925933134121,
+          0.9575925933134121,
+          0.9575925933134121,
+          0.9575925933134121,
+          0.9575925933134121,
+          0.9575925933134121,
+          1.4478485449942202,
+          1.4907796724782476,
+          1.5234876886288948,
+          1.5461619281576011,
+          1.5605242699687873,
+          1.5760328202388127,
+          1.581793527618883,
+          1.588491436154355,
+          1.592090907636889,
+          1.592090907636889,
+          1.5924680870099601,
+          1.5924680870099601,
+          1.5924680870099601,
+          1.5924680870099601,
+          1.5924680870099601,
+          1.5924680870099601,
+          1.5924680870099601,
+          1.5924680870099601,
+          1.5924680870099601,
+          1.5924680870099601,
+          1.5924680870099601,
+          1.5925273903674564,
+          1.5925273903674564,
+          1.5925273903674564,
+          1.5925273903674564,
+          1.5925273903674564
+        ],
+        "c": 0.5757685925616569,
+        "value": 3.738070396952855,
+        "diagonal_gradient": 4.542618902148021e-07,
+        "profile_residual": 4.012765530969631e-08,
+        "success": true,
+        "iterations": 360,
+        "message": "Optimization terminated successfully",
+        "rs": {
+          "D": 2.157980309791638,
+          "q": 1.2454403790469997,
+          "c": 0.9125399307446384,
+          "residual": 1.425526363618701e-13,
+          "success": true,
+          "message": "`gtol` termination condition is satisfied."
+        },
+        "outer_evaluations": 8,
+        "breakpoints": [
+          0.0196078431372549,
+          0.0392156862745098,
+          0.058823529411764705,
+          0.0784313725490196,
+          0.09803921568627451,
+          0.11764705882352941,
+          0.13725490196078433,
+          0.1568627450980392,
+          0.17647058823529413,
+          0.19607843137254902,
+          0.21568627450980393,
+          0.23529411764705882,
+          0.2549019607843137,
+          0.27450980392156865,
+          0.29411764705882354,
+          0.3137254901960784,
+          0.3333333333333333,
+          0.35294117647058826,
+          0.37254901960784315,
+          0.39215686274509803,
+          0.4117647058823529,
+          0.43137254901960786,
+          0.45098039215686275,
+          0.47058823529411764,
+          0.49019607843137253,
+          0.5098039215686274,
+          0.5294117647058824,
+          0.5490196078431373,
+          0.5686274509803921,
+          0.5882352941176471,
+          0.6078431372549019,
+          0.6274509803921569,
+          0.6470588235294118,
+          0.6666666666666666,
+          0.6862745098039216,
+          0.7058823529411765,
+          0.7254901960784313,
+          0.7450980392156863,
+          0.7647058823529411,
+          0.7843137254901961,
+          0.803921568627451,
+          0.8235294117647058,
+          0.8431372549019608,
+          0.8627450980392157,
+          0.8823529411764706,
+          0.9019607843137255,
+          0.9215686274509803,
+          0.9411764705882353,
+          0.9607843137254902,
+          0.9803921568627451
+        ]
+      },
+      "diagnostics": {
+        "stages": [
+          {
+            "minimum_raw_convolution": 4.417844623124528e-05,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.00048619462106475053,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0005663357101198252,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0006596867235067472,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0007684250973316598,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0008957429818539642,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0010434215659818058,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.001215391675393862,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0014157048050150722,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0016490322712577887,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0019208152872099427,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.002237391852110693,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0026061445539420913,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0030356727319064136,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0035359930136267814,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.004118772903614176,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.004814595182420556,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.005608750160284559,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.006738491026020643,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.008283548896481585,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.010065971503227189,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.012936431313053665,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.016332517998222662,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.021174789678626627,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.02812560868578301,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.03778478171569877,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.11225751491596703,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.14216799203159924,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1542061708930489,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.16726369136739838,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.18142686695237709,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1967893198043505,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.21345259960435897,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.2315268548270647,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.25113156084990745,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.27239630971542217,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.29546166676726987,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.32048009982255166,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.3476169870224656,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.3770517100234384,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.4089788397550638,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.4436094225829186,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.48117237537816393,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.5219169954906064,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.5661107673676273,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6140464331957791,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6660410715622423,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.7224383776631131,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.7836111492288629,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.8499637507935929,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.9219360194208982,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 4.417844623124528e-05
+      },
+      "seconds": 124.37239122390747
+    }
+  ]
+}

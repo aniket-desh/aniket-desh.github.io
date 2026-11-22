@@ -1,0 +1,2795 @@
+{
+  "metadata": {
+    "date_utc": "2026-11-22T01:46:29Z",
+    "base_commit": "56f16086082bfa1b18321372604e7c7dd2cc7859",
+    "source_sha256": {
+      "rsb_solver.py": "37f7d5ad1414ecb87e68120f2058c3cedef3e1e508b630bd28a80ddc7691be96",
+      "replica_bifurcation.py": "cc91ace0bc1b0738287119e86e1a288e8091172ebd9463d05f607e64688efc33"
+    },
+    "python": "3.11.4",
+    "numpy": "1.26.4",
+    "scipy": "1.17.1",
+    "torch": "2.8.0",
+    "random_seed": null,
+    "initialization": "deterministic RS plus .02 total hierarchy spread; break RS at every collapsed continuation point",
+    "reference": "Mike Winer and Boris Hanin, Deep Neural Nets as Hamiltonians, arXiv:2503.23982v2, Appendix A.2; Fig. 2; https://arxiv.org/html/2503.23982v2",
+    "model": "Gaussian x~N(0,I_d); H=sum_i a_i sin(w_i.x); w_ij~N(0,1/d), a_i~N(0,1); N/d=1",
+    "method": "minimize finite-step off-diagonal Parisi profile at fixed diagonal, maximize over diagonal",
+    "thermodynamic_limit": "d,N\u2192\u221e with N/d=1; finite 20-step replica ansatz, not a finite-network simulation"
+  },
+  "checks": {
+    "integer_matrix_entropy_error": 5.551115123125783e-17,
+    "exact_linear_RS": [
+      {
+        "beta": 0,
+        "value": 0.0,
+        "value_error": 0.0,
+        "gradient_max": 2.3314683517128287e-15
+      },
+      {
+        "beta": 1,
+        "value": 0.5,
+        "value_error": 0.0,
+        "gradient_max": 2.3314683517128287e-15
+      },
+      {
+        "beta": 4.5,
+        "value": 10.125,
+        "value_error": 0.0,
+        "gradient_max": 1.7763568394002505e-15
+      },
+      {
+        "beta": 7.1,
+        "value": 25.205,
+        "value_error": 0.0,
+        "gradient_max": 3.552713678800501e-15
+      }
+    ],
+    "terminal_fft_vs_independent_adaptive_quadrature": [
+      {
+        "c": 0.6,
+        "h": 0.0,
+        "a": 1.0,
+        "absolute_error": 0.0
+      },
+      {
+        "c": 0.9,
+        "h": 1.1044661672776617,
+        "a": -2.0,
+        "absolute_error": 1.7763568394002505e-15
+      },
+      {
+        "c": 0.6,
+        "h": 2.9943304979527716,
+        "a": 4.0,
+        "absolute_error": 0.0
+      }
+    ],
+    "autodiff_central_difference": [
+      {
+        "index": 0,
+        "autodiff": 0.009321261756633503,
+        "finite_difference": 0.009321261740247166,
+        "absolute_error": 1.6386336731954998e-11
+      },
+      {
+        "index": 1,
+        "autodiff": -0.05486365225171819,
+        "finite_difference": -0.05486365208806631,
+        "absolute_error": 1.636518767722528e-10
+      },
+      {
+        "index": 5,
+        "autodiff": -0.045433700168232116,
+        "finite_difference": -0.045433700202046616,
+        "absolute_error": 3.381449981132434e-11
+      },
+      {
+        "index": 21,
+        "autodiff": -0.0031717362805272487,
+        "finite_difference": -0.0031717363402350425,
+        "absolute_error": 5.970779383066005e-11
+      }
+    ],
+    "reported_saddle_fft_diagnostics": [
+      {
+        "beta": 0.5,
+        "stages": [
+          {
+            "minimum_raw_convolution": 0.0055591193914872605,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.022414093477068686,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.027101612321946966,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.03276944468086762,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.03962260616263141,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0479089878268153,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.057928322832674184,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.07004302830354542,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.08469131457426837,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1024030360037671,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.12381885670138054,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1497134244207768,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.18102339096464182,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.21888129313500015,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.2646565171915514,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.3200048320037264,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.3869282807196432,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.46784759748817545,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.565689768647563,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6839939054907851,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.8270394266621884,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 0.0055591193914872605
+      },
+      {
+        "beta": 1,
+        "stages": [
+          {
+            "minimum_raw_convolution": 0.0023664542350759488,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.013183522234544776,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.01636929153361727,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.020324895017629463,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.025236361433903287,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.03133467296939596,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.03890662815083701,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.04830832974081145,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.059981931954270984,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.07447643456759434,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.09247350203876248,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.11481952145070756,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.14256540743787105,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.17701602587557874,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.21979156078280893,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.2729037100024955,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.33885029402764366,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.4207327255447865,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.5224018671147848,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6486391337196913,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.8053813591831458,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 0.0023664542350759488
+      },
+      {
+        "beta": 1.5,
+        "stages": [
+          {
+            "minimum_raw_convolution": 0.0014309002309784435,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.009639451330049897,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.012157651752496279,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.015333704281923155,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.019339465531013456,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0243916877584619,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.03076374736169446,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.03880043730905197,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0489366239318495,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.061720777597745635,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.07784465051319261,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.09818070752469638,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.12382933530437445,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1561783844149437,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1969782660829673,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.24843666717645752,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.31333800842651816,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.39519410979282615,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.4984342154953424,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6286446609912686,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.792871150308339,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 0.0014309002309784435
+      },
+      {
+        "beta": 2,
+        "stages": [
+          {
+            "minimum_raw_convolution": 0.0010701360933509235,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.00827835027470275,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.010520747763785643,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.013370554498936704,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.016992302412610016,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.021595091011711975,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.02744465961587672,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.03487872966234945,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.04432650285651574,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.05633344088244341,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.07159275731559889,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.09098543990497959,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1156311138878135,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1469526829006934,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1867584794924963,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.2373466681511303,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.301637928492057,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.38334410196400454,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.48718252196087364,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6191482194292862,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.7868599788942198,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 0.0010701360933509235
+      },
+      {
+        "beta": 2.5,
+        "stages": [
+          {
+            "minimum_raw_convolution": 0.0009208225204593579,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.007955725599073427,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.010130848146924443,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.012900656627472584,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.016427740205589625,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.020919140479070397,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.026638504925600215,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.03392156314362843,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.04319583435034863,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.05500572297692685,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.07004447548516918,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.08919487428699824,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.11358105752048903,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.14463450652963306,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.18417807454642499,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.23453298910159126,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.2986551227551851,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.3803085388270553,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.484286344428831,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6166920358616151,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.7852976869245212,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 0.0009208225204593579
+      },
+      {
+        "beta": 3,
+        "stages": [
+          {
+            "minimum_raw_convolution": 0.0008586968354326874,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.008137859862401786,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.010351056913707857,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.013166161747985239,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.01674687103155098,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.02130140087260579,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.027094594463681843,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.03446332255525375,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.04383607228886577,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.05575786346873113,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.07092194113812805,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.09021008736500213,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.11474389634305038,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1459499962540744,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.18564302490947004,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.23613112153178029,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.3003501474779651,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.3820343975823681,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.48593373125864703,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6180897456182536,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.7861870420532633,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 0.0008586968354326874
+      },
+      {
+        "beta": 3.25,
+        "stages": [
+          {
+            "minimum_raw_convolution": 0.0008431635582883124,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.008326101827831223,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.010578394055309082,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.01343995473955234,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.017075597332669112,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.02169471894416436,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.027563360606569887,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.03501952992648921,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.044492668611352315,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.056528386077329296,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0718198836310201,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.09124787904437098,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.11593133089540414,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1472918840201196,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.18713574770074642,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.23775772189174516,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.3020733629286141,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.38378690022794776,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.48760457415568587,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6195056818496354,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.7870869404874513,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 0.0008431635582883124
+      },
+      {
+        "beta": 3.5,
+        "stages": [
+          {
+            "minimum_raw_convolution": 0.0008332322291541502,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.008549222919141952,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.010847518967676217,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.013763669561502545,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.017463773511228076,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.022158582135242355,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.028115503185376645,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0356738317646802,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0452640757358026,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.057432476322403836,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.07287212049730085,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.09246241718684955,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.11731918567332911,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.14885820901294666,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1888758721291946,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.2396514773054284,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.30407706440751897,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.3858221296269275,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.48954262410819305,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6211461356672779,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.788128356559365,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 0.0008332322291541502
+      },
+      {
+        "beta": 3.75,
+        "stages": [
+          {
+            "minimum_raw_convolution": 0.0006989487153400628,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.007381529857240998,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.009435188934309613,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.01205987134363773,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.015414688337212101,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.019832424793017778,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.02579218950833534,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.03692398227595878,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.04812043129065818,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.060883323026438174,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.07687588927967093,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.09706931321692058,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.12256705784730659,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.154762439039554,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1954147628093535,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.24674546201792363,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.3115594858400581,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.3933985752891769,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.49673480049008395,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6272149354799971,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.7919785566388376,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 0.0006989487153400628
+      },
+      {
+        "beta": 4,
+        "stages": [
+          {
+            "minimum_raw_convolution": 0.0005491370182365354,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.005939069097706529,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.007674188441088858,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.009920539389204674,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.01282909130156984,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.016615303223414424,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.02173610145841176,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.033813400675670735,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.050502453184181284,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.06477639683986092,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.08140622129683028,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.10225598201181929,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.12844578326605988,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.16134331619762304,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.20266656498738206,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.2545735239101913,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.3197748927164537,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.4016756355538917,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.5045527959591458,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6337875243284041,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.7961130468449173,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 0.0005491370182365354
+      },
+      {
+        "beta": 4.25,
+        "stages": [
+          {
+            "minimum_raw_convolution": 0.0004326107334805124,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.004791596494004624,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.006260773844620371,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.008177231221968395,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.010680033035438297,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.013965651871838014,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.018381717473307413,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.028506273990689668,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.048996625912736846,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.06775521855361388,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.08545520303807003,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.10687249661086645,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1336535560886462,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.16714515570682842,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.20902925364537328,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.2614135066074714,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.3269195578293637,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.4088393813122049,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.5112867543301408,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6394054905239748,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.799632183996712,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 0.0004326107334805124
+      },
+      {
+        "beta": 4.5,
+        "stages": [
+          {
+            "minimum_raw_convolution": 0.0003431336482365918,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.003883315461837511,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.005125780806259028,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.006770242284861505,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0089361436583415,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.011794463341327666,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.015657077103918726,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.02371945115615287,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.043407503841338346,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.06960071377164728,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.08909824700835695,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.11100322573801713,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.13829358643935274,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1722933358296871,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.21465199027388943,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.2674246029694849,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.33317485241109296,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.415086200639735,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.5171347495781583,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6442718375342312,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.8026755677810073,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 0.0003431336482365918
+      },
+      {
+        "beta": 4.75,
+        "stages": [
+          {
+            "minimum_raw_convolution": 0.0002741633662226156,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0031694112422335774,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.004226193632728192,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.005635071402485092,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.007513623953525561,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.010018425833982936,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.013358248537833461,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.020030778934796656,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.03634122001736434,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.06966343705337225,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0920387136093056,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1146052759718682,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.14234455902008358,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1767722573595485,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.21952669766310912,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.27262179997424063,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.33855857448032356,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.42044292996737265,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.5221319756289982,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6484179669389742,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.8052759535696732,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 0.0002741633662226156
+      },
+      {
+        "beta": 5,
+        "stages": [
+          {
+            "minimum_raw_convolution": 0.00022030312604904428,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0025977105431884695,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0034983405033258697,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.004713164374575307,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.006347258597680927,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.008547632236151292,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.011514653386977214,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.01714999613198981,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.029801516012396723,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.06394981216026763,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.09403248580158369,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.11828261401111356,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1464295819097034,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.18127450629587927,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.22441125764518427,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.27781298974106233,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.3439223953323085,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.4257634393602618,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.5270796806376252,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6525055090650669,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.8077781310886465,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 0.00022030312604904428
+      },
+      {
+        "beta": 5.5,
+        "stages": [
+          {
+            "minimum_raw_convolution": 0.00014507829763198837,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.001778780948272718,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0024413196421767536,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.003350842018548905,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.004598835356741049,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.006311598939640728,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.008662249690721269,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.01282266498488377,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.02101243762894056,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.04679416823955762,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.09486458060970021,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.12449042756297396,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.15332831487635773,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.18884642460506518,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.23259221308780864,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.2864716009435822,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.35283201040009765,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.43456463800574613,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.5352305784877979,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6592153233848338,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.8119218174683178,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 0.00014507829763198837
+      },
+      {
+        "beta": 6,
+        "stages": [
+          {
+            "minimum_raw_convolution": 9.77081833852117e-05,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.001242313490518343,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0017382011128113661,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0024288238148351127,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0033935307560214456,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.004749153307190945,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.006669685195414665,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.009716645384118039,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.016133067250403865,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.030819992349607916,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.08995489866966527,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1285413291934855,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.15878288926686307,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.19484427176856794,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.2390512043501722,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.2932769595027027,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.3598031443052539,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.44141995631523534,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.5415528895280426,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6644017386119562,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.8151090127497446,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 9.77081833852117e-05
+      },
+      {
+        "beta": 6.5,
+        "stages": [
+          {
+            "minimum_raw_convolution": 6.72985036918386e-05,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0008857165260534039,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0012587225440487404,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0017918185428942301,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.002550080839504698,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.003653170396730132,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.005217148027446938,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.007421841058985967,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.012595228603324404,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.02137050905602078,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.06762145940019781,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.12792395194708867,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.16511553705247067,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.20170297746507304,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.24639133823312864,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.30097892610842114,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.36766030255359844,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.4491148261493569,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.548615462877616,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6701623789197699,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.8186349949083492,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 6.72985036918386e-05
+      },
+      {
+        "beta": 7.1,
+        "stages": [
+          {
+            "minimum_raw_convolution": 4.409790125425861e-05,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.000603727918103758,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0008764244298866686,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0012702905059052694,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0018417905523213096,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0026821092407389724,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.00388839444067246,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.005637556992585391,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.009512744254939476,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.016097232921798765,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.04213730932040288,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.12352146929217411,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.17066356879029265,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.2077105278353572,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.25279949130008583,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.30767618506192485,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.3744652901294341,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.455752704693409,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.5546856632922151,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.675095069147529,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.8216479120543446,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 4.409790125425861e-05
+      },
+      {
+        "beta": 7.5,
+        "stages": [
+          {
+            "minimum_raw_convolution": 3.3770439794772455e-05,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.00047395021502943946,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0006954042427937956,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0010196509594816439,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0014950257376689646,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0021986012389858534,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.003232864416940706,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0047420291066766485,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.007949782956577445,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.013953103812146317,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.030190377155021875,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.12021757298564723,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.1732051810035969,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.21045805947760482,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.25572304461994655,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.31072355086811976,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.37755347863773253,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.4587570811198502,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.5574258254405869,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6773160865650911,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.8230027689773627,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 3.3770439794772455e-05
+      },
+      {
+        "beta": 8,
+        "stages": [
+          {
+            "minimum_raw_convolution": 2.439354106621716e-05,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0003529173782513273,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0005251919513318826,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.000783519541652844,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0011659083951114368,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.0017346568708123677,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.002581603702582147,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.003847587723562751,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.006419027151362167,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.011547816244379117,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.020179049434338903,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.11619127032251986,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.17527366448591686,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.2130078177337335,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.2585756573871916,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.31371331623929566,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.38057839306943053,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.4616951393954485,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.5601023959101559,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.6794831777584927,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          },
+          {
+            "minimum_raw_convolution": 0.8243547221593966,
+            "clipped_grid_points": 0,
+            "affected_readout_quadrature_mass": 0.0,
+            "weighted_clipped_grid_fraction": 0.0
+          }
+        ],
+        "maximum_affected_quadrature_mass": 0.0,
+        "clipped_grid_points": 0,
+        "minimum_raw_convolution": 2.439354106621716e-05
+      }
+    ],
+    "RS_replicon": [
+      {
+        "beta": 3.5,
+        "value": 0.03308205477824755
+      },
+      {
+        "beta": 3.75,
+        "value": -0.08189333879002181
+      },
+      {
+        "beta": 4.5,
+        "value": -0.4046551579401776
+      },
+      {
+        "beta": 7.1,
+        "value": -1.2411681597135509
+      }
+    ]
+  }
+}
