@@ -8,7 +8,7 @@ Every page is plain HTML with no build-time templating. Code shared between page
 
 - `assets/post.css` holds the defaults every post starts from, and `assets/post.js` handles footnotes and table-of-contents highlighting.
 - `assets/reading-theme.css`, `assets/reading-theme.js` and `assets/reading.css` hold the light and dark palettes and the reading layout.
-- `blog/<slug>/post.css` holds that post's own styles, and any other `.js` or `.css` in the folder is that post's figures. Drosophila is a daily problem log: each day lives at `drosophila/YYYY-MM-DD/` with the problem's first sentence as the `h1`, the rest in `.problem-statement`, the date in `.post-meta`, and the solution in `.post-body`; all drosophila pages share `drosophila/notes.css` in the same role.
+- `blog/<slug>/post.css` holds that post's own styles, and any other `.js` or `.css` in the folder is that post's figures. Drosophila is a daily problem log: each day lives at `drosophila/YYYY-MM-DD/` with a short title as the `h1`, the date in `.post-meta`, and the solution in `.post-body`, which opens with a sentence or two of context; all drosophila pages share `drosophila/notes.css` in the same role.
 - `assets/listing.css` and `assets/listing.js` serve the two listing pages, `/blog/` and `/drosophila/`.
 
 A post's `<head>` loads its stylesheets in this order, and the order matters because later files override earlier ones:

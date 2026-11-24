@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&amp;family=Alegreya+SC:wght@400;500&amp;display=swap" rel="stylesheet">
     <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="stylesheet" href="/assets/post.css">
-    <link rel="stylesheet" href="/drosophila/notes.css?v=20261124">
+    <link rel="stylesheet" href="/drosophila/notes.css?v=20261124b">
     <link rel="stylesheet" href="/assets/reading-theme.css?v=20260926-2">
     <link rel="stylesheet" href="/assets/reading.css?v=20260926-2">
 </head>
@@ -28,25 +28,15 @@
             </button>
         </nav>
 
-        <!-- Daily problem: title (first sentence), statement (the rest), date. -->
-        <header class="post-heading problem-heading">
+        <!-- Daily problem: title and date; the body opens with a sentence or two of context. -->
+        <header class="post-heading">
             <h1 class="post-header">The Ising model in one and two dimensions</h1>
-            <p class="problem-statement">
-                Take \(N\) spins \(s_i\in\{-1,+1\}\) on a lattice with Hamiltonian
-                \(H(\mathbf s)=-J\sum_{\langle i,j\rangle}s_is_j-h\sum_i s_i\), \(J&gt;0\), in equilibrium at
-                inverse temperature \(\beta\). Explain why a finite system at \(h=0\) has \(\langle M\rangle=0\)
-                at every temperature, and why spontaneous magnetization requires \(N\to\infty\) before \(h\to0^+\).
-                For the periodic chain, compute the partition function with a transfer matrix, find the free energy
-                per site and the correlation \(\langle s_is_j\rangle\), and show that there is no phase transition
-                at any \(T&gt;0\). Then use the energy of domain walls to explain why the square lattice can order at
-                low temperature, and state Onsager’s critical temperature.
-            </p>
             <p class="post-meta"><time datetime="2026-10-21">October 21, 2026</time></p>
         </header>
 
         <div class="content">
             <div class="post-body">
-                <!-- Solution: prose in <p>, display math in \[ \]. -->
+                <!-- Prose in <p>, display math in \[ \]. -->
                 <p>The Ising model is a highly simplified model of a magnetic material. On a two-dimensional square lattice at zero external field, it provides an exactly solvable example of a <i>phase transition</i>.</p>
                 <p>
                     Consider an \(N\)-site lattice \(\Lambda\) with each site \(i \in \Lambda\) having a spin variable

@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&amp;family=Alegreya+SC:wght@400;500&amp;display=swap" rel="stylesheet">
     <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="stylesheet" href="/assets/post.css">
-    <link rel="stylesheet" href="/drosophila/notes.css?v=20261124">
+    <link rel="stylesheet" href="/drosophila/notes.css?v=20261124b">
     <link rel="stylesheet" href="/assets/reading-theme.css?v=20260926-2">
     <link rel="stylesheet" href="/assets/reading.css?v=20260926-2">
 </head>
@@ -28,31 +28,29 @@
             </button>
         </nav>
 
-        <!-- Daily problem: title (first sentence), statement (the rest), date. -->
-        <header class="post-heading problem-heading">
+        <!-- Daily problem: title and date; the body opens with a sentence or two of context. -->
+        <header class="post-heading">
             <h1 class="post-header">Bias &amp; variance in ridge regression</h1>
-            <p class="problem-statement">
-                Suppose your training data follow the linear model
-                \[
-                y=X\theta_*+\varepsilon,\qquad \mathbb E[\varepsilon]=0,\quad \operatorname{Cov}(\varepsilon)=\sigma^2 I_n,
-                \]
-                where \(X\in\mathbb R^{n\times p}\) is fixed. For \(\lambda>0\), define the ridge estimator
-                \[
-                \hat\theta_\lambda=\arg\min_{\theta\in\mathbb R^p}\left\{\|y-X\theta\|_2^2+\lambda\|\theta\|_2^2\right\}.
-                \]
-                Starting from this optimization problem, derive the expected squared prediction error at a fixed new input \(x\in\mathbb R^p\),
-                \[
-                \mathbb E_\varepsilon\!\left[\bigl(x^\top\hat\theta_\lambda-x^\top\theta_*\bigr)^2\right].
-                \]
-            </p>
             <p class="post-meta"><time datetime="2026-11-25">November 25, 2026</time></p>
         </header>
 
         <div class="content">
             <div class="post-body">
-                <!-- Solution: prose in <p>, display math in \[ \]. -->
+                <!-- Prose in <p>, display math in \[ \]. -->
                 <p>
-                    Since we want to understand how the training noise \(\varepsilon\) changes the prediction \(x^\top\hat\theta_\lambda\), we note that \(X\), \(x\), and \(\theta_*\) are fixed, so all randomness comes from \(\varepsilon\).
+                    Suppose the training data follow the linear model
+                    \[
+                    y=X\theta_*+\varepsilon,\qquad \mathbb E[\varepsilon]=0,\quad \operatorname{Cov}(\varepsilon)=\sigma^2 I_n,
+                    \]
+                    where \(X\in\mathbb R^{n\times p}\) is fixed, and for \(\lambda>0\) define the ridge estimator
+                    \[
+                    \hat\theta_\lambda=\arg\min_{\theta\in\mathbb R^p}\left\{\|y-X\theta\|_2^2+\lambda\|\theta\|_2^2\right\}.
+                    \]
+                    In this note, we'll derive the expected squared prediction error at a fixed new input \(x\in\mathbb R^p\),
+                    \[
+                    \mathbb E_\varepsilon\!\left[\bigl(x^\top\hat\theta_\lambda-x^\top\theta_*\bigr)^2\right],
+                    \]
+                    and see how it splits into a squared bias caused by regularization and a variance caused by the training noise. Since \(X\), \(x\), and \(\theta_*\) are fixed, all randomness comes from \(\varepsilon\).
                 </p>
                 <p>
                     We will first solve the optimization problem, then separate the prediction error into a deterministic bias and a random fluctuation.

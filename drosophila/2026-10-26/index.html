@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&amp;family=Alegreya+SC:wght@400;500&amp;display=swap" rel="stylesheet">
     <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="stylesheet" href="/assets/post.css">
-    <link rel="stylesheet" href="/drosophila/notes.css?v=20261124">
+    <link rel="stylesheet" href="/drosophila/notes.css?v=20261124b">
     <link rel="stylesheet" href="/assets/reading-theme.css?v=20260926-2">
     <link rel="stylesheet" href="/assets/reading.css?v=20260926-2">
 </head>
@@ -28,25 +28,15 @@
             </button>
         </nav>
 
-        <!-- Daily problem: title (first sentence), statement (the rest), date. -->
-        <header class="post-heading problem-heading">
+        <!-- Daily problem: title and date; the body opens with a sentence or two of context. -->
+        <header class="post-heading">
             <h1 class="post-header">Fourier modes as eigenfunctions of symmetric operators</h1>
-            <p class="problem-statement">
-                Let \(T\) be a linear operator on functions on the circle that commutes with every rotation
-                \((U_af)(\theta)=f(\theta-a)\). Show that the modes \(e^{in\theta}\) are eigenfunctions of \(T\),
-                and for a convolution kernel \(\kappa(\theta-\phi)\) express its eigenvalues in terms of \(\kappa\).
-                Identify the zero-field transfer matrix of the one-dimensional Ising model as an instance. Extend the
-                argument to kernels \(\kappa(\mathbf x\cdot\mathbf x')\) on the sphere, find the spectrum of the
-                linear kernel on \(S^{N-1}\), and solve population gradient flow \(\partial_t e_t=-T_Ke_t\) mode by
-                mode. Finally, use a Fourier representation of the delta function to impose the constraint
-                \(\frac1N\sum_j w_j^2=1\) inside a partition function so that the integrand factors over coordinates.
-            </p>
             <p class="post-meta"><time datetime="2026-10-26">October 26, 2026</time></p>
         </header>
 
         <div class="content">
             <div class="post-body">
-                <!-- Solution: prose in <p>, display math in \[ \]. -->
+                <!-- Prose in <p>, display math in \[ \]. -->
                 <p>Fourier analysis expresses a function in modes that behave simply under symmetry. On a circle, these modes are the familiar complex exponentials \(e^{in\theta}\). On a sphere, they are spherical harmonics. When an operator respects the relevant symmetry, these modes can also be its eigenfunctions, turning an integral or differential equation into separate equations for individual coefficients.</p>
                 <p>This is why an eigendecomposition on a symmetric domain can sometimes be understood as a Fourier decomposition. The important condition is that the operator and the integration measure must respect the symmetry. The geometry of the domain alone is insufficient.</p>
                 <p>Fourier methods also appear in statistical mechanics when we represent a constraint using a Dirac delta function. The underlying mathematics is closely related, but the variable being Fourier-expanded is different. We will develop both applications.</p>
