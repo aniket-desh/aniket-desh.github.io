@@ -7,7 +7,7 @@
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
     <title>drosophila — aniket deshpande</title>
-    <meta name="description" content="Short notes on minimal models of the world.">
+    <meta name="description" content="A daily problem log in math, physics, high-dimensional statistics, and ML theory.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&amp;family=Alegreya+SC:wght@400;500&amp;display=swap" rel="stylesheet">
@@ -25,11 +25,21 @@
         <div class="content">
             <div class="tag-filters">
                 <button class="tag-btn active" data-tag="all">all</button>
-                <button class="tag-btn" data-tag="physics">physics</button>
-                <button class="tag-btn" data-tag="complexity">complexity</button>
                 <button class="tag-btn" data-tag="math">math</button>
+                <button class="tag-btn" data-tag="physics">physics</button>
+                <button class="tag-btn" data-tag="stats">high-dim stats</button>
+                <button class="tag-btn" data-tag="ml">ml theory</button>
             </div>
 
+            <!-- Newest first. One <li> per day; data-tag is math, physics, stats or ml. -->
+            <ol class="log">
+                <li class="post-entry log-entry" data-tag="physics">
+                    <time datetime="2026-11-24">Nov 24</time>
+                    <a href="/drosophila/2026-11-24/">Noether’s theorem for a Galilean boost</a>
+                </li>
+            </ol>
+
+            <!-- Older notes, not in the daily-problem format. Still reachable by URL.
             <div class="post-entry" data-tag="math">
                 <h3>Fourier methods and symmetry</h3>
                 <a href="/drosophila/fourier-methods-and-symmetry/" class="read-more">read more →</a>
@@ -39,6 +49,7 @@
                 <h3>Ising Model</h3>
                 <a href="/drosophila/ising-model/" class="read-more">read more →</a>
             </div>
+            -->
         </div>
     </div>
     <script src="/assets/listing.js"></script>

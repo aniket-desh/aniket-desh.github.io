@@ -41,3 +41,17 @@ html {
 ol.references a {
     color: #434c5e;
 }
+
+/* Daily problem pages: the statement sits under the title, and a rule
+   separates the problem from the solution. */
+.problem-heading {
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--reading-rule);
+}
+
+.problem-statement {
+    margin: 14px 0 14px;
+    color: var(--reading-ink);
+    font-size: 17.6px;
+    line-height: 1.55;
+}
