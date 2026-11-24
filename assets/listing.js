@@ -5,7 +5,9 @@ document.querySelectorAll('.tag-btn').forEach(function(btn) {
         btn.classList.add('active');
         var tag = btn.getAttribute('data-tag');
         document.querySelectorAll('.post-entry').forEach(function(entry) {
-            if (tag === 'all' || entry.getAttribute('data-tag') === tag) {
+            // data-tag may list several space-separated tags.
+            var tags = (entry.getAttribute('data-tag') || '').split(/\s+/);
+            if (tag === 'all' || tags.indexOf(tag) !== -1) {
                 entry.classList.remove('hidden');
             } else {
                 entry.classList.add('hidden');

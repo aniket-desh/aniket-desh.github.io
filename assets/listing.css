@@ -205,3 +205,98 @@ a:hover {
     color: #434c5e;
     text-decoration: underline;
 }
+
+/* Light/dark toggle in the header. The palette and the saved choice come
+   from /assets/reading-theme.css and /assets/reading-theme.js, so the
+   listings and the posts share one setting. */
+.header-tools {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--reading-icon);
+    cursor: pointer;
+}
+
+.theme-toggle[hidden] {
+    display: none;
+}
+
+.theme-toggle:hover {
+    color: var(--reading-link);
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--reading-link);
+    outline-offset: -4px;
+}
+
+.theme-toggle svg {
+    display: block;
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+}
+
+.theme-toggle .theme-sun,
+html[data-theme="dark"] .theme-toggle .theme-moon {
+    display: none;
+}
+
+html[data-theme="dark"] .theme-toggle .theme-sun {
+    display: block;
+}
+
+/* Dark palette for the listing pages. */
+html[data-theme="dark"] body {
+    background: var(--reading-paper);
+    color: var(--reading-ink);
+}
+
+html[data-theme="dark"] ::selection {
+    background: #565046;
+}
+
+html[data-theme="dark"] a,
+html[data-theme="dark"] .bio__header .home-otimes,
+html[data-theme="dark"] .post-entry a.read-more:hover,
+html[data-theme="dark"] .log-entry a:hover {
+    color: var(--reading-link);
+}
+
+html[data-theme="dark"] .bio__header a:not(.home-otimes),
+html[data-theme="dark"] .log-entry a {
+    color: var(--reading-ink);
+}
+
+html[data-theme="dark"] .post-entry a.read-more,
+html[data-theme="dark"] .log-entry time {
+    color: var(--reading-secondary);
+}
+
+html[data-theme="dark"] .tag-btn {
+    border-color: var(--reading-rule);
+    color: var(--reading-secondary);
+}
+
+html[data-theme="dark"] .tag-btn:hover {
+    background: var(--reading-hover);
+    color: var(--reading-ink);
+}
+
+html[data-theme="dark"] .tag-btn.active {
+    background: var(--reading-ink);
+    border-color: var(--reading-ink);
+    color: var(--reading-paper);
+}

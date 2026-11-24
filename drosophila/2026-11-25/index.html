@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <title>The bias–variance tradeoff in ridge regression — aniket deshpande</title>
+    <script src="/assets/reading-theme.js?v=20260926-2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&amp;family=Alegreya+SC:wght@400;500&amp;display=swap" rel="stylesheet">
+    <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="/assets/post.css">
+    <link rel="stylesheet" href="/drosophila/notes.css">
+    <link rel="stylesheet" href="/assets/reading-theme.css?v=20260926-2">
+    <link rel="stylesheet" href="/assets/reading.css?v=20260926-2">
+</head>
+
+<body class="reading-page">
+    <div class="container">
+        <nav class="reading-tools" aria-label="Post navigation and appearance">
+            <a href="/drosophila/" class="back-arrow" aria-label="Back to drosophila">← drosophila</a>
+            <button class="theme-toggle" type="button" aria-label="Switch to dark mode" hidden>
+                <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401Z"/></svg>
+                <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+        </nav>
+
+        <!-- Daily problem: title (first sentence), statement (the rest), date. -->
+        <header class="post-heading problem-heading">
+            <h1 class="post-header">The bias–variance tradeoff in ridge regression</h1>
+            <p class="problem-statement">
+                Suppose your training data follow the linear model
+                \[
+                y=X\theta_*+\varepsilon,\qquad \mathbb E[\varepsilon]=0,\quad \operatorname{Cov}(\varepsilon)=\sigma^2 I_n,
+                \]
+                where \(X\in\mathbb R^{n\times p}\) is fixed. For \(\lambda>0\), define the ridge estimator
+                \[
+                \hat\theta_\lambda=\arg\min_{\theta\in\mathbb R^p}\left\{\|y-X\theta\|_2^2+\lambda\|\theta\|_2^2\right\}.
+                \]
+                Starting from this optimization problem, derive the expected squared prediction error at a fixed new input \(x\in\mathbb R^p\),
+                \[
+                \mathbb E_\varepsilon\!\left[\bigl(x^\top\hat\theta_\lambda-x^\top\theta_*\bigr)^2\right].
+                \]
+            </p>
+            <p class="post-meta"><time datetime="2026-11-25">November 25, 2026</time></p>
+        </header>
+
+        <div class="content">
+            <div class="post-body">
+                <!-- Solution: prose in <p>, display math in \[ \]. -->
+                <p>
+                    Since we want to understand how the training noise \(\varepsilon\) changes the prediction \(x^\top\hat\theta_\lambda\), we note that \(X\), \(x\), and \(\theta_*\) are fixed, so all randomness comes from \(\varepsilon\).
+                </p>
+                <p>
+                    We will first solve the optimization problem, then separate the prediction error into a deterministic bias and a random fluctuation.
+                </p>
+                <p>
+                    First, expand the objective
+                    \[
+                    \begin{aligned}
+                    L(\theta)
+                    &=\|y-X\theta\|_2^2+\lambda\|\theta\|_2^2\\
+                    &=(y-X\theta)^\top(y-X\theta)+\lambda\theta^\top\theta\\
+                    &=y^\top y-y^\top X\theta-\theta^\top X^\top y
+                      +\theta^\top X^\top X\theta+\lambda\theta^\top\theta.
+                    \end{aligned}
+                    \]
+                    The two middle terms are equal because they are transposes of the same scalar:
+                    \[
+                    y^\top X\theta=\theta^\top X^\top y.
+                    \]
+                    Therefore,
+                    \[
+                    L(\theta)
+                    =y^\top y-2\theta^\top X^\top y
+                    +\theta^\top(X^\top X+\lambda I_p)\theta.
+                    \]
+                </p>
+                <p>
+                    Differentiate with respect to \(\theta\). The constant term contributes zero, the linear term contributes \(-2X^\top y\), and the quadratic term contributes \(2(X^\top X+\lambda I_p)\theta\), since its matrix is symmetric:
+                    \[
+                    \nabla_\theta L
+                    =-2X^\top y+2(X^\top X+\lambda I_p)\theta.
+                    \]
+                    Setting the gradient to zero gives
+                    \[
+                    \begin{aligned}
+                    -2X^\top y+2(X^\top X+\lambda I_p)\hat\theta_\lambda&=0,\\
+                    2(X^\top X+\lambda I_p)\hat\theta_\lambda&=2X^\top y,\\
+                    (X^\top X+\lambda I_p)\hat\theta_\lambda&=X^\top y.
+                    \end{aligned}
+                    \]
+                </p>
+                <p>
+                    To justify taking the inverse, let \(v\neq0\). Then
+                    \[
+                    \begin{aligned}
+                    v^\top(X^\top X+\lambda I_p)v
+                    &=v^\top X^\top Xv+\lambda v^\top v\\
+                    &=(Xv)^\top(Xv)+\lambda\|v\|_2^2\\
+                    &=\|Xv\|_2^2+\lambda\|v\|_2^2\\
+                    &>0,
+                    \end{aligned}
+                    \]
+                    because \(\lambda>0\). Thus \(X^\top X+\lambda I_p\) is positive definite and invertible. The Hessian is twice this matrix, so the stationary point is the unique minimum:
+                    \[
+                    \boxed{\hat\theta_\lambda=(X^\top X+\lambda I_p)^{-1}X^\top y.}
+                    \]
+                </p>
+                <p>
+                    For readability, define
+                    \[
+                    G:=X^\top X,
+                    \qquad
+                    A_\lambda:=(G+\lambda I_p)^{-1}.
+                    \]
+                    Both \(G\) and \(A_\lambda\) are symmetric. In particular,
+                    \[
+                    A_\lambda^\top
+                    =\bigl((G+\lambda I_p)^\top\bigr)^{-1}
+                    =(G+\lambda I_p)^{-1}
+                    =A_\lambda.
+                    \]
+                </p>
+                <p>
+                    Now substitute the data-generating model \(y=X\theta_*+\varepsilon\):
+                    \[
+                    \begin{aligned}
+                    \hat\theta_\lambda
+                    &=A_\lambda X^\top(X\theta_*+\varepsilon)\\
+                    &=A_\lambda X^\top X\theta_*+A_\lambda X^\top\varepsilon\\
+                    &=A_\lambda G\theta_*+A_\lambda X^\top\varepsilon.
+                    \end{aligned}
+                    \]
+                </p>
+                <p>
+                    The useful identity is
+                    \[
+                    \begin{aligned}
+                    A_\lambda G
+                    &=A_\lambda\bigl[(G+\lambda I_p)-\lambda I_p\bigr]\\
+                    &=A_\lambda(G+\lambda I_p)-\lambda A_\lambda\\
+                    &=I_p-\lambda A_\lambda.
+                    \end{aligned}
+                    \]
+                    Using it,
+                    \[
+                    \begin{aligned}
+                    \hat\theta_\lambda
+                    &=(I_p-\lambda A_\lambda)\theta_*+A_\lambda X^\top\varepsilon\\
+                    &=\theta_*-\lambda A_\lambda\theta_*+A_\lambda X^\top\varepsilon.
+                    \end{aligned}
+                    \]
+                    Subtract \(\theta_*\):
+                    \[
+                    \boxed{
+                    \hat\theta_\lambda-\theta_*
+                    =-\lambda A_\lambda\theta_*+A_\lambda X^\top\varepsilon.
+                    }
+                    \]
+                </p>
+                <p>
+                    This already separates two effects. The first term is the systematic displacement caused by regularization. The second is the training noise after it passes through the estimator.
+                </p>
+                <p>
+                    When we take expectations over the training noise \(\varepsilon\), we get
+                    \[
+                    \begin{aligned}
+                    \mathbb E_\varepsilon[\hat\theta_\lambda]
+                    &=\theta_*-\lambda A_\lambda\theta_*
+                      +A_\lambda X^\top\mathbb E_\varepsilon[\varepsilon]\\
+                    &=\theta_*-\lambda A_\lambda\theta_*,
+                    \end{aligned}
+                    \]
+                    since \(\mathbb E[\varepsilon]=0\).
+                </p>
+                <p>
+                    At the new input \(x\), the prediction bias is therefore
+                    \[
+                    \begin{aligned}
+                    b_\lambda(x)
+                    &:=\mathbb E_\varepsilon[x^\top\hat\theta_\lambda]-x^\top\theta_*\\
+                    &=x^\top\mathbb E_\varepsilon[\hat\theta_\lambda]-x^\top\theta_*\\
+                    &=x^\top(\theta_*-\lambda A_\lambda\theta_*)-x^\top\theta_*\\
+                    &=-\lambda x^\top A_\lambda\theta_*.
+                    \end{aligned}
+                    \]
+                    Consequently,
+                    \[
+                    \boxed{b_\lambda(x)^2=\lambda^2(x^\top A_\lambda\theta_*)^2.}
+                    \]
+                </p>
+                <p>
+                    To obtain the expected squared error, multiply the parameter-error equation by \(x^\top\):
+                    \[
+                    x^\top\hat\theta_\lambda-x^\top\theta_*
+                    =-\lambda x^\top A_\lambda\theta_*
+                    +x^\top A_\lambda X^\top\varepsilon.
+                    \]
+                    Write its random part as
+                    \[
+                    z_\lambda(x):=x^\top A_\lambda X^\top\varepsilon.
+                    \]
+                    Its mean is zero:
+                    \[
+                    \mathbb E_\varepsilon[z_\lambda(x)]
+                    =x^\top A_\lambda X^\top\mathbb E_\varepsilon[\varepsilon]
+                    =0.
+                    \]
+                </p>
+                <p>
+                    The prediction error is \(b_\lambda(x)+z_\lambda(x)\). Expanding its square gives
+                    \[
+                    \begin{aligned}
+                    \mathbb E_\varepsilon\!\left[
+                    (x^\top\hat\theta_\lambda-x^\top\theta_*)^2
+                    \right]
+                    &=\mathbb E_\varepsilon[(b_\lambda(x)+z_\lambda(x))^2]\\
+                    &=\mathbb E_\varepsilon[
+                    b_\lambda(x)^2+2b_\lambda(x)z_\lambda(x)+z_\lambda(x)^2]\\
+                    &=b_\lambda(x)^2
+                    +2b_\lambda(x)\mathbb E_\varepsilon[z_\lambda(x)]
+                    +\mathbb E_\varepsilon[z_\lambda(x)^2]\\
+                    &=b_\lambda(x)^2+\mathbb E_\varepsilon[z_\lambda(x)^2].
+                    \end{aligned}
+                    \]
+                    The cross term vanishes because the random fluctuation has mean zero.
+                </p>
+                <p>
+                    It remains to evaluate \(\mathbb E[z_\lambda(x)^2]\). First, the noise assumptions imply
+                    \[
+                    \begin{aligned}
+                    \operatorname{Cov}(\varepsilon)
+                    &=\mathbb E[\varepsilon\varepsilon^\top]
+                    -\mathbb E[\varepsilon]\mathbb E[\varepsilon]^\top\\
+                    &=\mathbb E[\varepsilon\varepsilon^\top],
+                    \end{aligned}
+                    \]
+                    so
+                    \[
+                    \mathbb E[\varepsilon\varepsilon^\top]=\sigma^2 I_n.
+                    \]
+                </p>
+                <p>
+                    Because \(z_\lambda(x)\) is a scalar, its square equals its product with its transpose:
+                    \[
+                    \begin{aligned}
+                    z_\lambda(x)^2
+                    &=(x^\top A_\lambda X^\top\varepsilon)
+                      (x^\top A_\lambda X^\top\varepsilon)^\top\\
+                    &=(x^\top A_\lambda X^\top\varepsilon)
+                      (\varepsilon^\top X A_\lambda^\top x)\\
+                    &=x^\top A_\lambda X^\top
+                      \varepsilon\varepsilon^\top
+                      X A_\lambda x.
+                    \end{aligned}
+                    \]
+                    Taking expectations,
+                    \[
+                    \begin{aligned}
+                    \mathbb E_\varepsilon[z_\lambda(x)^2]
+                    &=x^\top A_\lambda X^\top
+                      \mathbb E_\varepsilon[\varepsilon\varepsilon^\top]
+                      X A_\lambda x\\
+                    &=x^\top A_\lambda X^\top(\sigma^2 I_n)X A_\lambda x\\
+                    &=\sigma^2 x^\top A_\lambda X^\top X A_\lambda x\\
+                    &=\sigma^2 x^\top A_\lambda G A_\lambda x.
+                    \end{aligned}
+                    \]
+                    This is exactly the prediction variance, since
+                    \[
+                    x^\top\hat\theta_\lambda
+                    -\mathbb E_\varepsilon[x^\top\hat\theta_\lambda]
+                    =z_\lambda(x).
+                    \]
+                </p>
+                <p>
+                    Putting everything together,
+                    \[
+                    \boxed{
+                    \begin{aligned}
+                    &\mathbb E_\varepsilon\!\left[
+                    \bigl(x^\top\hat\theta_\lambda-x^\top\theta_*\bigr)^2
+                    \right]\\[2mm]
+                    &\quad=
+                    \underbrace{
+                    \lambda^2\left[x^\top(X^\top X+\lambda I_p)^{-1}\theta_*\right]^2
+                    }_{\text{squared prediction bias}}
+                    \\[2mm]
+                    &\qquad\quad+
+                    \underbrace{
+                    \sigma^2x^\top(X^\top X+\lambda I_p)^{-1}
+                    X^\top X
+                    (X^\top X+\lambda I_p)^{-1}x
+                    }_{\text{prediction variance}}.
+                    \end{aligned}
+                    }
+                    \]
+                </p>
+                <p>
+                    To see why this represents a tradeoff, consider a unit eigenvector \(u_j\) of \(G=X^\top X\), with eigenvalue \(d_j\geq0\). Since
+                    \[
+                    (G+\lambda I_p)u_j=(d_j+\lambda)u_j,
+                    \qquad
+                    A_\lambda u_j=\frac{1}{d_j+\lambda}u_j,
+                    \]
+                    the expected fitted coefficient in this direction is
+                    \[
+                    \begin{aligned}
+                    u_j^\top\mathbb E[\hat\theta_\lambda]
+                    &=u_j^\top(I_p-\lambda A_\lambda)\theta_*\\
+                    &=\left(1-\frac{\lambda}{d_j+\lambda}\right)u_j^\top\theta_*\\
+                    &=\frac{d_j}{d_j+\lambda}u_j^\top\theta_*.
+                    \end{aligned}
+                    \]
+                    Thus ridge shrinks each signal component by \(d_j/(d_j+\lambda)\).
+                </p>
+                <p>
+                    For prediction specifically at \(x=u_j\), the two error contributions become
+                    \[
+                    \text{bias}^2
+                    =\left(\frac{\lambda}{d_j+\lambda}\right)^2
+                    (u_j^\top\theta_*)^2,
+                    \qquad
+                    \text{variance}
+                    =\frac{\sigma^2d_j}{(d_j+\lambda)^2}.
+                    \]
+                    For \(d_j>0\), increasing \(\lambda\) increases the shrinkage bias in that direction while decreasing the variance. For general \(x\), bias contributions from different directions can cancel, so squared bias need not increase monotonically.
+                </p>
+                <p>
+                    Finally, there is no additional \(\sigma^2\) term in the requested answer: the target is the noiseless quantity \(x^\top\theta_*\). Predicting a fresh noisy response \(y_{\rm new}=x^\top\theta_*+\varepsilon_{\rm new}\), with independent noise of variance \(\sigma^2\), would add \(\sigma^2\).
+                </p>
+            </div>
+        </div>
+    </div>
+    <script src="/assets/post.js"></script>
+</body>
+</html>
