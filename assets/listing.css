@@ -189,6 +189,10 @@ a:hover {
     margin: 0 0 9px;
 }
 
+.log .log-entry.hidden {
+    display: none;
+}
+
 .log-entry time {
     flex: 0 0 3.4em;
     color: gray;
