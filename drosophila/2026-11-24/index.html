@@ -46,6 +46,467 @@
         <div class="content">
             <div class="post-body">
                 <!-- Solution: prose in <p>, display math in \[ \]. -->
+                <p>
+                    We have particles with constant masses \(m_i>0\), positions \(\mathbf r_i(t)\), and Lagrangian
+                    \[
+                    L=\sum_i\frac{m_i}{2}|\dot{\mathbf r}_i|^2
+                    -V\bigl(\{\mathbf r_i-\mathbf r_j\}\bigr).
+                    \]
+                    Assume the physical trajectories are twice continuously differentiable.
+                </p>
+
+                <h2>The boost changes \(L\) by a total derivative</h2>
+                <p>
+                    Introduce a dimensionless parameter \(\lambda\) to track the infinitesimal boost:
+                    \[
+                    \mathbf r_i^{(\lambda)}(t)
+                    =\mathbf r_i(t)+\lambda\boldsymbol\epsilon t,
+                    \]
+                    where \(\boldsymbol\epsilon\) is a constant vector with units of velocity. A first variation means differentiation with respect to \(\lambda\) at \(\lambda=0\).
+                </p>
+                <p>
+                    The time coordinate is unchanged. Differentiating the boosted position with respect to time,
+                    \[
+                    \dot{\mathbf r}_i^{(\lambda)}
+                    =\frac{d}{dt}\bigl(\mathbf r_i+\lambda\boldsymbol\epsilon t\bigr)
+                    =\dot{\mathbf r}_i+\lambda\boldsymbol\epsilon,
+                    \]
+                    so
+                    \[
+                    \delta\mathbf r_i
+                    \equiv\left.\frac{\partial\mathbf r_i^{(\lambda)}}{\partial\lambda}\right|_0
+                    =\boldsymbol\epsilon t,
+                    \qquad
+                    \delta\dot{\mathbf r}_i
+                    =\boldsymbol\epsilon.
+                    \]
+                </p>
+                <p>
+                    Physically, every particle receives the same additional velocity, so at each instant every particle is displaced by the same amount \(\lambda\boldsymbol\epsilon t\). Their relative positions therefore remain unchanged:
+                    \[
+                    \begin{aligned}
+                    \mathbf r_i^{(\lambda)}-\mathbf r_j^{(\lambda)}
+                    &=\mathbf r_i+\lambda\boldsymbol\epsilon t
+                    -\mathbf r_j-\lambda\boldsymbol\epsilon t\\
+                    &=\mathbf r_i-\mathbf r_j.
+                    \end{aligned}
+                    \]
+                    Since \(V\) depends only on these differences,
+                    \[
+                    V\bigl(\{\mathbf r_i^{(\lambda)}-\mathbf r_j^{(\lambda)}\}\bigr)
+                    =V\bigl(\{\mathbf r_i-\mathbf r_j\}\bigr),
+                    \qquad
+                    \delta V=0.
+                    \]
+                </p>
+                <p>
+                    Only the kinetic energy changes. Expanding its squared velocity,
+                    \[
+                    \begin{aligned}
+                    |\dot{\mathbf r}_i+\lambda\boldsymbol\epsilon|^2
+                    &=(\dot{\mathbf r}_i+\lambda\boldsymbol\epsilon)
+                    \cdot(\dot{\mathbf r}_i+\lambda\boldsymbol\epsilon)\\
+                    &=|\dot{\mathbf r}_i|^2
+                    +\lambda\dot{\mathbf r}_i\cdot\boldsymbol\epsilon
+                    +\lambda\boldsymbol\epsilon\cdot\dot{\mathbf r}_i
+                    +\lambda^2|\boldsymbol\epsilon|^2\\
+                    &=|\dot{\mathbf r}_i|^2
+                    +2\lambda\dot{\mathbf r}_i\cdot\boldsymbol\epsilon
+                    +\lambda^2|\boldsymbol\epsilon|^2.
+                    \end{aligned}
+                    \]
+                    Consequently,
+                    \[
+                    \begin{aligned}
+                    L^{(\lambda)}-L
+                    &=\sum_i\frac{m_i}{2}
+                    \left(
+                    2\lambda\dot{\mathbf r}_i\cdot\boldsymbol\epsilon
+                    +\lambda^2|\boldsymbol\epsilon|^2
+                    \right)\\
+                    &=\lambda\sum_i m_i\dot{\mathbf r}_i\cdot\boldsymbol\epsilon
+                    +\frac{\lambda^2}{2}\left(\sum_i m_i\right)|\boldsymbol\epsilon|^2.
+                    \end{aligned}
+                    \]
+                    Taking the derivative at \(\lambda=0\) gives the first variation:
+                    \[
+                    \delta L
+                    =\left.\frac{\partial L^{(\lambda)}}{\partial\lambda}\right|_0
+                    =\sum_i m_i\dot{\mathbf r}_i\cdot\boldsymbol\epsilon.
+                    \]
+                </p>
+                <p>
+                    Because the masses and the boost vector are constant,
+                    \[
+                    \begin{aligned}
+                    \frac{d}{dt}
+                    \left(\sum_i m_i\mathbf r_i\cdot\boldsymbol\epsilon\right)
+                    &=\sum_i m_i\frac{d\mathbf r_i}{dt}\cdot\boldsymbol\epsilon\\
+                    &=\sum_i m_i\dot{\mathbf r}_i\cdot\boldsymbol\epsilon.
+                    \end{aligned}
+                    \]
+                    Thus, defining
+                    \[
+                    F=\sum_i m_i\mathbf r_i\cdot\boldsymbol\epsilon,
+                    \]
+                    we have established
+                    \[
+                    \boxed{\delta L=\frac{dF}{dt}.}
+                    \]
+                    This identity holds for any differentiable paths, before we impose equations of motion. It means the boost changes the action only through its endpoints:
+                    \[
+                    \begin{aligned}
+                    \delta S
+                    &=\int_{t_a}^{t_b}\delta L\,dt\\
+                    &=\int_{t_a}^{t_b}\frac{dF}{dt}\,dt\\
+                    &=F(t_b)-F(t_a)\\
+                    &=[F]_{t_a}^{t_b}.
+                    \end{aligned}
+                    \]
+                </p>
+
+                <h2>The first variation of the action</h2>
+                <p>
+                    We now derive a second expression for \(\delta S\) from the variational principle. For this step, consider an arbitrary path variation,
+                    \[
+                    \mathbf r_i^{(\lambda)}
+                    =\mathbf r_i+\lambda\,\delta\mathbf r_i,
+                    \]
+                    where \(\delta\mathbf r_i(t)\) need not be a boost. Its velocity variation satisfies
+                    \[
+                    \begin{aligned}
+                    \delta\dot{\mathbf r}_i
+                    &=\left.\frac{\partial}{\partial\lambda}
+                    \frac{d\mathbf r_i^{(\lambda)}}{dt}\right|_0\\
+                    &=\frac{d}{dt}
+                    \left.\frac{\partial\mathbf r_i^{(\lambda)}}{\partial\lambda}\right|_0\\
+                    &=\frac{d}{dt}\delta\mathbf r_i.
+                    \end{aligned}
+                    \]
+                    Applying the chain rule to
+                    \[
+                    S=\int_{t_a}^{t_b}L\,dt
+                    \]
+                    therefore gives
+                    \[
+                    \begin{aligned}
+                    \delta S
+                    &=\int_{t_a}^{t_b}\delta L\,dt\\
+                    &=\int_{t_a}^{t_b}\sum_i
+                    \left[
+                    \frac{\partial L}{\partial\mathbf r_i}\cdot\delta\mathbf r_i
+                    +\frac{\partial L}{\partial\dot{\mathbf r}_i}
+                    \cdot\delta\dot{\mathbf r}_i
+                    \right]dt\\
+                    &=\int_{t_a}^{t_b}\sum_i
+                    \left[
+                    \frac{\partial L}{\partial\mathbf r_i}\cdot\delta\mathbf r_i
+                    +\frac{\partial L}{\partial\dot{\mathbf r}_i}
+                    \cdot\frac{d}{dt}\delta\mathbf r_i
+                    \right]dt.
+                    \end{aligned}
+                    \]
+                </p>
+                <p>
+                    To identify what stationarity requires inside the interval, we want every interior term to multiply \(\delta\mathbf r_i\) itself, not its derivative. The product rule gives
+                    \[
+                    \frac{d}{dt}
+                    \left(
+                    \frac{\partial L}{\partial\dot{\mathbf r}_i}\cdot\delta\mathbf r_i
+                    \right)
+                    =
+                    \frac{d}{dt}\left(\frac{\partial L}{\partial\dot{\mathbf r}_i}\right)
+                    \cdot\delta\mathbf r_i
+                    +
+                    \frac{\partial L}{\partial\dot{\mathbf r}_i}
+                    \cdot\frac{d}{dt}\delta\mathbf r_i.
+                    \]
+                    Rearranging,
+                    \[
+                    \frac{\partial L}{\partial\dot{\mathbf r}_i}
+                    \cdot\frac{d}{dt}\delta\mathbf r_i
+                    =
+                    \frac{d}{dt}
+                    \left(
+                    \frac{\partial L}{\partial\dot{\mathbf r}_i}\cdot\delta\mathbf r_i
+                    \right)
+                    -
+                    \frac{d}{dt}\left(\frac{\partial L}{\partial\dot{\mathbf r}_i}\right)
+                    \cdot\delta\mathbf r_i.
+                    \]
+                    Integrating this identity,
+                    \[
+                    \begin{aligned}
+                    \int_{t_a}^{t_b}
+                    \frac{\partial L}{\partial\dot{\mathbf r}_i}
+                    \cdot\frac{d}{dt}\delta\mathbf r_i\,dt
+                    &=
+                    \left[
+                    \frac{\partial L}{\partial\dot{\mathbf r}_i}\cdot\delta\mathbf r_i
+                    \right]_{t_a}^{t_b}\\
+                    &\quad-
+                    \int_{t_a}^{t_b}
+                    \frac{d}{dt}\left(\frac{\partial L}{\partial\dot{\mathbf r}_i}\right)
+                    \cdot\delta\mathbf r_i\,dt.
+                    \end{aligned}
+                    \]
+                    Substituting back into \(\delta S\), summing over particles, and combining the interior integrals,
+                    \[
+                    \boxed{
+                    \begin{aligned}
+                    \delta S
+                    &=
+                    \left[
+                    \sum_i\frac{\partial L}{\partial\dot{\mathbf r}_i}
+                    \cdot\delta\mathbf r_i
+                    \right]_{t_a}^{t_b}\\
+                    &\quad+
+                    \int_{t_a}^{t_b}\sum_i
+                    \left[
+                    \frac{\partial L}{\partial\mathbf r_i}
+                    -\frac{d}{dt}\left(\frac{\partial L}{\partial\dot{\mathbf r}_i}\right)
+                    \right]\cdot\delta\mathbf r_i\,dt.
+                    \end{aligned}
+                    }
+                    \]
+                    This is an identity for the first variation; we have not yet used stationarity.
+                </p>
+
+                <h2>Equations of motion from fixed endpoints</h2>
+                <p>
+                    The physical trajectory makes the action stationary under variations with fixed endpoints:
+                    \[
+                    \delta\mathbf r_i(t_a)=\delta\mathbf r_i(t_b)=0.
+                    \]
+                    For these variations the boundary term vanishes, so
+                    \[
+                    0=\delta S
+                    =\int_{t_a}^{t_b}\sum_i
+                    \left[
+                    \frac{\partial L}{\partial\mathbf r_i}
+                    -\frac{d}{dt}\left(\frac{\partial L}{\partial\dot{\mathbf r}_i}\right)
+                    \right]\cdot\delta\mathbf r_i\,dt.
+                    \]
+                    Each particle’s variation can be chosen independently, in any direction, and localized around any interior time. Since the bracket is continuous for twice-differentiable trajectories, the integral can vanish for every such choice only if
+                    \[
+                    \boxed{
+                    \frac{\partial L}{\partial\mathbf r_i}
+                    -\frac{d}{dt}\left(\frac{\partial L}{\partial\dot{\mathbf r}_i}\right)
+                    =0
+                    }
+                    \]
+                    for each \(i\). These are the Euler–Lagrange equations, obtained directly from stationarity.
+                </p>
+                <p>
+                    Now return to the general first-variation identity. Along a trajectory satisfying these equations, its interior integral vanishes. Therefore, for <em>any</em> variation along that trajectory,
+                    \[
+                    \delta S
+                    =
+                    \left[
+                    \sum_i\frac{\partial L}{\partial\dot{\mathbf r}_i}
+                    \cdot\delta\mathbf r_i
+                    \right]_{t_a}^{t_b}.
+                    \]
+                    The variation is now allowed to move the endpoints, so in particular we can use the boost.
+                </p>
+                <p>
+                    This distinction matters. Fixed-endpoint variations established the equations of motion, but the boost generally moves the endpoints, so we must keep its boundary term and must not set its \(\delta S\) to zero.
+                </p>
+
+                <h2>The conserved vector</h2>
+                <p>
+                    For our Lagrangian,
+                    \[
+                    \frac{\partial L}{\partial\dot{\mathbf r}_i}
+                    =m_i\dot{\mathbf r}_i.
+                    \]
+                    Explicitly, for a Cartesian component \(\alpha\),
+                    \[
+                    \begin{aligned}
+                    \frac{\partial L}{\partial\dot r_{i\alpha}}
+                    &=\frac{\partial}{\partial\dot r_{i\alpha}}
+                    \left(\frac{m_i}{2}\sum_\beta\dot r_{i\beta}^{\,2}\right)\\
+                    &=\frac{m_i}{2}\sum_\beta
+                    2\dot r_{i\beta}\delta_{\alpha\beta}\\
+                    &=m_i\dot r_{i\alpha},
+                    \end{aligned}
+                    \]
+                    because the potential contains no velocities.
+                </p>
+                <p>
+                    Substituting the boost variation \(\delta\mathbf r_i=\boldsymbol\epsilon t\) into the boundary expression gives
+                    \[
+                    \begin{aligned}
+                    \delta S
+                    &=\left[
+                    \sum_i m_i\dot{\mathbf r}_i\cdot(\boldsymbol\epsilon t)
+                    \right]_{t_a}^{t_b}\\
+                    &=\left[
+                    \boldsymbol\epsilon\cdot
+                    \left(t\sum_i m_i\dot{\mathbf r}_i\right)
+                    \right]_{t_a}^{t_b}.
+                    \end{aligned}
+                    \]
+                    But the direct boost calculation gave
+                    \[
+                    \delta S=[F]_{t_a}^{t_b}
+                    =
+                    \left[
+                    \boldsymbol\epsilon\cdot\sum_i m_i\mathbf r_i
+                    \right]_{t_a}^{t_b}.
+                    \]
+                    These describe the same action variation. Equating them and subtracting,
+                    \[
+                    \left[
+                    \boldsymbol\epsilon\cdot
+                    \left(
+                    t\sum_i m_i\dot{\mathbf r}_i-\sum_i m_i\mathbf r_i
+                    \right)
+                    \right]_{t_a}^{t_b}=0.
+                    \]
+                </p>
+                <p>
+                    Define
+                    \[
+                    \mathbf Q(t)
+                    =t\sum_i m_i\dot{\mathbf r}_i-\sum_i m_i\mathbf r_i.
+                    \]
+                    Because \(\boldsymbol\epsilon\) is constant, the endpoint relation becomes
+                    \[
+                    \boldsymbol\epsilon\cdot
+                    \bigl(\mathbf Q(t_b)-\mathbf Q(t_a)\bigr)=0.
+                    \]
+                    The boost direction is arbitrary, and choosing it along each Cartesian axis shows that every component of the difference vanishes:
+                    \[
+                    \mathbf Q(t_b)-\mathbf Q(t_a)=\mathbf 0.
+                    \]
+                    The endpoints can be any two times along the physical trajectory. Hence
+                    \[
+                    \boxed{
+                    \mathbf Q=t\sum_i m_i\dot{\mathbf r}_i-\sum_i m_i\mathbf r_i
+                    \quad\text{is constant}.
+                    }
+                    \]
+                    One often uses the opposite sign for the boost charge:
+                    \[
+                    \boxed{
+                    \mathbf K=-\mathbf Q
+                    =\sum_i m_i\mathbf r_i-t\sum_i m_i\dot{\mathbf r}_i.
+                    }
+                    \]
+                    Both conventions express the same conservation law.
+                </p>
+
+                <h2>What it says about the center of mass</h2>
+                <p>
+                    To interpret the conserved vector physically, define the total mass and center of mass:
+                    \[
+                    M=\sum_i m_i,
+                    \qquad
+                    \mathbf R=\frac{1}{M}\sum_i m_i\mathbf r_i.
+                    \]
+                    Multiplying the second definition by \(M\),
+                    \[
+                    M\mathbf R=\sum_i m_i\mathbf r_i,
+                    \]
+                    and differentiating with constant masses,
+                    \[
+                    M\dot{\mathbf R}=\sum_i m_i\dot{\mathbf r}_i.
+                    \]
+                    The conserved vector therefore becomes
+                    \[
+                    \begin{aligned}
+                    \mathbf Q
+                    &=tM\dot{\mathbf R}-M\mathbf R\\
+                    &=M(t\dot{\mathbf R}-\mathbf R).
+                    \end{aligned}
+                    \]
+                </p>
+                <p>
+                    Conservation means its derivative vanishes:
+                    \[
+                    \begin{aligned}
+                    \mathbf 0
+                    =\frac{d\mathbf Q}{dt}
+                    &=M\frac{d}{dt}(t\dot{\mathbf R}-\mathbf R)\\
+                    &=M\left(
+                    \frac{dt}{dt}\dot{\mathbf R}
+                    +t\frac{d\dot{\mathbf R}}{dt}
+                    -\dot{\mathbf R}
+                    \right)\\
+                    &=M\left(
+                    \dot{\mathbf R}+t\ddot{\mathbf R}-\dot{\mathbf R}
+                    \right)\\
+                    &=Mt\ddot{\mathbf R}.
+                    \end{aligned}
+                    \]
+                    For \(t\neq0\), divide by \(Mt\):
+                    \[
+                    \ddot{\mathbf R}=\mathbf 0.
+                    \]
+                    Since the trajectories are twice continuously differentiable, \(\ddot{\mathbf R}\) is continuous, so this also holds at \(t=0\). Thus the center of mass has zero acceleration throughout the trajectory.
+                </p>
+                <p>
+                    Integrating once from any reference time \(t_0\),
+                    \[
+                    \begin{aligned}
+                    \dot{\mathbf R}(t)-\dot{\mathbf R}(t_0)
+                    &=\int_{t_0}^{t}\ddot{\mathbf R}(s)\,ds\\
+                    &=\int_{t_0}^{t}\mathbf 0\,ds\\
+                    &=\mathbf 0.
+                    \end{aligned}
+                    \]
+                    Therefore
+                    \[
+                    \dot{\mathbf R}(t)=\dot{\mathbf R}(t_0)
+                    \equiv\mathbf V_{\rm CM},
+                    \]
+                    a constant vector. Integrating again,
+                    \[
+                    \begin{aligned}
+                    \mathbf R(t)-\mathbf R(t_0)
+                    &=\int_{t_0}^{t}\dot{\mathbf R}(s)\,ds\\
+                    &=\int_{t_0}^{t}\mathbf V_{\rm CM}\,ds\\
+                    &=\mathbf V_{\rm CM}(t-t_0).
+                    \end{aligned}
+                    \]
+                    Hence
+                    \[
+                    \boxed{
+                    \mathbf R(t)=\mathbf R(t_0)+\mathbf V_{\rm CM}(t-t_0).
+                    }
+                    \]
+                    The center of mass moves in a straight line at constant velocity, even while internal interactions produce complicated individual motions.
+                </p>
+                <p>
+                    Writing this as
+                    \[
+                    \mathbf R(t)=\mathbf R_0+\mathbf V_{\rm CM}t,
+                    \]
+                    where \(\mathbf R_0=\mathbf R(t_0)-\mathbf V_{\rm CM}t_0\), gives
+                    \[
+                    \begin{aligned}
+                    \mathbf Q
+                    &=M(t\dot{\mathbf R}-\mathbf R)\\
+                    &=M\left[t\mathbf V_{\rm CM}
+                    -\left(\mathbf R_0+\mathbf V_{\rm CM}t\right)\right]\\
+                    &=-M\mathbf R_0.
+                    \end{aligned}
+                    \]
+                    So the boost charge records the center-of-mass position extrapolated back to time zero:
+                    \[
+                    \boxed{\mathbf K=M\mathbf R_0.}
+                    \]
+                </p>
+                <p>
+                    Finally, total momentum conservation follows as a consequence:
+                    \[
+                    \mathbf P\equiv\sum_i m_i\dot{\mathbf r}_i
+                    =M\dot{\mathbf R}
+                    =M\mathbf V_{\rm CM},
+                    \]
+                    which is constant. We derived that result from the action rather than using it to establish the boost conservation law.
+                </p>
             </div>
         </div>
     </div>
