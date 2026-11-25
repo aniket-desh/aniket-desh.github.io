@@ -22,6 +22,22 @@ A post's `<head>` loads its stylesheets in this order, and the order matters bec
 
 `<script src="/assets/post.js"></script>` goes at the end of `<body>`, after the post's own scripts. Footnotes are either keyed (`<sup data-fn="key"></sup>` with `<li data-fn="key">`) or numbered (`<sup>3</sup>` for the third list item); the script picks the mode from the list. `data-toc-offset` and `data-toc-default="first"` on `.toc-sidebar` adjust when a section counts as reached.
 
+## Math
+
+Posts are written with TeX between `\( \)` and `\[ \]` and load MathJax from a CDN, so a page previews locally with no build step. The deploy does not ship that script. After the Jekyll build, `scripts/prerender_math.js` typesets every expression in `_site` with the same MathJax version, inlines the stylesheet the output needs, and removes the MathJax `<script>`. Readers get finished math in the first paint instead of raw TeX while a 205 KB script downloads and runs, and the math is the same size on every load. The files in the repository are never rewritten.
+
+A page keeps client-side MathJax when it calls `MathJax.typeset` itself (`research/tensor-contraction/` does, because it adds math after load) or sets a MathJax config with macros, packages or a loader. A page with no math should not load MathJax at all.
+
+To run it locally against a copy of the site:
+
+```sh
+npm ci --prefix scripts
+rsync -a --exclude .git --exclude scripts ./ /tmp/site/
+node scripts/prerender_math.js /tmp/site
+```
+
+The script prints the number of expressions per page and names any expression MathJax could not parse.
+
 ## Blog sharing previews
 
 `scripts/generate_social_cards.py` creates a 1200 × 630 JPEG for each published blog post and adds Open Graph and large Twitter Card metadata to its HTML. The image uses the post's existing hero, a dark gradient, its title, and the author's name in the site's serif typography. The article's visible content and hero remain unchanged.

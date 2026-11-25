@@ -48,6 +48,22 @@ jobs:
           source: ./
           destination: ./_site
 
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: scripts/package-lock.json
+
+      - name: Install math pre-render dependencies
+        run: npm ci --prefix scripts
+
+      # The Jekyll action writes _site as root, so take ownership before editing it.
+      - name: Pre-render math
+        run: |
+          sudo chown -R "$(id -u):$(id -g)" _site
+          node scripts/prerender_math.js _site
+
       - name: Upload site
         uses: actions/upload-pages-artifact@v4
         with:

@@ -1,0 +1,11 @@
+{
+  "name": "academic-site-scripts",
+  "private": true,
+  "description": "Build-time helpers for aniketdeshpande.com",
+  "scripts": {
+    "prerender-math": "node prerender_math.js"
+  },
+  "dependencies": {
+    "mathjax-full": "3.2.2"
+  }
+}
